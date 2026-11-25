@@ -6,7 +6,7 @@ $tk = wugweb_core_service_toolkit();
 if (!$tk || empty($tk['groups'])) { return; }
 $icons = array();
 foreach ((array) ($tk['icons'] ?? array()) as $k => $u) { $icons[strtolower((string) $k)] = $u; }
-$style = '--theme-base: var(--svc-' . $p . ', var(--color-accent-primary));';
+$style = '--theme-base: var(--color-accent-primary);';
 $wrap = get_block_wrapper_attributes(array('class' => 'wrap toolkit-section wugweb-toolkit-grid', 'id' => 'toolkit-section', 'aria-labelledby' => 'toolkit-section-title', 'style' => $style));
 ?>
 <section <?php echo $wrap; ?>>

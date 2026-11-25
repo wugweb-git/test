@@ -17,7 +17,7 @@ foreach ($d['caps'] as $i => $c) {
 if (!$items) { return; }
 $dense = count($items) > 12;
 $heading = $d['capsTitle'] ?? 'What we can do';
-$theme = 'var(--svc-' . $p . ', var(--color-accent-primary))';
+$theme = 'var(--color-accent-primary)';
 $wrap = get_block_wrapper_attributes(array('class' => 'wrap capabilities-section wugweb-capability-showcase', 'id' => 'capabilities-section', 'aria-labelledby' => 'caps-heading'));
 ?>
 <section <?php echo $wrap; ?>>

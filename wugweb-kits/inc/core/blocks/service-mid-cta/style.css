@@ -96,3 +96,4 @@
     transition: color var(--duration-normal) var(--easing-out),                border-color var(--duration-normal) var(--easing-out);
   }
   .approach-cta-link:hover { color: var(--fg); border-color: var(--fg); }
+@media (max-width: 767.98px) { .approach-cta-link { min-height: 44px; display: inline-flex; align-items: center; } }

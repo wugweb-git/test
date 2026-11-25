@@ -8,7 +8,7 @@ $cta = $d['cta'];
 $base = rtrim((string) apply_filters('wugweb_assets_base', 'https://pub-39ad1d03baec440faf48303be95c3782.r2.dev'), '/');
 $img = $base . '/assets/site/services/reference/' . ($p === 'brand' ? 'brand-hero.jpg' : 'services-hero.jpg');
 $logo = get_theme_file_uri('assets/brand/logo-large.svg');
-$style = '--theme-base: var(--svc-' . $p . ', var(--color-accent-primary));';
+$style = '--theme-base: var(--color-accent-primary);';
 $wrap = get_block_wrapper_attributes(array('class' => 'approach-cta wugweb-service-mid-cta', 'style' => $style, 'data-reveal' => ''));
 $btn = $cta['btn'] ?? array('Start a project', 'See the work first');
 ?>

@@ -15,7 +15,7 @@ $sub  = $d['subtitle'] ?? ($c['subtitle'] ?? ($d['tagline'] ?? ''));
 $text = $d['heroText'] ?? ($c['heroText'] ?? '');
 $tags = $d['tags'] ?? ($c['tags'] ?? array());
 $body = $d['body'] ?? ($c['body'] ?? '');
-$style = '--theme-base: var(--svc-' . $p . ', var(--color-accent-primary)); --theme-dark: var(--svc-' . $p . '-dark, var(--color-ash)); --theme-light: var(--svc-' . $p . '-light, var(--color-surface-inverse)); --theme-gradient: linear-gradient(135deg, var(--theme-base), var(--theme-light));';
+$style = '--theme-base: var(--color-accent-primary); --theme-dark: var(--color-ash); --theme-light: var(--color-surface-inverse); --theme-gradient: linear-gradient(135deg, var(--theme-base), var(--theme-light));';
 $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-service-hero-metrics service-page-wrapper', 'style' => $style));
 ?>
 <div <?php echo $wrap; ?>>

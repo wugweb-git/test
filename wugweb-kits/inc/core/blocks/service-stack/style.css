@@ -37,3 +37,12 @@
 .svc-gallery img{width:100%;height:100%;object-fit:cover;display:block}
 .svc-gallery .wugweb-ph{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
 .svc-btn{text-decoration:none}
+
+/* Source intends white buttons with ash text; the shared .btn surface was winning. */
+.svc-panel .svc-btn{background:var(--neutral-0);border-color:var(--neutral-0);color:var(--color-ash)}
+.svc-panel .svc-btn:hover{background:var(--svc-accent);border-color:var(--svc-accent);color:var(--color-ash)}
+/* Touch targets: 44px tall tabs and buttons below desktop. */
+@media (max-width: 1023.98px) {
+  .svc-tab { min-height: 40px; }
+  .svc-panel .svc-btn { min-height: 44px; display: inline-flex; align-items: center; }
+}
