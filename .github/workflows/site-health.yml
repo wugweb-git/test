@@ -1,0 +1,92 @@
+name: Site health (test.wugweb.com)
+
+# Daily watch on the live test site. Fails the run (GitHub emails the owner)
+# when a page breaks, a section goes missing, a media link 404s or the
+# sitemap/robots drift. Optional WordPress checks run only when the
+# WP_USER / WP_APP_PASSWORD secrets exist (user "Wugweb Ingestion").
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+env:
+  BASE: https://test.wugweb.com
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pages return 200
+        run: |
+          fail=0
+          for p in / /about/ /services/ /services/strategy/ /services/brand/ /services/experience/ /services/engineering/ /services/growth/ /services/operations/ /our-work/ /blog/ /faq/ /contact-us/ /industries/ /impact/ /reviews/ /subscription/ /sitemap/ /privacy-policy/ /terms-of-use/ /refund-policy/ /cookie-policy/; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$BASE$p")
+            echo "$code $p"; [ "$code" = 200 ] || fail=1
+          done
+          code=$(curl -s -o /dev/null -w '%{http_code}' "$BASE/zzz-not-a-page/"); echo "$code (404 expected)"; [ "$code" = 404 ] || fail=1
+          exit $fail
+
+      - name: One H1 per page, legal sections intact
+        run: |
+          fail=0
+          h1() { curl -s "$BASE$1" | grep -o '<h1[ >]' | wc -l; }
+          h2() { curl -s "$BASE$1" | grep -o '<h2[ >]' | wc -l; }
+          for p in / /about/ /services/ /our-work/ /blog/ /faq/ /contact-us/ /industries/ /impact/ /reviews/ /subscription/; do
+            n=$(h1 $p); echo "h1=$n $p"; [ "$n" = 1 ] || fail=1
+          done
+          # minimum h2 counts from Sanity: privacy 8, refund 7, terms 31, cookie 10
+          chk() { n=$(h2 $1); echo "h2=$n $1 (min $2)"; [ "$n" -ge "$2" ] || fail=1; }
+          chk /privacy-policy/ 8; chk /refund-policy/ 7; chk /terms-of-use/ 31; chk /cookie-policy/ 10
+          exit $fail
+
+      - name: Sitemap and robots
+        run: |
+          curl -sf "$BASE/robots.txt" | tee /dev/stderr | grep -qi '^Sitemap:' 
+          smap=$(curl -s "$BASE/robots.txt" | grep -i '^Sitemap:' | head -1 | awk '{print $2}')
+          curl -sf "$smap" | grep -q '<loc>'
+          echo "sitemap ok: $smap"
+
+      - name: Media links resolve (R2 and local)
+        run: |
+          fail=0
+          for p in / /about/ /services/ /our-work/ /blog/; do
+            curl -s "$BASE$p" | grep -oE '(src|poster)="https?://[^"]+\.(jpg|jpeg|png|webp|svg|mp4|webm)"' | sed -E 's/^[a-z]+="//; s/"$//' | sort -u
+          done | sort -u | while read -r u; do
+            code=$(curl -s -o /dev/null -I -w '%{http_code}' "$u"); [ "$code" = 200 ] || echo "BROKEN $code $u"
+          done | tee broken.txt
+          ! grep -q BROKEN broken.txt
+
+      - name: Internal links on the home page
+        run: |
+          fail=0
+          curl -s "$BASE/" | grep -oE 'href="(/[^"#?]*|https://test\.wugweb\.com/[^"#?]*)"' | sed -E 's/^href="//; s/"$//' | sort -u | while read -r l; do
+            case "$l" in /*) l="$BASE$l";; esac
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$l"); [ "$code" = 200 ] || [ "$code" = 301 ] || echo "BAD $code $l"
+          done | tee links.txt
+          ! grep -q BAD links.txt
+
+      - name: Core Web Vitals (PageSpeed, mobile)
+        continue-on-error: true
+        run: |
+          for p in / /services/ /blog/; do
+            curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=$BASE$p&strategy=mobile&category=performance&category=seo&category=accessibility" \
+             | python3 -c "import sys,json;d=json.load(sys.stdin);c=d.get('lighthouseResult',{}).get('categories',{});print('$p',{k:round(v['score']*100) for k,v in c.items()})" || true
+          done
+
+      - name: WordPress checks (needs WP_USER / WP_APP_PASSWORD)
+        env:
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_PASS: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          if [ -z "$WP_PASS" ]; then echo "skipped: add secrets WP_USER and WP_APP_PASSWORD"; exit 0; fi
+          api="$BASE/wp-json/wp/v2"
+          auth="$WP_USER:$WP_PASS"
+          curl -sf -u "$auth" "$api/users/me" >/dev/null && echo "auth ok"
+          pages=$(curl -sf -u "$auth" "$api/pages?per_page=100&status=publish&_fields=id" | python3 -c "import sys,json;print(len(json.load(sys.stdin)))")
+          echo "published pages: $pages"; [ "$pages" -ge 20 ]
+          # pages missing SEO title or description meta
+          curl -sf -u "$auth" "$api/pages?per_page=100&status=publish&_fields=slug,meta" | python3 -c "
+          import sys,json
+          bad=[p['slug'] for p in json.load(sys.stdin) if not p['meta'].get('wugweb_page_seo_title') or not p['meta'].get('wugweb_page_seo_description')]
+          print('missing seo meta:',bad)
+          sys.exit(1 if bad else 0)"
