@@ -52,6 +52,20 @@ add_filter('render_block', function ($html, $block) {
     $html = preg_replace_callback('#href="([^"]*)"#', function ($m) use ($copy) {
         $h = html_entity_decode($m[1], ENT_QUOTES); return array_key_exists($h, $copy) ? 'href="' . esc_url((string) $copy[$h]) . '"' : $m[0];
     }, $html);
+    $html = preg_replace_callback('#<img\b[^>]*>#i', function ($m) use ($copy) {
+        $tag = $m[0];
+        if (!preg_match('#\ssrc="([^"]*)"#i', $tag, $sm)) return $tag;
+        $src = html_entity_decode($sm[1], ENT_QUOTES);
+        if (isset($copy['src:' . $src]) && $copy['src:' . $src] !== '') {
+            $tag = preg_replace('#\ssrc="[^"]*"#i', ' src="' . esc_url((string) $copy['src:' . $src]) . '"', $tag, 1);
+            $tag = preg_replace('#\s(srcset|sizes)="[^"]*"#i', '', $tag);
+        }
+        if (array_key_exists('alt:' . $src, $copy)) {
+            $alt = ' alt="' . esc_attr((string) $copy['alt:' . $src]) . '"';
+            $tag = preg_match('#\salt="[^"]*"#i', $tag) ? preg_replace('#\salt="[^"]*"#i', $alt, $tag, 1) : preg_replace('#<img#i', '<img' . $alt, $tag, 1);
+        }
+        return $tag;
+    }, $html);
     return $html;
 }, 20, 2);
 add_action('enqueue_block_editor_assets', function () {

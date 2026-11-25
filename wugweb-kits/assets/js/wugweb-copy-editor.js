@@ -13,6 +13,7 @@
       if (t.length < 2 || seen['t' + t]) continue; seen['t' + t] = 1; out.push({ kind: 'text', key: t });
     }
     doc.querySelectorAll('a[href]').forEach(function (a) { var h = a.getAttribute('href'); if (!h || h.charAt(0) === '#' || seen['h' + h]) return; seen['h' + h] = 1; out.push({ kind: 'link', key: h }); });
+    doc.querySelectorAll('img[src]').forEach(function (i) { var u = i.getAttribute('src'); if (!u || seen['i' + u]) return; seen['i' + u] = 1; out.push({ kind: 'image', key: u, alt: i.getAttribute('alt') || '' }); });
     return out;
   }
   function Panel(props) {
@@ -29,6 +30,12 @@
     if (!items.length) return null;
     return el(PanelBody, { title: 'Text & links (' + items.length + ')', initialOpen: false },
       items.map(function (it) {
+        if (it.kind === 'image') {
+          var sk = 'src:' + it.key, ak = 'alt:' + it.key;
+          return el(wp.element.Fragment, { key: 'img' + it.key },
+            el(TextControl, { label: 'Image URL', value: copy[sk] !== undefined ? copy[sk] : it.key, onChange: function (v) { put(sk, v === it.key ? '' : v); }, __nextHasNoMarginBottom: true }),
+            el(TextControl, { label: 'Image alt text', value: copy[ak] !== undefined ? copy[ak] : it.alt, onChange: function (v) { var c = Object.assign({}, copy); if (v === it.alt) delete c[ak]; else c[ak] = v; set({ copy: c }); }, __nextHasNoMarginBottom: true }));
+        }
         var cur = copy[it.key] !== undefined ? copy[it.key] : it.key;
         return el(TextControl, { key: it.kind + it.key, label: it.kind === 'link' ? 'Link' : 'Text', value: cur, onChange: function (v) { put(it.key, v); }, __nextHasNoMarginBottom: true });
       }),
