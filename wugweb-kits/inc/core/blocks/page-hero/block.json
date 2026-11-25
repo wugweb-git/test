@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "wugweb/page-hero",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Page Hero",
   "category": "wugweb",
   "supports": {
@@ -121,6 +121,10 @@
     "postId": {
       "type": "integer",
       "default": 0
+    },
+    "showGame": {
+      "type": "boolean",
+      "default": false
     }
   },
   "keywords": [
@@ -136,5 +140,6 @@
   "usesContext": [
     "postId",
     "postType"
-  ]
+  ],
+  "viewScript": "file:./view.js"
 }

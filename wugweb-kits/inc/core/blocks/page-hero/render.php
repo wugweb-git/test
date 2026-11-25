@@ -36,7 +36,7 @@ case 'contact':
   foreach ((array) ($a['chips'] ?? array()) as $c) { if (empty($c['label'])) continue; $ext = !empty($c['href']) && strpos($c['href'], 'http') === 0; echo !empty($c['href']) ? '<a href="' . esc_url($c['href']) . '" class="quick-chip"' . ($ext ? ' target="_blank" rel="noopener noreferrer"' : '') . '>' . $e($c['label']) . '</a>' : '<span class="quick-sla">' . $e($c['label']) . '</span>'; }
   echo '</div></header></div>'; break;
 case 'notfound':
-  echo '<section class="wrap not-found" id="not-found" aria-labelledby="page-hero-title"><h1 id="page-hero-title">' . $e($title) . '</h1>' . ($lede !== '' ? '<p>' . $e($lede) . '</p>' : '') . $b1 . '</section>'; break;
+  echo '<section class="wrap not-found" id="not-found" aria-labelledby="page-hero-title"><h1 id="page-hero-title">' . $e($title) . '</h1>' . ($lede !== '' ? '<p>' . $e($lede) . '</p>' : '') . (!empty($a['showGame']) ? '<div class="game" id="game"><span class="cell" data-cell></span><span class="cell" data-cell></span><span class="cell" data-cell></span><span class="cell" data-cell></span><span class="cell" data-cell></span><span class="cell" data-cell></span><span class="cell" data-cell></span><span class="cell" data-cell></span><span class="cell" data-cell></span></div>' : '') . $b1 . '</section>'; break;
 case 'thanks':
   echo '<section class="wrap thank-you" id="thank-you" aria-labelledby="page-hero-title"><h1 id="page-hero-title">' . $e($title) . '</h1>' . ($lede !== '' ? '<p>' . $e($lede) . '</p>' : '') . '<div class="thank-you-actions">' . $b1 . $b2 . '</div></section>'; break;
 case 'split':

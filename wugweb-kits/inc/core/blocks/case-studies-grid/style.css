@@ -31,3 +31,5 @@
   .work-grid h3 { font-size: var(--t-h5); font-weight: var(--font-weight-semibold); margin-top: var(--gap-1); }
 
   
+/* grey box until the video has data (R2 URLs fill in later) */
+.work-grid video{background:var(--neutral-5,#7d7d7d)}
