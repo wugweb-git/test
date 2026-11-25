@@ -1,0 +1,12 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/cta-band",
+  "version": "1.0.0",
+  "title": "CTA Band",
+  "category": "design",
+  "supports": {
+    "html": false
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css"
+}

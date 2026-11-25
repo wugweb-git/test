@@ -1,0 +1,22 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/faq-list",
+  "version": "1.0.0",
+  "title": "FAQ List",
+  "category": "design",
+  "supports": {
+    "html": false
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Questions worth answering."
+    },
+    "items": {
+      "type": "array",
+      "default": []
+    }
+  }
+}

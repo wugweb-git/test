@@ -1,0 +1,2 @@
+<?php
+?><section <?php echo get_block_wrapper_attributes(array('class'=>'wugweb-section wugweb-cta-band')); ?>><p class="wugweb-section__eyebrow">Start a conversation</p><h2>We speak your industry’s language.</h2><p class="wugweb-section__intro">Partner with Wugweb for domain-driven design and development.</p><div class="wp-block-button"><a class="wp-block-button__link wp-element-button">Request Quote</a></div></section>

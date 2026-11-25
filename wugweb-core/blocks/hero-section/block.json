@@ -1,0 +1,30 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/hero-section",
+  "version": "1.0.0",
+  "title": "Hero Section",
+  "category": "design",
+  "supports": {
+    "html": false
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Strategy \u00b7 Design \u00b7 Technology"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Where ambition meets execution."
+    },
+    "body": {
+      "type": "string",
+      "default": "Wugweb is a digital experience company that turns complex challenges into clear, compelling outcomes."
+    },
+    "buttonLabel": {
+      "type": "string",
+      "default": "Start a conversation"
+    }
+  }
+}

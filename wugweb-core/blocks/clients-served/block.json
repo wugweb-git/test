@@ -1,0 +1,18 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/clients-served",
+  "version": "1.0.0",
+  "title": "Clients Served",
+  "category": "design",
+  "supports": {
+    "html": false
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Built with teams who expect more."
+    }
+  }
+}
