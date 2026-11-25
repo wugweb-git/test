@@ -3,6 +3,7 @@ $items = !empty($attributes['items']) ? $attributes['items'] : array(array('q' =
 $heading = $attributes['heading'] ?? ''; $lede = $attributes['lede'] ?? ''; $framed = $heading || $lede; $uid = 'faq-' . wp_unique_id();
 ?><div <?php echo get_block_wrapper_attributes(array('class' => $framed ? 'wrap faq-block' : '')); ?>>
 <?php if ($framed): ?><div class="faq-head"><?php if ($heading): ?><h2 data-reveal><?php echo esc_html($heading); ?></h2><?php endif; ?><?php if ($lede): ?><p class="faq-lede" data-reveal><?php echo esc_html($lede); ?></p><?php endif; ?></div><?php endif; ?>
+<?php if (!$framed): ?><h2 class="sr-only">Frequently asked questions</h2><?php endif; ?>
 <ul class="faq-list<?php echo $framed ? '' : ' is-bare'; ?>" data-faq><?php foreach ($items as $i => $f): $o = $i === 0; ?>
 <li class="faq-card" data-reveal><h3 class="faq-q"><button type="button" class="faq-trigger" aria-expanded="<?php echo $o ? 'true' : 'false'; ?>" aria-controls="<?php echo esc_attr("$uid-p$i"); ?>" id="<?php echo esc_attr("$uid-t$i"); ?>"><span class="faq-q-text"><?php echo esc_html($f['q'] ?? ''); ?></span><span class="u-chip faq-toggle" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M8 1.5v13M1.5 8h13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg></span></button></h3><div class="faq-panel" id="<?php echo esc_attr("$uid-p$i"); ?>" role="region" aria-labelledby="<?php echo esc_attr("$uid-t$i"); ?>"<?php echo $o ? '' : ' hidden'; ?>><p><?php echo esc_html($f['a'] ?? ''); ?></p></div></li>
 <?php endforeach; ?></ul></div>
