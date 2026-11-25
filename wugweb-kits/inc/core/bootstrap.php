@@ -14,7 +14,7 @@ add_action('init', function () {
     wp_register_style('wugweb-core-cards', get_theme_file_uri('inc/core/assets/cards.css'), array(), '0.3.0');
     $blocks = array(
         // cards
-        'blog-card', 'portfolio-card', 'industry-card', 'client-card', 'team-card', 'stat-card', 'media-card', 'testimonial-card',
+        'blog-card', 'portfolio-card', 'industry-card', 'client-card', 'team-card', 'stat-card', 'media-card', 'blog-cards', 'testimonial-card',
         // interactive / runtime
         'pillar-scope', 'copyright-year', 'marquee', 'taxonomy-filter',
         // service pages (data from includes/service-data.json)
