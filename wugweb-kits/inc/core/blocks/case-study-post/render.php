@@ -115,7 +115,15 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
   } elseif ($kind === 'philosophy') {
     echo '<div class="b-list">'; foreach ($items as $it) { echo $it[0] === 'media' ? $fig($it[1], $brand . ' case study image') : $pt($it[1]); } echo '</div>';
   } else {
-    foreach ($items as $it) { echo $it[0] === 'media' ? $fig($it[1], $brand . ' case study image') : $pt($it[1]); } // phpcs:ignore
+    // Points with no link target are not cards: the form follows the count (1 statement, 2 pair, 3+ ruled rows).
+    $tl = array_filter($items, function ($x) { return $x[0] === 'point'; }); $nt = count($tl);
+    if ($nt) {
+      $form = $nt === 1 ? 'one' : ($nt === 2 ? 'two' : 'rows');
+      echo '<div class="b-points b-points--' . $form . '">';
+      foreach ($tl as $it) { $t = $it[1]; echo '<div class="b-pt">' . ($t[0] !== '' ? '<h3>' . esc_html($t[0]) . '</h3>' : '') . '<p>' . esc_html($t[1]) . '</p></div>'; }
+      echo '</div>';
+    }
+    foreach ($items as $it) { if ($it[0] === 'media') echo $fig($it[1], $brand . ' case study image'); } // phpcs:ignore
   }
   foreach ($vids as $v) { echo $fig($v, ''); }
   if ($kind === 'outcome') {
@@ -126,7 +134,11 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
   ?>
 </section>
 <?php endforeach;
-if ($closing) : ?><section class="bento" id="b-closing" aria-label="More from the project"><?php foreach ($closing as $md) { echo $fig($md, $brand . ' case study image'); } ?></section><?php endif; ?>
+if ($closing) : ?><section class="bento" id="b-closing" aria-label="More from the project"><?php
+  $first = array_slice($closing, 0, 6); $more = array_slice($closing, 6);
+  echo '<div class="b-gallery">'; foreach ($first as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div>';
+  if ($more) { echo '<details class="b-gallery-more"><summary>Show all ' . (int) count($closing) . ' images</summary><div class="b-gallery">'; foreach ($more as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div></details>'; }
+  ?></section><?php endif; ?>
 </div>
 <?php endif; ?>
 <?php if ($others) : ?>

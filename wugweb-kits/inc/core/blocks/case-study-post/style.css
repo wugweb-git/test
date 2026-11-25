@@ -63,9 +63,6 @@
 .wugweb-case-study .b-media,.wugweb-case-study .b-video,.wugweb-case-study .b-styles{grid-column:1/-1;grid-row:auto}
 .wugweb-case-study .b-media img{height:auto;object-fit:cover}
 .wugweb-case-study .b-point,.wugweb-case-study .b-point--long{grid-column:auto;border:0;background:var(--color-surface-elevated);border-radius:var(--radius-lg)}
-@media (min-width:768px){
-  .wugweb-case-study .bento[data-kind=challenges],.wugweb-case-study .bento[data-kind=outcome],.wugweb-case-study .bento[data-kind=other]{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
 @media (min-width:1100px){
   .wugweb-case-study .b-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--gap-10);align-items:start}
   .wugweb-case-study .b-head h2{grid-column:1;grid-row:1 / span 8}
@@ -108,10 +105,30 @@
 .wugweb-case-study .b-row .b-media{grid-column:auto;grid-row:auto}
 .wugweb-case-study .b-row .b-media img{max-height:none;aspect-ratio:4/3}
 
-/* Gallery (closing bento) = compact grid instead of a tall stack; media inside sections capped lower. */
+/* Gallery (closing bento): first six, rest behind a native <details>; 2-up on phones, 3-up from 1100. */
 .wugweb-case-study .b-media img{max-height:480px}
-.wugweb-case-study #b-closing{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap-4)}
-.wugweb-case-study #b-closing .b-media,.wugweb-case-study #b-closing .b-video{grid-column:auto}
-.wugweb-case-study #b-closing .b-media img{aspect-ratio:4/3;max-height:none;height:auto}
-@media (min-width:1100px){.wugweb-case-study #b-closing{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:575px){.wugweb-case-study #b-closing{grid-template-columns:minmax(0,1fr)}}
+.wugweb-case-study .b-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap-4)}
+.wugweb-case-study .b-gallery .b-media,.wugweb-case-study .b-gallery .b-video{grid-column:auto}
+.wugweb-case-study .b-gallery .b-media img{aspect-ratio:4/3;max-height:none;height:auto}
+@media (min-width:1100px){.wugweb-case-study .b-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.wugweb-case-study .b-gallery-more{margin-top:var(--gap-4)}
+.wugweb-case-study .b-gallery-more summary{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--gap-6);border:var(--stroke-thin) solid var(--line-strong,var(--line));border-radius:var(--radius-sm);color:var(--fg);cursor:pointer;list-style:none;font-weight:var(--font-weight-medium)}
+.wugweb-case-study .b-gallery-more summary::-webkit-details-marker{display:none}
+.wugweb-case-study .b-gallery-more[open] summary{margin-bottom:var(--gap-4)}
+.wugweb-case-study .b-gallery-more summary:focus-visible{outline:2px solid var(--color-accent-primary);outline-offset:3px}
+
+/* Points by count (no link target, so not cards): 1 statement, 2 pair, 3+ ruled rows. */
+.wugweb-case-study .b-points{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gap-6)}
+.wugweb-case-study .b-pt h3{margin:0 0 var(--gap-2);font-size:var(--fluid-body-lg);font-weight:var(--font-weight-semibold);color:var(--fg);line-height:var(--core-line-height-snug)}
+.wugweb-case-study .b-pt p{margin:0;font-size:var(--fluid-body-md);line-height:1.6;color:var(--fg-muted);max-width:60ch}
+.wugweb-case-study .b-points--one .b-pt p{font-size:var(--fluid-body-lg);color:var(--fg)}
+.wugweb-case-study .b-points--rows{gap:0}
+.wugweb-case-study .b-points--rows .b-pt{padding:var(--gap-6) 0;border-top:var(--stroke-thin) solid var(--line)}
+.wugweb-case-study .b-points--rows .b-pt:last-child{border-bottom:var(--stroke-thin) solid var(--line)}
+@media (min-width:768px){
+  .wugweb-case-study .b-points--two{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap-10)}
+  .wugweb-case-study .b-points--rows .b-pt{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:var(--gap-10);align-items:baseline}
+  .wugweb-case-study .b-points--rows .b-pt h3{margin:0}
+}
+.wugweb-case-study .bento[data-kind=challenges],.wugweb-case-study .bento[data-kind=outcome],.wugweb-case-study .bento[data-kind=other]{grid-template-columns:minmax(0,1fr)}
+.wugweb-case-study #b-closing{display:block}
