@@ -88,6 +88,11 @@ $prev = get_adjacent_post(false, '', true);
 $next = get_adjacent_post(false, '', false);
 $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-article-post'));
 ?>
+<?php
+$share_news = do_blocks('<!-- wp:wugweb/article-share-newsletter /-->');
+$news_html = '';
+if (preg_match('#<aside class="article-newsletter".*?</aside>#s', $share_news, $nm)) { $news_html = $nm[0]; $share_news = str_replace($nm[0], '', $share_news); }
+?>
 <?php ob_start(); ?>
     <div class="article-byline %CLS%">
       <?php if ($author) : ?><<?php echo $uid ? 'a href="' . esc_url(get_author_posts_url($uid)) . '"' : 'div'; ?> class="byline-card byline-author"><?php if ($photo) : ?><img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($author); ?>" class="meta-avatar" width="94" height="94"><?php else : ?><span class="wugweb-ph meta-avatar" aria-hidden="true"></span><?php endif; ?><div class="byline-text"><p class="byline-main"><?php echo esc_html($author); ?></p><?php if ($role !== '') : ?><p class="byline-sub"><?php echo esc_html($role); ?></p><?php endif; ?></div></<?php echo $uid ? 'a' : 'div'; ?>><?php endif; ?>
@@ -121,12 +126,7 @@ $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-article-post'));
         <?php foreach ($share as $l) : ?><a href="<?php echo esc_url($l[1]); ?>" target="_blank" rel="noopener noreferrer" class="share-link" aria-label="<?php echo esc_attr($l[0]); ?>"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><?php echo $icons[$l[2]]; // phpcs:ignore WordPress.Security.EscapeOutput ?></svg></a><?php endforeach; ?>
         <button type="button" class="share-link" data-copy-link="<?php echo esc_url($permalink); ?>" aria-label="Copy link"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg></button>
       </div></div>
-      <aside class="rail-promo" aria-labelledby="rail-promo-title">
-        <?php if ($logo_url) : ?><img class="promo-logo" src="<?php echo esc_url($logo_url); ?>" alt="Wugweb" width="96" height="auto" loading="lazy"><?php endif; ?>
-        <p class="promo-title" id="rail-promo-title">Have a project in mind?</p>
-        <p class="promo-text">Tell us what you are building and what it needs to achieve. Our team will help you map the next step.</p>
-        <a class="btn btn-solid promo-cta" href="<?php echo esc_url(home_url('/contact/')); ?>">Start a project</a>
-      </aside>
+      <?php if ($news_html !== '') : ?><div class="rail-newsletter"><?php echo $news_html; // phpcs:ignore WordPress.Security.EscapeOutput ?></div><?php endif; ?>
     </aside>
     <div class="post-body">
       <?php if (trim(wp_strip_all_tags($body)) !== '') : ?>
@@ -140,7 +140,7 @@ $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-article-post'));
       <div class="author-info"><p class="author-name"><?php echo esc_html($author); ?></p><?php if ($role !== '') : ?><p class="author-role"><?php echo esc_html($role); ?></p><?php endif; ?><p class="author-bio"><?php echo esc_html($bio); ?></p></div>
     </aside>
     <?php endif; ?>
-    <?php echo do_blocks('<!-- wp:wugweb/article-share-newsletter /-->'); ?>
+    <?php echo $share_news; // phpcs:ignore WordPress.Security.EscapeOutput ?>
     <?php if ($prev || $next) : ?>
     <nav class="article-prevnext" aria-label="Previous and next articles">
       <?php if ($prev) : ?><a href="<?php echo esc_url(get_permalink($prev)); ?>" class="pn-link pn-prev"><span class="pn-dir">Previous</span><span class="pn-title"><?php echo esc_html(get_the_title($prev)); ?></span></a><?php else : ?><span class="pn-link pn-placeholder"></span><?php endif; ?>

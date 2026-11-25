@@ -407,3 +407,12 @@
   .post-rail .rail-share{flex-direction:column;align-items:flex-start;gap:var(--gap-3)}
   .post-rail .rail-share .share-label{font-family:var(--font-body);font-size:var(--fluid-body-lg);font-weight:var(--font-weight-medium);text-transform:none;letter-spacing:0;color:var(--fg-muted)}
 }
+
+/* Newsletter lives in the rail (promo card removed). */
+.post-rail .rail-newsletter{order:3}
+.rail-newsletter .article-newsletter{margin:0;padding:var(--gap-5);text-align:left;background:var(--color-surface-elevated);border-radius:var(--radius-lg);max-width:none}
+.rail-newsletter .article-newsletter .eyebrow{display:none}
+.rail-newsletter .article-newsletter h2{font-size:var(--fluid-body-lg);font-weight:var(--font-weight-semibold);line-height:1.25;margin:0;max-width:none}
+.rail-newsletter .article-newsletter p{font-size:var(--fluid-body-sm);margin:var(--gap-2) 0 0}
+.rail-newsletter .nl-form{flex-direction:column;margin:var(--gap-4) 0 0;max-width:none}
+.rail-newsletter .nl-form .btn{width:100%;justify-content:center}

@@ -21,14 +21,21 @@
     chips.forEach((c) => c.classList.toggle('active', c === chip));
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
     // The featured post is outside the grid; hide it too when its topic doesn't match.
-    document.querySelectorAll('.blog-grid li, .blog-featured').forEach((el) => {
-      el.classList.toggle('hidden', !!active && el.dataset.topic !== active);
+    const q = (document.getElementById('blog-search')?.value || '').trim().toLowerCase();
+    document.querySelectorAll('.blog-grid li').forEach((el) => {
+      const topicOk = !active || el.dataset.topic === active;
+      const textOk = !q || el.textContent.toLowerCase().includes(q);
+      el.classList.toggle('hidden', !(topicOk && textOk));
+    });
+    document.querySelectorAll('.blog-featured').forEach((el) => {
+      el.classList.toggle('hidden', (!!active && el.dataset.topic !== active) || !!q);
     });
     shown = PAGE; paginate();
     const url = new URL(location.href);
     if (active) url.searchParams.set('topic', active); else url.searchParams.delete('topic');
     history.replaceState(null, '', url);
   }
+  document.getElementById('blog-search')?.addEventListener('input', () => applyTopic(new URLSearchParams(location.search).get('topic') ?? ''));
   chips.forEach((chip) => chip.addEventListener('click', () => applyTopic(chip.dataset.topic ?? '')));
   applyTopic(new URLSearchParams(location.search).get('topic') ?? '');
 
