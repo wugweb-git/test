@@ -1,0 +1,27 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/pillar-scope",
+  "version": "1.0.0",
+  "title": "Wugweb 6-Pillar Switcher & Scope Selector",
+  "category": "design",
+  "icon": "grid-view",
+  "description": "Interactive service pillar and scope selector.",
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "interactivity": true,
+    "autoRegister": true
+  },
+  "attributes": {
+    "ctaUrl": {
+      "type": "string",
+      "default": "#"
+    }
+  },
+  "render": "file:./render.php",
+  "viewScriptModule": "file:./view.js",
+  "style": "file:./style.css"
+}

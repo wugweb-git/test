@@ -1,0 +1,12 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/read-time",
+  "version": "1.0.0",
+  "title": "Wugweb Read Time",
+  "category": "text",
+  "render": "file:./render.php",
+  "supports": {
+    "html": false,
+    "autoRegister": true
+  }
+}

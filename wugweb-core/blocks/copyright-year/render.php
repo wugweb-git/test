@@ -1,0 +1,1 @@
+<?php $start='2020'; $year=gmdate('Y'); ?><span class="wugweb-copyright-year">© <?php echo esc_html($start . '–' . $year . ' Wugweb'); ?></span>

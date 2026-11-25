@@ -1,0 +1,12 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/copyright-year",
+  "version": "1.0.0",
+  "title": "Wugweb Copyright Year",
+  "category": "text",
+  "render": "file:./render.php",
+  "supports": {
+    "html": false,
+    "autoRegister": true
+  }
+}

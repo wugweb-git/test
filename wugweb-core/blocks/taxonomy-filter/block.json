@@ -1,0 +1,21 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/taxonomy-filter",
+  "version": "1.0.0",
+  "title": "Wugweb Taxonomy Filter",
+  "category": "query",
+  "icon": "filter",
+  "description": "Accessible case-study discipline and industry filters.",
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "supports": {
+    "html": false,
+    "autoRegister": true
+  },
+  "attributes": {
+    "taxonomy": {
+      "type": "string",
+      "default": "discipline"
+    }
+  }
+}
