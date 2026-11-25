@@ -370,3 +370,14 @@
 /* Radii from tokens, matching uat: cover/banner radius-xl (20), newsletter input radius-sm (8). */
 .wugweb-article-post .post-cover{border-radius:var(--radius-xl)}
 .wugweb-article-post .article-newsletter .nl-input{border-radius:var(--radius-sm)}
+
+/* Meta row: separate slim pills (author, date, read time, category/tags). */
+.wugweb-article-post .article-byline{display:flex;flex-wrap:wrap;gap:var(--gap-2);max-width:none}
+.article-byline .byline-card{display:inline-flex;align-items:center;gap:var(--gap-2);min-height:36px;width:auto;padding:4px 14px;border-radius:var(--radius-full);background:var(--color-surface-elevated);color:var(--fg);font-size:var(--fluid-body-sm);line-height:1.2;text-decoration:none}
+.article-byline .byline-author{padding:4px 14px 4px 4px}
+.article-byline .byline-author .meta-avatar{width:28px;height:28px;border-radius:50%}
+.article-byline .byline-author .byline-main{font-size:var(--fluid-body-sm);font-weight:var(--font-weight-medium)}
+.article-byline .byline-icon{width:16px;height:16px;padding:0;flex:0 0 16px;color:var(--fg-muted)}
+.article-byline a.byline-tag{border:var(--stroke-thin) solid var(--line-strong);background:transparent;color:var(--fg-muted)}
+.article-byline a.byline-tag:hover{color:var(--fg)}
+.article-byline span.byline-tag{border:var(--stroke-thin) solid var(--line-strong);background:transparent;color:var(--fg-muted)}

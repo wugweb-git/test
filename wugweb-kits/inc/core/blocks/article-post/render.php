@@ -72,8 +72,12 @@ $share = array(
   array('Share on LinkedIn', 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($permalink), 'LinkedIn'),
   array('Share on Facebook', 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode($permalink), 'Facebook'),
 );
-$cat_names = array_values(array_filter(array_map(function ($c) { return $c->name; }, (array) get_the_category($id)), function ($n) { return strtolower($n) !== 'uncategorized'; }));
-if (!$cat_names && $f['category']) { $cat_names = array($f['category']); }
+$tags = $f['tags'];
+$cat_pills = array();
+foreach ((array) get_the_category($id) as $c) { if (strtolower($c->name) !== 'uncategorized') { $cat_pills[] = array($c->name, get_category_link($c)); } }
+if (!$cat_pills && $f['category']) { $cat_pills[] = array($f['category'], ''); }
+foreach ((array) $tags as $tg) { if (count($cat_pills) < 3 && $tg !== '') { $cat_pills[] = array($tg, ''); } }
+$cat_pills = array_slice($cat_pills, 0, 3);
 $cover = $f['image'];
 $tags = $f['tags'];
 $excerpt = get_the_excerpt($id);
@@ -91,7 +95,9 @@ $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-article-post'));
     <?php if ($excerpt) : ?><p class="article-intro" data-reveal><?php echo esc_html(wp_strip_all_tags($excerpt)); ?></p><?php endif; ?>
     <div class="article-byline" data-reveal>
       <?php if ($author) : ?><div class="byline-card byline-author"><?php if ($photo) : ?><img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($author); ?>" class="meta-avatar" width="94" height="94"><?php else : ?><span class="wugweb-ph meta-avatar" aria-hidden="true"></span><?php endif; ?><div class="byline-text"><p class="byline-main"><?php echo esc_html($author); ?></p><?php if ($role !== '') : ?><p class="byline-sub"><?php echo esc_html($role); ?></p><?php endif; ?></div></div><?php endif; ?>
-      <div class="byline-card byline-date"><svg class="byline-icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg><div class="byline-text"><p class="byline-main"><time datetime="<?php echo esc_attr(get_the_modified_date('c', $id)); ?>">Updated <?php echo esc_html(get_the_modified_date('j F Y', $id)); ?></time></p><?php foreach ($cat_names as $cn) : ?><p class="byline-sub"><?php echo esc_html($cn); ?></p><?php endforeach; ?><p class="byline-sub"><?php echo esc_html((int) $f['minutes'] . ' min read'); ?></p></div></div>
+      <div class="byline-card byline-date"><svg class="byline-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg><time datetime="<?php echo esc_attr(get_the_date('c', $id)); ?>"><?php echo esc_html(wugweb_post_date_label($id)); ?></time></div>
+      <div class="byline-card byline-read"><?php echo esc_html((int) $f['minutes'] . ' min read'); ?></div>
+      <?php foreach ($cat_pills as $cp) : ?><?php if ($cp[1]) : ?><a class="byline-card byline-tag" href="<?php echo esc_url($cp[1]); ?>"><?php echo esc_html($cp[0]); ?></a><?php else : ?><span class="byline-card byline-tag"><?php echo esc_html($cp[0]); ?></span><?php endif; ?><?php endforeach; ?>
     </div>
   </header>
   <?php if ($cover) : ?>

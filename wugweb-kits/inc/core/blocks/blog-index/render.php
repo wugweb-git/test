@@ -11,7 +11,7 @@ foreach ($ids as $id) {
   $c = wugweb_post_card_data($id);
   $f = wugweb_fields_post($id);
   $c['slug_topic'] = $c['topic'] !== '' ? sanitize_title($c['topic']) : '';
-  $c['date'] = get_the_date('j M Y', $id);
+  $c['date'] = wugweb_post_date_label($id);
   $c['author'] = $f['author'];
   $c['tags'] = array_slice(array_values(array_filter((array) $f['tags'])), 0, 3);
   $cards[] = $c;
@@ -29,7 +29,7 @@ $arrow = '';
       <span class="pillar-tag"><i></i><?php echo esc_html($hero['topic']); ?></span>
       <h2 id="blog-featured-title"><?php echo esc_html($hero['title']); ?></h2>
       <p class="featured-excerpt"><?php echo esc_html($hero['excerpt']); ?></p>
-      <div class="post-meta"><?php if ($hero['author']) : ?><span><?php echo esc_html($hero['author']); ?></span><?php endif; ?><span><?php echo esc_html($hero['date']); ?></span><?php if (!empty($hero['minutes'])) : ?><span><?php echo (int) $hero['minutes']; ?> min read</span><?php endif; ?></div>
+      <div class="post-meta"><?php if ($hero['author']) : ?><span><?php echo esc_html($hero['author']); ?></span><?php endif; ?><span class="pc-date"><svg class="date-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><?php echo esc_html($hero['date']); ?></span><?php if (!empty($hero['minutes'])) : ?><span><?php echo (int) $hero['minutes']; ?> min read</span><?php endif; ?></div>
     </div>
   </a>
 </section>

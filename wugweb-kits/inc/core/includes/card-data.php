@@ -1,4 +1,6 @@
 <?php
+/** Site-wide post date: published date only, "DD Month YY" (17 July 25). Never the modified date. */
+if (!function_exists('wugweb_post_date_label')) { function wugweb_post_date_label($id) { return get_the_date('j F y', $id); } }
 /** Data schema -> card fields. One place that maps WordPress records (post, case_study, client, industry term, user) to what the card blocks show. */
 defined('ABSPATH') || exit;
 
@@ -25,7 +27,7 @@ function wugweb_fields_post($id) {
     if ($author === '') $author = get_the_author_meta('display_name', get_post_field('post_author', $id));
     return array('title' => get_the_title($id), 'url' => get_permalink($id),
         'image' => wugweb_img_first(array(get_the_post_thumbnail_url($id, 'large'), (string) get_post_meta($id, 'wugweb_cover_url', true))),
-        'excerpt' => wp_trim_words(get_the_excerpt($id), 24), 'date' => get_the_date('', $id), 'category' => $cat, 'minutes' => $mins, 'author' => $author,
+        'excerpt' => wp_trim_words(get_the_excerpt($id), 24), 'date' => wugweb_post_date_label($id), 'category' => $cat, 'minutes' => $mins, 'author' => $author,
         'tags' => wugweb_term_names($id, 'post_tag'));
 }
 
