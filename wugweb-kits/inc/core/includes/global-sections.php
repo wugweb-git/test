@@ -71,3 +71,15 @@ add_filter('render_block', function ($html, $block) {
 add_action('enqueue_block_editor_assets', function () {
     wp_enqueue_script('wugweb-copy-editor', get_theme_file_uri('assets/js/wugweb-copy-editor.js'), array('wp-hooks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch', 'wp-data'), wp_get_theme()->get('Version'), true);
 });
+
+/** Site Identity logo: header/footer logo images follow the Site Identity logo when one is set (the DB header part keeps its theme-asset fallback). */
+add_filter('render_block', function ($html, $block) {
+    if (($block['blockName'] ?? '') !== 'core/html' || strpos($html, 'site-logo-img') === false) return $html;
+    $id = (int) get_theme_mod('custom_logo');
+    if (!$id) return $html;
+    $src = wp_get_attachment_image_url($id, 'full');
+    if (!$src) return $html;
+    return preg_replace_callback('#<img\b[^>]*site-logo-img[^>]*>#', function ($m) use ($src) {
+        return preg_replace('#\ssrc="[^"]*"#', ' src="' . esc_url($src) . '"', $m[0], 1);
+    }, $html);
+}, 25, 2);

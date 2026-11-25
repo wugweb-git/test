@@ -178,3 +178,12 @@ body a{color:inherit}
 .wp-site-blocks .stat-card-wrap{padding:var(--gap-8)}
 .wp-site-blocks .team-heading{color:var(--fg);margin-top:var(--gap-3)}
 .wp-site-blocks .faq-lede{margin-top:0}
+
+/* Form controls — source contact-us .field-group input/textarea; values from settings.custom.input (theme.json). */
+.wp-site-blocks :is(input:not([type=checkbox],[type=radio],[type=range],[type=submit],[type=button],[type=reset],[type=file],[type=color],[type=hidden],[type=image]),textarea,select),.wp-site-blocks .ff-el-form-control{background:var(--wp--custom--input--background);color:var(--fg);border:var(--stroke-thin) solid var(--wp--custom--input--border);border-radius:var(--r-1);padding:var(--gap-3) var(--gap-4);font-family:var(--font-body);font-size:var(--fluid-body-md);transition:var(--transition-fast);box-sizing:border-box;max-width:100%}
+.wp-site-blocks :is(input,textarea,select):not([type=checkbox],[type=radio],[type=submit],[type=button],[type=hidden]):hover{border-color:var(--wp--custom--input--borderHover)}
+.wp-site-blocks :is(input,textarea,select):not([type=checkbox],[type=radio],[type=submit],[type=button],[type=hidden]):focus,.wp-site-blocks .ff-el-form-control:focus{outline:none;border-color:var(--wp--custom--input--borderFocus);background:var(--wp--custom--input--backgroundFocus)}
+.wp-site-blocks :is(input,textarea,select):not([type=checkbox],[type=radio],[type=submit],[type=button],[type=hidden]):focus-visible{outline:var(--focus-input);outline-offset:2px}
+.wp-site-blocks :is(input,textarea)::placeholder{color:var(--wp--custom--input--placeholder);opacity:1}
+.wp-site-blocks :is(input,textarea,select):disabled{opacity:var(--wp--custom--input--disabledOpacity);cursor:not-allowed}
+.wp-site-blocks :is(input,textarea,select)[aria-invalid=true],.wp-site-blocks .ff-el-is-error .ff-el-form-control{border-color:var(--wp--custom--input--error)}
