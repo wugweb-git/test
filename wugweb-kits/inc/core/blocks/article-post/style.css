@@ -389,3 +389,12 @@
 .article-byline a.byline-card:hover .byline-icon{color:var(--color-text-primary)}
 .article-byline a.byline-card:focus-visible{outline:2px solid var(--color-accent-primary);outline-offset:2px}
 .article-byline a.byline-author .byline-main{color:inherit}
+
+/* Meta: under the lede below 1200, first item of the sticky rail at 1200+ (never both). */
+.article-byline.is-rail{display:none}
+@media (min-width:1200px){
+  .article-byline.is-hero{display:none}
+  .article-byline.is-rail{display:flex;flex-direction:column;align-items:flex-start;gap:var(--gap-2);margin:0 0 var(--gap-2)}
+  .article-byline.is-rail .byline-card{width:auto}
+  .post-rail .article-byline.is-rail{order:0}
+}
