@@ -1,0 +1,68 @@
+  
+  /* Full-width section with a 48rem content column carved by padding (was a
+     48rem cap on the section itself, so the section was not full width). */
+
+  .reviews-section { padding-block: var(--space-section-md); border-top: var(--stroke-thin) solid var(--line); }
+  .section-header { max-width: 48rem; }
+  .section-header h2 { margin-top: var(--gap-3); }
+  .section-lead { margin-top: var(--gap-4); color: var(--fg-muted); }
+
+  .platform-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-4);
+    margin-top: var(--gap-8);
+  }
+  @media (min-width: 640px) {
+    .platform-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .glass-panel {
+    background: var(--color-surface-elevated);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-lg);
+  }
+
+  .platform-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-3);
+    padding: var(--gap-6);
+    text-decoration: none;
+    transition: box-shadow var(--duration-normal) var(--easing-out), transform var(--duration-normal) var(--easing-out);
+  }
+  .platform-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .platform-logo-ph { width: 120px; border-radius: 6px; }
+  .platform-name { font-weight: var(--font-weight-semibold); color: var(--fg); font-size: var(--fluid-body-md); }
+  .platform-sub { color: var(--fg-muted); font-size: var(--fluid-body-sm); }
+  .platform-cta {
+    margin-top: auto;
+    color: var(--fg-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fluid-label);
+  }
+  .platform-card:hover .platform-cta { color: var(--fg); }
+
+  /* Client testimonials. Reuses .platform-card so the cards match the platform
+     grid above; only the inner typography differs. Tokens only.
+     figure carries a default UA margin (~40px each side) that .platform-card
+     never reset, because every other card on this page is an <a> — without this
+     the testimonial card rendered 291px inside a 370px grid column. */
+  figure.platform-card { margin: 0; }
+  .testimonial-quote {
+    margin: 0;
+    color: var(--fg);
+    font-size: var(--fluid-body-md);
+    line-height: var(--core-line-height-relaxed);
+  }
+  .testimonial-attrib {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--gap-2);
+  }
+  .testimonial-photo { border-radius: var(--radius-full); object-fit: cover; }
+  .testimonial-name { font-weight: var(--font-weight-semibold); color: var(--fg); font-size: var(--fluid-body-sm); }
+  .testimonial-role { color: var(--fg-muted); font-family: var(--font-mono); font-size: var(--fluid-label); }

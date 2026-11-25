@@ -1,0 +1,1 @@
+document.getElementById('legal-cookie-settings-btn')&&document.getElementById('legal-cookie-settings-btn').addEventListener('click',function(){if(window.openWugwebCookieSettings)window.openWugwebCookieSettings();});

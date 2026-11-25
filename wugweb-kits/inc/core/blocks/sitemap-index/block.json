@@ -1,0 +1,45 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/sitemap-index",
+  "version": "3.0.0",
+  "title": "Sitemap Index",
+  "category": "wugweb",
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "attributes": {},
+  "icon": "list-view",
+  "description": "Sitemap columns: pages, services, case studies, posts, legal (footer/sitemap.astro)."
+}

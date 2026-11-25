@@ -1,0 +1,130 @@
+  .legal-hub { padding-block: var(--space-page-head) var(--space-section-xl); }
+
+  .legal-hub-head { margin-bottom: var(--space-section-md); }
+  .legal-hub-crumb {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--fluid-label);
+    letter-spacing: 0.02em;
+    color: var(--fg-muted);
+    text-decoration: none;
+  }
+  .legal-hub-crumb:hover { color: var(--fg); }
+  .legal-hub-head .page-title { margin-top: var(--gap-3); }
+
+  /* A real container, not a plain muted line — the date is information
+     someone scans for specifically (did this change since I last read
+     it?), so it gets its own visual weight instead of blending into body
+     copy. */
+  /* .meta-row/.meta-item/.meta-icon (global.css) supply the icon + text
+     pairing — this just wraps it in the pill container a date deserves
+     over blending into body copy. */
+  .legal-hub-updated {
+    margin-top: var(--gap-4);
+  }
+  .legal-hub-updated .meta-item {
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--neutral-0) 8%, transparent);
+    font-size: var(--fluid-label);
+  }
+
+  .legal-hub-grid {
+    display: grid;
+    gap: var(--grid-gap);
+  }
+  @media (min-width: 1024px) {
+    /* Nav column sized to its longest label ("Cookie Settings") plus
+       breathing room, not a guessed fraction — content column takes the
+       rest, up to whatever max-width the page's own .legal/.static-page
+       content sets. */
+    .legal-hub-grid { grid-template-columns: 14rem 1fr; align-items: start; gap: var(--grid-gap); }
+  }
+
+  .legal-hub-nav {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-page-md));
+  }
+  .legal-hub-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-1);
+  }
+  @media (max-width: 1023.98px) {
+    .legal-hub-nav ul { flex-direction: row; flex-wrap: wrap; gap: var(--gap-2); }
+  }
+
+  .legal-hub-nav a,
+  .legal-hub-action {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    padding: var(--gap-2) var(--gap-3);
+    border-radius: var(--radius-sm);
+    border-left: 2px solid transparent;
+    color: var(--fg-muted);
+    font-size: var(--fluid-body-sm);
+    text-decoration: none;
+    background: none;
+    border-block: 0;
+    border-right: 0;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--easing-out),
+                color var(--duration-fast) var(--easing-out),
+                border-color var(--duration-fast) var(--easing-out);
+  }
+  @media (max-width: 1023.98px) {
+    .legal-hub-nav a,
+    .legal-hub-action {
+      width: auto;
+      background: color-mix(in srgb, var(--neutral-0) 6%, transparent);
+      border-radius: var(--radius-full);
+      /* The left accent bar is a desktop-rail affordance — in a wrapped
+         pill row there's no consistent "left edge" to read it against. */
+      border-left-color: transparent !important;
+    }
+  }
+
+  .legal-hub-nav a:hover,
+  .legal-hub-action:hover {
+    color: var(--fg);
+    background: color-mix(in srgb, var(--neutral-0) 8%, transparent);
+  }
+  /* Selected state — three signals together (fill, left rail, weight), not
+     just a faint background shift: the fill reads at a glance, the rail
+     gives it a fixed anchor point scanning down the list, the weight
+     confirms it on closer look. */
+  .legal-hub-nav a[aria-current='page'] {
+    color: var(--fg);
+    background: color-mix(in srgb, var(--neutral-0) 12%, transparent);
+    border-left-color: var(--color-accent-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+  .legal-hub-nav a:focus-visible,
+  .legal-hub-action:focus-visible {
+    outline: var(--focus-primary);
+    outline-offset: 2px;
+  }
+
+  .legal-hub-content { min-width: 0; }
+  /* The four pages each still set their own padding-block on .legal /
+     .static-page for their standalone route — cancel that here so the hub
+     controls vertical rhythm once, not twice. */
+  .legal-hub-content .legal,
+  .legal-hub-content .static-page {
+    padding-block: 0;
+  }
+
+.legal{max-width:800px}
+.legal-body h2{font-size:var(--fluid-h3);font-weight:var(--font-weight-semibold);margin-top:var(--gap-12);margin-bottom:var(--gap-4);color:var(--color-text-primary);border-top:var(--stroke-thin) solid var(--color-border-subtle);padding-top:var(--p-6)}
+.legal-body > :first-child{margin-top:0}
+.legal-body p,.legal-body li{font-size:var(--fluid-body-md);line-height:var(--core-line-height-relaxed);color:var(--color-text-secondary);margin-bottom:var(--gap-4);max-width:70ch}
+.legal-body ul,.legal-body ol{margin-bottom:var(--gap-6);padding-left:var(--p-5)}
+.legal-body li{margin-bottom:var(--gap-2)}
+.legal-body a{color:var(--color-accent-primary);text-decoration:none}
+.legal-body a:hover{text-decoration:underline}
