@@ -88,8 +88,8 @@ $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-article-post'));
     <h1 id="article-hero-title" data-reveal><?php echo esc_html(get_the_title($id)); ?></h1>
     <?php if ($excerpt) : ?><p class="article-intro" data-reveal><?php echo esc_html(wp_strip_all_tags($excerpt)); ?></p><?php endif; ?>
     <p class="article-byline" data-reveal>
-      <?php if ($author) : ?><span class="meta-author"><?php if ($photo) : ?><img src="<?php echo esc_url($photo); ?>" alt="" class="meta-avatar"><?php else : ?><span class="wugweb-ph meta-avatar" aria-hidden="true"></span><?php endif; ?><span><?php echo esc_html($author); ?></span></span><span class="byline-dot" aria-hidden="true">&middot;</span><?php endif; ?>
-      <span>Updated <time datetime="<?php echo esc_attr(get_the_modified_date('c', $id)); ?>"><?php echo esc_html(get_the_modified_date('j M Y', $id)); ?></time></span><span class="byline-dot" aria-hidden="true">&middot;</span><span><?php echo esc_html((int) $f['minutes'] . ' min read'); ?></span>
+      <?php if ($author) : ?><span class="meta-author byline-pill"><?php if ($photo) : ?><img src="<?php echo esc_url($photo); ?>" alt="" class="meta-avatar"><?php else : ?><span class="wugweb-ph meta-avatar" aria-hidden="true"></span><?php endif; ?><span><?php echo esc_html($author); ?></span></span><?php endif; ?>
+      <span class="byline-pill">Updated <time datetime="<?php echo esc_attr(get_the_modified_date('c', $id)); ?>"><?php echo esc_html(get_the_modified_date('j M Y', $id)); ?></time></span><span class="byline-pill"><?php echo esc_html((int) $f['minutes'] . ' min read'); ?></span>
     </p>
   </header>
   <?php if ($cover) : ?>
