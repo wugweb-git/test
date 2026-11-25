@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "wugweb/cookie-consent",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Cookie consent",
   "category": "wugweb",
   "icon": "privacy",

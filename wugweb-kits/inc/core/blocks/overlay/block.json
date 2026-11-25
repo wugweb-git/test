@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "wugweb/overlay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "title": "Overlay (modal / drawer)",
   "category": "wugweb",
   "icon": "welcome-widgets-menus",
