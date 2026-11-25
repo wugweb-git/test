@@ -19,3 +19,16 @@ add_filter('render_block', function ($html, $block) {
     $key = $name === 'wugweb/industries-served' ? 'sectors' : ($name === 'wugweb/recent-thoughts' ? 'teaser' : 'cta');
     return $r[$key] ? $html : '';
 }, 10, 2);
+
+/** Primary nav: mark the current section (SiteHeader.astro isActive: exact or prefix match). */
+add_filter('render_block_core/html', function ($html) {
+    if (strpos($html, 'id="site-nav"') === false) return $html;
+    $path = trailingslashit((string) wp_parse_url(add_query_arg(array()), PHP_URL_PATH));
+    $extra = array('/work/' => array('/our-work/'));
+    return preg_replace_callback('#<a href="([^"]+)" class="nav-link">#', function ($m) use ($path, $extra) {
+        $href = trailingslashit((string) wp_parse_url($m[1], PHP_URL_PATH));
+        $on = $path === $href || strpos($path, $href) === 0 && $href !== '/';
+        foreach ($extra[$href] ?? array() as $alt) { if (strpos($path, $alt) === 0) $on = true; }
+        return $on ? '<a href="' . $m[1] . '" class="nav-link is-active" aria-current="page">' : $m[0];
+    }, $html);
+});
