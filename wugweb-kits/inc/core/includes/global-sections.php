@@ -123,3 +123,24 @@ add_filter('render_block_core/group', function ($html, $block) {
     $new = preg_replace('#^<main\b#', '<main id="main" tabindex="-1" aria-label="' . esc_attr($title) . '"' . ($ids ? ' data-scroll-flow="' . esc_attr(implode(' ', $ids)) . '"' : ''), $new);
     return preg_replace('#^\s*<main\b[^>]*>#', addcslashes($new, '\\$'), $html, 1);
 }, 10, 2);
+
+/** Cookie consent: render the banner + modal in the footer; hold analytics scripts (Site Kit / gtag) until consent (view.js releases them). */
+add_action('wp_footer', function () {
+    if (is_admin() || is_feed() || is_embed()) return;
+    echo do_blocks('<!-- wp:wugweb/cookie-consent /-->');
+}, 5);
+add_action('template_redirect', function () {
+    if (is_admin() || is_feed() || is_embed() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_customize_preview()) return;
+    ob_start(function ($html) {
+        if (stripos($html, '</html>') === false) return $html;
+        return preg_replace_callback('#<script\b([^>]*)>(.*?)</script>#is', function ($m) {
+            $attrs = $m[1]; $body = $m[2];
+            $isGa = preg_match('#\bsrc=["\'][^"\']*(googletagmanager\.com|google-analytics\.com)#i', $attrs)
+                || preg_match('#\bid=["\']google_gtagjs#i', $attrs)
+                || (stripos($body, 'gtag(') !== false && stripos($body, 'dataLayer') !== false && stripos($body, 'wugweb_cookie') === false);
+            if (!$isGa) return $m[0];
+            $attrs = preg_replace('#\stype=["\'][^"\']*["\']#i', '', $attrs);
+            return '<script type="text/plain" data-wugweb-consent="analytics"' . $attrs . '>' . $body . '</script>';
+        }, $html);
+    });
+}, 1);
