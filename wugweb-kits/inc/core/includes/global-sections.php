@@ -75,7 +75,7 @@ add_action('enqueue_block_editor_assets', function () {
 /** Site Identity logo: header/footer logo images follow the Site Identity logo when one is set (the DB header part keeps its theme-asset fallback). */
 add_filter('render_block', function ($html, $block) {
     if (($block['blockName'] ?? '') !== 'core/html' || strpos($html, 'site-logo-img') === false) return $html;
-    $id = (int) get_theme_mod('custom_logo');
+    $id = (int) get_option('site_logo') ?: (int) get_theme_mod('custom_logo');
     if (!$id) return $html;
     $src = wp_get_attachment_image_url($id, 'full');
     if (!$src) return $html;
