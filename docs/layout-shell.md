@@ -56,7 +56,7 @@ Spring transition (nav and hover): 400ms, bounce 0.2, delay 0 -> `--duration-spr
 
 ## Every page is indexed (canvas)
 
-- `<html lang>`; skip link is the first focusable element and targets `#main`.
+- `<html lang>`. Skip link: removed by owner decision 2026-11-25 (the spec wanted one as the first focusable element, targeting `#main`).
 - `<main id="main" tabindex="-1" aria-label={page title}>`; `<header>` (sticky nav); `<footer id="site-footer" aria-label="Site footer">`.
 - Exactly one `h1` per page, inside main. Heading levels never skip.
 - `main[data-scroll-flow]` lists section ids in order; each top-level section gets `data-scroll-index` 1..n.
@@ -110,3 +110,10 @@ The measuring iframe needs `border: 0`. A 768px iframe with the default 2px bord
 ## Not carried (superseded)
 
 Old audit items on 1024 breakpoint, flat spacing, nav card values, type scale and component counts are superseded by this file and `breakpoints.md` / `typography.md` in the source repo.
+
+## Layout tokens (from `kits_design_system/docs/tokens/layout.md`)
+
+- `.wrap` = 1200px content plus gutters; it is the section and owns the only page gutter. `.page` (90rem) is legacy; nothing may be wider than the nav (1280).
+- `.grid`: 4 columns mobile, 8 at 768, 12 at 1200; gap `--grid-gap` 16 / 24 / 32.
+- Page gutter `--space-page-xs/sm/md/lg/xl` = 16 / 20 / 32 / 40 / 48.
+- Section spacing `--space-section-xs` to `--space-section-xl` all = 48 mobile, 70 at 768, 96 at 1200. The old 32/40/48/64/80 ladder is retired.
