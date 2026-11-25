@@ -145,7 +145,7 @@ CREATE TABLE {$p}wugweb_client_engagements (
 	dbDelta( $sql );
 }
 
-add_action( 'plugins_loaded', function () {
+add_action( 'after_setup_theme', function () {
 	if ( version_compare( get_option( 'wugweb_db_version', '0' ), WUGWEB_DB_VERSION, '<' ) ) {
 		wugweb_core_create_tables();
 		update_option( 'wugweb_db_version', WUGWEB_DB_VERSION );

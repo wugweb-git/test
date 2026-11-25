@@ -1,15 +1,10 @@
 <?php
-/**
- * Plugin Name: Wugweb Core
- * Description: Data models, interactive and dynamic blocks, and runtime hooks for Wugweb Kits.
- * Version: 0.2.0
- * Requires PHP: 8.0
- */
+/** Wugweb Core, merged into the theme. Blocks, post types, schemas and DB tables. */
 if (!defined('ABSPATH')) { exit; }
 require_once __DIR__ . '/includes/service-data.php';
 add_action('init', function () {
-    wp_register_style('wugweb-core-service', plugins_url('assets/service.css', __FILE__), array(), '0.2.0');
-    wp_register_style('wugweb-core-content', plugins_url('assets/content.css', __FILE__), array(), '0.2.0');
+    wp_register_style('wugweb-core-service', get_theme_file_uri('inc/core/assets/service.css'), array(), '0.2.0');
+    wp_register_style('wugweb-core-content', get_theme_file_uri('inc/core/assets/content.css'), array(), '0.2.0');
     $blocks = array(
         // interactive / runtime
         'pillar-scope', 'copyright-year', 'marquee', 'taxonomy-filter',

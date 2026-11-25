@@ -77,3 +77,8 @@ add_action('init', function () {
 });
 
 require_once __DIR__ . '/inc/design-system.php';
+
+/** Wugweb Core (merged from the former plugin). Skipped while the old plugin is still active so nothing is declared twice. */
+if (!in_array('wugweb-core/wugweb-core.php', (array) get_option('active_plugins', array()), true)) {
+    require_once __DIR__ . '/inc/core/bootstrap.php';
+}
