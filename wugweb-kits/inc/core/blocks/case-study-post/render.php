@@ -47,6 +47,8 @@ foreach (parse_blocks((string) get_post_field('post_content', $id)) as $b) {
 }
 $push();
 $secs = $long ?: $short;
+// Long copy: a short unpunctuated line followed by a longer one is a titled point (case-body.ts).
+foreach ($secs as $i => $sec) { $paras = array(); $n = count($sec['paras']); for ($k = 0; $k < $n; $k++) { $l = $sec['paras'][$k]; $nx = $sec['paras'][$k + 1] ?? null; if ($nx !== null && strlen($l) <= 70 && !preg_match('/[.:!?]$/', $l) && strlen($nx) > strlen($l)) { $secs[$i]['tiles'][] = array($l, $nx); $k++; } else { $paras[] = $l; } } $secs[$i]['paras'] = $paras; }
 // Route media to sections by label words; client logo and cover are handled elsewhere.
 $key = function ($s) { $s = strtolower($s); if (preg_match('/style/', $s)) return 'styles'; if (preg_match('/challenge|problem/', $s)) return 'challenges'; if (preg_match('/solution|approach|what we built/', $s)) return 'solutions'; if (preg_match('/philosoph|insight|thesis/', $s)) return 'philosophy'; if (preg_match('/conclusion|impact|outcome|result|filler/', $s)) return 'outcome'; if (preg_match('/about|context/', $s)) return 'about'; return $s; };
 $by = array(); $closing = array();
