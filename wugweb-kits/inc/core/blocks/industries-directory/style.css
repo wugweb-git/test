@@ -1,0 +1,427 @@
+
+  /* Vertical padding comes from the global top-level section rule
+     (--section-y); a local padding-block here would be overridden. */
+  .ind-hero {
+    display: grid;
+    gap: var(--gap-8);
+    align-items: center;
+  }
+
+  .ind-hero h1 {
+    font-size: var(--fluid-display);
+    font-weight: var(--font-weight-extrabold);
+    line-height: var(--lh-display);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--gap-6);
+  }
+
+  .ind-hero-lead {
+    font-size: var(--fluid-body-lg);
+    line-height: var(--lh-xl);
+    color: var(--color-text-secondary);
+    max-width: 46ch;
+  }
+
+  /* x < 480: no diagram. */
+  .ind-hero-visual { display: none; }
+
+  .ind-diagram {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "nw n ne"
+      "w  c e"
+      "sw s se";
+    gap: var(--gap-3);
+    aspect-ratio: 1 / 1;
+    background-color: var(--color-surface-elevated);
+    border-radius: var(--radius-5);
+    padding: var(--p-5);
+  }
+
+  .ind-diagram-lines {
+    position: absolute;
+    inset: var(--p-5);
+    width: calc(100% - 2 * var(--p-5));
+    height: calc(100% - 2 * var(--p-5));
+    pointer-events: none;
+  }
+
+  .ind-line {
+    stroke: var(--color-border-subtle);
+    stroke-width: var(--stroke-thin);
+    stroke-dasharray: 4 4;
+  }
+
+  .ind-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-2);
+    min-width: 0;
+    padding: var(--p-2);
+    border-radius: var(--radius-3);
+    background-color: var(--surface-2);
+    color: var(--color-text-primary);
+    text-align: center;
+  }
+
+  .ind-node-centre {
+    background-color: var(--color-text-primary);
+    color: var(--color-surface-page);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    font-size: var(--fluid-body-sm);
+  }
+
+  .ind-node-tile { display: inline-flex; color: var(--color-text-secondary); }
+  .ind-node-tile svg { width: var(--gap-6); height: var(--gap-6); stroke-width: 1.5; }
+
+  .ind-node-name {
+    font-family: var(--font-mono);
+    font-size: var(--fluid-body-sm);
+    line-height: var(--lh-snug);
+    overflow-wrap: anywhere;
+  }
+
+  /* 480 ≤ x < 768: the four cross nodes only, larger labels. */
+  @media (min-width: 480px) {
+    .ind-hero-visual { display: block; max-width: calc(var(--gap-8) * 14); width: 100%; margin-inline: auto; }
+    .ind-node.is-extra, .ind-line.is-extra { display: none; }
+  }
+
+  /* 768 ≤ x < 1024: text, then the full diagram. */
+  @media (min-width: 768px) {
+    .ind-hero-visual { max-width: calc(var(--gap-8) * 16); }
+    .ind-node.is-extra { display: flex; }
+    .ind-line.is-extra { display: inline; }
+    .ind-node-name { font-size: var(--fluid-caption); }
+  }
+
+  /* x ≥ 1024: split. */
+  @media (min-width: 1024px) {
+    .ind-hero { grid-template-columns: 1.1fr 0.9fr; gap: var(--gap-12); }
+    .ind-hero-visual { max-width: none; }
+  }
+
+  @media (forced-colors: active) {
+    .ind-node { border: var(--stroke-thin) solid CanvasText; }
+    .ind-line { stroke: CanvasText; }
+  }
+
+  .dir-row {
+    display: grid;
+    gap: var(--gap-6);
+    padding: var(--p-6);
+    border-radius: var(--radius-5);
+    scroll-margin-top: calc(var(--header-height) + var(--gap-4));
+  }
+
+  .dir-row.is-tint { background-color: var(--color-surface-elevated); }
+
+  .dir-row-meta { display: grid; gap: var(--gap-2); align-content: start; min-width: 0; }
+
+  .dir-row-num {
+    font-family: var(--font-mono);
+    font-size: var(--fluid-caption);
+    letter-spacing: var(--tracking-label);
+    color: var(--fg-subtle);
+  }
+
+  .dir-row-name {
+    font-size: var(--fluid-h3);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--lh-h3);
+    letter-spacing: -0.01em;
+  }
+
+  .dir-row-line {
+    font-size: var(--fluid-body-md);
+    line-height: var(--lh-xl);
+    color: var(--color-text-secondary);
+    max-width: 48ch;
+  }
+
+  .dir-row-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-2);
+    align-content: start;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .dir-row-label {
+    max-width: 100%;
+    padding: var(--p-2) var(--p-4);
+    border-radius: var(--radius-full);
+    background-color: var(--surface-2);
+    color: var(--color-text-primary);
+    font-size: var(--fluid-body-sm);
+    line-height: var(--lh-snug);
+    overflow-wrap: anywhere;
+  }
+
+  @media (min-width: 1024px) {
+    .dir-row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      gap: var(--gap-12);
+      padding: var(--p-8);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .dir-row-label { border: var(--stroke-thin) solid CanvasText; }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────
+     LAYOUT & THEME INTEGRATION
+     ───────────────────────────────────────────────────────────────────── */
+  .industries-page {
+    padding-bottom: var(--space-section-xl);
+    background-color: var(--color-surface-page);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
+  }
+
+  .section-header {
+    margin-bottom: var(--gap-12);
+  }
+
+  .section-header h2 {
+    font-size: var(--fluid-h2);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: -0.02em;
+    max-width: 25ch;
+    line-height: var(--lh-h2);
+  }
+
+  .section-lede {
+    font-size: var(--fluid-body-lg);
+    line-height: var(--lh-xl);
+    color: var(--color-text-secondary);
+    margin-top: var(--gap-4);
+    max-width: 50ch;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────
+     SECTION 02: SECTOR DIRECTORY (rows: SectorRow.astro)
+     ───────────────────────────────────────────────────────────────────── */
+  .directory-section {
+    padding-block: var(--space-section-xl);
+  }
+
+  .directory-list {
+    display: grid;
+    gap: var(--gap-4);
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────
+     SECTION 03: CROSS INDUSTRY EXPERIENCE
+     ───────────────────────────────────────────────────────────────────── */
+  .cross-experience-section {
+    padding-block: var(--space-section-xl);
+    border-top: var(--stroke-thin) solid var(--color-border-subtle);
+  }
+
+  .cross-grid {
+    display: grid;
+    gap: var(--gap-8);
+    align-items: center;
+  }
+
+  .cross-grid > * { min-width: 0; }
+
+  @media (min-width: 1024px) {
+    .cross-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-12);
+    }
+  }
+
+  .cross-copy h2 {
+    font-size: var(--fluid-h2);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    margin-top: var(--gap-4);
+    margin-bottom: var(--gap-6);
+  }
+
+  .cross-copy p {
+    font-size: var(--fluid-body-lg);
+    line-height: var(--lh-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--gap-4);
+    max-width: 48ch;
+  }
+
+  /* Diagram styles */
+  .transfer-diagram {
+    background-color: var(--neutral-8);
+    border: var(--stroke-thin) solid var(--color-border-subtle);
+    padding: var(--p-8);
+    border-radius: var(--radius-5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-2);
+  }
+
+  .diagram-inputs, .diagram-outputs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap-4);
+    width: 100%;
+  }
+
+  .diag-node {
+    background-color: var(--color-surface-page);
+    border: var(--stroke-thin) solid var(--color-border-subtle);
+    padding: var(--p-3) var(--p-5);
+    border-radius: var(--radius-2);
+    font-family: var(--font-mono);
+    font-size: var(--fluid-caption);
+    color: var(--color-text-primary);
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .diag-node.outline {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-secondary);
+  }
+
+  .diag-node.active {
+    background-color: var(--color-accent-primary);
+    color: var(--neutral-10);
+    border-color: var(--color-accent-primary);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .diagram-arrows {
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    font-size: var(--t-h4);
+    line-height: 1;
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+  }
+
+  .diagram-center {
+    background-color: var(--color-accent-primary);
+    color: var(--neutral-10);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--fluid-body-sm);
+    letter-spacing: var(--tracking-label);
+    padding: var(--p-3) var(--p-6);
+    border-radius: var(--radius-2);
+    z-index: 2;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────
+     SECTION 04: DON'T SEE YOUR INDUSTRY?
+     ───────────────────────────────────────────────────────────────────── */
+  .missing-industry-section {
+    padding-block: var(--space-section-md);
+    border-top: var(--stroke-thin) solid var(--color-border-subtle);
+  }
+
+  .missing-inner {
+    background-color: var(--neutral-0);
+    color: var(--neutral-10);
+    border-radius: var(--radius-5);
+    padding: var(--p-8);
+    text-align: center;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 768px) {
+    .missing-inner {
+      padding: var(--p-12);
+    }
+  }
+
+  .missing-inner h2 {
+    font-size: var(--fluid-h2);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--gap-4);
+  }
+
+  .missing-inner p {
+    font-size: var(--fluid-body-lg);
+    line-height: var(--lh-xl);
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: var(--gap-8);
+    max-width: 55ch;
+    margin-inline: auto;
+  }
+
+  .btn.btn-light {
+    background-color: var(--neutral-10);
+    color: var(--neutral-0);
+    border-color: var(--neutral-10);
+  }
+
+  .btn.btn-light:hover {
+    background-color: var(--surface-2);
+    border-color: var(--color-border-subtle);
+  }
+
+  .missing-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-4);
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────
+     SECTION 05: FINAL CTA
+     ───────────────────────────────────────────────────────────────────── */
+  .final-cta {
+    padding-top: var(--space-section-xl);
+    padding-bottom: var(--space-section-md);
+  }
+
+  .final-inner {
+    background-color: var(--neutral-8);
+    border: var(--stroke-thin) solid var(--color-border-subtle);
+    border-radius: var(--radius-5);
+    padding: var(--p-8) var(--p-6);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .final-inner {
+      padding: var(--p-12);
+    }
+  }
+
+  .final-inner h2 {
+    font-size: var(--fluid-h2);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--gap-4);
+    max-width: 25ch;
+  }
+
+  .final-inner p {
+    font-size: var(--fluid-body-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--gap-8);
+    max-width: 45ch;
+    line-height: var(--lh-xl);
+  }
