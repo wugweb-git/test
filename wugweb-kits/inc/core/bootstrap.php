@@ -3,6 +3,10 @@
 if (!defined('ABSPATH')) { exit; }
 require_once __DIR__ . '/includes/service-data.php';
 require_once __DIR__ . '/includes/cards.php';
+add_filter('block_categories_all', function ($cats) {
+    array_unshift($cats, array('slug' => 'wugweb', 'title' => 'Wugweb'));
+    return $cats;
+});
 add_action('init', function () {
     wp_register_style('wugweb-core-service', get_theme_file_uri('inc/core/assets/service.css'), array(), '0.3.0');
     wp_register_style('wugweb-core-content', get_theme_file_uri('inc/core/assets/content.css'), array(), '0.3.0');
@@ -19,7 +23,7 @@ add_action('init', function () {
         'contact-form', 'editorial-card', 'case-study-card', 'article-meta-toc',
         'article-share-newsletter', 'case-study-brief-matrix', 'post-cross-sell-rail', 'faq-list',
         // page sections
-        'hero-section', 'industries-served', 'clients-served', 'case-studies-grid', 'recent-thoughts', 'cta-band',
+        'service-tags', 'intro-statement', 'hero-section', 'industries-served', 'clients-served', 'case-studies-grid', 'recent-thoughts', 'cta-band',
     );
     foreach ($blocks as $b) { register_block_type(__DIR__ . '/blocks/' . $b); }
     register_block_pattern_category('wugweb-cards', array('label' => 'Wugweb Cards'));
@@ -27,7 +31,7 @@ add_action('init', function () {
         register_block_pattern('wugweb-core/' . $c . '-card', array('title' => ucfirst($c) . ' Card', 'categories' => array('wugweb-cards'), 'content' => '<!-- wp:wugweb/' . $c . '-card /-->'));
     }
     register_block_pattern_category('wugweb-sections', array('label' => 'Wugweb Sections'));
-    register_block_pattern('wugweb-core/homepage-sections', array('title' => 'Wugweb Homepage Sections', 'categories' => array('wugweb-sections'), 'content' => '<!-- wp:wugweb/hero-section /--><!-- wp:wugweb/clients-served /--><!-- wp:wugweb/industries-served /--><!-- wp:wugweb/case-studies-grid /--><!-- wp:wugweb/recent-thoughts /--><!-- wp:wugweb/cta-band /-->'));
+    register_block_pattern('wugweb-core/homepage-sections', array('title' => 'Wugweb Homepage Sections', 'categories' => array('wugweb-sections'), 'content' => '<!-- wp:wugweb/hero-section /--><!-- wp:wugweb/intro-statement /--><!-- wp:wugweb/service-tags /--><!-- wp:wugweb/case-studies-grid /--><!-- wp:wugweb/clients-served /--><!-- wp:wugweb/industries-served /--><!-- wp:wugweb/recent-thoughts /-->'));
     register_block_pattern('wugweb-core/service-sections', array('title' => 'Wugweb Service Sections', 'categories' => array('wugweb-sections'), 'content' => '<!-- wp:wugweb/hero-section /--><!-- wp:wugweb/industries-served /--><!-- wp:wugweb/clients-served /--><!-- wp:wugweb/cta-band /-->'));
     register_block_pattern_category('wugweb-services', array('label' => 'Wugweb Services'));
     foreach (array('strategy', 'brand', 'experience', 'engineering', 'growth', 'operations') as $p) {

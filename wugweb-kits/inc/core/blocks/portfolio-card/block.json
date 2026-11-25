@@ -4,7 +4,7 @@
   "name": "wugweb/portfolio-card",
   "version": "1.0.0",
   "title": "Portfolio Card",
-  "category": "design",
+  "category": "wugweb",
   "keywords": [
     "card",
     "wugweb"
@@ -41,7 +41,15 @@
   },
   "supports": {
     "html": false,
-    "autoRegister": true
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "styles": [
     {
@@ -59,5 +67,7 @@
     }
   ],
   "render": "file:./render.php",
-  "style": "wugweb-core-cards"
+  "style": "wugweb-core-cards",
+  "icon": "portfolio",
+  "description": "Portfolio Card \u2014 Wugweb block."
 }

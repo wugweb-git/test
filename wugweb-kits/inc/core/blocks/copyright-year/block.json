@@ -3,10 +3,22 @@
   "name": "wugweb/copyright-year",
   "version": "1.0.0",
   "title": "Wugweb Copyright Year",
-  "category": "text",
+  "category": "wugweb",
   "render": "file:./render.php",
   "supports": {
     "html": false,
-    "autoRegister": true
-  }
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "icon": "info-outline",
+  "description": "Wugweb Copyright Year \u2014 Wugweb block.",
+  "attributes": {}
 }

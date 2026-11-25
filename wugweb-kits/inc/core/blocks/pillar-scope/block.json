@@ -3,7 +3,7 @@
   "name": "wugweb/pillar-scope",
   "version": "1.0.0",
   "title": "Wugweb 6-Pillar Switcher & Scope Selector",
-  "category": "design",
+  "category": "wugweb",
   "icon": "grid-view",
   "description": "Interactive service pillar and scope selector.",
   "supports": {
@@ -13,7 +13,12 @@
     ],
     "html": false,
     "interactivity": true,
-    "autoRegister": true
+    "autoRegister": true,
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "attributes": {
     "ctaUrl": {

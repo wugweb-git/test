@@ -1,18 +1,42 @@
 {
   "apiVersion": 3,
   "name": "wugweb/recent-thoughts",
-  "version": "1.0.0",
-  "title": "Recent Thoughts",
-  "category": "design",
+  "version": "1.1.0",
+  "title": "Recent Blog Posts",
+  "category": "wugweb",
   "supports": {
-    "html": false
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "render": "file:./render.php",
   "style": "file:./style.css",
   "attributes": {
     "heading": {
       "type": "string",
-      "default": "Ideas for the next decision."
+      "default": "Thoughts on design, product, and strategy"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "default": "View all articles"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "/blog/"
+    },
+    "count": {
+      "type": "integer",
+      "default": 4
     }
-  }
+  },
+  "icon": "admin-post",
+  "description": "Latest blog posts."
 }

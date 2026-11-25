@@ -4,11 +4,22 @@
   "name": "wugweb/editorial-card",
   "version": "1.0.0",
   "title": "Editorial Card",
-  "category": "design",
+  "category": "wugweb",
   "supports": {
     "html": false,
-    "autoRegister": true
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-content"
+  "style": "wugweb-core-content",
+  "icon": "format-aside",
+  "description": "Editorial Card \u2014 Wugweb block.",
+  "attributes": {}
 }

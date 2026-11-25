@@ -4,11 +4,23 @@
   "name": "wugweb/post-cross-sell-rail",
   "version": "1.0.0",
   "title": "Post Cross-Sell Rail",
-  "category": "design",
+  "category": "wugweb",
   "supports": {
     "html": false,
-    "autoRegister": true
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-content"
+  "style": "wugweb-core-content",
+  "icon": "networking",
+  "description": "Post Cross-Sell Rail \u2014 Wugweb block.",
+  "attributes": {}
 }

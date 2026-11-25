@@ -1,12 +1,161 @@
-/* Wugweb section objects — layout-shell tokens (--section-y, --grid-gap, --shell-gutter). */
-.wugweb-section,.wugweb-content-block{max-width:calc(1200px + 2 * var(--shell-gutter,16px));margin-inline:auto;padding-inline:var(--shell-gutter,16px);padding-block:var(--section-y,48px)}
-.wugweb-section h2,.wugweb-content-block h2{margin:0 0 var(--wp--preset--spacing--30);font-size:var(--wp--preset--font-size--h3);letter-spacing:normal;max-width:22ch}
-.wugweb-section__intro{max-width:55ch;color:var(--wp--preset--color--neutral-3);font-size:var(--wp--preset--font-size--body-lg)}
-.wugweb-section__grid,.wugweb-content-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--grid-gap,16px)}
-.wugweb-section__card,.wugweb-content-card{padding:var(--grid-gap,16px);border:1px solid var(--wugweb-line-strong,rgba(255,255,255,.12));border-radius:16px;background:var(--wp--preset--color--ash);transition:background var(--duration-normal,300ms) cubic-bezier(0,0,.2,1),transform 350ms cubic-bezier(.16,1,.3,1)}
-.wugweb-section__card:hover,.wugweb-content-card:hover{background:var(--wp--preset--color--neutral-7)}
-.wugweb-content-card a{color:inherit}
-.wugweb-section__eyebrow,.wugweb-content-eyebrow{margin:0 0 8px;font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--caption);font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--wp--preset--color--neutral-3)}
-@media(max-width:1023px){.wugweb-section__grid,.wugweb-content-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:767px){.wugweb-section__grid,.wugweb-content-grid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){.wugweb-section__card,.wugweb-content-card{transition:none}}
+.blog-teaser {
+    padding-block: var(--space-section-xl);
+    border-top: var(--stroke-thin) solid var(--line);
+  }
+
+  .blog-teaser-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--gap-6);
+    flex-wrap: wrap;
+    margin-bottom: var(--gap-10);
+  }
+
+  .blog-teaser-head h2 { font-size: var(--t-h3); max-width: 22ch; margin-top: var(--gap-4); }
+
+  /* Grid by card size. sm (< 768) is the stacked list; md (768 – 1199) 2 across
+     so the cards stay readable (3 across at 768 is ~220px each); lg (1200+) 3
+     across. The 4th post only fits md and sm, so lg hides it. */
+  .blog-teaser-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--gap-6);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) {
+    .blog-teaser-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1200px) {
+    .blog-teaser-grid { grid-template-columns: repeat(3, 1fr); }
+    .blog-teaser-grid > li:nth-child(n + 4) { display: none; }
+  }
+
+  /* ── sm + stacked (< 768): the first post is a full sm card, the rest are
+     stacked rows (PostCard `row`). The section is one app screen; this places
+     the head, list and CTA, and caps the list at 480px like the rows. ── */
+  @media (max-width: 767.98px) {
+    /* svh (not vh) so mobile browser chrome collapsing doesn't yank the
+       layout. Head pins to the top, cards fill the middle, the CTA pins to the
+       bottom — .blog-teaser-head goes `display: contents` so its two children
+       become direct flex items and can be ordered independently. */
+    .blog-teaser {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: var(--gap-8) var(--gap-12);
+    }
+    .blog-teaser-head { display: contents; }
+    .btc-head-text { order: 0; }
+    .blog-teaser-grid { order: 1; gap: var(--gap-3); margin-block: auto; }
+    .blog-teaser-grid > li { max-width: 480px; width: 100%; margin-inline: auto; }
+    .blog-teaser-grid > li:first-child { margin-bottom: var(--gap-3); }
+    .btc-cta { order: 2; margin-top: var(--gap-6); }
+  }
+
+.post-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    color: var(--fg);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .post-card:hover { transform: translateY(-3px); }
+  .pc-thumb-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; flex-shrink: 0; border-radius: var(--radius-lg); }
+  .pc-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  .post-card:hover .pc-thumb { transform: scale(1.06); }
+  .pc-dot {
+    position: absolute; top: var(--gap-3); left: var(--gap-3); width: 9px; height: 9px; border-radius: 50%;
+    background: var(--card-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-surface-page) 55%, transparent);
+  }
+  .pc-arrow {
+    position: absolute; top: var(--gap-3); right: var(--gap-3); width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: var(--color-surface-page);
+    background: var(--fg); opacity: 0; transform: scale(0.7) translateY(4px);
+    transition: opacity var(--duration-normal) ease, transform var(--duration-normal) cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .post-card:hover .pc-arrow { opacity: 1; transform: scale(1) translateY(0); }
+
+  .pc-content { padding: var(--gap-5) var(--gap-1) 0; display: flex; flex-direction: column; flex: 1; gap: var(--gap-2); }
+  .pc-cat-row { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-3); }
+  .pc-category { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: 0.04em; text-transform: uppercase; color: var(--card-accent); }
+  .pc-launch { display: none; width: 1.5rem; height: 1.5rem; }
+  .pc-launch svg { width: 0.75rem; height: 0.75rem; }
+  .post-card h3 { font-size: var(--t-h5); font-weight: var(--font-weight-semibold); line-height: var(--lh-h5); color: var(--fg); }
+  .pc-excerpt { font-size: var(--t-sm); color: var(--fg-muted); line-height: var(--lh-s); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .pc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-3); margin-top: var(--gap-1); font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); }
+  .pc-meta span:not(:last-child)::after {
+    content: ''; display: inline-block; width: 1px; height: 0.85em; background: var(--line-strong); margin-left: var(--gap-3); vertical-align: -0.1em;
+  }
+
+  /* No-cover state: its own visual, not a broken image */
+  .pc-thumb-fallback {
+    position: relative; display: flex; align-items: flex-end; padding: var(--gap-4); width: 100%; height: 100%;
+    background:
+      radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--card-accent) 32%, transparent), transparent 55%),
+      linear-gradient(160deg, var(--color-surface-elevated) 0%, var(--color-surface-page) 100%);
+  }
+  .pc-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--card-accent) 8%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--card-accent) 8%, transparent) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .pc-initials {
+    position: relative; font-family: var(--font-display); font-size: var(--fluid-h1); font-weight: var(--font-weight-extrabold);
+    line-height: 1; color: var(--fg); opacity: var(--opacity-strong);
+  }
+
+  /* ── Stacked (sm): compact row. Same look the homepage teaser shipped on
+     mobile — only moved here so it is one card, not two. ── */
+  @media (max-width: 767.98px) {
+    .post-card--row {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--gap-4);
+      padding: var(--gap-2);
+      background: var(--color-surface-elevated);
+      /* 480 is a comfortable single-column reading cap; centres itself on
+         anything wider (phones up through small portrait tablets). */
+      max-width: 480px;
+      width: 100%;
+      margin-inline: auto;
+    }
+    .post-card--row:hover { transform: none; }
+    .post-card--row:active { background: var(--surface-2); transform: scale(0.98); }
+    .post-card--row:active .pc-thumb { transform: scale(1.06); }
+    .post-card--row:active h3 { color: var(--accent-warm); }
+    .post-card--row .pc-thumb-wrap { width: 5.5rem; aspect-ratio: 1; flex: 0 0 auto; border-radius: var(--radius-md); }
+    .post-card--row .pc-dot,
+    .post-card--row .pc-arrow,
+    .post-card--row .pc-excerpt,
+    .post-card--row .pc-meta { display: none; }
+    .post-card--row .pc-content { padding: 0; min-width: 0; gap: 0; }
+    .post-card--row .pc-cat-row { margin-bottom: var(--gap-2); }
+    .post-card--row .pc-category {
+      display: inline-flex;
+      font-family: var(--font-body);
+      font-size: var(--fluid-body-sm);
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--fg-muted);
+      background: color-mix(in srgb, var(--neutral-0) 8%, transparent);
+      padding: 0.1875rem 0.375rem;
+      border-radius: var(--radius-sm);
+    }
+    .post-card--row .pc-launch { display: grid; }
+    .post-card--row:active .pc-launch { background: color-mix(in srgb, var(--neutral-0) 18%, transparent); }
+    .post-card--row h3 {
+      font-size: var(--fluid-body-lg);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }

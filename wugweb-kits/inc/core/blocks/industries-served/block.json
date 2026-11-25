@@ -1,18 +1,42 @@
 {
   "apiVersion": 3,
   "name": "wugweb/industries-served",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Industries Served",
-  "category": "design",
+  "category": "wugweb",
   "supports": {
-    "html": false
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "render": "file:./render.php",
   "style": "file:./style.css",
   "attributes": {
     "heading": {
       "type": "string",
-      "default": "Domain knowledge that makes the work sharper."
+      "default": "We understand the context behind the product."
+    },
+    "intro": {
+      "type": "string",
+      "default": "From regulated sectors to fast-moving consumer markets, our experience spans industries that demand precision and creativity in equal measure."
+    },
+    "buttonLabel": {
+      "type": "string",
+      "default": "Explore All Industries"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "/industries/"
     }
-  }
+  },
+  "icon": "building",
+  "description": "Industries served section."
 }

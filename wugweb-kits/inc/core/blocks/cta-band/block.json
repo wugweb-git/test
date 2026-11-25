@@ -3,10 +3,44 @@
   "name": "wugweb/cta-band",
   "version": "1.0.0",
   "title": "CTA Band",
-  "category": "design",
+  "category": "wugweb",
   "supports": {
-    "html": false
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "render": "file:./render.php",
-  "style": "file:./style.css"
+  "style": "file:./style.css",
+  "icon": "megaphone",
+  "description": "Yellow call-to-action band.",
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "heading": {
+      "type": "string",
+      "default": "We speak your Industry's language."
+    },
+    "text": {
+      "type": "string",
+      "default": "Partner with Wugweb for domain-driven design and development that delivers."
+    },
+    "buttonLabel": {
+      "type": "string",
+      "default": "Request Quote"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "/contact-us/"
+    }
+  }
 }

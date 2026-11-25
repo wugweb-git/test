@@ -62,8 +62,8 @@ add_filter('body_class', function ($classes) {
 
 require_once __DIR__ . '/inc/motion-enqueue.php';
 
-add_action('wp_enqueue_scripts', function () { wp_enqueue_style('wugweb-blocks', get_theme_file_uri('assets/css/wugweb-blocks.css'), array('wugweb-layout-shell'), wp_get_theme()->get('Version')); });
-add_action('enqueue_block_editor_assets', function () { wp_enqueue_style('wugweb-blocks-editor', get_theme_file_uri('assets/css/wugweb-blocks.css'), array(), wp_get_theme()->get('Version')); });
+add_action('wp_enqueue_scripts', function () { wp_enqueue_style('wugweb-site-shell', get_theme_file_uri('assets/css/site-shell.css'), array('wugweb-layout-shell'), wp_get_theme()->get('Version')); wp_enqueue_script('wugweb-site-header', get_theme_file_uri('assets/js/site-header.js'), array(), wp_get_theme()->get('Version'), true); wp_enqueue_style('wugweb-blocks', get_theme_file_uri('assets/css/wugweb-blocks.css'), array('wugweb-site-shell'), wp_get_theme()->get('Version')); });
+add_action('enqueue_block_editor_assets', function () { wp_enqueue_style('wugweb-site-shell-editor', get_theme_file_uri('assets/css/site-shell.css'), array(), wp_get_theme()->get('Version')); wp_enqueue_style('wugweb-blocks-editor', get_theme_file_uri('assets/css/wugweb-blocks.css'), array(), wp_get_theme()->get('Version')); });
 add_action('wp_enqueue_scripts', function () { wp_enqueue_style('wugweb-layout-shell', get_theme_file_uri('assets/css/layout-shell.css'), array(), wp_get_theme()->get('Version')); });
 
 add_action('init', function () {

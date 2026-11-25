@@ -15,14 +15,16 @@ function wugweb_card_dynamic($type, array $a) {
         $a['url'] = get_permalink($id);
         $a['imageUrl'] = (string) get_the_post_thumbnail_url($id, 'large');
     } elseif ($type === 'portfolio' && $pt === 'case_study') {
-        $client = get_post_meta($id, '_client', true);
-        $terms = get_the_terms($id, 'discipline');
-        $a['eyebrow'] = $client ? (is_numeric($client) ? get_the_title($client) : $client) : '';
+        $client = (string) get_post_meta($id, 'wugweb_cs_client', true);
+        $disc = (string) get_post_meta($id, 'wugweb_cs_additional_disciplines', true);
+        if ($disc === '') $disc = (string) get_post_meta($id, 'wugweb_cs_primary_discipline', true);
+        $a['eyebrow'] = trim($client . ($disc !== '' ? ' — ' . $disc : ''));
         $a['title'] = get_the_title($id);
-        $a['text'] = wp_trim_words(get_the_excerpt($id), 22);
-        $a['meta'] = ($terms && !is_wp_error($terms)) ? implode(' · ', wp_list_pluck($terms, 'name')) : '';
+        $a['text'] = '';
+        $a['meta'] = '';
         $a['url'] = get_permalink($id);
-        $a['imageUrl'] = (string) get_the_post_thumbnail_url($id, 'large');
+        $cover = (string) get_post_meta($id, 'wugweb_cs_cover_image', true);
+        $a['imageUrl'] = get_the_post_thumbnail_url($id, 'large') ?: $cover;
     } elseif ($type === 'client' && $pt === 'client') {
         $a['title'] = get_the_title($id);
         $a['url'] = get_permalink($id);
@@ -37,7 +39,9 @@ function wugweb_render_card($type, array $a, $wrapper) {
     echo '<article ' . $wrapper . '>';
     if ($type === 'stat') echo '<p class="wugweb-card__value">' . esc_html($a['eyebrow']) . '</p>';
     if ($type === 'testimonial') echo '<blockquote class="wugweb-card__quote">' . esc_html($a['text']) . '</blockquote>';
-    if (!empty($a['imageUrl']) && !in_array($type, array('stat', 'testimonial'), true)) {
+    if (empty($a['imageUrl']) && in_array($type, array('blog', 'portfolio'), true) && get_the_ID()) {
+        echo '<div class="wugweb-card__media wugweb-card__media--empty" aria-hidden="true"></div>';
+    } elseif (!empty($a['imageUrl']) && !in_array($type, array('stat', 'testimonial'), true)) {
         echo '<div class="wugweb-card__media"><img src="' . esc_url($a['imageUrl']) . '" alt="' . esc_attr($a['imageAlt']) . '" loading="lazy" decoding="async"></div>';
     }
     echo '<div class="wugweb-card__body">';
@@ -50,4 +54,26 @@ function wugweb_render_card($type, array $a, $wrapper) {
     echo '</div>';
     if ($url) echo '<span class="wugweb-card__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="9 5 19 5 19 15"/></svg></span>';
     echo '</article>';
+}
+
+/** PostCard markup (components/PostCard.astro). $c: slug-less url, title, excerpt, topic, author, minutes, cover, alt, accent, initials. */
+function wugweb_post_card_data($id) {
+    $cat = get_the_category($id);
+    $topic = $cat ? $cat[0]->name : 'Strategy';
+    $pillars = array('Strategy', 'Brand', 'Experience', 'Engineering', 'Growth', 'Operations');
+    $pillar = in_array($topic, $pillars, true) ? $topic : 'Strategy';
+    $title = get_the_title($id);
+    $w = preg_split('/\s+/', trim(preg_replace('/[^\w\s]/', '', $title)), -1, PREG_SPLIT_NO_EMPTY);
+    $ini = $w ? strtoupper(substr($w[0], 0, 1) . (isset($w[1]) ? substr($w[1], 0, 1) : '')) : 'Ww';
+    return array('url' => get_permalink($id), 'title' => $title, 'excerpt' => wp_trim_words(get_the_excerpt($id), 24), 'topic' => $topic,
+        'author' => get_the_author_meta('display_name', get_post_field('post_author', $id)),
+        'minutes' => max(1, (int) ceil(str_word_count(wp_strip_all_tags((string) get_post_field('post_content', $id))) / 200)),
+        'cover' => (string) get_the_post_thumbnail_url($id, 'large'), 'alt' => $title,
+        'accent' => 'var(--svc-' . strtolower($pillar) . ')', 'initials' => $ini);
+}
+function wugweb_post_card_html(array $c, $row = false, $wrapper = '') {
+    $cls = 'post-card' . ($row ? ' post-card--row' : '');
+    ob_start(); ?>
+<a href="<?php echo esc_url($c['url']); ?>" class="<?php echo esc_attr($cls); ?>" style="--card-accent: <?php echo esc_attr($c['accent']); ?>"><div class="pc-thumb-wrap"><?php if (!empty($c['cover'])): ?><img src="<?php echo esc_url($c['cover']); ?>" alt="<?php echo esc_attr($c['alt']); ?>" loading="lazy" decoding="async" class="pc-thumb"><?php else: ?><div class="pc-thumb pc-thumb-fallback" aria-hidden="true"><span class="pc-grid"></span><span class="pc-initials"><?php echo esc_html($c['initials']); ?></span></div><?php endif; ?><span class="pc-dot" aria-hidden="true"></span><span class="pc-arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="9 5 19 5 19 15"></polyline></svg></span></div><div class="pc-content"><div class="pc-cat-row"><span class="pc-category"><?php echo esc_html($c['topic']); ?></span><?php if ($row): ?><span class="u-chip pc-launch" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M8 1.5v13M1.5 8h13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg></span><?php endif; ?></div><h3><?php echo esc_html($c['title']); ?></h3><?php if (!empty($c['excerpt'])): ?><p class="pc-excerpt"><?php echo esc_html($c['excerpt']); ?></p><?php endif; ?><div class="pc-meta"><?php if (!empty($c['author'])): ?><span><?php echo esc_html($c['author']); ?></span><?php endif; ?><?php if (!empty($c['minutes'])): ?><span><?php echo (int) $c['minutes']; ?> min read</span><?php endif; ?></div></div></a>
+<?php return ob_get_clean();
 }

@@ -1,18 +1,43 @@
 {
   "apiVersion": 3,
   "name": "wugweb/case-studies-grid",
-  "version": "1.0.0",
-  "title": "Featured Case Studies",
-  "category": "design",
+  "version": "1.1.0",
+  "title": "Portfolio Grid",
+  "category": "wugweb",
   "supports": {
-    "html": false
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "render": "file:./render.php",
   "style": "file:./style.css",
   "attributes": {
     "heading": {
       "type": "string",
-      "default": "Works that move the business."
+      "default": "Work that Leads with Clarity and Delivers with Impact"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "default": "View case studies"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "count": {
+      "type": "integer",
+      "default": 8
     }
-  }
+  },
+  "icon": "portfolio",
+  "description": "Latest case studies from the Case Study post type.",
+  "viewScript": "file:./view.js"
 }

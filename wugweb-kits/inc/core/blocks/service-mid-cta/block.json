@@ -4,21 +4,36 @@
   "name": "wugweb/service-mid-cta",
   "version": "1.2.0",
   "title": "Service Mid Cta",
-  "category": "design",
+  "category": "wugweb",
   "supports": {
     "html": false,
     "align": [
       "wide",
       "full"
     ],
-    "autoRegister": true
+    "autoRegister": true,
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "attributes": {
     "pillar": {
       "type": "string",
-      "default": "brand"
+      "enum": [
+        "strategy",
+        "brand",
+        "experience",
+        "engineering",
+        "growth",
+        "operations"
+      ],
+      "default": "strategy"
     }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-service"
+  "style": "wugweb-core-service",
+  "icon": "megaphone",
+  "description": "Service Mid Cta \u2014 Wugweb block."
 }

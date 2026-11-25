@@ -3,19 +3,33 @@
   "name": "wugweb/taxonomy-filter",
   "version": "1.0.0",
   "title": "Wugweb Taxonomy Filter",
-  "category": "query",
+  "category": "wugweb",
   "icon": "filter",
   "description": "Accessible case-study discipline and industry filters.",
   "render": "file:./render.php",
   "style": "file:./style.css",
   "supports": {
     "html": false,
-    "autoRegister": true
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "attributes": {
     "taxonomy": {
       "type": "string",
-      "default": "discipline"
+      "default": "discipline",
+      "enum": [
+        "discipline",
+        "category",
+        "post_tag"
+      ]
     }
   }
 }

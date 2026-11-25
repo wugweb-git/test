@@ -1,30 +1,48 @@
 {
   "apiVersion": 3,
   "name": "wugweb/hero-section",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Hero Section",
-  "category": "design",
+  "category": "wugweb",
   "supports": {
-    "html": false
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "render": "file:./render.php",
   "style": "file:./style.css",
   "attributes": {
-    "eyebrow": {
-      "type": "string",
-      "default": "Strategy \u00b7 Design \u00b7 Technology"
-    },
     "heading": {
       "type": "string",
-      "default": "Where ambition meets execution."
-    },
-    "body": {
-      "type": "string",
-      "default": "Wugweb is a digital experience company that turns complex challenges into clear, compelling outcomes."
+      "default": "Where Vision Meets Velocity"
     },
     "buttonLabel": {
-      "type": "string",
-      "default": "Start a conversation"
+      "type": "string"
+    },
+    "buttonUrl": {
+      "type": "string"
+    },
+    "secondaryLabel": {
+      "type": "string"
+    },
+    "secondaryUrl": {
+      "type": "string"
+    },
+    "videoUrl": {
+      "type": "string"
+    },
+    "posterUrl": {
+      "type": "string"
     }
-  }
+  },
+  "icon": "cover-image",
+  "description": "Page hero with eyebrow, headline, intro and button."
 }

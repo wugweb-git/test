@@ -1,14 +1,116 @@
-/* Wugweb section objects — layout-shell tokens (--section-y, --grid-gap, --shell-gutter). */
-.wugweb-section,.wugweb-content-block{max-width:calc(1200px + 2 * var(--shell-gutter,16px));margin-inline:auto;padding-inline:var(--shell-gutter,16px);padding-block:var(--section-y,48px)}
-.wugweb-section h2,.wugweb-content-block h2{margin:0 0 var(--wp--preset--spacing--30);font-size:var(--wp--preset--font-size--h3);letter-spacing:normal;max-width:22ch}
-.wugweb-section__intro{max-width:55ch;color:var(--wp--preset--color--neutral-3);font-size:var(--wp--preset--font-size--body-lg)}
-.wugweb-section__grid,.wugweb-content-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--grid-gap,16px)}
-.wugweb-section__card,.wugweb-content-card{padding:var(--grid-gap,16px);border:1px solid var(--wugweb-line-strong,rgba(255,255,255,.12));border-radius:16px;background:var(--wp--preset--color--ash);transition:background var(--duration-normal,300ms) cubic-bezier(0,0,.2,1),transform 350ms cubic-bezier(.16,1,.3,1)}
-.wugweb-section__card:hover,.wugweb-content-card:hover{background:var(--wp--preset--color--neutral-7)}
-.wugweb-content-card a{color:inherit}
-.wugweb-section__eyebrow,.wugweb-content-eyebrow{margin:0 0 8px;font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--caption);font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--wp--preset--color--neutral-3)}
-@media(max-width:1023px){.wugweb-section__grid,.wugweb-content-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:767px){.wugweb-section__grid,.wugweb-content-grid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){.wugweb-section__card,.wugweb-content-card{transition:none}}
-.wugweb-faq-list details{border:1px solid var(--wp--preset--color--neutral-7);border-radius:16px;padding:var(--wp--preset--spacing--30);margin-block-end:8px;background:var(--wp--preset--color--ash)}
-.wugweb-faq-list summary{cursor:pointer;font-weight:600;transition:color 200ms}.wugweb-faq-list summary:hover{color:var(--wp--preset--color--yellow)}
+.faq-block { padding-block: var(--space-section-xl); }
+  .faq-head h2 { font-size: var(--t-h3); max-width: 22ch; }
+  .faq-lede {
+    margin-top: var(--gap-3); max-width: 46ch;
+    color: var(--fg-muted); font-size: var(--fluid-body-md);
+    line-height: var(--core-line-height-relaxed);
+  }
+
+  .faq-list {
+    list-style: none; margin: var(--gap-10) 0 0; padding: 0;
+    display: grid; gap: var(--gap-3);
+    max-width: 52rem;
+  }
+  /* Bare mode: the host page supplies the heading and the wrapper. */
+  .faq-list.is-bare { margin-top: 0; max-width: none; }
+
+  .faq-card {
+    position: relative;
+    z-index: var(--layer-base);
+    background: color-mix(in srgb, var(--neutral-8) 55%, transparent);
+    border: var(--stroke-thin) solid var(--line);
+    border-radius: var(--radius-lg);
+    /* The panel is clipped by the card, which is what lets the height animate
+       without the answer spilling past the rounded corner. */
+    overflow: hidden;
+    /* No `opacity` and no `transform` here on purpose. `data-reveal` is a GSAP
+       tween on this element and it leaves both as inline styles once it
+       finishes, so a CSS rule on either would simply never apply — the same
+       two-owners bug the BentoBlock and the ProcessMap both hit. Dimming is
+       `filter`; the lift is shadow and border. */
+    transition: border-color var(--duration-normal) var(--easing-smooth),                background-color var(--duration-normal) var(--easing-smooth),
+                box-shadow var(--duration-normal) var(--easing-smooth),
+                filter var(--duration-normal) var(--easing-smooth);
+  }
+
+  /* Hovering the list pushes every card back and keeps only the one under the
+     pointer — and the open one — forward. Same interaction-as-hierarchy rule
+     the Bento Block and Process Map use. */
+  .faq-list:hover .faq-card { filter: brightness(0.72); }
+  .faq-list:hover .faq-card:hover,
+  .faq-list:hover .faq-card.is-open { filter: none; }
+
+  .faq-card:hover {
+    border-color: color-mix(in srgb, var(--neutral-0) 22%, transparent);
+    box-shadow: var(--shadow-md);
+    z-index: var(--layer-card);
+  }
+  .faq-card.is-open {
+    background: color-mix(in srgb, var(--neutral-8) 80%, transparent);
+    border-color: color-mix(in srgb, var(--neutral-0) 16%, transparent);
+    box-shadow: var(--shadow-xl);
+    z-index: var(--layer-card);
+  }
+  /* The card actually under the pointer wins over a merely-open one. */
+  .faq-card:hover { z-index: var(--layer-popover); }
+
+  .faq-q { margin: 0; }
+  .faq-trigger {
+    width: 100%;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--gap-4);
+    padding: var(--gap-5) var(--gap-6);
+    background: none; border: 0; cursor: pointer; text-align: left;
+    color: var(--fg);
+    font-family: inherit;
+    font-size: var(--fluid-body-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--core-line-height-tight);
+  }
+  .faq-trigger:focus-visible { outline: var(--focus-primary); outline-offset: -2px; }
+  .faq-q-text { min-width: 0; text-wrap: balance; }
+
+  /* Box, background and glyph size all come from the site-wide `.u-chip`.
+     Only the open state is local. */
+  .faq-trigger:hover .faq-toggle { background: color-mix(in srgb, var(--neutral-0) 16%, transparent); }
+  /* Open state steps up the neutral ramp rather than introducing a hue —
+     a light grey chip with dark ink, which reads as "active" without spending
+     the brand yellow on every FAQ row. */
+  .faq-card.is-open .faq-toggle {
+    transform: rotate(45deg);
+    background: var(--neutral-2);
+    color: var(--neutral-10);
+  }
+
+  .faq-panel { padding: 0 var(--gap-6) var(--gap-5); }
+  /* The answer rises in *behind* the height rather than being revealed by it,
+     so opening reads as the card making room for something arriving. On the
+     way out it leaves quickly — a fade that lingers looks like a stall.
+     Safe to animate opacity/transform here: GSAP touches the card, not this. */
+  .faq-panel p {
+    margin: 0; max-width: 62ch;
+    color: var(--fg-muted);
+    font-size: var(--fluid-body-sm);
+    line-height: var(--core-line-height-relaxed);
+    opacity: var(--opacity-0);
+    transform: translateY(6px);
+    transition: opacity 120ms var(--easing-out), transform 120ms var(--easing-out);  }
+  .faq-card.is-open .faq-panel p {
+    opacity: var(--opacity-100);
+    transform: none;
+    transition: opacity 260ms var(--easing-out) 80ms, transform var(--duration-normal) var(--easing-out) 80ms;  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-card, .faq-toggle, .faq-panel p { transition: none; }
+    .faq-panel p { opacity: var(--opacity-100); transform: none; }
+  }
+
+  /* Snapped to --breakpoint-md (768px, "Tablet") — the documented scale
+     (tokens/breakpoints.md) is 480/640/768/1024/1280/1440; this was an
+     off-scale 900px one-off. Just a padding-comfort bump, not a layout
+     switch, so stepping it down to 768 only widens the range where the
+     roomier padding applies — never narrows it. */
+  @media (min-width: 768px) {
+    .faq-list { gap: var(--gap-4); }
+    .faq-trigger { padding: var(--gap-6); }
+    .faq-panel { padding: 0 var(--gap-6) var(--gap-6); }
+  }

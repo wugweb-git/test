@@ -98,7 +98,7 @@ main>.wp-block-group.alignwide+.wp-block-group.alignwide,.wugweb-canvas>.wp-bloc
 .wp-block-group.has-border-color{border-color:var(--wugweb-line-strong)!important;background-color:var(--wp--preset--color--ash);padding:var(--grid-gap);transition:background var(--duration-normal,300ms) var(--wugweb-out)}
 .wp-block-group.has-border-color:hover{background-color:var(--wp--preset--color--neutral-7)}
 /* Headings: display marketing axis */
-h1.wp-block-heading{font-weight:800;max-width:16ch;letter-spacing:normal;margin-inline:0!important}
+h1.wp-block-heading{font-weight:800;max-width:16ch;letter-spacing:normal;margin-inline:0!important;line-height:1.2!important}
 .wp-block-heading,h1,h2,h3,h4,h5,h6{letter-spacing:normal}
 /* Links that leave the block get the uat trailing arrow */
 .wp-block-buttons .wp-block-button__link[href]:not(.wugweb-desktop-cta *)::after{content:"\2192";margin-left:8px;display:inline-block;transition:transform var(--duration-fast,200ms) var(--wugweb-out)}

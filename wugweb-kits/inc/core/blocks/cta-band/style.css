@@ -12,3 +12,21 @@
 @media(prefers-reduced-motion:reduce){.wugweb-section__card,.wugweb-content-card{transition:none}}
 .wugweb-cta-band{background:var(--wp--preset--color--yellow);color:var(--wp--preset--color--ash);border-radius:16px;padding-inline:var(--wp--preset--spacing--50)}
 .wugweb-cta-band .wugweb-section__intro,.wugweb-cta-band .wugweb-section__eyebrow{color:var(--wp--preset--color--ash)}
+
+.wugweb-section__head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--grid-gap,16px);margin-bottom:var(--wp--preset--spacing--50)}
+.wugweb-section__head h2{margin:0}
+.wugweb-section__grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.wugweb-section__grid--4{grid-template-columns:repeat(4,minmax(0,1fr));margin-block:var(--wp--preset--spacing--50)}
+@media(max-width:1023px){.wugweb-section__grid--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.wugweb-section__grid--2,.wugweb-section__grid--4{grid-template-columns:1fr}}
+.wugweb-section .wp-block-button__link{background:var(--wp--preset--color--yellow);color:var(--wp--preset--color--ash)}
+.wugweb-cta-band .wp-block-button__link{background:var(--wp--preset--color--ash);color:var(--wp--preset--color--neutral-1)}
+.wugweb-logos__heading{text-align:center;margin-inline:auto;max-width:none}
+.wugweb-logos__heading span{display:block;color:var(--wp--preset--color--neutral-3)}
+.wugweb-logos{list-style:none;margin:var(--wp--preset--spacing--50) 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.wugweb-logos__tile{aspect-ratio:16/9;display:grid;place-items:center;border-radius:16px;background:var(--wp--preset--color--ash);overflow:hidden;transition:background 300ms}
+.wugweb-logos__tile:hover{background:var(--wp--preset--color--neutral-7)}
+.wugweb-logos__tile img{max-width:72%;max-height:54%;width:auto;height:auto;object-fit:contain;filter:grayscale(1) brightness(1.9);opacity:.9;transition:filter 300ms,opacity 300ms}
+.wugweb-logos__tile:hover img{filter:none;opacity:1}
+@media(max-width:1023px){.wugweb-logos{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:767px){.wugweb-logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}}

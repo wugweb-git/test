@@ -4,11 +4,23 @@
   "name": "wugweb/case-study-brief-matrix",
   "version": "1.0.0",
   "title": "Case Study Brief Matrix",
-  "category": "design",
+  "category": "wugweb",
   "supports": {
     "html": false,
-    "autoRegister": true
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-content"
+  "style": "wugweb-core-content",
+  "icon": "editor-table",
+  "description": "Case Study Brief Matrix \u2014 Wugweb block.",
+  "attributes": {}
 }

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wugweb/service-tags",
+  "version": "1.1.0",
+  "title": "Service Tags",
+  "category": "wugweb",
+  "icon": "tag",
+  "description": "The six Wugweb service pillars as coloured tags.",
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "lede": {
+      "type": "string"
+    },
+    "buttonLabel": {
+      "type": "string"
+    },
+    "buttonUrl": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "viewScript": "file:./view.js"
+}

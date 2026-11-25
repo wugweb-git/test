@@ -23,3 +23,6 @@
 .wugweb-card.is-style-row .wugweb-card__media{margin:0;width:88px;flex:0 0 88px;aspect-ratio:1;border-radius:8px}
 .wugweb-card.is-style-row .wugweb-card__text{display:none}
 @media(prefers-reduced-motion:reduce){.wugweb-card,.wugweb-card__media img,.wugweb-card__arrow{transition:none}.wugweb-card:hover{transform:none}.wugweb-card:hover .wugweb-card__media img{transform:none}}
+.wugweb-card__media--empty{background:var(--wp--preset--color--neutral-5);border-radius:8px;aspect-ratio:16/10;margin:calc(var(--grid-gap,16px) * -1) calc(var(--grid-gap,16px) * -1) 0}
+.wugweb-card--portfolio .wugweb-card__media,.wugweb-card--blog .wugweb-card__media{aspect-ratio:16/10}
+.wugweb-card--portfolio .wugweb-card__eyebrow{order:-1}
