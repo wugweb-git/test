@@ -366,3 +366,7 @@
 /* lede: uat .article-intro = 1rem, 1.15rem from 1200, lh 1.4, secondary colour */
 .wugweb-article-post .article-intro{color:var(--color-text-secondary)}
 .article-faq>h2,.article-summary h2{margin-top:0}
+
+/* Radii from tokens, matching uat: cover/banner radius-xl (20), newsletter input radius-sm (8). */
+.wugweb-article-post .post-cover{border-radius:var(--radius-xl)}
+.wugweb-article-post .article-newsletter .nl-input{border-radius:var(--radius-sm)}

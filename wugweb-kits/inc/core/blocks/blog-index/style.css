@@ -91,3 +91,6 @@
 /* Tags on blog cards */
 .wugweb-blog-index .pc-tags{list-style:none;margin:var(--gap-1) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:var(--gap-2)}
 .wugweb-blog-index .pc-tag{font-size:var(--t-micro);line-height:1;padding:var(--gap-1) var(--gap-3);border:var(--stroke-thin) solid var(--line-strong);border-radius:var(--radius-full);color:var(--fg-muted);background:var(--neutral-10)}
+
+/* Featured card radius = uat radius-xl (20). */
+.wugweb-blog-index .featured-card{border-radius:var(--radius-xl)}
