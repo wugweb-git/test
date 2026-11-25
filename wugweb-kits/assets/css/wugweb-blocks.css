@@ -66,8 +66,19 @@ main>.wp-block-group.alignwide+.wp-block-group.alignwide,.wugweb-canvas>.wp-bloc
 .wugweb-site-footer .wp-block-navigation:hover .wp-block-navigation-item__content:hover{color:var(--wp--preset--color--neutral-1)}
 @media(max-width:767px){.wugweb-site-footer .wugweb-footer-inner{flex-direction:column;align-items:flex-start}.wugweb-site-footer .wp-block-navigation{justify-content:flex-start}}
 
+.wugweb-site-footer .wugweb-footer-inner{display:flex;flex-direction:row;flex-wrap:wrap;max-width:1200px;margin-inline:auto}
+.wugweb-site-footer .wugweb-footer-inner>.wp-block-group{flex:0 0 auto;width:auto;max-width:none;margin:0}
+.wugweb-site-footer .wugweb-footer-inner>.wp-block-group>*{margin-inline:0}
+.wugweb-site-footer .wugweb-footer-inner>.wp-block-navigation{flex:1 1 auto;width:auto;justify-content:flex-end}
 /* Patterns */
 .wugweb-kpi-strip strong{font-weight:800;letter-spacing:-.02em}
 .wugweb-form-shell .ff-btn-submit{border-radius:8px!important;font-weight:500!important}
 .wp-block-image img,.wp-block-post-featured-image img{border-radius:16px}
 @media(prefers-reduced-motion:reduce){.wp-block-navigation__responsive-container.is-menu-open{animation:none}.wp-block-post-template .wp-block-group.has-ash-background-color{transition:none}.wp-block-post-template .wp-block-group.has-ash-background-color:hover{transform:none}.wugweb-site-footer .wp-block-navigation-item__content,.wugweb-site-footer .wp-block-navigation-item__content::after{transition:none}}
+
+/* uat.wugweb.com is dark end to end: white page sections sit on the page surface with a hairline divider. */
+main .wp-block-group.has-neutral-0-background-color{background-color:transparent!important;color:var(--wp--preset--color--neutral-1)!important;border-top:1px solid var(--wugweb-line)}
+main .wp-block-group.has-neutral-0-background-color .has-neutral-10-color{color:var(--wp--preset--color--neutral-1)}
+main .has-neutral-1-background-color{background-color:var(--wp--preset--color--ash)!important;color:var(--wp--preset--color--neutral-1)!important}
+main .wp-block-group.has-border-color{border-color:var(--wugweb-line-strong)!important;background-color:var(--wp--preset--color--ash);transition:background var(--duration-normal,300ms) var(--wugweb-out)}
+main .wp-block-group.has-border-color:hover{background-color:var(--wp--preset--color--neutral-7)}
