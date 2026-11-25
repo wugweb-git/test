@@ -21,7 +21,7 @@ add_filter('render_block', function ($html, $block) {
 }, 10, 2);
 
 /** Primary nav: mark the current section (SiteHeader.astro isActive: exact or prefix match). */
-add_filter('render_block_core/html', function ($html) {
+function wugweb_mark_active_nav($html) {
     if (strpos($html, 'id="site-nav"') === false) return $html;
     $path = trailingslashit((string) wp_parse_url(add_query_arg(array()), PHP_URL_PATH));
     $extra = array();
@@ -31,7 +31,10 @@ add_filter('render_block_core/html', function ($html) {
         foreach ($extra[$href] ?? array() as $alt) { if (strpos($path, $alt) === 0) $on = true; }
         return $on ? '<a href="' . $m[1] . '" class="nav-link is-active" aria-current="page">' : $m[0];
     }, $html);
-});
+}
+add_filter('render_block_core/html', 'wugweb_mark_active_nav');
+// The header part can be saved as non-html blocks in the database; mark the active link on the whole part too.
+add_filter('render_block_core/template-part', 'wugweb_mark_active_nav');
 
 /** Editable copy: every wugweb/* block gets a `copy` attribute { original: replacement } edited in the "Text & links" panel (assets/js/wugweb-copy-editor.js). */
 add_filter('register_block_type_args', function ($args, $name) {
