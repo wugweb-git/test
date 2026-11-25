@@ -19,6 +19,6 @@ $url = !empty($attributes['buttonUrl']) ? $attributes['buttonUrl'] : (get_post_t
     $disc = (string) get_post_meta($id, 'wugweb_cs_additional_disciplines', true);
     if ($disc === '') $disc = (string) get_post_meta($id, 'wugweb_cs_primary_discipline', true);
     $media = get_the_post_thumbnail_url($id, 'large') ?: (string) get_post_meta($id, 'wugweb_cs_cover_image', true);
-    $is_video = (bool) preg_match('/\.(mp4|webm)(\?|$)/i', $media); ?>
-<li data-reveal><a href="<?php echo esc_url(get_permalink($id)); ?>"><?php if ($is_video): ?><video aria-hidden="true" muted loop playsinline preload="none" data-src="<?php echo esc_url($media); ?>"></video><?php elseif ($media): ?><img src="<?php echo esc_url($media); ?>" alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--r-2)"><?php else: ?><span class="wugweb-ph" style="--ph-ar:16/10" aria-hidden="true"></span><?php endif; ?><p class="work-client"><?php echo esc_html($client . ' — ' . $disc); ?></p><h3><?php echo esc_html(get_the_title($id)); ?></h3></a></li>
+    ?>
+<?php echo wugweb_work_card_html(array('url' => get_permalink($id), 'client' => $client . ' — ' . $disc, 'title' => get_the_title($id), 'media' => $media)); ?>
 <?php endforeach; ?></ul></section>

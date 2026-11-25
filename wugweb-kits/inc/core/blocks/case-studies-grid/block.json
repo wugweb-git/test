@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "wugweb/case-studies-grid",
-  "version": "1.3.0",
+  "version": "3.0.0",
   "title": "Portfolio Grid",
   "category": "wugweb",
   "supports": {
@@ -38,7 +38,10 @@
     "shadow": true
   },
   "render": "file:./render.php",
-  "style": "file:./style.css",
+  "style": [
+    "wugweb-work-card",
+    "file:./style.css"
+  ],
   "attributes": {
     "heading": {
       "type": "string",

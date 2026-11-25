@@ -102,3 +102,9 @@ add_action('wp_enqueue_scripts', function () {
     foreach (array('ScrollTrigger', 'Draggable', 'Flip', 'InertiaPlugin') as $p) { wp_enqueue_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); $deps[] = 'gsap-' . $p; }
     wp_enqueue_script('wugweb-motion', $u . 'wugweb-motion.js', $deps, $v, true);
 });
+
+add_action('init', function () {
+    $v = wp_get_theme()->get('Version');
+    wp_register_style('wugweb-post-card', get_theme_file_uri('assets/css/post-card.css'), array(), $v);
+    wp_register_style('wugweb-work-card', get_theme_file_uri('assets/css/work-card.css'), array(), $v);
+}, 5);

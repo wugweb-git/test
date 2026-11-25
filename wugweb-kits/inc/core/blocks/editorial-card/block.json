@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/editorial-card",
-  "version": "1.7.0",
+  "version": "3.0.0",
   "title": "Editorial Card",
   "category": "wugweb",
   "supports": {
@@ -38,7 +38,9 @@
     "shadow": true
   },
   "render": "file:./render.php",
-  "style": "file:./style.css",
+  "style": [
+    "wugweb-post-card"
+  ],
   "icon": "format-aside",
   "description": "Editorial Card \u2014 Wugweb block.",
   "attributes": {

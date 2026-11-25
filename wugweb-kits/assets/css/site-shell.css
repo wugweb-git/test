@@ -233,7 +233,7 @@ section:not(section section) > .wrap{ padding-block: 0 !important; }
   }
 
   /* Yellow CTA — only yellow in the bar (design.md §2.3) */
-  .nav-cta {
+  .nav-cta .wp-block-button__link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -252,11 +252,11 @@ section:not(section section) > .wrap{ padding-block: 0 !important; }
     transition: filter var(--duration-spring) var(--ease-spring), transform var(--duration-spring) var(--ease-spring);
   }
   .wa-icon { width: 16px; height: 16px; flex-shrink: 0; }
-  .nav-cta:hover { filter: brightness(1.05); }
-  .nav-cta:active { transform: scale(0.97); }
+  .nav-cta .wp-block-button__link:hover { filter: brightness(1.05); }
+  .nav-cta .wp-block-button__link:active { transform: scale(0.97); }
 
-  .desktop-cta { display: none; }
-  .mobile-cta { display: none; }
+  .wp-block-buttons.desktop-cta { display: none; }
+  .wp-block-buttons.mobile-cta { display: none; }
 
   /* Light chip toggle — staggered bars (Nav Bar 04X.png) */
   .nav-toggle {
@@ -390,7 +390,9 @@ section:not(section section) > .wrap{ padding-block: 0 !important; }
     justify-content: flex-start;
     line-height: var(--core-line-height-tight);
   }
-  .site-header-inner[data-open='true'] .mobile-cta {
+  .site-header-inner[data-open='true'] .mobile-cta { display: flex; width: 100%; }
+  .site-header-inner[data-open='true'] .mobile-cta .wp-block-button { width: 100%; }
+  .site-header-inner[data-open='true'] .mobile-cta .wp-block-button__link {
     display: inline-flex;
     width: 100%;
     padding: var(--gap-4);
@@ -496,7 +498,7 @@ section:not(section section) > .wrap{ padding-block: 0 !important; }
     }
     /* 44px buttons (--control-size) in the 68px bar; see the --nav-* tokens. */
     .nav-link,
-    .nav-cta {
+    .nav-cta .wp-block-button__link {
       font-size: var(--nav-link-size);
       font-weight: var(--font-weight-regular);
       line-height: var(--nav-link-line);
@@ -508,8 +510,8 @@ section:not(section section) > .wrap{ padding-block: 0 !important; }
       align-items: center;
     }
     .nav-link.is-active { font-weight: var(--font-weight-medium); }
-    .desktop-cta { display: inline-flex; }
-    .mobile-cta { display: none !important; }
+    .wp-block-buttons.desktop-cta { display: flex; }
+    .wp-block-buttons.mobile-cta { display: none !important; }
 
     .site-header-inner[data-open='true'] {
       min-height: var(--nav-height);

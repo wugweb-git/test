@@ -1,34 +1,17 @@
-.work {
+.work{
     padding-block: var(--space-section-xl);
     border-top: var(--stroke-thin) solid var(--line);
   }
-
-  .work-head {
+.work-head{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: var(--gap-6);
   }
-
-  .work-head h2 {
+.work-head h2{
     font-size: var(--t-h3);
     max-width: 22ch;
   }
-
-  .work-grid {
-    list-style: none;
-    margin: var(--gap-12) 0 0;
-    padding: 0;
-    display: grid;
-    gap: var(--gap-8);
-  }
-
-  @media (min-width: 768px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
-  .work-grid a { text-decoration: none; display: block; }
-  .work-grid video { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: var(--r-2); }
-  .work-client { font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); margin-top: var(--gap-4); }
-  .work-grid h3 { font-size: var(--t-h5); font-weight: var(--font-weight-semibold); margin-top: var(--gap-1); }
-
-  
+.work-grid video{ width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: var(--r-2); }
 .wp-block-wugweb-portfolio-card{width:100%;max-width:36rem}

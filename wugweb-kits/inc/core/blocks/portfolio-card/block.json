@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/portfolio-card",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "title": "Portfolio Card",
   "category": "wugweb",
   "keywords": [
@@ -91,7 +91,10 @@
     }
   ],
   "render": "file:./render.php",
-  "style": "file:./style.css",
+  "style": [
+    "wugweb-work-card",
+    "file:./style.css"
+  ],
   "icon": "portfolio",
   "description": "Portfolio Card \u2014 Wugweb block.",
   "usesContext": [

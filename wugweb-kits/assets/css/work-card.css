@@ -1,0 +1,14 @@
+/* Shared home work-card CSS (pages/index.astro #work) used by portfolio-card and case-studies-grid */
+.work-grid{
+    list-style: none;
+    margin: var(--gap-12) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--gap-8);
+  }
+.work-grid a{ text-decoration: none; display: block; }
+.work-grid video{ width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: var(--r-2); }
+.work-client{ font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); margin-top: var(--gap-4); }
+.work-grid h3{ font-size: var(--t-h5); font-weight: var(--font-weight-semibold); margin-top: var(--gap-1); }
+@media (min-width: 768px){ .work-grid { grid-template-columns: repeat(2, 1fr); } }
+.work-grid video{background:var(--neutral-5,#7d7d7d)}

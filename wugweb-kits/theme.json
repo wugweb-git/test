@@ -501,23 +501,38 @@
           "primary": {
             "color": {
               "background": "var(--wp--preset--color--yellow)",
-              "text": "var(--wp--preset--color--neutral-10)"
+              "text": "var(--wp--preset--color--ash)"
+            },
+            "border": {
+              "radius": "8px"
+            },
+            "spacing": {
+              "padding": {
+                "top": "8px",
+                "right": "20px",
+                "bottom": "8px",
+                "left": "20px"
+              }
+            },
+            "typography": {
+              "fontWeight": "500"
             },
             ":hover": {
               "color": {
-                "background": "var(--wp--preset--color--neutral-2)"
+                "background": "var(--wp--preset--color--yellow)"
               }
             },
             ":focus": {
               "color": {
-                "background": "var(--wp--preset--color--neutral-2)"
+                "background": "var(--wp--preset--color--yellow)"
               }
             },
             ":active": {
               "color": {
-                "background": "var(--wp--preset--color--neutral-3)"
+                "background": "var(--wp--preset--color--yellow)"
               }
-            }
+            },
+            "css": "&{transition:filter 400ms cubic-bezier(.34,1.56,.64,1),transform 400ms cubic-bezier(.34,1.56,.64,1)}&:hover{filter:brightness(1.05)}&:active{transform:scale(.97)}"
           },
           "secondary": {
             "color": {

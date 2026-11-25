@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/blog-card",
-  "version": "1.7.0",
+  "version": "3.0.0",
   "title": "Blog Card",
   "category": "wugweb",
   "keywords": [
@@ -87,7 +87,9 @@
     }
   ],
   "render": "file:./render.php",
-  "style": "file:./style.css",
+  "style": [
+    "wugweb-post-card"
+  ],
   "icon": "format-aside",
   "description": "Blog Card \u2014 Wugweb block.",
   "usesContext": [
