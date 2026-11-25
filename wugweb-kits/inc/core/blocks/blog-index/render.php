@@ -34,12 +34,13 @@ $arrow = '';
 </section>
 <?php endif; ?>
 <section class="wrap blog-grid-section" id="blog-grid-section" aria-label="All articles">
-  <div class="blog-filters" role="toolbar" aria-label="Filter articles" data-reveal>
+  <div class="blog-filters" role="toolbar" aria-label="Filter articles by topic">
     <button class="filter-chip" data-topic="">All</button>
     <?php foreach ($topics as $slug => $t) : ?><button class="filter-chip" data-topic="<?php echo esc_attr($slug); ?>"><?php echo esc_html($t['name']); ?></button><?php endforeach; ?>
   </div>
   <ul class="blog-grid">
     <?php foreach ($cards as $i => $c) : ?><li data-reveal data-reveal-delay="<?php echo esc_attr(number_format(min($i % 6, 5) * 0.05, 2)); ?>" data-topic="<?php echo esc_attr($c['slug_topic']); ?>"><?php echo wugweb_post_card_html($c, false); ?></li><?php endforeach; ?>
   </ul>
+  <div class="blog-more" hidden><button type="button" class="btn btn-ghost blog-more-btn">Load more articles</button><p class="blog-count" role="status" aria-live="polite"></p></div>
 </section>
 </div>
