@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<ruleset name="Wugweb Kits theme">
+	<description>WordPress Coding Standards for the wugweb-kits theme (blocks, patterns, core includes).</description>
+
+	<file>wugweb-kits</file>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*.min.js</exclude-pattern>
+	<exclude-pattern>*.min.css</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg value="ps"/>
+	<arg name="colors"/>
+	<config name="testVersion" value="7.4-"/>
+	<config name="minimum_supported_wp_version" value="6.5"/>
+
+	<rule ref="WordPress-Extra"/>
+	<rule ref="WordPress-Docs"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="wugweb-kits"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="wugweb"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Block render files run with $attributes, $content, $block in scope. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound">
+		<exclude-pattern>*/blocks/*/render.php</exclude-pattern>
+		<exclude-pattern>*/patterns/*</exclude-pattern>
+		<exclude-pattern>*/templates/*</exclude-pattern>
+		<exclude-pattern>*/parts/*</exclude-pattern>
+	</rule>
+</ruleset>
