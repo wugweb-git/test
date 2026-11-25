@@ -169,3 +169,6 @@ body a{color:inherit}
 /* Small text-label pill (global.css .u-tag) */
 .u-tag{display:inline-flex;align-self:flex-start;font-size:var(--fluid-body-sm);color:var(--fg-muted);background:color-mix(in srgb,var(--neutral-0) 8%,transparent);padding:.1875rem .375rem;border-radius:var(--radius-full);transition:background var(--duration-fast) var(--easing-out),color var(--duration-fast) var(--easing-out)}
 .u-tag:hover{background:color-mix(in srgb,var(--neutral-0) 16%,transparent);color:var(--fg)}
+
+.eyebrow{font-family:var(--core-font-family-mono);font-size:var(--fluid-caption);font-weight:var(--font-weight-medium);line-height:var(--core-line-height-normal);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--accent)}
+.wugweb-case-study .more-cases-head{flex-wrap:nowrap}
