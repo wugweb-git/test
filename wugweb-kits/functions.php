@@ -69,6 +69,11 @@ add_action('wp_enqueue_scripts', function () { wp_enqueue_style('wugweb-layout-s
 add_action('init', function () {
     register_block_style('core/button', array('name' => 'magnetic', 'label' => 'Magnetic Pill'));
     register_block_style('core/button', array('name' => 'ghost', 'label' => 'Ghost'));
+    register_block_style('core/paragraph', array('name' => 'label', 'label' => 'Label'));
+    register_block_style('core/paragraph', array('name' => 'caption', 'label' => 'Caption'));
+    foreach (array('core/post-terms', 'core/tag-cloud', 'core/group') as $wb_blk) { register_block_style($wb_blk, array('name' => 'chip', 'label' => 'Chip')); register_block_style($wb_blk, array('name' => 'pill', 'label' => 'Pill')); }
+    register_block_style('core/group', array('name' => 'label', 'label' => 'Label'));
+    foreach (array('primary' => 'Primary (yellow)', 'secondary' => 'Secondary', 'small' => 'Small') as $wb_n => $wb_l) { register_block_style('core/button', array('name' => $wb_n, 'label' => $wb_l)); }
     register_block_style('core/group', array('name' => 'surface', 'label' => 'Surface Card'));
     register_block_style('core/group', array('name' => 'pill-nav', 'label' => 'Morphing Pill Header'));
     register_block_pattern_category('wugweb-kits', array('label' => 'Wugweb Kits'));
