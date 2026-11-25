@@ -95,3 +95,10 @@
 @media (min-width:768px){.wugweb-case-study .b-facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .wugweb-case-study .b-facts dt{font-size:var(--fluid-label);text-transform:uppercase;letter-spacing:.04em;color:var(--fg-muted)}
 .wugweb-case-study .b-facts dd{margin:var(--gap-1) 0 0;font-size:var(--fluid-h3);font-weight:var(--font-weight-semibold);color:var(--fg)}
+
+/* Placeholders (media not on storage yet): one short grey box per section instead of a stack of tall ones; none inside the ruled list. */
+.wugweb-case-study .b-media:has(.wugweb-ph){max-height:340px}
+.wugweb-case-study .b-media:has(.wugweb-ph) ~ .b-media:has(.wugweb-ph){display:none}
+.wugweb-case-study .b-media .wugweb-ph{height:100%;min-height:200px}
+.wugweb-case-study .b-list .b-media:has(.wugweb-ph){display:none}
+.wugweb-case-study .b-rows .b-row:not(:first-child) .b-media:has(.wugweb-ph){display:none}
