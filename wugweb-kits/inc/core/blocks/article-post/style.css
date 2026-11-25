@@ -433,3 +433,16 @@
   .article-byline.is-rail .byline-tag + .byline-tag{margin-top:var(--gap-3)}
   .article-byline.is-rail a.byline-author:hover{background:transparent;color:var(--color-accent-primary)}
 }
+
+/* Meta = author + date only, plain rows (Webflow-light). Rail-to-body gap 96px (Webflow is ~11% of its container; ours = 2 x gap-12). */
+.article-byline .byline-author,.article-byline .byline-date{background:transparent;border:0;border-radius:0;padding:0;min-height:0;gap:var(--gap-3)}
+.article-byline .byline-author .meta-avatar{width:40px;height:40px}
+.article-byline .byline-author .byline-main{font-size:var(--fluid-body-md);font-weight:var(--font-weight-semibold)}
+.article-byline .byline-date{font-size:var(--fluid-body-sm);color:var(--fg-muted)}
+.article-byline.is-hero{gap:var(--gap-3) var(--gap-8);align-items:center}
+.article-byline.is-rail{padding-bottom:var(--gap-8);gap:var(--gap-4)}
+@media (min-width:1200px){
+  .wugweb-article-post .post-grid{column-gap:calc(var(--gap-12) * 2)}
+  .post-rail{gap:var(--gap-10)}
+  .article-byline.is-rail .byline-author{margin-bottom:0}
+}
