@@ -7,7 +7,10 @@
   const moreBtn = document.querySelector('.blog-more-btn');
   const count = document.querySelector('.blog-count');
   function paginate() {
-    const items = [...document.querySelectorAll('.blog-grid > li')].filter((li) => !li.classList.contains('hidden'));
+    const root = document.querySelector('.wugweb-blog-index');
+    const filtered = !!root?.classList.contains('is-filtered');
+    // Posts already shown in the showcase blocks are listed in the grid too, but hidden until a filter/search is active.
+    const items = [...document.querySelectorAll('.blog-grid > li')].filter((li) => !li.classList.contains('hidden') && (filtered || !li.dataset.dup));
     items.forEach((li, i) => li.classList.toggle('is-later', i >= shown));
     if (!more) return;
     more.hidden = items.length <= shown;
@@ -27,9 +30,8 @@
       const textOk = !q || el.textContent.toLowerCase().includes(q);
       el.classList.toggle('hidden', !(topicOk && textOk));
     });
-    document.querySelectorAll('.blog-featured').forEach((el) => {
-      el.classList.toggle('hidden', (!!active && el.dataset.topic !== active) || !!q);
-    });
+    // While a topic or search is active the showcase blocks (featured, strip, picks, case studies) step aside; the grid then lists every match.
+    document.querySelector('.wugweb-blog-index')?.classList.toggle('is-filtered', !!active || !!q);
     shown = PAGE; paginate();
     const url = new URL(location.href);
     if (active) url.searchParams.set('topic', active); else url.searchParams.delete('topic');
