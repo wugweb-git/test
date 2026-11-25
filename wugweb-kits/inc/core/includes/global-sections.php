@@ -32,3 +32,28 @@ add_filter('render_block_core/html', function ($html) {
         return $on ? '<a href="' . $m[1] . '" class="nav-link is-active" aria-current="page">' : $m[0];
     }, $html);
 });
+
+/** Editable copy: every wugweb/* block gets a `copy` attribute { original: replacement } edited in the "Text & links" panel (assets/js/wugweb-copy-editor.js). */
+add_filter('register_block_type_args', function ($args, $name) {
+    if (strpos($name, 'wugweb/') !== 0) return $args;
+    $args['attributes'] = isset($args['attributes']) ? $args['attributes'] : array();
+    if (!isset($args['attributes']['copy'])) $args['attributes']['copy'] = array('type' => 'object', 'default' => new stdClass());
+    return $args;
+}, 10, 2);
+add_filter('render_block', function ($html, $block) {
+    $name = $block['blockName'] ?? '';
+    $copy = $block['attrs']['copy'] ?? null;
+    if (strpos($name, 'wugweb/') !== 0 || empty($copy) || !is_array($copy) || $html === '') return $html;
+    $norm = function ($s) { return trim(preg_replace('/\s+/', ' ', html_entity_decode((string) $s, ENT_QUOTES))); };
+    $html = preg_replace_callback('#>([^<>]+)<#', function ($m) use ($copy, $norm) {
+        $t = $norm($m[1]); if ($t === '' || !array_key_exists($t, $copy)) return $m[0];
+        return '>' . esc_html((string) $copy[$t]) . '<';
+    }, $html);
+    $html = preg_replace_callback('#href="([^"]*)"#', function ($m) use ($copy) {
+        $h = html_entity_decode($m[1], ENT_QUOTES); return array_key_exists($h, $copy) ? 'href="' . esc_url((string) $copy[$h]) . '"' : $m[0];
+    }, $html);
+    return $html;
+}, 20, 2);
+add_action('enqueue_block_editor_assets', function () {
+    wp_enqueue_script('wugweb-copy-editor', get_theme_file_uri('assets/js/wugweb-copy-editor.js'), array('wp-hooks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch', 'wp-data'), wp_get_theme()->get('Version'), true);
+});
