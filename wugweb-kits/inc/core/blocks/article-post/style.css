@@ -300,3 +300,14 @@
 .byline-main{font-size:15px;line-height:1.3}
 .byline-sub{font-size:13px;line-height:1.35;margin-top:2px!important}
 .wugweb-article-post .article-byline{max-width:620px}
+
+/* Slim meta row: smaller than the title and lede; one line per card. */
+.wugweb-article-post .article-byline{display:flex;flex-wrap:wrap;gap:var(--gap-2);max-width:none;margin-top:var(--gap-5)}
+.byline-card{min-height:0;width:auto;padding:6px 14px 6px 6px;gap:var(--gap-3);border-radius:var(--radius-full)}
+.byline-card .meta-avatar{width:32px;height:32px;border-radius:50%}
+.byline-date{padding:6px 14px}
+.byline-icon{width:18px;height:18px;padding:0;flex:0 0 18px}
+.byline-text{display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--gap-2)}
+.byline-main{font-size:13px;line-height:1.3;font-weight:var(--font-weight-medium)}
+.byline-sub{font-size:13px;line-height:1.3;margin-top:0!important}
+.byline-date .byline-sub::before{content:"\00b7";margin-right:var(--gap-2);color:var(--fg-muted)}
