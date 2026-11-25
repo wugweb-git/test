@@ -416,3 +416,20 @@
 .rail-newsletter .article-newsletter p{font-size:var(--fluid-body-sm);margin:var(--gap-2) 0 0}
 .rail-newsletter .nl-form{flex-direction:column;margin:var(--gap-4) 0 0;max-width:none}
 .rail-newsletter .nl-form .btn{width:100%;justify-content:center}
+
+/* Rail meta, Webflow rhythm: plain author row, light icon rows for date/read time, inline wrapping tag chips, generous group gaps. */
+@media (min-width:1200px){
+  .post-rail{gap:var(--gap-10)}
+  .article-byline.is-rail{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:var(--gap-2);margin:0;padding-bottom:var(--gap-8);border-bottom:var(--stroke-thin) solid var(--line)}
+  .article-byline.is-rail .byline-author,
+  .article-byline.is-rail .byline-date,
+  .article-byline.is-rail .byline-read{flex:0 0 100%;background:transparent;border:0;border-radius:0;padding:0;min-height:0;gap:var(--gap-3)}
+  .article-byline.is-rail .byline-author{margin-bottom:var(--gap-3);color:var(--fg)}
+  .article-byline.is-rail .byline-author .meta-avatar{width:40px;height:40px}
+  .article-byline.is-rail .byline-author .byline-main{font-size:var(--fluid-body-md);font-weight:var(--font-weight-semibold)}
+  .article-byline.is-rail .byline-date,.article-byline.is-rail .byline-read{font-size:var(--fluid-body-sm);color:var(--fg-muted)}
+  .article-byline.is-rail .byline-date .byline-icon,.article-byline.is-rail .byline-read .byline-icon{color:var(--fg-muted)}
+  .article-byline.is-rail .byline-tag{flex:0 0 auto;min-height:28px;padding:2px 10px;gap:6px;margin-top:var(--gap-3);font-size:var(--fluid-label)}
+  .article-byline.is-rail .byline-tag + .byline-tag{margin-top:var(--gap-3)}
+  .article-byline.is-rail a.byline-author:hover{background:transparent;color:var(--color-accent-primary)}
+}
