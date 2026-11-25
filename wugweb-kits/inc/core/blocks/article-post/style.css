@@ -446,3 +446,11 @@
   .post-rail{gap:var(--gap-10)}
   .article-byline.is-rail .byline-author{margin-bottom:0}
 }
+
+/* Next-article panel: kicker + wide media-card; previous is a quiet text link. */
+.wugweb-article-post .article-prevnext{display:block;margin-top:var(--gap-10);max-width:720px;margin-inline:0}
+.pn-kicker{margin:0 0 var(--gap-3);font-size:var(--fluid-label);color:var(--fg-muted);text-transform:uppercase;letter-spacing:.04em}
+.wugweb-article-post .article-prevnext .media-card{border-radius:var(--radius-lg)}
+.pn-prev-link{display:inline-block;margin-top:var(--gap-4);font-size:var(--fluid-body-sm);color:var(--fg-muted);text-decoration:none}
+.pn-prev-link:hover{color:var(--fg);text-decoration:underline;text-underline-offset:3px}
+.pn-prev-link:focus-visible{outline:2px solid var(--color-accent-primary);outline-offset:3px}

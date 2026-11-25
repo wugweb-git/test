@@ -6,6 +6,7 @@ $title = (string) ($attributes['title'] ?? '');
 $text = (string) ($attributes['text'] ?? '');
 $url = (string) ($attributes['url'] ?? '');
 $img = (string) ($attributes['imageUrl'] ?? '');
+$cta = (string) ($attributes['cta'] ?? '');
 $alt = (string) ($attributes['imageAlt'] ?? '');
 $right = ($attributes['mediaSide'] ?? 'left') === 'right';
 if ($title === '' && $text === '' && $img === '') { return; }
@@ -19,5 +20,6 @@ echo $open;
   <?php if ($eyebrow !== '') : ?><span class="media-card-eyebrow"><?php echo esc_html($eyebrow); ?></span><?php endif; ?>
   <?php if ($title !== '') : ?><span class="media-card-title"><?php echo esc_html($title); ?></span><?php endif; ?>
   <?php if ($text !== '') : ?><span class="media-card-text"><?php echo esc_html($text); ?></span><?php endif; ?>
+  <?php if ($cta !== '') : ?><span class="media-card-cta"><?php echo esc_html($cta); ?> <span aria-hidden="true">&rarr;</span></span><?php endif; ?>
 </span>
 <?php echo '</' . $tag . '>';

@@ -141,8 +141,12 @@ if (preg_match('#<aside class="article-newsletter".*?</aside>#s', $share_news, $
     <?php echo $share_news; // phpcs:ignore WordPress.Security.EscapeOutput ?>
     <?php if ($prev || $next) : ?>
     <nav class="article-prevnext" aria-label="Previous and next articles">
-      <?php if ($prev) : ?><a href="<?php echo esc_url(get_permalink($prev)); ?>" class="pn-link pn-prev"><span class="pn-dir">Previous</span><span class="pn-title"><?php echo esc_html(get_the_title($prev)); ?></span></a><?php else : ?><span class="pn-link pn-placeholder"></span><?php endif; ?>
-      <?php if ($next) : ?><a href="<?php echo esc_url(get_permalink($next)); ?>" class="pn-link pn-next"><span class="pn-dir">Next</span><span class="pn-title"><?php echo esc_html(get_the_title($next)); ?></span></a><?php else : ?><span class="pn-link pn-placeholder"></span><?php endif; ?>
+      <?php if ($next) :
+        $nc = wugweb_post_card_data($next->ID);
+        echo '<p class="pn-kicker">Next article</p>';
+        echo do_blocks('<!-- wp:wugweb/media-card ' . wp_json_encode(array('className' => 'is-style-wide', 'title' => get_the_title($next), 'text' => wp_trim_words(get_the_excerpt($next), 24), 'url' => get_permalink($next), 'imageUrl' => (string) ($nc['cover'] ?? ''), 'imageAlt' => (string) ($nc['alt'] ?? ''), 'cta' => 'Read next')) . ' /-->');
+      endif; ?>
+      <?php if ($prev) : ?><a href="<?php echo esc_url(get_permalink($prev)); ?>" class="pn-prev-link"><span aria-hidden="true">&larr;</span> Previous: <?php echo esc_html(get_the_title($prev)); ?></a><?php endif; ?>
     </nav>
     <?php endif; ?>
   </div>

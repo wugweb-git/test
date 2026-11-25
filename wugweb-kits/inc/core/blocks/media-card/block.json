@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/media-card",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Media Card (horizontal)",
   "category": "wugweb",
   "keywords": [
@@ -42,6 +42,10 @@
     "mediaSide": {
       "type": "string",
       "default": "left"
+    },
+    "cta": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {
@@ -89,6 +93,10 @@
     {
       "name": "stacked",
       "label": "Stacked"
+    },
+    {
+      "name": "wide",
+      "label": "Wide (16:9 image)"
     }
   ],
   "render": "file:./render.php",

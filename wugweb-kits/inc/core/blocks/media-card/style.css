@@ -15,3 +15,14 @@ a.media-card:focus-visible{outline:2px solid var(--accent,var(--color-accent-pri
 .media-card.is-style-stacked .media-card-media{width:100%;aspect-ratio:16/10}
 .media-card.is-style-stacked .media-card-body{padding:var(--gap-2) var(--gap-3) var(--gap-3)}
 .media-card-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--gap-3)}
+
+/* Wide: 16:9 image strip (next-article panel). */
+.media-card.is-style-wide .media-card-media{width:clamp(180px,30%,300px);aspect-ratio:16/9}
+.media-card-cta{margin-top:var(--gap-2);font-size:var(--fluid-body-md);font-weight:var(--font-weight-medium);color:var(--fg);text-decoration:underline;text-underline-offset:3px}
+.media-card:hover .media-card-cta{color:var(--color-accent-primary)}
+.media-card:hover .media-card-title{text-decoration:underline;text-underline-offset:3px}
+@media (max-width:767px){
+  .media-card.is-style-wide{flex-direction:column;align-items:stretch}
+  .media-card.is-style-wide .media-card-media{width:100%}
+  .media-card.is-style-wide .media-card-body{padding:var(--gap-2) var(--gap-3) var(--gap-3)}
+}
