@@ -398,3 +398,12 @@
   .article-byline.is-rail .byline-card{width:auto}
   .post-rail .article-byline.is-rail{order:0}
 }
+
+/* Webflow-post rail rhythm (structure only): boxed contents, Share heading above the icons. */
+@media (min-width:1200px){
+  .post-rail{gap:var(--gap-6)}
+  .post-rail .toc-details{border:var(--stroke-thin) solid var(--line);border-radius:var(--radius-lg);padding:var(--gap-5)}
+  .post-rail .toc-title{margin-bottom:var(--gap-3)}
+  .post-rail .rail-share{flex-direction:column;align-items:flex-start;gap:var(--gap-3)}
+  .post-rail .rail-share .share-label{font-family:var(--font-body);font-size:var(--fluid-body-lg);font-weight:var(--font-weight-medium);text-transform:none;letter-spacing:0;color:var(--fg-muted)}
+}
