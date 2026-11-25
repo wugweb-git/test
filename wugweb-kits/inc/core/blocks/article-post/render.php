@@ -72,6 +72,8 @@ $share = array(
   array('Share on LinkedIn', 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($permalink), 'LinkedIn'),
   array('Share on Facebook', 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode($permalink), 'Facebook'),
 );
+$cat_names = array_values(array_filter(array_map(function ($c) { return $c->name; }, (array) get_the_category($id)), function ($n) { return strtolower($n) !== 'uncategorized'; }));
+if (!$cat_names && $f['category']) { $cat_names = array($f['category']); }
 $cover = $f['image'];
 $tags = $f['tags'];
 $excerpt = get_the_excerpt($id);
@@ -87,10 +89,10 @@ $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-article-post'));
     <nav class="article-crumbs" aria-label="Breadcrumb"><a href="<?php echo esc_url(home_url('/blog/')); ?>"><span aria-hidden="true">&lsaquo;</span> Blog</a><?php if ($f['category']) : ?><span class="crumb-sep" aria-hidden="true">/</span><span class="crumb-current"><?php echo esc_html($f['category']); ?></span><?php endif; ?></nav>
     <h1 id="article-hero-title" data-reveal><?php echo esc_html(get_the_title($id)); ?></h1>
     <?php if ($excerpt) : ?><p class="article-intro" data-reveal><?php echo esc_html(wp_strip_all_tags($excerpt)); ?></p><?php endif; ?>
-    <p class="article-byline" data-reveal>
-      <?php if ($author) : ?><span class="meta-author byline-pill"><?php if ($photo) : ?><img src="<?php echo esc_url($photo); ?>" alt="" class="meta-avatar"><?php else : ?><span class="wugweb-ph meta-avatar" aria-hidden="true"></span><?php endif; ?><span><?php echo esc_html($author); ?></span></span><?php endif; ?>
-      <span class="byline-pill">Updated <time datetime="<?php echo esc_attr(get_the_modified_date('c', $id)); ?>"><?php echo esc_html(get_the_modified_date('j M Y', $id)); ?></time></span><span class="byline-pill"><?php echo esc_html((int) $f['minutes'] . ' min read'); ?></span>
-    </p>
+    <div class="article-byline" data-reveal>
+      <?php if ($author) : ?><div class="byline-card byline-author"><?php if ($photo) : ?><img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($author); ?>" class="meta-avatar" width="94" height="94"><?php else : ?><span class="wugweb-ph meta-avatar" aria-hidden="true"></span><?php endif; ?><div class="byline-text"><p class="byline-main"><?php echo esc_html($author); ?></p><?php if ($role !== '') : ?><p class="byline-sub"><?php echo esc_html($role); ?></p><?php endif; ?></div></div><?php endif; ?>
+      <div class="byline-card byline-date"><svg class="byline-icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg><div class="byline-text"><p class="byline-main"><time datetime="<?php echo esc_attr(get_the_modified_date('c', $id)); ?>">Updated <?php echo esc_html(get_the_modified_date('j F Y', $id)); ?></time></p><?php foreach ($cat_names as $cn) : ?><p class="byline-sub"><?php echo esc_html($cn); ?></p><?php endforeach; ?><p class="byline-sub"><?php echo esc_html((int) $f['minutes'] . ' min read'); ?></p></div></div>
+    </div>
   </header>
   <?php if ($cover) : ?>
   <figure class="post-cover" id="article-cover" data-reveal><img src="<?php echo esc_url($cover); ?>" alt="<?php echo esc_attr(get_the_title($id)); ?>" loading="eager" fetchpriority="high" decoding="async"></figure>
