@@ -96,13 +96,34 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
   foreach ($s['tiles'] as $ti => $t) { if ($ti % 2 === 0 && $mi < count($imgs)) $items[] = array('media', $imgs[$mi++]); $items[] = array('point', $t); }
   while ($mi < count($imgs)) $items[] = array('media', $imgs[$mi++]);
   $lead = $s['paras'][0] ?? ''; $rest = array_slice($s['paras'], 1);
+  $kind = $key($s['title']); if (!in_array($kind, array('about', 'challenges', 'solutions', 'philosophy', 'outcome'), true)) { $kind = 'other'; }
 ?>
-<section class="bento" id="b-s-<?php echo (int) $si; ?>" aria-labelledby="b-h-<?php echo (int) $si; ?>">
+<section class="bento" data-kind="<?php echo esc_attr($kind); ?>" id="b-s-<?php echo (int) $si; ?>" aria-labelledby="b-h-<?php echo (int) $si; ?>">
   <div class="b-head<?php echo $items ? '' : ' b-head--solo'; ?>"><h2 id="b-h-<?php echo (int) $si; ?>"><?php echo esc_html($s['title']); ?></h2><?php if ($lead !== '') : ?><p><?php echo esc_html($lead); ?></p><?php endif; foreach ($rest as $p) : ?><p><?php echo esc_html($p); ?></p><?php endforeach; ?></div>
   <?php if ($stylesRow) : ?><div class="b-styles"><?php foreach ($stylesRow as $md) : ?><figure><?php echo $ok($md['src']) ? '<img src="' . esc_url($md['src']) . '" alt="' . esc_attr($brand . ' style') . '" loading="lazy" decoding="async">' : $ph('4/3'); ?></figure><?php endforeach; ?></div><?php endif; ?>
-  <?php foreach ($items as $it) : if ($it[0] === 'media') { echo $fig($it[1], $brand . ' case study image'); } else { $t = $it[1]; ?>
-  <div class="b-point<?php echo strlen($t[1]) > 170 ? ' b-point--long' : ''; ?>"><?php if ($t[0] !== '') : ?><h3><?php echo esc_html($t[0]); ?></h3><?php endif; ?><p><?php echo esc_html($t[1]); ?></p></div>
-  <?php } endforeach; foreach ($vids as $v) { echo $fig($v, ''); } ?>
+  <?php
+  $pt = function ($t) { return '<div class="b-point' . (strlen($t[1]) > 170 ? ' b-point--long' : '') . '">' . ($t[0] !== '' ? '<h3>' . esc_html($t[0]) . '</h3>' : '') . '<p>' . esc_html($t[1]) . '</p></div>'; };
+  if ($kind === 'solutions') {
+    // Alternating rows: text beside its routed image (text only where the case has no image for that point).
+    echo '<div class="b-rows">'; $ri = 0; $pending = null;
+    foreach ($items as $it) {
+      if ($it[0] === 'media') { $pending = $it[1]; continue; }
+      echo '<div class="b-row' . ($pending ? ' has-media' : '') . ($ri % 2 ? ' is-flip' : '') . '">' . ($pending ? $fig($pending, $brand . ' case study image') : '') . $pt($it[1]) . '</div>'; $ri++; $pending = null;
+    }
+    if ($pending) { echo $fig($pending, $brand . ' case study image'); }
+    echo '</div>';
+  } elseif ($kind === 'philosophy') {
+    echo '<div class="b-list">'; foreach ($items as $it) { echo $it[0] === 'media' ? $fig($it[1], $brand . ' case study image') : $pt($it[1]); } echo '</div>';
+  } else {
+    foreach ($items as $it) { echo $it[0] === 'media' ? $fig($it[1], $brand . ' case study image') : $pt($it[1]); } // phpcs:ignore
+  }
+  foreach ($vids as $v) { echo $fig($v, ''); }
+  if ($kind === 'outcome') {
+    $facts = array(); foreach ($meta as $r) { if (in_array($r[0], array('Timeline', 'Platform'), true)) { $facts[] = $r; } }
+    if ($disc) { $facts[] = array('Disciplines', (string) count($disc), ''); }
+    if ($facts) { echo '<dl class="b-facts">'; foreach ($facts as $f) { echo '<div><dt>' . esc_html($f[0]) . '</dt><dd>' . esc_html($f[1]) . '</dd></div>'; } echo '</dl>'; }
+  }
+  ?>
 </section>
 <?php endforeach;
 if ($closing) : ?><section class="bento" id="b-closing" aria-label="More from the project"><?php foreach ($closing as $md) { echo $fig($md, $brand . ' case study image'); } ?></section><?php endif; ?>

@@ -52,3 +52,46 @@
 .wugweb-case-study .more-card-client{font-family:var(--font-mono);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.05em;color:var(--color-accent-primary)}
 .wugweb-case-study .more-card h3{font-size:var(--t-h4);font-weight:var(--font-weight-bold);color:var(--fg);margin:0;line-height:var(--core-line-height-tight)}
 .wugweb-case-study .more-card-discipline{font-size:var(--fluid-body-sm);color:var(--fg-muted);margin-top:var(--gap-1)}
+
+/* ── Case-study layout v2 (Webflow solution-page rhythm on our tokens): facts row, 5/7 head split, 3-col cards, alternating rows, ruled list, facts band ── */
+@media (min-width:768px){.wugweb-case-study .work-meta{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap-6) var(--gap-8)}}
+.wugweb-case-study .bento-body{gap:var(--space-section-md)}
+.wugweb-case-study .bento{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:auto;gap:var(--gap-6)}
+.wugweb-case-study .b-head{grid-column:1/-1;grid-row:auto;padding:0;background:none;border-radius:0;justify-content:flex-start;gap:var(--gap-3)}
+.wugweb-case-study .b-head h2{font-size:var(--fluid-h2);font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-.015em}
+.wugweb-case-study .b-head p{max-width:60ch}
+.wugweb-case-study .b-media,.wugweb-case-study .b-video,.wugweb-case-study .b-styles{grid-column:1/-1;grid-row:auto}
+.wugweb-case-study .b-media img{height:auto;object-fit:cover}
+.wugweb-case-study .b-point,.wugweb-case-study .b-point--long{grid-column:auto;border:0;background:var(--color-surface-elevated);border-radius:var(--radius-lg)}
+@media (min-width:768px){
+  .wugweb-case-study .bento[data-kind=challenges],.wugweb-case-study .bento[data-kind=outcome],.wugweb-case-study .bento[data-kind=other]{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (min-width:1100px){
+  .wugweb-case-study .b-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--gap-10);align-items:start}
+  .wugweb-case-study .b-head h2{grid-column:1;grid-row:1 / span 8}
+  .wugweb-case-study .b-head p{grid-column:2}
+}
+/* Solutions: alternating text / image rows */
+.wugweb-case-study .b-rows{display:flex;flex-direction:column;gap:var(--gap-10)}
+.wugweb-case-study .b-row{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gap-6);align-items:center}
+.wugweb-case-study .b-row .b-point{background:none;padding:0}
+.wugweb-case-study .b-row .b-point h3{font-size:var(--fluid-h3);line-height:1.25}
+@media (min-width:768px){
+  .wugweb-case-study .b-row.has-media{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap-10)}
+  .wugweb-case-study .b-row.is-flip .b-media{order:2}
+}
+/* Design philosophy: ruled list beside the heading */
+.wugweb-case-study .b-list{display:flex;flex-direction:column}
+.wugweb-case-study .b-list .b-point{background:none;border-radius:0;padding:var(--gap-6) 0;border-top:var(--stroke-thin) solid var(--line)}
+.wugweb-case-study .b-list .b-point:last-child{border-bottom:var(--stroke-thin) solid var(--line)}
+@media (min-width:1100px){
+  .wugweb-case-study .bento[data-kind=philosophy]{grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--gap-10);align-items:start}
+  .wugweb-case-study .bento[data-kind=philosophy] .b-head{display:flex;grid-column:1;position:sticky;top:calc(var(--header-height,72px) + var(--gap-6))}
+  .wugweb-case-study .bento[data-kind=philosophy] .b-head h2{grid-row:auto}
+  .wugweb-case-study .bento[data-kind=philosophy] .b-list{grid-column:2}
+}
+/* Conclusion facts band (real Timeline / Platform / Disciplines only) */
+.wugweb-case-study .b-facts{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gap-6);margin:var(--gap-4) 0 0;padding-top:var(--gap-6);border-top:var(--stroke-thin) solid var(--line)}
+@media (min-width:768px){.wugweb-case-study .b-facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.wugweb-case-study .b-facts dt{font-size:var(--fluid-label);text-transform:uppercase;letter-spacing:.04em;color:var(--fg-muted)}
+.wugweb-case-study .b-facts dd{margin:var(--gap-1) 0 0;font-size:var(--fluid-h3);font-weight:var(--font-weight-semibold);color:var(--fg)}
