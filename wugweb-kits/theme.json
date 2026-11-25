@@ -139,57 +139,57 @@
         {
           "slug": "g1",
           "size": "0.25rem",
-          "name": "Gap 1 \u00b7 4px"
+          "name": "Gap 1 · 4px"
         },
         {
           "slug": "g2",
           "size": "0.5rem",
-          "name": "Gap 2 \u00b7 8px"
+          "name": "Gap 2 · 8px"
         },
         {
           "slug": "g3",
           "size": "0.75rem",
-          "name": "Gap 3 \u00b7 12px"
+          "name": "Gap 3 · 12px"
         },
         {
           "slug": "g4",
           "size": "1rem",
-          "name": "Gap 4 \u00b7 16px"
+          "name": "Gap 4 · 16px"
         },
         {
           "slug": "g5",
           "size": "1.25rem",
-          "name": "Gap 5 \u00b7 20px"
+          "name": "Gap 5 · 20px"
         },
         {
           "slug": "g6",
           "size": "1.5rem",
-          "name": "Gap 6 \u00b7 24px"
+          "name": "Gap 6 · 24px"
         },
         {
           "slug": "g8",
           "size": "2rem",
-          "name": "Gap 8 \u00b7 32px"
+          "name": "Gap 8 · 32px"
         },
         {
           "slug": "g10",
           "size": "2.5rem",
-          "name": "Gap 10 \u00b7 40px"
+          "name": "Gap 10 · 40px"
         },
         {
           "slug": "s-sm",
           "size": "48px",
-          "name": "Section \u00b7 mobile 48px"
+          "name": "Section · mobile 48px"
         },
         {
           "slug": "s-md",
           "size": "70px",
-          "name": "Section \u00b7 tablet 70px"
+          "name": "Section · tablet 70px"
         },
         {
           "slug": "s-lg",
           "size": "96px",
-          "name": "Section \u00b7 desktop 96px"
+          "name": "Section · desktop 96px"
         }
       ]
     },
@@ -205,57 +205,57 @@
         {
           "slug": "caption",
           "size": "clamp(.625rem,.05vw + .62rem,.75rem)",
-          "name": "Caption \u00b7 12px"
+          "name": "Caption · 12px"
         },
         {
           "slug": "xs",
           "size": "clamp(.625rem,.05vw + .62rem,.75rem)",
-          "name": "XS \u00b7 12px"
+          "name": "XS · 12px"
         },
         {
           "slug": "label",
           "size": "clamp(.75rem,.1vw + .73rem,.875rem)",
-          "name": "Label \u00b7 14px"
+          "name": "Label · 14px"
         },
         {
           "slug": "body-sm",
           "size": "clamp(.8125rem,.1vw + .8rem,.875rem)",
-          "name": "Body Sm \u00b7 14px"
+          "name": "Body Sm · 14px"
         },
         {
           "slug": "body-md",
           "size": "clamp(.9375rem,.25vw + .875rem,1rem)",
-          "name": "Body Md \u00b7 16px"
+          "name": "Body Md · 16px"
         },
         {
           "slug": "body-lg",
           "size": "clamp(1rem,.25vw + .9rem,1.125rem)",
-          "name": "Body Lg \u00b7 18px"
+          "name": "Body Lg · 18px"
         },
         {
           "slug": "h5",
           "size": "clamp(1rem,.6vw + .7rem,1.1875rem)",
-          "name": "H5 \u00b7 19px"
+          "name": "H5 · 19px"
         },
         {
           "slug": "h4",
           "size": "clamp(1.06rem,1vw + .5rem,1.375rem)",
-          "name": "H4 \u00b7 22px"
+          "name": "H4 · 22px"
         },
         {
           "slug": "h3",
           "size": "clamp(1.25rem,1.5vw + .5rem,1.75rem)",
-          "name": "H3 \u00b7 28px"
+          "name": "H3 · 28px"
         },
         {
           "slug": "h2",
           "size": "clamp(1.5rem,2.5vw + .5rem,2.25rem)",
-          "name": "H2 \u00b7 36px"
+          "name": "H2 · 36px"
         },
         {
           "slug": "h1",
           "size": "clamp(2rem,4vw + .5rem,3rem)",
-          "name": "H1 \u00b7 48px"
+          "name": "H1 · 48px"
         },
         {
           "slug": "display",
@@ -336,6 +336,14 @@
           "color": {
             "text": "var(--wp--preset--color--yellow)"
           }
+        },
+        ":focus-visible": {
+          "outline": {
+            "color": "var(--wp--preset--color--yellow)",
+            "style": "solid",
+            "width": "2px",
+            "offset": "2px"
+          }
         }
       },
       "h1": {
@@ -413,6 +421,14 @@
         ":active": {
           "color": {
             "background": "var(--wp--preset--color--neutral-7)"
+          }
+        },
+        ":focus-visible": {
+          "outline": {
+            "color": "var(--wp--preset--color--yellow)",
+            "style": "solid",
+            "width": "2px",
+            "offset": "2px"
           }
         }
       },
@@ -2590,6 +2606,160 @@
           "spacing": {
             "blockGap": "var:preset|spacing|g2"
           }
+        }
+      },
+      "wugweb/service-stack": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/subscription-page": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/impact-page": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/legal-hub": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/sitemap-index": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/reviews-page": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/about-section": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/work-index": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/industries-directory": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/article-post": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/case-study-post": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/blog-index": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/service-related-work": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
+        }
+      },
+      "wugweb/section-intro": {
+        "spacing": {
+          "margin": {
+            "top": "0",
+            "bottom": "0"
+          }
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--body)"
         }
       }
     },
