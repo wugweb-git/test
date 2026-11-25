@@ -1,0 +1,84 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/values-section",
+  "version": "1.0.0",
+  "title": "Values Section",
+  "category": "wugweb",
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "icon": "star-filled",
+  "description": "About page values: lede and four numbered value cards.",
+  "attributes": {
+    "lede": {
+      "type": "string",
+      "default": "Creating projects at the nexus of design and technology, bringing the future into the present. We develop comprehensive strategies, looking from a hybrid and more coherent perspective. Then we give it a life of its own by equipping it with cutting-edge systems that allow it to adapt to and live in the wild, ever-evolving environment."
+    },
+    "heading": {
+      "type": "string",
+      "default": "Our values"
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "n": "01",
+          "title": "Bold",
+          "copy": "We balance distinctive expression with measurable results."
+        },
+        {
+          "n": "02",
+          "title": "Adaptive",
+          "copy": "We build flexible solutions without sacrificing creative vision."
+        },
+        {
+          "n": "03",
+          "title": "Distinct",
+          "copy": "We reject sameness, crafting experiences with unique identities."
+        },
+        {
+          "n": "04",
+          "title": "Start Smart, Start Small",
+          "copy": "We start focused, prove value early, and scale what works."
+        }
+      ]
+    }
+  },
+  "keywords": [
+    "values",
+    "about",
+    "culture"
+  ]
+}

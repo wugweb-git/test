@@ -1,8 +1,8 @@
 {
   "apiVersion": 3,
   "name": "wugweb/cta-band",
-  "version": "1.3.0",
-  "title": "CTA Band",
+  "version": "2.0.0",
+  "title": "Yellow CTA Box",
   "category": "wugweb",
   "supports": {
     "html": false,
@@ -40,7 +40,7 @@
   "render": "file:./render.php",
   "style": "file:./style.css",
   "icon": "megaphone",
-  "description": "Yellow call-to-action band.",
+  "description": "The yellow call-to-action box above the footer (FooterCTA): heading, copy, button and draggable social discs.",
   "attributes": {
     "eyebrow": {
       "type": "string",
@@ -61,6 +61,42 @@
     "buttonUrl": {
       "type": "string",
       "default": "/contact-us/"
+    },
+    "discs": {
+      "type": "array",
+      "default": [
+        {
+          "platform": "Facebook",
+          "profileUrl": "https://www.facebook.com/wugweb"
+        },
+        {
+          "platform": "Instagram",
+          "profileUrl": "https://www.instagram.com/wugweb"
+        },
+        {
+          "platform": "Pinterest",
+          "profileUrl": "https://in.pinterest.com/wugweb"
+        },
+        {
+          "platform": "X",
+          "profileUrl": "https://twitter.com/the_wugweb"
+        },
+        {
+          "platform": "YouTube",
+          "profileUrl": "https://www.youtube.com/channel/UC7qGSNvbvZqxZI8cA-Fijlg"
+        }
+      ]
     }
-  }
+  },
+  "keywords": [
+    "yellow",
+    "cta",
+    "call to action",
+    "band",
+    "footer cta",
+    "contact",
+    "banner",
+    "box"
+  ],
+  "viewScript": "file:./view.js"
 }

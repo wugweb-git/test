@@ -1,0 +1,140 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/page-hero",
+  "version": "1.0.0",
+  "title": "Page Hero",
+  "category": "wugweb",
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "icon": "align-wide",
+  "description": "Page hero for every page type: about, services, work, blog, faq, contact, 404, thank-you, split (impact/subscription), narrow (reviews), service, article, case.",
+  "attributes": {
+    "variant": {
+      "type": "string",
+      "default": "standard"
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "lede": {
+      "type": "string",
+      "default": ""
+    },
+    "sub": {
+      "type": "string",
+      "default": ""
+    },
+    "primaryLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "primaryUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "secondaryLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "secondaryUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "mediaUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "posterUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "statement": {
+      "type": "string",
+      "default": ""
+    },
+    "statementSub": {
+      "type": "string",
+      "default": ""
+    },
+    "badge": {
+      "type": "string",
+      "default": ""
+    },
+    "tags": {
+      "type": "string",
+      "default": ""
+    },
+    "chips": {
+      "type": "array",
+      "default": []
+    },
+    "priceValue": {
+      "type": "string",
+      "default": ""
+    },
+    "pricePeriod": {
+      "type": "string",
+      "default": ""
+    },
+    "priceNote": {
+      "type": "string",
+      "default": ""
+    },
+    "postId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "keywords": [
+    "hero",
+    "page hero",
+    "page title",
+    "header",
+    "about",
+    "services",
+    "contact",
+    "404"
+  ],
+  "usesContext": [
+    "postId",
+    "postType"
+  ]
+}

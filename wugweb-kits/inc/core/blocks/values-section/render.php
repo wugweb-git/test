@@ -1,0 +1,4 @@
+<?php
+require_once get_template_directory() . '/inc/core/includes/value-card-html.php';
+$items = is_array($attributes['items'] ?? null) ? $attributes['items'] : array();
+?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap values', 'id' => 'values', 'data-scroll' => 'rise', 'aria-labelledby' => 'values-title')); ?>><h2 class="sr-only" id="values-title"><?php echo esc_html($attributes['heading'] ?? 'Our values'); ?></h2><?php if (!empty($attributes['lede'])): ?><p class="values-lede" data-reveal><?php echo esc_html($attributes['lede']); ?></p><?php endif; ?><ol class="values-list"><?php foreach ($items as $i => $v) echo '<li data-reveal>' . wugweb_value_card_html((string) ($v['n'] ?? str_pad($i + 1, 2, '0', STR_PAD_LEFT)), (string) ($v['title'] ?? ''), (string) ($v['copy'] ?? '')) . '</li>'; ?></ol></section>
