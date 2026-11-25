@@ -152,3 +152,8 @@
 
 .pc-date,.post-meta .pc-date{display:inline-flex;align-items:center;gap:var(--gap-1)}
 .date-icon{flex:0 0 12px;opacity:.7}
+
+/* Category chip overlaid on the thumbnail (top-left). Cards are one link, so the chip is a label, not a nested anchor. */
+.pc-thumb-wrap,.featured-visual{position:relative}
+.pc-chip{position:absolute;top:var(--gap-3);left:var(--gap-3);z-index:2;display:inline-flex;align-items:center;max-width:calc(100% - var(--gap-6));padding:var(--gap-1) var(--gap-3);border-radius:var(--radius-full);background:color-mix(in srgb,var(--neutral-10) 62%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:var(--stroke-thin) solid var(--line-strong);color:var(--fg);font-family:var(--font-body);font-size:var(--fluid-label);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.post-card:hover .pc-chip,.featured-card:hover .pc-chip,.post-card:focus-visible .pc-chip{background:color-mix(in srgb,var(--neutral-10) 78%,transparent)}

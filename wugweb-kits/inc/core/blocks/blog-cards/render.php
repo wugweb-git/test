@@ -9,12 +9,11 @@ switch ($slot) {
 case 'featured':
   if (!$hero) { return; }
   ?><a href="<?php echo esc_url($hero['url']); ?>" class="featured-card blog-featured" id="blog-featured" style="--card-accent: <?php echo esc_attr($hero['accent']); ?>">
-    <div class="featured-visual"><?php if (!empty($hero['cover'])) : ?><img src="<?php echo esc_url($hero['cover']); ?>" alt="<?php echo esc_attr($hero['alt']); ?>" loading="eager" decoding="async"><?php else : ?><div class="wugweb-ph" style="height:100%;aspect-ratio:auto;border-radius:0" aria-hidden="true"></div><?php endif; ?></div>
+    <div class="featured-visual"><?php if (!empty($hero['topic'])) : ?><span class="pc-chip"><?php echo esc_html($hero['topic']); ?></span><?php endif; ?><?php if (!empty($hero['cover'])) : ?><img src="<?php echo esc_url($hero['cover']); ?>" alt="<?php echo esc_attr($hero['alt']); ?>" loading="eager" decoding="async"><?php else : ?><div class="wugweb-ph" style="height:100%;aspect-ratio:auto;border-radius:0" aria-hidden="true"></div><?php endif; ?></div>
     <div class="featured-content">
-      <span class="pillar-tag"><i></i><?php echo esc_html($hero['topic']); ?></span>
       <h2><?php echo esc_html($hero['title']); ?></h2>
       <p class="featured-excerpt"><?php echo esc_html($hero['excerpt']); ?></p>
-      <div class="post-meta"><?php if ($hero['author']) : ?><span>By <?php echo esc_html($hero['author']); ?></span><?php endif; ?><span class="pc-date"><?php echo $cal; // phpcs:ignore ?><?php echo esc_html($hero['date']); ?></span></div>
+      <div class="post-meta"><span class="pc-date"><?php echo $cal; // phpcs:ignore ?><?php echo esc_html($hero['date']); ?></span></div>
     </div></a><?php
   break;
 case 'list':
