@@ -1,7 +1,7 @@
 
 /* Page hero: sources are pages/*.astro heroes (about, services, work, blog, faq, contact-us, 404, thank-you, footer/*, services/[slug], blog/[slug], work/[slug]). */
 .wp-block-wugweb-page-hero{max-width:none!important;width:100%}
-.wp-block-wugweb-page-hero .page-title{font-size:var(--t-display);font-weight:var(--font-weight-semibold);line-height:.96;letter-spacing:-.03em;text-wrap:balance;margin:0}
+.wp-block-wugweb-page-hero .page-title{font-size:var(--t-display);font-weight:var(--font-weight-semibold);line-height:.96;letter-spacing:-.03em;text-wrap:balance}
 .wp-block-wugweb-page-hero .eyebrow{font-family:var(--font-mono);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.08em;color:var(--fg-muted);margin:0}
 /* about */
 .about-hero{padding-block:var(--space-page-head) 0}

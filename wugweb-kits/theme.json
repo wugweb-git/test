@@ -2479,10 +2479,6 @@
             "top": "0",
             "bottom": "0"
           },
-          "padding": {
-            "top": "0",
-            "bottom": "0"
-          },
           "blockGap": "var:preset|spacing|g4"
         },
         "typography": {
