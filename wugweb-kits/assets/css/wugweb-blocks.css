@@ -165,3 +165,7 @@ body a{color:inherit}
 .meta-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--gap-3) var(--gap-6);font-family:var(--font-mono);font-size:var(--t-sm);color:var(--fg-muted)}
 .meta-item{display:inline-flex;align-items:center;gap:var(--gap-2)}
 .meta-icon{color:var(--fg-muted);opacity:.6;flex-shrink:0}
+
+/* Small text-label pill (global.css .u-tag) */
+.u-tag{display:inline-flex;align-self:flex-start;font-size:var(--fluid-body-sm);color:var(--fg-muted);background:color-mix(in srgb,var(--neutral-0) 8%,transparent);padding:.1875rem .375rem;border-radius:var(--radius-full);transition:background var(--duration-fast) var(--easing-out),color var(--duration-fast) var(--easing-out)}
+.u-tag:hover{background:color-mix(in srgb,var(--neutral-0) 16%,transparent);color:var(--fg)}
