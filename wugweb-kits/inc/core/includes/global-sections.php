@@ -83,3 +83,38 @@ add_filter('render_block', function ($html, $block) {
         return preg_replace('#\ssrc="[^"]*"#', ' src="' . esc_url($src) . '"', $m[0], 1);
     }, $html);
 }, 25, 2);
+
+/** Layout shell (docs/layout-shell.md): one skip link targeting #main; main landmark id/tabindex/aria-label; scroll flow + per-section index. */
+add_action('init', function () {
+    remove_action('wp_footer', 'the_block_template_skip_link');
+    remove_action('wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link');
+}, 20);
+add_filter('render_block', function ($html, $block) {
+    if (($block['blockName'] ?? '') === 'core/html' && strpos($html, 'class="skip-link"') !== false) {
+        return str_replace('href="#content-main"', 'href="#main"', $html);
+    }
+    return $html;
+}, 5, 2);
+add_filter('render_block_core/group', function ($html, $block) {
+    if (($block['attrs']['tagName'] ?? '') !== 'main' || !preg_match('#^\s*<main\b[^>]*>#', $html, $om)) return $html;
+    $title = is_singular() ? get_the_title() : (is_search() ? __('Search results', 'wugweb-kits') : (is_404() ? __('Page not found', 'wugweb-kits') : wp_strip_all_tags(get_the_archive_title())));
+    if ($title === '') $title = get_bloginfo('name');
+    $parts = preg_split('#(</?section\b[^>]*>)#i', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
+    $depth = 0; $n = 0; $ids = array();
+    foreach ($parts as $i => $p) {
+        if (!preg_match('#^<(/?)section\b#i', $p, $sm)) continue;
+        if ($sm[1] === '/') { $depth = max(0, $depth - 1); continue; }
+        if ($depth === 0) {
+            $n++;
+            if (preg_match('#\sid="([^"]+)"#', $p, $im)) $ids[] = $im[1];
+            else { $ids[] = 'section-' . $n; $p = preg_replace('#^<section\b#i', '<section id="section-' . $n . '"', $p); }
+            $parts[$i] = preg_replace('#^<section\b#i', '<section data-scroll-index="' . $n . '"', $p);
+        }
+        $depth++;
+    }
+    $html = implode('', $parts);
+    $open = $om[0];
+    $new = preg_replace('#\s(id|tabindex|aria-label|data-scroll-flow)="[^"]*"#', '', $open);
+    $new = preg_replace('#^<main\b#', '<main id="main" tabindex="-1" aria-label="' . esc_attr($title) . '"' . ($ids ? ' data-scroll-flow="' . esc_attr(implode(' ', $ids)) . '"' : ''), $new);
+    return preg_replace('#^\s*<main\b[^>]*>#', $new, $html, 1);
+}, 10, 2);

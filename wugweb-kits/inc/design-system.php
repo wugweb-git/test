@@ -12,11 +12,3 @@ add_action('init', function () {
     register_block_style('core/details', array('name' => 'wugweb-details', 'label' => 'Wugweb Details'));
     register_block_style('core/table', array('name' => 'wugweb-table', 'label' => 'Wugweb Table'));
 });
-
-/** Skip-link target: add tabindex to the main landmark (cannot live in block markup without invalidating the group). */
-add_filter('render_block_core/group', function ($html) {
-    if (strpos($html, 'id="content-main"') !== false && strpos($html, 'tabindex=') === false) {
-        $html = preg_replace('/<main\b/', '<main tabindex="-1"', $html, 1);
-    }
-    return $html;
-});
