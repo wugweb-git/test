@@ -172,3 +172,9 @@ body a{color:inherit}
 
 .eyebrow{font-family:var(--core-font-family-mono);font-size:var(--fluid-caption);font-weight:var(--font-weight-medium);line-height:var(--core-line-height-normal);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--accent)}
 .wugweb-case-study .more-cases-head{flex-wrap:nowrap}
+
+/* Specificity fixes found in the uat computed-style diff */
+.wp-site-blocks :is(.services-hero-content,.work-hero-content,.blog-hero-content) h1.page-title{margin-bottom:var(--gap-5)}
+.wp-site-blocks .stat-card-wrap{padding:var(--gap-8)}
+.wp-site-blocks .team-heading{color:var(--fg);margin-top:var(--gap-3)}
+.wp-site-blocks .faq-lede{margin-top:0}
