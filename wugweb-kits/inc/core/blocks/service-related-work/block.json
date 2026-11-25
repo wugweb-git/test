@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wugweb/service-related-work",
+  "version": "1.3.0",
+  "title": "Service Related Work",
+  "category": "wugweb",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "autoRegister": true,
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "attributes": {
+    "pillar": {
+      "type": "string",
+      "default": "strategy"
+    },
+    "limit": {
+      "type": "integer",
+      "default": 4
+    }
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "icon": "portfolio",
+  "description": "Related case studies for a pillar (services/[slug].astro #svc-work)."
+}

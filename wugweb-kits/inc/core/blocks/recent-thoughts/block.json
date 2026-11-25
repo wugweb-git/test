@@ -58,6 +58,10 @@
     "count": {
       "type": "integer",
       "default": 4
+    },
+    "category": {
+      "type": "string",
+      "default": ""
     }
   },
   "icon": "admin-post",

@@ -1,5 +1,7 @@
 <?php
-$q = new WP_Query(array('post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => max(1, min(12, (int) ($attributes['count'] ?? 4))), 'ignore_sticky_posts' => true));
+$args = array('post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => max(1, min(12, (int) ($attributes['count'] ?? 4))), 'ignore_sticky_posts' => true);
+if (!empty($attributes['category'])) { $cats = get_terms(array('taxonomy' => 'category', 'name__like' => (string) $attributes['category'], 'fields' => 'ids', 'hide_empty' => true)); if (!$cats || is_wp_error($cats)) { return; } $args['category__in'] = $cats; }
+$q = new WP_Query($args);
 if (!$q->have_posts()) { return; }
 $heading = $attributes['heading'] ?? 'Thoughts on design, product, and strategy';
 ?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap blog-teaser', 'id' => 'blog-teaser', 'aria-labelledby' => 'blog-teaser-title')); ?>>

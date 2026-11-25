@@ -1,0 +1,13 @@
+.svc-work { padding-block: var(--space-section-xl); }
+.svc-work-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--gap-6); margin-bottom: var(--gap-10);}
+.svc-work-head h2 { font-size: var(--t-h3); max-width: 22ch; }
+.svc-work-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--gap-6); grid-template-columns: 1fr; }
+@media (min-width: 640px) { .svc-work-grid { grid-template-columns: repeat(2, 1fr); } }
+.svc-work-card { text-decoration: none; display: flex; flex-direction: column; justify-content: center; padding: var(--gap-8); height: 100%; transition: transform var(--duration-slow) cubic-bezier(0.16, 1, 0.3, 1), border-color var(--duration-slow) ease, box-shadow var(--duration-slow) ease; }
+.svc-work .glass-panel { background: color-mix(in srgb, var(--neutral-8) 60%, transparent); border: var(--stroke-thin) solid color-mix(in srgb, var(--neutral-0) 12%, transparent); backdrop-filter: var(--glass-medium); -webkit-backdrop-filter: var(--glass-medium); border-radius: var(--radius-lg); position: relative; overflow: hidden; }
+.svc-work .glass-panel:hover { border-color: color-mix(in srgb, var(--neutral-0) 22%, transparent); }
+.svc-work .card-glow { position: absolute; inset: 0; background: radial-gradient(circle 250px at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in srgb, var(--neutral-0) 8%, transparent) 0%, transparent 85%); opacity: var(--opacity-0); transition: opacity var(--duration-slow) ease; z-index: 0; pointer-events: none; }
+.svc-work-card:hover .card-glow { opacity: 1; }
+.svc-work-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+.svc-work-card h3 { font-size: var(--t-h5); font-weight: var(--font-weight-semibold); color: var(--fg); line-height: var(--lh-h5); position: relative; z-index: 1; }
+.svc-work-card p { margin-top: var(--gap-2); font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); position: relative; z-index: 1; }
