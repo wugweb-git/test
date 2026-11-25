@@ -311,3 +311,9 @@
 .byline-main{font-size:13px;line-height:1.3;font-weight:var(--font-weight-medium)}
 .byline-sub{font-size:13px;line-height:1.3;margin-top:0!important}
 .byline-date .byline-sub::before{content:"\00b7";margin-right:var(--gap-2);color:var(--fg-muted)}
+
+/* Reading column 720 (text fills it), tighter gap to the sidebar. */
+.wugweb-article-post .post-body,.wugweb-article-post .post-layout .post-body,.wugweb-article-post .post-layout:not(.has-cover) .post-body{max-width:720px}
+.wugweb-article-post .article-body,
+.wugweb-article-post :is(.article-author,.article-newsletter,.article-prevnext,.article-share-newsletter){max-width:720px}
+@media (min-width:1200px){.wugweb-article-post .post-grid{grid-template-columns:230px minmax(0,720px);column-gap:var(--gap-8)}}
