@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "wugweb/clients-served",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "title": "Client Logos",
   "category": "wugweb",
   "supports": {
@@ -14,8 +14,28 @@
     ],
     "spacing": {
       "margin": true,
-      "padding": true
-    }
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
   },
   "render": "file:./render.php",
   "style": "file:./style.css",
