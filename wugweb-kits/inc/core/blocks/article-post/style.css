@@ -459,3 +459,15 @@
 @media (min-width:1200px){
   .wugweb-article-post .post-grid{grid-template-columns:300px minmax(0,720px);column-gap:calc(var(--gap-10) * 2)}
 }
+
+/* Author + date = one card, same box as the contents panel (radius-lg, 1px line, gap-5 padding, full column/rail width). */
+.wugweb-article-post .article-byline.is-hero,
+.wugweb-article-post .article-byline.is-rail{display:flex;flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:var(--gap-3);padding:var(--gap-5);margin:var(--gap-6) 0 0;background:var(--color-surface-elevated);border:var(--stroke-thin) solid var(--line);border-radius:var(--radius-lg);max-width:none;width:100%;box-sizing:border-box}
+.wugweb-article-post .article-byline.is-hero .byline-author,.wugweb-article-post .article-byline.is-hero .byline-date,
+.wugweb-article-post .article-byline.is-rail .byline-author,.wugweb-article-post .article-byline.is-rail .byline-date{flex:0 0 auto;margin:0;width:100%}
+.wugweb-article-post .article-byline .byline-author .meta-avatar{width:44px;height:44px}
+@media (min-width:1200px){
+  .wugweb-article-post .article-byline.is-hero{display:none}
+  .wugweb-article-post .article-byline.is-rail{margin:0;border-bottom:var(--stroke-thin) solid var(--line);padding-bottom:var(--gap-5)}
+}
+@media (max-width:1199.98px){.wugweb-article-post .article-byline.is-rail{display:none}}
