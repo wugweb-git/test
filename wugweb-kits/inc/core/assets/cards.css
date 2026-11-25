@@ -1,0 +1,25 @@
+.wugweb-card{position:relative;display:flex;flex-direction:column;gap:var(--grid-gap,16px);padding:var(--grid-gap,16px);border-radius:16px;background:var(--wp--preset--color--ash);color:var(--wp--preset--color--neutral-1);overflow:hidden;transition:background 300ms cubic-bezier(0,0,.2,1),transform 350ms cubic-bezier(.16,1,.3,1)}
+.wugweb-card:hover,.wugweb-card:focus-within{background:var(--wp--preset--color--neutral-7);transform:translateY(-3px)}
+.wugweb-card a{color:inherit;text-decoration:none}
+.wugweb-card a::after{content:"";position:absolute;inset:0}
+.wugweb-card__media{margin:calc(var(--grid-gap,16px) * -1) calc(var(--grid-gap,16px) * -1) 0;aspect-ratio:4/3;overflow:hidden}
+.wugweb-card__media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms cubic-bezier(.16,1,.3,1)}
+.wugweb-card:hover .wugweb-card__media img{transform:scale(1.06)}
+.wugweb-card__body{display:flex;flex-direction:column;gap:8px}
+.wugweb-card__eyebrow,.wugweb-card__meta{margin:0;font-family:var(--wp--preset--font-family--mono);font-size:var(--wp--preset--font-size--caption);letter-spacing:.08em;text-transform:uppercase;color:var(--wp--preset--color--neutral-3)}
+.wugweb-card__title{margin:0;font-size:var(--wp--preset--font-size--h4);font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.wugweb-card__text{margin:0;font-size:var(--wp--preset--font-size--body-sm);color:var(--wp--preset--color--neutral-3);line-height:1.5}
+.wugweb-card__arrow{position:absolute;top:var(--grid-gap,16px);right:var(--grid-gap,16px);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--wp--preset--color--neutral-1);color:var(--wp--preset--color--neutral-9);opacity:0;transform:scale(.7) translateY(4px);transition:opacity 300ms ease,transform 300ms cubic-bezier(.16,1,.3,1)}
+.wugweb-card:hover .wugweb-card__arrow,.wugweb-card:focus-within .wugweb-card__arrow{opacity:1;transform:none}
+.wugweb-card--stat .wugweb-card__value{margin:0;font-size:var(--wp--preset--font-size--display);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--wp--preset--color--yellow)}
+.wugweb-card--stat:hover,.wugweb-card--team:hover{transform:none}
+.wugweb-card--testimonial .wugweb-card__quote{margin:0;padding:0;border:0;background:none;font-size:var(--wp--preset--font-size--h5);line-height:1.4;font-weight:500}
+.wugweb-card--client .wugweb-card__media{aspect-ratio:16/9;display:grid;place-items:center}
+.wugweb-card--client .wugweb-card__media img{object-fit:contain;max-width:72%;max-height:54%;width:auto;height:auto;filter:grayscale(1) brightness(1.9);opacity:.9;transition:filter 300ms,opacity 300ms}
+.wugweb-card--client:hover .wugweb-card__media img{filter:none;opacity:1}
+.wugweb-card.is-style-compact{padding:12px}
+.wugweb-card.is-style-compact .wugweb-card__media{margin:-12px -12px 0}
+.wugweb-card.is-style-row{flex-direction:row;align-items:center}
+.wugweb-card.is-style-row .wugweb-card__media{margin:0;width:88px;flex:0 0 88px;aspect-ratio:1;border-radius:8px}
+.wugweb-card.is-style-row .wugweb-card__text{display:none}
+@media(prefers-reduced-motion:reduce){.wugweb-card,.wugweb-card__media img,.wugweb-card__arrow{transition:none}.wugweb-card:hover{transform:none}.wugweb-card:hover .wugweb-card__media img{transform:none}}

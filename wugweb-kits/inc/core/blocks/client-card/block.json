@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wugweb/client-card",
+  "version": "1.0.0",
+  "title": "Client Card",
+  "category": "design",
+  "keywords": [
+    "card",
+    "wugweb"
+  ],
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Client"
+    },
+    "title": {
+      "type": "string",
+      "default": "Client name"
+    },
+    "text": {
+      "type": "string",
+      "default": ""
+    },
+    "meta": {
+      "type": "string",
+      "default": "Since 2020"
+    },
+    "url": {
+      "type": "string",
+      "default": "#"
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "autoRegister": true
+  },
+  "styles": [
+    {
+      "name": "default",
+      "label": "Default",
+      "isDefault": true
+    },
+    {
+      "name": "compact",
+      "label": "Compact"
+    },
+    {
+      "name": "row",
+      "label": "Row"
+    }
+  ],
+  "render": "file:./render.php",
+  "style": "wugweb-core-cards"
+}

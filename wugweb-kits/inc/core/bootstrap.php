@@ -2,10 +2,14 @@
 /** Wugweb Core, merged into the theme. Blocks, post types, schemas and DB tables. */
 if (!defined('ABSPATH')) { exit; }
 require_once __DIR__ . '/includes/service-data.php';
+require_once __DIR__ . '/includes/cards.php';
 add_action('init', function () {
     wp_register_style('wugweb-core-service', get_theme_file_uri('inc/core/assets/service.css'), array(), '0.3.0');
     wp_register_style('wugweb-core-content', get_theme_file_uri('inc/core/assets/content.css'), array(), '0.3.0');
+    wp_register_style('wugweb-core-cards', get_theme_file_uri('inc/core/assets/cards.css'), array(), '0.3.0');
     $blocks = array(
+        // cards
+        'blog-card', 'portfolio-card', 'industry-card', 'client-card', 'service-card', 'team-card', 'stat-card', 'testimonial-card',
         // interactive / runtime
         'pillar-scope', 'copyright-year', 'marquee', 'taxonomy-filter',
         // service pages (data from includes/service-data.json)
@@ -18,6 +22,10 @@ add_action('init', function () {
         'hero-section', 'industries-served', 'clients-served', 'case-studies-grid', 'recent-thoughts', 'cta-band',
     );
     foreach ($blocks as $b) { register_block_type(__DIR__ . '/blocks/' . $b); }
+    register_block_pattern_category('wugweb-cards', array('label' => 'Wugweb Cards'));
+    foreach (array('blog','portfolio','industry','client','service','team','stat','testimonial') as $c) {
+        register_block_pattern('wugweb-core/' . $c . '-card', array('title' => ucfirst($c) . ' Card', 'categories' => array('wugweb-cards'), 'content' => '<!-- wp:wugweb/' . $c . '-card /-->'));
+    }
     register_block_pattern_category('wugweb-sections', array('label' => 'Wugweb Sections'));
     register_block_pattern('wugweb-core/homepage-sections', array('title' => 'Wugweb Homepage Sections', 'categories' => array('wugweb-sections'), 'content' => '<!-- wp:wugweb/hero-section /--><!-- wp:wugweb/clients-served /--><!-- wp:wugweb/industries-served /--><!-- wp:wugweb/case-studies-grid /--><!-- wp:wugweb/recent-thoughts /--><!-- wp:wugweb/cta-band /-->'));
     register_block_pattern('wugweb-core/service-sections', array('title' => 'Wugweb Service Sections', 'categories' => array('wugweb-sections'), 'content' => '<!-- wp:wugweb/hero-section /--><!-- wp:wugweb/industries-served /--><!-- wp:wugweb/clients-served /--><!-- wp:wugweb/cta-band /-->'));
