@@ -69,7 +69,6 @@ $cal = '<svg class="date-icon" viewBox="0 0 24 24" width="12" height="12" fill="
 
 <?php if ($strip) : $sf = $strip['f']; ?>
     <div class="blog-strip">
-      <p class="pn-kicker">From our work</p>
       <?php echo do_blocks('<!-- wp:wugweb/media-card ' . wp_json_encode(array('className' => 'is-style-wide', 'title' => (string) $sf['title'], 'text' => trim($sf['client'] . ($sf['discipline'] !== '' ? ' · ' . $sf['discipline'] : '')), 'url' => (string) $sf['url'], 'imageUrl' => (string) $sf['image'], 'imageAlt' => (string) $sf['title'], 'cta' => 'See the case study')) . ' /-->'); ?>
     </div>
 <?php endif; ?>
@@ -86,7 +85,6 @@ $cal = '<svg class="date-icon" viewBox="0 0 24 24" width="12" height="12" fill="
       <?php endif; ?>
       <?php if ($picks_big) : ?>
       <div class="picks-big">
-        <h2><?php echo $picks_label === "Editor's picks" ? 'Also featured' : 'Worth a read'; ?></h2>
         <ul>
           <?php foreach ($picks_big as $pb) : ?><li><?php echo wugweb_post_card_html($pb, false); ?></li><?php endforeach; ?>
         </ul>
@@ -97,7 +95,6 @@ $cal = '<svg class="date-icon" viewBox="0 0 24 24" width="12" height="12" fill="
 
 <?php if ($cs) : ?>
     <div class="blog-work">
-      <h2>Featured case studies</h2>
       <ul class="blog-work-grid">
         <?php foreach ($cs as $w) : $wf = $w['f']; ?>
         <li><a href="<?php echo esc_url($wf['url']); ?>" class="related-card"><div class="related-visual"><?php if (!empty($wf['image'])) : ?><img src="<?php echo esc_url($wf['image']); ?>" alt="<?php echo esc_attr($wf['title']); ?>" loading="lazy" decoding="async"><?php else : ?><span class="related-visual-empty" aria-hidden="true"></span><?php endif; ?></div><div class="related-content"><span class="related-kicker"><?php echo esc_html($wf['client'] !== '' ? $wf['client'] : 'Case study'); ?></span><h3><?php echo esc_html($wf['title']); ?></h3><?php if ($wf['discipline'] !== '') : ?><span class="related-sub"><?php echo esc_html($wf['discipline']); ?></span><?php endif; ?></div></a></li>
@@ -107,17 +104,10 @@ $cal = '<svg class="date-icon" viewBox="0 0 24 24" width="12" height="12" fill="
 <?php endif; ?>
   </div>
 
-  <h2 class="blog-grid-title">All articles</h2>
   <ul class="blog-grid">
     <?php foreach ($cards as $i => $c) : ?><li data-reveal data-reveal-delay="<?php echo esc_attr(number_format(min($i % 6, 5) * 0.05, 2)); ?>" data-topic="<?php echo esc_attr($c['slug_topic']); ?>"<?php echo isset($used[$c['pid']]) ? ' data-dup="1"' : ''; ?>><?php echo wugweb_post_card_html($c, false); ?></li><?php endforeach; ?>
     <?php if ($hero) : ?><li data-topic="<?php echo esc_attr($hero['slug_topic']); ?>" data-dup="1"><?php echo wugweb_post_card_html($hero, false); ?></li><?php endif; ?>
   </ul>
   <div class="blog-more" hidden><button type="button" class="btn btn-ghost blog-more-btn">Load more articles</button><p class="blog-count" role="status" aria-live="polite"></p></div>
-</section>
-<section class="wrap blog-newsletter" id="blog-newsletter" aria-labelledby="blog-newsletter-title">
-  <div class="bn-card">
-    <div class="bn-copy"><h2 id="blog-newsletter-title">Get insights like this in your inbox</h2><p>Design, product, and digital strategy. No spam, just thoughtful content.</p></div>
-    <form class="nl-form bn-form" method="POST" action="/api/subscribe"><input type="email" name="email" aria-label="Email address" placeholder="you@company.com" required autocomplete="email" class="nl-input"><button type="submit" class="btn btn-solid">Subscribe</button></form>
-  </div>
 </section>
 </div>
