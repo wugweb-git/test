@@ -160,3 +160,8 @@ section:not(section section)>.wrap{padding-block:0!important}
 body p{margin:0;color:var(--fg-muted);font-size:var(--fluid-body-md);font-weight:var(--font-weight-regular);line-height:var(--core-line-height-normal)}
 body a{color:inherit}
 .wp-site-blocks .svc-panel .svc-btn{font-size:var(--fluid-label);padding:var(--gap-3) var(--gap-5)}
+
+/* Meta rows (global.css) */
+.meta-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--gap-3) var(--gap-6);font-family:var(--font-mono);font-size:var(--t-sm);color:var(--fg-muted)}
+.meta-item{display:inline-flex;align-items:center;gap:var(--gap-2)}
+.meta-icon{color:var(--fg-muted);opacity:.6;flex-shrink:0}
