@@ -3,46 +3,48 @@
 **Status:** built, awaiting sign-off · **Last verified:** 2026-10-19
 **Source:** `src/pages/blog/[slug].astro` · tokens `--article-*` in `src/styles/global.css` · related cards `src/components/PostCard.astro`
 
-Reference: the Fabrica blog post (split layout, sticky cover beside one
-reading column). Copy, order of content and the global sections (Sectors,
-blog teaser, final CTA) are unchanged.
+Reference (2026-11-25): the timeleft.com blog detail, with our tokens and
+palette. Supersedes the earlier Fabrica split layout (sticky cover beside one
+column, `--article-cols/areas/cover-*` tokens, no longer used by article-post).
+Copy, order of content and the global sections are unchanged.
 
 ---
 
 ## 1. Anatomy
 
 ```
-section.wrap.post-layout#article (.has-cover when the post has a cover)
-├ header.post-hero#article-hero   grid-area: hero   h1, intro, tags, meta
-├ figure.post-cover#article-cover grid-area: cover  cover image
-└ div.post-body                   grid-area: body   contents, body, author, share, newsletter, previous/next
-section#related-posts  PostCard (row) × 3
-section#related-cases  case-study cards × 2
+section.wrap.post-layout#article
+├ header.post-hero#article-hero    breadcrumb (‹ Blog / category), h1, lede, byline (author · Updated date · N min read)
+├ figure.post-cover#article-cover  rounded cover, 860px max, 20px radius
+└ div.post-grid
+  ├ aside.post-rail                contents ("In this article"), share (X, LinkedIn, Facebook, copy link), one promo card
+  └ div.post-body                  .article-body, author block, newsletter, previous/next
+section#related-posts              post-cross-sell-rail cards
 ```
 
-## 2. Tokens (sm / md / lg)
+## 2. Measures
 
-Boundaries: sm 0, md 768, lg 1200 (the layout shell's own steps).
-
-| Token | sm | md | lg |
-|---|---|---|---|
-| `--article-cols` | `minmax(0, 1fr)` | same | `minmax(0, 5fr) minmax(0, 7fr)` |
-| `--article-areas` | `"hero" "cover" "body"` | same | `"cover hero" "cover body"` |
-| `--article-column` | `720px` | same | `none` |
-| `--article-cover-ratio` | `4 / 3` | `16 / 9` | `auto` |
-| `--article-cover-height` | `auto` | same | viewport below the header |
-| `--article-cover-position` | `static` | same | `sticky` |
-| `--article-title-size` | `--t-display` | same | `--t-h1` |
-
-A post without a cover never splits: one 720 column at every breakpoint.
+| Part | Value |
+|---|---|
+| Hero | 860px max; h1 56px/60px weight 500, tracking -0.025em, 780px max; lede 20px grey |
+| Rail (≥1200) | 230px, sticky under the header; contents links grey, active darker |
+| Reading column | 680px, 616px text measure |
+| Body | 17px/27px, p margin-bottom 12px, links underlined in text colour |
+| h2 / h3 | 26/31 weight 500, -0.4px / 20/26 |
+| Figures, quotes, summary | full-width rounded blocks (20px) |
 
 ## 3. Tiers
 
 | Range | Layout |
 |---|---|
-| x < 768 | Title block, cover (4:3), body: one column |
-| 768 ≤ x < 1200 | Same, 720 column, cover 16:9 |
-| x ≥ 1200 | Sticky cover left (5 of 12), title and body right (7 of 12) |
+| x < 1200 | Header, cover, contents as collapsed details, body, end-of-article share row, promo card |
+| x ≥ 1200 | Header, cover, then rail (230) beside reading column (680); the end share row is hidden |
+
+Authoring conventions (applied in `article-post/render.php`): a first h2
+matching "short version / TL;DR / key takeaways / summary" becomes the tinted
+summary box; an h2 matching "FAQ" turns its h3 + answers into native
+`details` accordions; bare tables get a horizontal-scroll wrapper; h2/h3
+without ids get slug ids for the contents links.
 
 ## 4. Related posts
 
