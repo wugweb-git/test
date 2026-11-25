@@ -275,3 +275,11 @@
 
 /* One H1 system: same scale tokens and treatment as .page-title (uat: --article-title-size = display below 1200, h1 from 1200). */
 .wugweb-article-post .post-hero h1{font-size:var(--article-title-size);font-weight:var(--font-weight-semibold);line-height:.96;letter-spacing:-.03em;text-wrap:balance}
+
+/* Meta row: spans the cover width, two equal cards, texts start on the same line. */
+.wugweb-article-post .article-byline{max-width:none}
+.byline-date{padding:var(--gap-2)}
+.byline-icon{width:94px;height:94px;padding:31px;box-sizing:border-box;flex:0 0 94px}
+.byline-card{min-height:110px}
+.byline-text{align-self:center}
+.byline-sub:empty{display:none}
