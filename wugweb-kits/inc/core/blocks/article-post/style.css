@@ -272,3 +272,6 @@
 .byline-card p{margin:0}
 .byline-main{font-size:var(--fluid-body-lg);font-weight:var(--font-weight-semibold);color:var(--fg);line-height:1.3}
 .byline-sub{font-size:var(--fluid-body-md);color:var(--fg-muted);line-height:1.4;margin-top:var(--gap-1)!important}
+
+/* One H1 system: same scale tokens and treatment as .page-title (uat: --article-title-size = display below 1200, h1 from 1200). */
+.wugweb-article-post .post-hero h1{font-size:var(--article-title-size);font-weight:var(--font-weight-semibold);line-height:.96;letter-spacing:-.03em;text-wrap:balance}

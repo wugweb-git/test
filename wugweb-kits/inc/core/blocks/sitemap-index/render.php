@@ -1,7 +1,7 @@
 <?php
 /** Sitemap Index — .sitemap-grid from footer/sitemap.astro, fed by WordPress content. */
 defined('ABSPATH') || exit;
-$pages = array('/' => 'Home', '/about/' => 'About', '/services/' => 'Services', '/our-work/' => 'Work', '/blog/' => 'Blog', '/faq/' => 'FAQ', '/contact-us/' => 'Contact', '/impact/' => 'Impact', '/subscription/' => 'Subscription');
+$pages = array('/' => 'Home', '/about/' => 'About', '/services/' => 'Services', '/work/' => 'Work', '/blog/' => 'Blog', '/faq/' => 'FAQ', '/contact-us/' => 'Contact', '/impact/' => 'Impact', '/subscription/' => 'Subscription');
 $services = get_pages(array('parent' => (int) (get_page_by_path('services')->ID ?? 0), 'sort_column' => 'menu_order,post_title'));
 $cs = get_posts(array('post_type' => 'case_study', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids', 'orderby' => 'date', 'order' => 'DESC'));
 $posts = get_posts(array('post_type' => 'post', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids', 'orderby' => 'date', 'order' => 'DESC', 'ignore_sticky_posts' => true));
@@ -24,7 +24,7 @@ $pl = array(); foreach (array_slice($posts, 0, 24) as $id) { $pl[wp_make_link_re
     <?php
     $col('01', 'Pages', $pages);
     $col('02', 'Services (' . count($svc) . ')', $svc);
-    $col('03', 'Case Studies (' . count($cs) . ')', $csl, '/our-work/', max(0, count($cs) - 24));
+    $col('03', 'Case Studies (' . count($cs) . ')', $csl, '/work/', max(0, count($cs) - 24));
     $col('04', 'Blog Posts (' . count($posts) . ')', $pl, '/blog/', max(0, count($posts) - 24));
     $col('05', 'Legal', $legal);
     ?>

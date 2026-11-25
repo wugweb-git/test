@@ -24,7 +24,7 @@ add_filter('render_block', function ($html, $block) {
 add_filter('render_block_core/html', function ($html) {
     if (strpos($html, 'id="site-nav"') === false) return $html;
     $path = trailingslashit((string) wp_parse_url(add_query_arg(array()), PHP_URL_PATH));
-    $extra = array('/work/' => array('/our-work/'));
+    $extra = array();
     return preg_replace_callback('#<a href="([^"]+)" class="nav-link">#', function ($m) use ($path, $extra) {
         $href = trailingslashit((string) wp_parse_url($m[1], PHP_URL_PATH));
         $on = $path === $href || strpos($path, $href) === 0 && $href !== '/';
@@ -158,3 +158,29 @@ $wugweb_bust = function ($src) {
 };
 add_filter('style_loader_src', $wugweb_bust, 20);
 add_filter('script_loader_src', $wugweb_bust, 20);
+
+
+/** /our-work/ is retired: /work/ is the one case-study listing. 301 keeps path remainder and query string. */
+add_action('template_redirect', function () {
+    $path = (string) wp_parse_url(isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '', PHP_URL_PATH);
+    if (!preg_match('#^/our-work(/.*)?$#', $path, $m)) return;
+    $rest = isset($m[1]) ? $m[1] : '/';
+    $q = (string) wp_parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_QUERY);
+    wp_safe_redirect(home_url('/work' . ($rest === '' ? '/' : $rest)) . ($q !== '' ? '?' . $q : ''), 301);
+    exit;
+}, 1);
+/** Any remaining /our-work/ link in stored content (header/footer parts, patterns, blocks) renders as /work/. */
+add_filter('render_block', function ($html) {
+    return is_string($html) && strpos($html, '/our-work') !== false ? preg_replace('#(href=["\'](?:https?://[^"\'/]+)?)/our-work(/|["\'?\#])#', '$1/work$2', $html) : $html;
+}, 99);
+/** Core sitemap: the retired our-work page out, the /work/ listing in. */
+add_filter('wp_sitemaps_posts_query_args', function ($args, $type) {
+    if ($type !== 'page') return $args;
+    $pg = get_page_by_path('our-work');
+    if ($pg) { $args['post__not_in'] = array_merge((array) ($args['post__not_in'] ?? array()), array((int) $pg->ID)); }
+    return $args;
+}, 10, 2);
+add_filter('wp_sitemaps_posts_entry', function ($entry, $post) {
+    if ($post && $post->post_type === 'page' && $post->post_name === 'our-work') { $entry['loc'] = home_url('/work/'); }
+    return $entry;
+}, 10, 2);

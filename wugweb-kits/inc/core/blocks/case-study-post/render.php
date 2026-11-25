@@ -110,7 +110,7 @@ if ($closing) : ?><section class="bento" id="b-closing" aria-label="More from th
 <?php endif; ?>
 <?php if ($others) : ?>
 <section class="wrap section more-cases-section" id="more-cases-section" aria-labelledby="more-cases-section-title">
-  <div class="more-cases-head"><h2 id="more-cases-section-title">More Case Studies</h2><a href="<?php echo esc_url(home_url('/our-work/')); ?>" class="btn btn-ghost">View all work</a></div>
+  <div class="more-cases-head"><h2 id="more-cases-section-title">More Case Studies</h2><a href="<?php echo esc_url(home_url('/work/')); ?>" class="btn btn-ghost">View all work</a></div>
   <div class="more-grid"><?php foreach ($others as $c) : ?>
     <a href="<?php echo esc_url($c['url']); ?>" class="more-card"><div class="more-card-visual"><?php echo $c['img'] ? '<img src="' . esc_url($c['img']) . '" alt="" loading="lazy">' : $ph('16/10'); ?></div><div class="more-card-content"><span class="more-card-client"><?php echo esc_html($c['client']); ?></span><h3><?php echo esc_html($c['title']); ?></h3><?php if ($c['disc']) : ?><span class="more-card-discipline"><?php echo esc_html($c['disc']); ?></span><?php endif; ?></div></a>
   <?php endforeach; ?></div>
