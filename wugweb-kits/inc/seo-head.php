@@ -28,4 +28,5 @@ add_action('wp_head', function () {
     echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
     if (!has_action('wp_head', 'rel_canonical')) echo '<link rel="canonical" href="' . esc_url($url) . '">' . "\n";
     if (!has_site_icon()) echo '<link rel="icon" href="' . esc_url(get_theme_file_uri('assets/brand/favicon.svg')) . '" type="image/svg+xml">' . "\n";
+    if (!has_site_icon()) echo '<link rel="apple-touch-icon" href="' . esc_url(get_theme_file_uri('assets/brand/apple-touch-icon.png')) . '">' . "\n";
 }, 5);
