@@ -303,7 +303,22 @@
         "placeholder": "var(--fg-muted)",
         "error": "#ff6b6b",
         "disabledOpacity": "0.5"
-      }
+      },
+      "spacePage": {
+        "xs": "16px",
+        "sm": "20px",
+        "md": "32px",
+        "lg": "40px",
+        "xl": "48px"
+      },
+      "spaceSection": {
+        "xs": "var(--space-section-xs)",
+        "sm": "var(--space-section-sm)",
+        "md": "var(--space-section-md)",
+        "lg": "var(--space-section-lg)",
+        "xl": "var(--space-section-xl)"
+      },
+      "gridGap": "var(--grid-gap)"
     }
   },
   "styles": {

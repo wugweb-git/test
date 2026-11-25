@@ -95,12 +95,11 @@ add_action('init', function () {
     remove_action('wp_footer', 'the_block_template_skip_link');
     remove_action('wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link');
 }, 20);
-add_filter('render_block', function ($html, $block) {
-    if (strpos($html, 'class="skip-link"') !== false && strpos($html, 'href="#content-main"') !== false) {
-        return str_replace('href="#content-main"', 'href="#main"', $html);
-    }
-    return $html;
-}, 5, 2);
+/** Owner decision: no skip link at all (theme link stripped here; WP core's removed above). */
+add_filter('render_block', function ($html) {
+    if (strpos($html, 'class="skip-link"') === false) return $html;
+    return preg_replace('#<a\b[^>]*class="skip-link"[^>]*>.*?</a>#s', '', $html);
+}, 5);
 add_filter('render_block_core/group', function ($html, $block) {
     if (($block['attrs']['tagName'] ?? '') !== 'main' || !preg_match('#^\s*<main\b[^>]*>#', $html, $om)) return $html;
     $title = is_singular() ? get_the_title() : (is_search() ? __('Search results', 'wugweb-kits') : (is_404() ? __('Page not found', 'wugweb-kits') : wp_strip_all_tags(get_the_archive_title())));
