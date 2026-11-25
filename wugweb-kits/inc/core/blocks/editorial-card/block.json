@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/editorial-card",
-  "version": "1.4.0",
+  "version": "1.7.0",
   "title": "Editorial Card",
   "category": "wugweb",
   "supports": {
@@ -50,5 +50,16 @@
   "usesContext": [
     "postId",
     "postType"
+  ],
+  "styles": [
+    {
+      "name": "default",
+      "label": "Card",
+      "isDefault": true
+    },
+    {
+      "name": "row",
+      "label": "Row (stacked, mobile)"
+    }
   ]
 }

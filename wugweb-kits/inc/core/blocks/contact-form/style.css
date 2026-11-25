@@ -125,3 +125,26 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 16px color-mix(in srgb, var(--color-yellow) 30%, transparent);
 }
+
+/* mobile/responsive rules ported from pages/contact-us.astro */
+@media (min-width: 1024px){
+    .contact-v2-grid {
+      grid-template-columns: 1.8fr 1fr;
+    }
+  }
+@media (min-width: 640px){
+    .inputs-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+@media (min-width: 640px){
+    .form-footer {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+@media (min-width: 480px){
+    .info-addresses { flex-direction: row; gap: var(--gap-6); }
+    .info-addresses .info-item { flex: 1; min-width: 0; }
+  }

@@ -12,3 +12,13 @@
 .nl-form { display: flex; gap: var(--gap-3); margin-top: var(--gap-6); max-width: 420px; margin-inline: auto; }
 .nl-input { flex: 1; padding: var(--gap-3) var(--gap-4); border: var(--stroke-thin) solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: var(--fluid-body-md); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
 .nl-input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 20%, transparent); }
+
+/* mobile/responsive rules ported from pages/blog/[slug].astro */
+@media (min-width: 1200px){
+    .post-layout.has-cover .post-hero, .post-layout.has-cover .post-body { margin-inline: 0; }
+    .post-layout:not(.has-cover) .post-hero, .post-layout:not(.has-cover) .post-body { max-width: 720px; }
+  }
+@media (min-width: 768px){ .article-meta { grid-template-columns: repeat(5, max-content); } }
+@media (min-width: 640px){ .article-prevnext { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 768px){ .related-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px){ .related-grid.is-posts { grid-template-columns: repeat(3, 1fr); } }

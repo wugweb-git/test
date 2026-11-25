@@ -101,3 +101,50 @@
       overflow: hidden;
     }
   }
+
+/* Row variation (block style): the mobile stacked-row card at every width */
+
+    .is-style-row .post-card--row {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--gap-4);
+      padding: var(--gap-2);
+      background: var(--color-surface-elevated);
+      /* 480 is a comfortable single-column reading cap; centres itself on
+         anything wider (phones up through small portrait tablets). */
+      max-width: 480px;
+      width: 100%;
+      margin-inline: auto;
+    }
+    .is-style-row .post-card--row:hover { transform: none; }
+    .is-style-row .post-card--row:active { background: var(--surface-2); transform: scale(0.98); }
+    .is-style-row .post-card--row:active .pc-thumb { transform: scale(1.06); }
+    .is-style-row .post-card--row:active h3 { color: var(--accent-warm); }
+    .is-style-row .post-card--row .pc-thumb-wrap { width: 5.5rem; aspect-ratio: 1; flex: 0 0 auto; border-radius: var(--radius-md); }
+    .is-style-row .post-card--row .pc-dot,
+    .is-style-row .post-card--row .pc-arrow,
+    .is-style-row .post-card--row .pc-excerpt,
+    .is-style-row .post-card--row .pc-meta { display: none; }
+    .is-style-row .post-card--row .pc-content { padding: 0; min-width: 0; gap: 0; }
+    .is-style-row .post-card--row .pc-cat-row { margin-bottom: var(--gap-2); }
+    .is-style-row .post-card--row .pc-category {
+      display: inline-flex;
+      font-family: var(--font-body);
+      font-size: var(--fluid-body-sm);
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--fg-muted);
+      background: color-mix(in srgb, var(--neutral-0) 8%, transparent);
+      padding: 0.1875rem 0.375rem;
+      border-radius: var(--radius-sm);
+    }
+    .is-style-row .post-card--row .pc-launch { display: grid; }
+    .is-style-row .post-card--row:active .pc-launch { background: color-mix(in srgb, var(--neutral-0) 18%, transparent); }
+    .is-style-row .post-card--row h3 {
+      font-size: var(--fluid-body-lg);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  

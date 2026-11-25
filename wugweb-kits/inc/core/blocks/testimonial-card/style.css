@@ -45,3 +45,13 @@
   color: var(--color-text-muted);
   font-size: var(--fluid-caption);
 }
+
+/* mobile/responsive rules ported from components/PortableTextRenderer.astro */
+@media (min-width: 768px){
+    .pt-two-cols {
+      gap: var(--gap-8);
+    }
+    .pt-two-cols.layout-50-50 { grid-template-columns: 1fr 1fr; }
+    .pt-two-cols.layout-60-40 { grid-template-columns: 3fr 2fr; }
+    .pt-two-cols.layout-40-60 { grid-template-columns: 2fr 3fr; }
+  }

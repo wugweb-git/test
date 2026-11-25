@@ -122,3 +122,8 @@
       overflow: hidden;
     }
   }
+
+/* mobile/responsive rules ported from pages/blog/[slug].astro */
+@media (min-width: 640px){ .article-prevnext { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 768px){ .related-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px){ .related-grid.is-posts { grid-template-columns: repeat(3, 1fr); } }

@@ -6,4 +6,5 @@ else {
         'author' => '', 'minutes' => (int) filter_var($attributes['meta'] ?? '', FILTER_SANITIZE_NUMBER_INT), 'cover' => $attributes['imageUrl'] ?? '', 'alt' => $attributes['imageAlt'] ?? '',
         'accent' => 'var(--svc-strategy)', 'initials' => 'Ww');
 }
-echo '<div ' . get_block_wrapper_attributes() . '>' . wugweb_post_card_html($c) . '</div>';
+$row = strpos((string) ($attributes['className'] ?? ''), 'is-style-row') !== false;
+echo '<div ' . get_block_wrapper_attributes() . '>' . wugweb_post_card_html($c, $row) . '</div>';

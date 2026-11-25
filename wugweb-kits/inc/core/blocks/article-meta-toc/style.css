@@ -13,3 +13,12 @@
 .toc-item a { color: var(--fg-muted); text-decoration: none; font-size: var(--fluid-body-sm); line-height: var(--core-line-height-normal); padding: var(--gap-1) 0 var(--gap-1) var(--gap-3); border-left: var(--stroke-thin) solid var(--line); transition: color 0.2s ease, border-color 0.2s ease; display: block; }
 .toc-item a:hover { color: var(--fg); border-color: var(--accent); }
 .toc-h3 a { padding-left: var(--gap-6); font-size: var(--fluid-body-sm); }
+
+/* mobile/responsive rules ported from pages/blog/[slug].astro */
+@media (min-width: 1200px){
+    .post-layout.has-cover .post-hero, .post-layout.has-cover .post-body { margin-inline: 0; }
+    .post-layout:not(.has-cover) .post-hero, .post-layout:not(.has-cover) .post-body { max-width: 720px; }
+  }
+@media (min-width: 640px){ .article-prevnext { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 768px){ .related-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px){ .related-grid.is-posts { grid-template-columns: repeat(3, 1fr); } }
