@@ -1,13 +1,13 @@
 .wugweb-service-page>section,.wugweb-service-page{--pillar-accent:var(--wp--preset--color--yellow)}
 .wugweb-service-page>section{padding-block:var(--section-y,48px)}
-.wugweb-eyebrow{color:var(--pillar-accent);text-transform:uppercase;letter-spacing:.08em;font-family:var(--wp--preset--font-family--mono);font-size:var(--wp--preset--font-size--caption)}
+.wugweb-eyebrow{color:var(--pillar-accent);text-transform:uppercase;letter-spacing:.08em;font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--caption)}
 .wugweb-lede{color:var(--wp--preset--color--neutral-3);font-size:var(--wp--preset--font-size--body-lg)}
 .wugweb-service-hero-metrics-grid,.wugweb-service-impact-bento-grid,.wugweb-framework-loop-grid,.wugweb-toolkit-grid-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--grid-gap,16px)}
 .wugweb-service-impact-bento-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .wugweb-framework-loop-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .wugweb-toolkit-grid-items{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
 .wugweb-service-hero-metrics-grid>div{display:flex;flex-direction:column;padding:var(--wp--preset--spacing--30);border-top:3px solid var(--pillar-accent)}
-.wugweb-service-hero-metrics-grid strong{font-size:var(--wp--preset--font-size--h2);font-weight:800;letter-spacing:-.03em;line-height:1}
+.wugweb-service-hero-metrics-grid strong{font-size:var(--wp--preset--font-size--h2);font-weight:800;letter-spacing:normal;line-height:1}
 .wugweb-card,.wugweb-capability-showcase-item,.wugweb-toolkit-grid-items span{padding:var(--wp--preset--spacing--40);border:1px solid var(--wugweb-line-strong,rgba(255,255,255,.12));border-radius:16px;background:var(--wp--preset--color--ash);transition:background 300ms cubic-bezier(0,0,.2,1)}
 .wugweb-card:hover,.wugweb-capability-showcase-item:hover,.wugweb-toolkit-grid-items span:hover{background:var(--wp--preset--color--neutral-7)}
 .wugweb-toolkit-grid-items span{padding:var(--wp--preset--spacing--30);border-radius:12px}

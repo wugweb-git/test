@@ -26,7 +26,6 @@ function wugweb_kits_tenant_tokens() {
         'primary' => $hex($get('primary_color', ''), '#ffbe1a'),
         'secondary' => $hex($get('secondary_color', ''), '#2167e9'),
         'accent' => $hex($get('accent_color', ''), '#09e2c0'),
-        'display_font' => sanitize_text_field((string) $get('display_font', 'Inter Tight, system-ui, sans-serif')),
         'body_font' => sanitize_text_field((string) $get('body_font', 'Inter Tight, system-ui, sans-serif')),
         'radius' => $radius,
     );
@@ -44,7 +43,6 @@ function wugweb_kits_tenant_css() {
         '--wp--preset--color--yellow:' . esc_attr($t['primary']) . ';' .
         '--wp--preset--color--blue:' . esc_attr($t['secondary']) . ';' .
         '--wp--preset--color--aqua:' . esc_attr($t['accent']) . ';' .
-        '--wp--preset--font-family--display:' . esc_attr($t['display_font']) . ';' .
         '--wp--preset--font-family--body:' . esc_attr($t['body_font']) . ';' .
         '} .wp-block-button__link,.wugweb-scope-cta{border-radius:var(--wugweb-tenant-radius);}' .
         '.wugweb-tenant-name{content:"' . esc_attr($t['tenant']) . '";}';

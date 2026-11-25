@@ -1,6 +1,14 @@
 /* Wugweb block layer — mirrors wugweb.com / uat.wugweb.com (global.css, SiteHeader, SiteFooter, buttons). */
 :root{--wugweb-line:rgba(255,255,255,.05);--wugweb-line-strong:rgba(255,255,255,.12);--wugweb-surface-hover:#555;--wugweb-out:cubic-bezier(0,0,.2,1)}
 
+/* WordPress kebab-cases digit slugs (h2 -> h-2); alias them so has-h2-font-size and var(--...--h2) resolve. */
+:root{--wp--preset--font-size--h1:var(--wp--preset--font-size--h-1);--wp--preset--font-size--h2:var(--wp--preset--font-size--h-2);--wp--preset--font-size--h3:var(--wp--preset--font-size--h-3);--wp--preset--font-size--h4:var(--wp--preset--font-size--h-4);--wp--preset--font-size--h5:var(--wp--preset--font-size--h-5);}
+.has-h1-font-size{font-size:var(--wp--preset--font-size--h-1)!important}
+.has-h2-font-size{font-size:var(--wp--preset--font-size--h-2)!important}
+.has-h3-font-size{font-size:var(--wp--preset--font-size--h-3)!important}
+.has-h4-font-size{font-size:var(--wp--preset--font-size--h-4)!important}
+.has-h5-font-size{font-size:var(--wp--preset--font-size--h-5)!important}
+
 /* Buttons (.btn): neutral-6 surface, 8px radius, no stroke, press scale */
 .wp-block-button__link,.wp-element-button{border:0;text-decoration:none;transition:background var(--duration-fast,200ms) var(--wugweb-out),color var(--duration-fast,200ms) var(--wugweb-out),transform 100ms var(--wugweb-out),filter var(--duration-fast,200ms) var(--wugweb-out)}
 .wp-block-button__link:hover,.wp-element-button:hover{background:var(--wugweb-surface-hover);color:var(--wp--preset--color--neutral-0)}
@@ -19,7 +27,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .wp-block-post-template .wp-block-post-featured-image img{aspect-ratio:16/10;object-fit:cover;border-radius:8px}
 
 /* Mono eyebrow labels (design: .work-client / .intro-tags) */
-.wp-block-post-terms,.wp-block-post-date{font-family:var(--wp--preset--font-family--mono);font-size:var(--wp--preset--font-size--caption);letter-spacing:.08em;text-transform:uppercase}
+.wp-block-post-terms,.wp-block-post-date{font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--caption);letter-spacing:.08em;text-transform:uppercase}
 
 /* Details / FAQ */
 .wp-block-details summary{cursor:pointer;font-weight:600;transition:color var(--duration-fast,200ms) var(--wugweb-out)}
@@ -36,11 +44,11 @@ main>.wp-block-group.alignwide+.wp-block-group.alignwide,.wugweb-canvas>.wp-bloc
 .wugweb-site-header .wugweb-pill-bar.is-scrolled{background:rgba(43,43,43,.88);border-radius:12px}
 .wugweb-site-header .wp-block-site-logo img{height:var(--nav-logo-height,40px);width:auto}
 .wugweb-site-header .wp-block-site-title,.wugweb-site-header .wp-block-site-title a{font-size:var(--wp--preset--font-size--body-md);font-weight:700;text-decoration:none;color:var(--wp--preset--color--neutral-1)}
-.wugweb-site-header .wp-block-navigation{font-size:var(--wp--preset--font-size--label);font-weight:500;gap:8px}
-.wugweb-site-header .wp-block-navigation .wp-block-navigation-item__content{padding:8px 16px;border-radius:8px;background:var(--wp--preset--color--neutral-6);color:var(--wp--preset--color--neutral-1);text-decoration:none;transition:background var(--duration-spring,400ms) var(--ease-spring,ease),color var(--duration-spring,400ms) var(--ease-spring,ease)}
+.wugweb-site-header .wp-block-navigation{font-size:1rem;font-weight:400;gap:12px}
+.wugweb-site-header .wp-block-navigation .wp-block-navigation-item__content{padding:10px 12px;font-size:1rem;font-weight:400;border-radius:8px;background:var(--wp--preset--color--neutral-6);color:var(--wp--preset--color--neutral-1);text-decoration:none;transition:background var(--duration-spring,400ms) var(--ease-spring,ease),color var(--duration-spring,400ms) var(--ease-spring,ease)}
 .wugweb-site-header .wp-block-navigation .wp-block-navigation-item__content:hover,.wugweb-site-header .wp-block-navigation .current-menu-item>.wp-block-navigation-item__content{background:var(--wugweb-surface-hover)}
 .wugweb-site-header .wp-block-navigation__submenu-container{background:var(--wp--preset--color--neutral-7);border:1px solid var(--wugweb-line-strong);border-radius:12px;padding:8px;box-shadow:0 5px 10px rgba(0,0,0,.25)}
-.wugweb-site-header .wugweb-desktop-cta .wp-block-button__link{padding:8px 20px;font-size:var(--wp--preset--font-size--label);font-weight:500}
+.wugweb-site-header .wugweb-desktop-cta .wp-block-button__link{padding:10px 12px;font-size:1rem;font-weight:400}
 /* Mobile toggle chip: light 44px chip, black bars (Nav Bar 04X) */
 .wugweb-site-header .wp-block-navigation__responsive-container-open{width:44px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;background:var(--wp--preset--color--neutral-3);color:var(--wp--preset--color--neutral-10)}
 .wugweb-site-header .wp-block-navigation__responsive-container-open svg{fill:currentColor}
@@ -53,7 +61,7 @@ main>.wp-block-group.alignwide+.wp-block-group.alignwide,.wugweb-canvas>.wp-bloc
 @media(min-width:782px){.wugweb-site-header .wp-block-navigation__responsive-container-open{display:none}}
 
 /* Footer: hairline top, mono 12px row, wipe underline links (SiteFooter) */
-.wugweb-site-footer{border-top:1px solid var(--wugweb-line);font-family:var(--wp--preset--font-family--mono);font-size:var(--wp--preset--font-size--caption)}
+.wugweb-site-footer{border-top:1px solid var(--wugweb-line);font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--caption)}
 .wugweb-site-footer .wugweb-footer-inner{gap:var(--wp--preset--spacing--40);align-items:center;justify-content:space-between;padding-block:var(--section-y)}
 .wugweb-site-footer .wp-block-site-title,.wugweb-site-footer .wp-block-site-title a{font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--body-sm);color:var(--wp--preset--color--neutral-1);text-decoration:none}
 .wugweb-site-footer p{color:var(--wp--preset--color--neutral-3);margin:0}
@@ -71,7 +79,7 @@ main>.wp-block-group.alignwide+.wp-block-group.alignwide,.wugweb-canvas>.wp-bloc
 .wugweb-site-footer .wugweb-footer-inner>.wp-block-group>*{margin-inline:0}
 .wugweb-site-footer .wugweb-footer-inner>.wp-block-navigation{flex:1 1 auto;width:auto;justify-content:flex-end}
 /* Patterns */
-.wugweb-kpi-strip strong{font-weight:800;letter-spacing:-.02em}
+.wugweb-kpi-strip strong{font-weight:800;letter-spacing:normal}
 .wugweb-form-shell .ff-btn-submit{border-radius:8px!important;font-weight:500!important}
 .wp-block-image img,.wp-block-post-featured-image img{border-radius:16px}
 @media(prefers-reduced-motion:reduce){.wp-block-navigation__responsive-container.is-menu-open{animation:none}.wp-block-post-template .wp-block-group.has-ash-background-color{transition:none}.wp-block-post-template .wp-block-group.has-ash-background-color:hover{transform:none}.wugweb-site-footer .wp-block-navigation-item__content,.wugweb-site-footer .wp-block-navigation-item__content::after{transition:none}}
@@ -90,7 +98,8 @@ main>.wp-block-group.alignwide+.wp-block-group.alignwide,.wugweb-canvas>.wp-bloc
 .wp-block-group.has-border-color{border-color:var(--wugweb-line-strong)!important;background-color:var(--wp--preset--color--ash);padding:var(--grid-gap);transition:background var(--duration-normal,300ms) var(--wugweb-out)}
 .wp-block-group.has-border-color:hover{background-color:var(--wp--preset--color--neutral-7)}
 /* Headings: display marketing axis */
-h1.wp-block-heading{font-weight:800;max-width:16ch}
+h1.wp-block-heading{font-weight:800;max-width:16ch;letter-spacing:normal;margin-inline:0!important}
+.wp-block-heading,h1,h2,h3,h4,h5,h6{letter-spacing:normal}
 /* Links that leave the block get the uat trailing arrow */
 .wp-block-buttons .wp-block-button__link[href]:not(.wugweb-desktop-cta *)::after{content:"\2192";margin-left:8px;display:inline-block;transition:transform var(--duration-fast,200ms) var(--wugweb-out)}
 .wp-block-buttons .wp-block-button__link[href]:hover::after{transform:translateX(3px)}
@@ -100,3 +109,8 @@ h1.wp-block-heading{font-weight:800;max-width:16ch}
 /* Outline buttons read as uat ghost buttons on the dark surface */
 .wp-block-button.is-style-outline .wp-block-button__link{color:var(--wp--preset--color--neutral-1)!important;background:color-mix(in srgb,var(--wp--preset--color--neutral-0) 14%,transparent);border:0}
 .wp-block-button.is-style-outline .wp-block-button__link:hover{background:color-mix(in srgb,var(--wp--preset--color--neutral-0) 22%,transparent)}
+
+/* uat: all button links are 8px, text 16px; footer links BABABA */
+.wp-block-button .wp-block-button__link{border-radius:8px!important}
+.wugweb-site-footer .wp-block-navigation .wp-block-navigation-item__content{color:var(--wp--preset--color--neutral-3)}
+.wugweb-site-footer .wp-block-navigation .wp-block-navigation-item__content:hover,.wugweb-site-footer .wp-block-navigation .wp-block-navigation-item__content:focus-visible{color:var(--wp--preset--color--neutral-1)}

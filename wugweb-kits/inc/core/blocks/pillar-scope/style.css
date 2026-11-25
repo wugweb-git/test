@@ -4,7 +4,7 @@
 .wugweb-pillar-tab:hover,.wugweb-scope-chip:hover{background:var(--wugweb-surface-hover,#555)}
 .wugweb-pillar-tab[aria-selected="true"],.wugweb-scope-chip.is-selected{background:var(--svc-base,var(--wp--preset--color--yellow));color:var(--wp--preset--color--ash)}
 .wugweb-pillar-active-card{border-radius:16px;padding:var(--wp--preset--spacing--50);background:var(--wp--preset--color--ash);color:var(--wp--preset--color--neutral-1)}
-.wugweb-pillar-active-title{font-size:var(--wp--preset--font-size--h3);letter-spacing:-.02em}
+.wugweb-pillar-active-title{font-size:var(--wp--preset--font-size--h3);letter-spacing:normal}
 .wugweb-pillar-active-summary{color:var(--wp--preset--color--neutral-3)}
 .wugweb-scope-grid{display:grid;gap:var(--grid-gap,16px)}
 .wugweb-scope-header{display:flex;justify-content:space-between;gap:var(--grid-gap,16px)}
