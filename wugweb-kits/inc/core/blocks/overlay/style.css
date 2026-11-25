@@ -4,7 +4,7 @@
 .wugweb-overlay::backdrop{background:rgba(0,0,0,.72);opacity:0;transition:opacity var(--duration-normal,300ms) var(--easing-out,ease)}
 .wugweb-overlay.is-open::backdrop{opacity:1}
 .wugweb-overlay__panel{position:relative;box-sizing:border-box;background:var(--neutral-9);color:var(--fg);border:var(--stroke-thin) solid var(--color-border-subtle);padding:var(--gap-6);display:flex;flex-direction:column;gap:var(--gap-4);overflow-y:auto;overscroll-behavior:contain;opacity:0;transition:transform var(--duration-slow,400ms) var(--easing-spring,cubic-bezier(.34,1.56,.64,1)),opacity var(--duration-normal,300ms) var(--easing-out,ease)}
-.wugweb-overlay.is-open .wugweb-overlay__panel{opacity:1;transform:none}
+.wugweb-overlay.is-open[data-layout] .wugweb-overlay__panel{opacity:1;transform:none}
 .wugweb-overlay__head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--gap-4)}
 .wugweb-overlay__title{margin:0;font-size:var(--fluid-h3);font-weight:var(--font-weight-bold);color:var(--color-text-primary)}
 .wugweb-overlay__close{flex:none;min-width:44px;min-height:44px;margin:-8px -8px 0 0;background:none;border:0;color:var(--color-text-secondary);font-size:1.75rem;line-height:1;cursor:pointer;border-radius:var(--radius-sm,8px)}
