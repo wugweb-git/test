@@ -186,3 +186,11 @@ body a{color:inherit}
 .wp-site-blocks :is(input,textarea)::placeholder{color:var(--wp--custom--input--placeholder);opacity:1}
 .wp-site-blocks :is(input,textarea,select):disabled{opacity:var(--wp--custom--input--disabledOpacity);cursor:not-allowed}
 .wp-site-blocks :is(input,textarea,select)[aria-invalid=true],.wp-site-blocks .ff-el-is-error .ff-el-form-control{border-color:var(--wp--custom--input--error)}
+
+/* Review fixes: one chip style for blog + work (readable selected state, 40px hit area), accent focus ring, tighter page-head spacing. */
+.wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip{display:inline-flex;align-items:center;min-height:40px;padding:0 var(--gap-4);font-family:var(--font-body);font-size:var(--t-sm);line-height:1.2;color:var(--fg-muted);background:transparent;border:var(--stroke-thin) solid var(--line);border-radius:var(--radius-full);white-space:nowrap;cursor:pointer;text-decoration:none}
+.wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip:hover{color:var(--fg);border-color:var(--line-strong)}
+.wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip.active,.wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip[aria-current=page]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.wp-site-blocks :is(.wugweb-blog-index,.work-grid-section,.wugweb-article-post,.wugweb-case-study,.wp-block-wugweb-work-index) :is(a,button,summary,[tabindex],.filter-chip):focus-visible{outline:2px solid var(--color-accent-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+.wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip:focus-visible{border-radius:var(--radius-full)}
+.services-hero,.work-hero,.blog-hero{padding-bottom:var(--gap-6)}

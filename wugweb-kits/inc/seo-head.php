@@ -17,6 +17,8 @@ add_action('wp_head', function () {
         $title = wp_get_document_title();
         $url = home_url(add_query_arg(array()));
     }
+    if (is_page('blog') && $desc === '') { $desc = "Field notes from Wugweb's design, engineering, and strategy work: what we're learning, testing, and shipping."; }
+    if (is_page('work') && $desc === '') { $desc = 'Case studies from Wugweb: UX, design, martech, AI, and web projects for ambitious teams.'; }
     $desc = trim(preg_replace('/\s+/', ' ', (string) $desc));
     if ($desc !== '') echo '<meta name="description" content="' . esc_attr($desc) . '">' . "\n";
     echo '<meta property="og:type" content="' . (is_front_page() ? 'website' : 'article') . '">' . "\n";
@@ -24,7 +26,10 @@ add_action('wp_head', function () {
     echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
     if ($desc !== '') echo '<meta property="og:description" content="' . esc_attr($desc) . '">' . "\n";
     echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
-    if (is_singular() && has_post_thumbnail()) echo '<meta property="og:image" content="' . esc_url(get_the_post_thumbnail_url(null, 'large')) . '">' . "\n";
+    $og = (is_singular() && has_post_thumbnail()) ? get_the_post_thumbnail_url(null, 'large') : '';
+    if ($og === '' && is_singular('case_study')) { $og = (string) get_post_meta(get_the_ID(), 'wugweb_cs_cover_image', true); }
+    if ($og === '') { $og = get_theme_file_uri('assets/brand/og-default.png'); }
+    echo '<meta property="og:image" content="' . esc_url($og) . '">' . "\n";
     echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
     if (!has_action('wp_head', 'rel_canonical')) echo '<link rel="canonical" href="' . esc_url($url) . '">' . "\n";
     if (!has_site_icon()) echo '<link rel="icon" href="' . esc_url(get_theme_file_uri('assets/brand/favicon.svg')) . '" type="image/svg+xml">' . "\n";

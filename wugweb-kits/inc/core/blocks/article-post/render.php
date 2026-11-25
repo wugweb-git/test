@@ -91,7 +91,7 @@ $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-article-post'));
 <?php
 $share_news = do_blocks('<!-- wp:wugweb/article-share-newsletter /-->');
 $news_html = '';
-if (preg_match('#<aside class="article-newsletter".*?</aside>#s', $share_news, $nm)) { $news_html = $nm[0]; $share_news = str_replace($nm[0], '', $share_news); }
+if (preg_match('#<aside class="article-newsletter".*?</aside>#s', $share_news, $nm)) { $news_html = preg_replace('#<h2( id="newsletter-title")>(.*?)</h2>#s','<h3$1>$2</h3>',$nm[0]); $share_news = str_replace($nm[0], '', $share_news); }
 ?>
 <?php ob_start(); ?>
     <div class="article-byline %CLS%">
