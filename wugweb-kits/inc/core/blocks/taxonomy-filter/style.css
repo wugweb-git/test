@@ -1,1 +1,4 @@
-.wugweb-taxonomy-filter{display:flex;flex-wrap:wrap;gap:.6rem}.wugweb-taxonomy-filter a{border:1px solid currentColor;border-radius:999px;padding:.55rem .9rem;text-decoration:none}.wugweb-taxonomy-filter a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.wugweb-taxonomy-filter{display:flex;flex-wrap:wrap;gap:8px}
+.wugweb-taxonomy-filter a{display:inline-flex;align-items:center;min-height:44px;border:0;border-radius:8px;background:var(--wp--preset--color--neutral-6);color:var(--wp--preset--color--neutral-1);padding:8px 16px;font-size:var(--wp--preset--font-size--label);font-weight:500;text-decoration:none;transition:background 300ms cubic-bezier(0,0,.2,1)}
+.wugweb-taxonomy-filter a:hover,.wugweb-taxonomy-filter a[aria-current],.wugweb-taxonomy-filter a.is-active{background:var(--wp--preset--color--yellow);color:var(--wp--preset--color--ash)}
+.wugweb-taxonomy-filter a:focus-visible{outline:2px solid var(--wp--preset--color--neutral-3);outline-offset:3px}

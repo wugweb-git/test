@@ -3,8 +3,8 @@
 if (!defined('ABSPATH')) { exit; }
 require_once __DIR__ . '/includes/service-data.php';
 add_action('init', function () {
-    wp_register_style('wugweb-core-service', get_theme_file_uri('inc/core/assets/service.css'), array(), '0.2.0');
-    wp_register_style('wugweb-core-content', get_theme_file_uri('inc/core/assets/content.css'), array(), '0.2.0');
+    wp_register_style('wugweb-core-service', get_theme_file_uri('inc/core/assets/service.css'), array(), '0.3.0');
+    wp_register_style('wugweb-core-content', get_theme_file_uri('inc/core/assets/content.css'), array(), '0.3.0');
     $blocks = array(
         // interactive / runtime
         'pillar-scope', 'copyright-year', 'marquee', 'taxonomy-filter',
