@@ -114,3 +114,14 @@ h1.wp-block-heading{font-weight:800;max-width:16ch;letter-spacing:normal;margin-
 .wp-block-button .wp-block-button__link{border-radius:8px!important}
 .wugweb-site-footer .wp-block-navigation .wp-block-navigation-item__content{color:var(--wp--preset--color--neutral-3)}
 .wugweb-site-footer .wp-block-navigation .wp-block-navigation-item__content:hover,.wugweb-site-footer .wp-block-navigation .wp-block-navigation-item__content:focus-visible{color:var(--wp--preset--color--neutral-1)}
+
+/* Section blocks are full-bleed like the Astro .wrap sections: the .wrap padding-inline carves the 1200 content box, so WP's constrained max-width must not apply. */
+.wp-block-wugweb-hero-section,.wp-block-wugweb-intro-statement,.wp-block-wugweb-service-tags,.wp-block-wugweb-case-studies-grid,.wp-block-wugweb-clients-served,.wp-block-wugweb-industries-served,.wp-block-wugweb-recent-thoughts,.wp-block-wugweb-faq-list.wrap,.wp-block-wugweb-service-page,.wp-block-wugweb-cta-band{max-width:none !important;width:100%}
+body.page-template-page-landing .wugweb-canvas{max-width:none !important;padding-inline:0 !important}
+body.page-template-page-landing .entry-content{max-width:none}
+
+/* global.css base: body line-height 1.5 (a plugin sets 1.6), p muted, a inherits — scoped to wugweb blocks so core content keeps theme.json. */
+body.wugweb-tenant-wugweb{line-height:var(--core-line-height-normal)}
+/*w*/:where([class*="wp-block-wugweb-"]) :where(p){margin:0;color:var(--fg-muted);font-size:var(--fluid-body-md);font-weight:var(--font-weight-regular);line-height:var(--core-line-height-normal)}
+:where([class*="wp-block-wugweb-"]) :where(a:not(.btn):not(.wp-element-button)){color:inherit}
+:where([class*="wp-block-wugweb-"]) :where(h1,h2,h3,h4,h5,h6){margin:0;letter-spacing:0}
