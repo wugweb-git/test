@@ -1,0 +1,98 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wugweb/media-card",
+  "version": "1.0.0",
+  "title": "Media Card (horizontal)",
+  "category": "wugweb",
+  "keywords": [
+    "card",
+    "row",
+    "media",
+    "stat",
+    "value",
+    "team",
+    "wugweb"
+  ],
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": "Card title"
+    },
+    "text": {
+      "type": "string",
+      "default": "A short description that sits to the right of the image."
+    },
+    "url": {
+      "type": "string",
+      "default": ""
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "mediaSide": {
+      "type": "string",
+      "default": "left"
+    }
+  },
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "styles": [
+    {
+      "name": "default",
+      "label": "Default",
+      "isDefault": true
+    },
+    {
+      "name": "compact",
+      "label": "Compact"
+    },
+    {
+      "name": "stacked",
+      "label": "Stacked"
+    }
+  ],
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "icon": "align-pull-left",
+  "description": "Horizontal card: image left, title and description right. Grey box when there is no image. Use anywhere: stats, values, team, links."
+}
