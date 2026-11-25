@@ -26,7 +26,7 @@ add_filter('render_block_core/html', function ($html) {
     $path = trailingslashit((string) wp_parse_url(add_query_arg(array()), PHP_URL_PATH));
     $extra = array();
     return preg_replace_callback('#<a href="([^"]+)" class="nav-link">#', function ($m) use ($path, $extra) {
-        $href = trailingslashit((string) wp_parse_url($m[1], PHP_URL_PATH));
+        $href = str_replace('/our-work/', '/work/', trailingslashit((string) wp_parse_url($m[1], PHP_URL_PATH)));
         $on = $path === $href || strpos($path, $href) === 0 && $href !== '/';
         foreach ($extra[$href] ?? array() as $alt) { if (strpos($path, $alt) === 0) $on = true; }
         return $on ? '<a href="' . $m[1] . '" class="nav-link is-active" aria-current="page">' : $m[0];
