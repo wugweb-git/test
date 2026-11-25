@@ -7,6 +7,7 @@
   "supports": { "html": false, "autoRegister": true, "anchor": true, "align": ["wide", "full"] },
   "render": "file:./render.php",
   "style": ["file:./style.css"],
+  "viewScript": "file:./view.js",
   "attributes": { "postId": { "type": "integer", "default": 0 } },
   "icon": "portfolio",
   "description": "Single case study: hero, meta, cover, bento body sections, more case studies (work/[slug].astro).",
