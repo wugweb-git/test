@@ -1,0 +1,56 @@
+name: Deploy theme to test.wugweb.com
+
+# Publishes wugweb-kits/ to the WordPress theme folder over SSH (rsync, no --delete).
+# Runs on every push to main that touches the theme, on demand, and once a day
+# (the scheduled run re-syncs the server so it never drifts from main).
+on:
+  push:
+    branches: [main]
+    paths: ['wugweb-kits/**', '.github/workflows/deploy-theme.yml']
+  workflow_dispatch:
+  schedule:
+    - cron: '30 2 * * *'
+
+concurrency:
+  group: deploy-theme
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint PHP
+        run: |
+          set -e
+          find wugweb-kits -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
+
+      - name: Check secrets
+        env:
+          KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then echo "::error::Add the repository secrets HOSTINGER_SSH_KEY, HOSTINGER_HOST, HOSTINGER_PORT, HOSTINGER_USER, HOSTINGER_THEME_PATH"; exit 1; fi
+
+      - name: Sync theme
+        env:
+          HOST: ${{ secrets.HOSTINGER_HOST }}
+          PORT: ${{ secrets.HOSTINGER_PORT }}
+          USER_: ${{ secrets.HOSTINGER_USER }}
+          DEST: ${{ secrets.HOSTINGER_THEME_PATH }}
+          KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+        run: |
+          set -e
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$PORT" "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          rsync -rci --exclude '.git' -e "ssh -p $PORT -i ~/.ssh/deploy_key -o IdentitiesOnly=yes" \
+            wugweb-kits/ "$USER_@$HOST:$DEST/"
+
+      - name: Smoke test
+        run: |
+          for p in / /about/ /services/ /blog/; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://test.wugweb.com$p")
+            echo "$p $code"
+            [ "$code" = "200" ] || exit 1
+          done
