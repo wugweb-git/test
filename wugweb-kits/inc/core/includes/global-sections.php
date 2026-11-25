@@ -144,3 +144,17 @@ add_action('template_redirect', function () {
         }, $html);
     });
 }, 1);
+
+/** Cache busting: every theme-served CSS/JS (blocks' style/view/edit, assets/) is versioned by the file's mtime, not block.json's static version. */
+$wugweb_bust = function ($src) {
+    if (!is_string($src) || $src === '') return $src;
+    $base = get_theme_file_uri('');
+    $base = rtrim($base, '/') . '/';
+    $clean = strtok($src, '?');
+    if (strpos($clean, $base) !== 0) return $src;
+    $file = get_theme_file_path(substr($clean, strlen($base)));
+    if (!is_file($file)) return $src;
+    return add_query_arg('ver', filemtime($file), $clean);
+};
+add_filter('style_loader_src', $wugweb_bust, 20);
+add_filter('script_loader_src', $wugweb_bust, 20);
