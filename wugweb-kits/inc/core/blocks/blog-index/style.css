@@ -163,3 +163,12 @@
 .wugweb-blog-index .related-kicker{font-size:var(--fluid-label);text-transform:uppercase;letter-spacing:.04em;color:var(--fg-muted)}
 .wugweb-blog-index .related-card h3{font-size:var(--fluid-h4);font-weight:var(--font-weight-semibold);color:var(--fg);margin:0;line-height:1.25}
 .wugweb-blog-index .related-sub{font-size:var(--fluid-body-sm);color:var(--fg-muted)}
+
+/* Mosaic polish: static toolbar (Webflow chips row is not sticky), clean ruled rows / big card, inline newsletter form. */
+.wugweb-blog-index .blog-toolbar{position:static}
+.wugweb-blog-index .picks-rows .pc-tags,.wugweb-blog-index .picks-rows .pc-launch,.wugweb-blog-index .picks-rows .pc-arrow,.wugweb-blog-index .picks-big .pc-tags{display:none}
+.wugweb-blog-index .picks-big .pc-meta{margin-top:var(--gap-2)}
+.wugweb-blog-index .bn-form{display:flex;flex-wrap:nowrap;align-items:stretch;gap:var(--gap-3)}
+.wugweb-blog-index .bn-form .nl-input{flex:1 1 auto;min-width:0;width:auto}
+.wugweb-blog-index .bn-form .btn{flex:0 0 auto}
+@media (max-width:480px){.wugweb-blog-index .bn-form{flex-wrap:wrap}.wugweb-blog-index .bn-form .btn{width:100%;justify-content:center}}
