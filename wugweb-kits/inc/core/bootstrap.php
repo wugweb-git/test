@@ -19,7 +19,7 @@ add_action('init', function () {
         'pillar-scope', 'copyright-year', 'marquee', 'taxonomy-filter',
         // service pages (data from includes/service-data.json)
         'service-page', 'service-hero-metrics', 'capability-showcase', 'service-impact-bento',
-        'process-timeline', 'service-mid-cta', 'service-stack', 'industries-directory', 'article-post', 'blog-index', 'service-related-work', 'section-intro', 'framework-loop', 'toolkit-grid',
+        'process-timeline', 'service-mid-cta', 'service-stack', 'about-section', 'work-index', 'industries-directory', 'article-post', 'blog-index', 'service-related-work', 'section-intro', 'framework-loop', 'toolkit-grid',
         // dynamic content
         'contact-form', 'editorial-card', 'case-study-card', 'article-meta-toc',
         'article-share-newsletter', 'case-study-brief-matrix', 'post-cross-sell-rail', 'faq-list',

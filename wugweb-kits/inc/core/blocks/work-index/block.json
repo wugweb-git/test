@@ -1,0 +1,51 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/work-index",
+  "version": "3.0.0",
+  "title": "Work Index",
+  "category": "wugweb",
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "attributes": {
+    "limit": {
+      "type": "integer",
+      "default": 200
+    }
+  },
+  "icon": "portfolio",
+  "description": "Case study grid with pillar filter chips (work/index.astro).",
+  "viewScript": "file:./view.js"
+}

@@ -59,7 +59,8 @@
       "type": "string",
       "enum": [
         "pillar",
-        "why"
+        "why",
+        "about"
       ],
       "default": "pillar"
     },

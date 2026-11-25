@@ -361,3 +361,4 @@
 .bento-media.is-cover .wugweb-ph{display:block;width:100%;height:100%;aspect-ratio:auto;border-radius:0}
 
 .bento-media.is-cover:has(.wugweb-ph)::after{display:none}
+.bento-media.is-inset .wugweb-ph{aspect-ratio:16/10;border-radius:0}

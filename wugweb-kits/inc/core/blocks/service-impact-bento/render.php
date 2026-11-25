@@ -4,9 +4,23 @@
  * from services/[slug].astro). Data: service-data.json `bentoTitle` + `bento`.
  */
 defined('ABSPATH') || exit;
-$variant = (($attributes['variant'] ?? 'pillar') === 'why') ? 'why' : 'pillar';
+$variant = in_array(($attributes['variant'] ?? 'pillar'), array('why', 'about'), true) ? $attributes['variant'] : 'pillar';
+$lede = '';
 $media_image = isset($attributes['mediaImage']) ? esc_url($attributes['mediaImage']) : '';
-if ($variant === 'why') {
+if ($variant === 'about') {
+  // about.astro "Why Wugweb?" bento: tall light media tile + CTA, short + inset media, toolkit stack + tall media.
+  $heading = 'Why Wugweb?';
+  $lede = 'In a world clamoring for attention, your brand deserves more than fleeting visibility. It requires a strategic partner that architects compelling narratives, cultivates authentic connections, and engineers brand experiences designed to stand the test of time.';
+  $tools = array('Figma', 'Notion', 'Slack', 'Webflow', 'Framer', 'Shopify', 'Zapier', 'HubSpot');
+  $tiles = array(
+    array('col'=>0,'span'=>'tall','title'=>'Strategic Brand Vision','body'=>'Resonant brand foundations are architected through the synthesis of strategic insight and creative brilliance, driving measurable business growth.','tone'=>'light','ph'=>'cover','fit'=>'cover'),
+    array('col'=>0,'span'=>'strip','kind'=>'cta','href'=>'/contact-us','linkLabel'=>"Let's talk"),
+    array('col'=>1,'span'=>'short','title'=>'Data-Driven Brand Evolution','body'=>'Data and analytics inform brand strategy, optimizing brand performance and fueling sustainable brand evolution.'),
+    array('col'=>1,'span'=>'mid','title'=>'Authentic Brand Storytelling','body'=>"Brand's core essence is unearthed, crafting authentic narratives that forge emotional connections and inspire unwavering loyalty.",'ph'=>'inset','fit'=>'inset'),
+    array('col'=>2,'span'=>'slim','kind'=>'stack','items'=>array_map(function ($n) { return array('name' => $n); }, $tools)),
+    array('col'=>2,'span'=>'tall','title'=>'Holistic Brand Experience Design','body'=>'Cohesive brand experiences are engineered across all touchpoints, ensuring consistency, impact, and a seamless customer journey.','ph'=>'cover','fit'=>'cover'),
+  );
+} elseif ($variant === 'why') {
   // services/index.astro "Why Wugweb?" bento: media opens the left column, weight falls to the middle.
   $heading = '';
   $r = is_array($attributes['reasons'] ?? null) ? $attributes['reasons'] : array();
@@ -82,6 +96,7 @@ $wrap = get_block_wrapper_attributes($wrap_args);
 ?>
 <section <?php echo $wrap; ?>>
   <?php if ($heading !== '') : ?><h2 data-reveal id="bento-block-title"><?php echo esc_html($heading); ?></h2><?php endif; ?>
+  <?php if ($lede !== '') : ?><p class="bento-lede" data-reveal><?php echo esc_html($lede); ?></p><?php endif; ?>
 
   <span class="bento-cursor" data-bento-cursor aria-hidden="true"></span>
   <div class="bento" data-bento data-scroll="bento">
@@ -92,7 +107,8 @@ $wrap = get_block_wrapper_attributes($wrap_args);
         $num   = str_pad((string) ($ti + 1), 2, '0', STR_PAD_LEFT);
         $kind  = $t['kind'] ?? 'reason';
         $tag   = !empty($t['href']) ? 'a' : 'article';
-        $media = !empty($t['video']) || !empty($t['image']);
+        $ph    = !empty($t['ph']);
+        $media = !empty($t['video']) || !empty($t['image']) || $ph;
         $fit   = $t['fit'] ?? 'cover';
         $tone  = $t['tone'] ?? '';
         $cls   = array('bento-tile', 'is-' . $t['span'], 'kind-' . $kind);
@@ -115,7 +131,9 @@ $wrap = get_block_wrapper_attributes($wrap_args);
         <?php endif; ?>
         <?php if ($media) : ?>
           <span class="bento-media is-<?php echo esc_attr($fit); ?>">
-            <?php if (!empty($t['video'])) : ?>
+            <?php if ($ph) : ?>
+              <span class="wugweb-ph" aria-hidden="true"></span>
+            <?php elseif (!empty($t['video'])) : ?>
               <video data-bento-video src="<?php echo esc_url($t['video']); ?>"<?php echo !empty($t['poster']) ? ' poster="' . esc_url($t['poster']) . '"' : ''; ?> preload="none" muted loop playsinline tabindex="-1" aria-hidden="true"></video>
             <?php else : ?>
               <img src="<?php echo esc_url($t['image']); ?>" alt="" loading="lazy" decoding="async" />
