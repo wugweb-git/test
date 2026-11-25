@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wugweb/case-study-brief-matrix",
+  "version": "1.0.0",
+  "title": "Case Study Brief Matrix",
+  "category": "design",
+  "supports": {
+    "html": false,
+    "autoRegister": true
+  },
+  "render": "file:./render.php",
+  "style": "wugweb-core-content"
+}

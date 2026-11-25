@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wugweb/framework-loop",
+  "version": "1.2.0",
+  "title": "Framework Loop",
+  "category": "design",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "autoRegister": true
+  },
+  "attributes": {
+    "pillar": {
+      "type": "string",
+      "default": "brand"
+    }
+  },
+  "render": "file:./render.php",
+  "style": "wugweb-core-service"
+}

@@ -1,0 +1,21 @@
+.wugweb-service-page>section,.wugweb-service-page{--pillar-accent:var(--wp--preset--color--yellow)}
+.wugweb-service-page>section{padding-block:var(--wp--preset--spacing--50)}
+.wugweb-eyebrow{color:var(--pillar-accent);text-transform:uppercase;letter-spacing:.08em;font-size:var(--wp--preset--font-size--label)}
+.wugweb-lede{color:var(--wp--preset--color--neutral-3);font-size:var(--wp--preset--font-size--body-lg)}
+.wugweb-service-hero-metrics-grid,.wugweb-service-impact-bento-grid,.wugweb-framework-loop-grid,.wugweb-toolkit-grid-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--wp--preset--spacing--30)}
+.wugweb-service-impact-bento-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.wugweb-framework-loop-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.wugweb-toolkit-grid-items{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+.wugweb-service-hero-metrics-grid>div{display:flex;flex-direction:column;padding:var(--wp--preset--spacing--30);border-top:3px solid var(--pillar-accent)}
+.wugweb-service-hero-metrics-grid strong{font-size:var(--wp--preset--font-size--h2)}
+.wugweb-card,.wugweb-capability-showcase-item,.wugweb-toolkit-grid-items span{padding:var(--wp--preset--spacing--40);border:1px solid var(--wp--preset--color--neutral-8);border-radius:16px;background:var(--wp--preset--color--ash)}
+.wugweb-toolkit-grid-items span{padding:var(--wp--preset--spacing--30);border-radius:12px}
+.wugweb-capability-showcase-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--wp--preset--spacing--30)}
+.wugweb-capability-showcase summary{cursor:pointer;font-weight:600}.wugweb-capability-showcase summary span{color:var(--pillar-accent);margin-right:.5rem}
+.wugweb-process-timeline ol{list-style:none;margin:0;padding:0;display:grid;gap:var(--wp--preset--spacing--30)}
+.wugweb-process-timeline li{display:flex;flex-direction:column;padding-left:var(--wp--preset--spacing--40);border-left:3px solid var(--pillar-accent)}
+.wugweb-service-mid-cta>div{background:var(--wp--preset--color--yellow);color:var(--wp--preset--color--neutral-10);border-radius:24px;padding:var(--wp--preset--spacing--60)}
+.wugweb-service-mid-cta-button{display:inline-block;padding:10px 16px;min-height:44px;background:var(--wp--preset--color--neutral-10);color:var(--wp--preset--color--neutral-0);border-radius:9999px;text-decoration:none;font-weight:700}
+.wugweb-fw-note{color:var(--wp--preset--color--neutral-3)}
+@media(max-width:1023px){.wugweb-service-hero-metrics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.wugweb-service-hero-metrics-grid,.wugweb-service-impact-bento-grid,.wugweb-capability-showcase-grid{grid-template-columns:1fr}}

@@ -1,0 +1,9 @@
+.wugweb-content-block{max-width:1200px;margin-inline:auto;padding-block:var(--wp--preset--spacing--50)}
+.wugweb-content-block h2{margin-bottom:var(--wp--preset--spacing--30)}
+.wugweb-content-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--wp--preset--spacing--30)}
+.wugweb-content-card{padding:var(--wp--preset--spacing--40);border:1px solid var(--wp--preset--color--neutral-8);border-radius:16px;background:var(--wp--preset--color--ash)}
+.wugweb-content-card a{color:inherit}
+.wugweb-content-eyebrow{color:var(--wp--preset--color--yellow);font-size:var(--wp--preset--font-size--label);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.wugweb-editorial-card__media img,.wugweb-case-study-card img{border-radius:12px;width:100%;height:auto}
+@media(max-width:1023px){.wugweb-content-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.wugweb-content-grid{grid-template-columns:1fr}}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wugweb/article-share-newsletter",
+  "version": "1.0.0",
+  "title": "Article Share & Newsletter",
+  "category": "design",
+  "supports": {
+    "html": false,
+    "autoRegister": true
+  },
+  "render": "file:./render.php",
+  "style": "wugweb-core-content"
+}

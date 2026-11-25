@@ -1,0 +1,21 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/marquee",
+  "version": "1.1.0",
+  "title": "Wugweb Logo Marquee",
+  "category": "design",
+  "icon": "slides",
+  "description": "Accessible pauseable text/logo track.",
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "viewScriptModule": "file:./view.js",
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "interactivity": true,
+    "autoRegister": true
+  }
+}
