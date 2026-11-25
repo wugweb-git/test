@@ -1,0 +1,296 @@
+  /* Approach Stepper */
+  .approach-section { padding-block: var(--space-section-xl); }
+  .approach-section h2 { font-size: var(--t-h3); margin-top: var(--gap-3); max-width: 22ch; }
+  /* Mobile is the app screen, not a slice of a scrolling document — this
+     section had no height rule at all, so it was whatever the card
+     count/padding happened to add up to, which made the deal-out
+     scroll-scrub (see scroll-animations.ts's 'cardstack' kind) feel
+     cramped or oddly paced depending on how many steps a pillar has.
+     Fixing it to one full screen gives the scrub a stable, generous
+     range to play out in, matching InsightsBlock's mobile treatment. */
+  @media (max-width: 767.98px) {
+    .approach-section {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  /* Landscape cards: wide and short, one per row. The card's own grid does the
+     work — meter and number in a narrow left column, title next, body last —
+     so the height stays low and five of them read as a sequence rather than a
+     wall. The Process Map sits directly below and is the page's big diagram;
+     tall portrait cards ahead of it would compete with it. */
+  .approach-layout {
+    margin-top: var(--gap-10);
+    display: grid;
+    gap: var(--gap-6);
+    grid-template-columns: 1fr;
+    /* `stretch`, not `start`: the CTA matches the card column's height rather
+       than sitting as a short panel against a tall list. */
+    align-items: stretch;
+  }
+  @media (min-width: 1024px) {
+    /* Even split. The cards were on 1.55fr against the CTA's 1fr, which read as
+       a main column with a sidebar bolted on rather than two halves. */
+    .approach-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap-6); }
+  }
+
+  .approach-cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--gap-3);
+    /* The deck's depth. Without a perspective the cards' translateZ does
+       nothing and the stack collapses to a flat pile. */
+    perspective: 500px;
+    transform-style: preserve-3d;
+  }
+  .approach-card {
+    position: relative;
+    z-index: var(--layer-base);
+    display: grid;
+    /* Visual left, copy right. The visual keeps a fixed ratio at every
+       breakpoint (governance §8) and the copy column takes the rest. */
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: var(--gap-4);
+    align-items: stretch;
+    padding: var(--gap-4);
+    /* Near-opaque on purpose. At 48% the cards were translucent, so while the
+       deck was dealing the card behind showed straight through the one in
+       front — two titles and two + chips visible at once. A card in a stack
+       has to occlude what is under it. */
+    background: color-mix(in srgb, var(--neutral-8) 97%, var(--bg));
+    border: var(--stroke-thin) solid var(--line);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    /* GSAP owns `transform`, `opacity` and `filter` here for the deck reveal,
+       so hover uses none of the three — border, background and shadow only. */
+    transition: border-color var(--duration-normal) var(--easing-smooth),                background-color var(--duration-normal) var(--easing-smooth),
+                box-shadow var(--duration-normal) var(--easing-smooth),
+                filter var(--duration-normal) var(--easing-smooth);
+  }
+  @media (min-width: 480px) { .approach-card { grid-template-columns: 8rem minmax(0, 1fr); } }
+
+  .approach-card-visual {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: calc(var(--radius-lg) - var(--gap-2));
+    overflow: hidden;
+    background:
+      radial-gradient(120% 100% at 30% 0%,
+        color-mix(in srgb, var(--neutral-0) 9%, transparent) 0%,
+        transparent 70%),
+      color-mix(in srgb, var(--neutral-10) 62%, transparent);
+    display: grid;
+    place-items: center;
+    transition: background var(--duration-normal) var(--easing-smooth);  }
+  .approach-card.is-open .approach-card-visual {
+    background:
+      radial-gradient(120% 100% at 30% 0%,
+        color-mix(in srgb, var(--neutral-0) 16%, transparent) 0%,
+        transparent 70%),
+      color-mix(in srgb, var(--neutral-10) 45%, transparent);
+  }
+  .approach-card-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Icon tile. The mark is matched to the step's own wording by
+     `src/lib/step-icons.ts`, so "Discovery" gets the same icon here as it does
+     in the Process Map. */
+  .approach-visual-mark { display: grid; gap: var(--gap-3); justify-items: center; }
+  .approach-icon {
+    width: 1.75rem; height: 1.75rem;
+    fill: none;
+    stroke: var(--fg);
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: block;
+  }
+  /* Segment meter — fills to this step's position, so the graphic reports
+     progress through the sequence rather than decorating. */
+  .approach-meter { display: inline-flex; gap: 3px; }
+  .approach-seg {
+    width: 8px; height: 3px;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--neutral-0) 16%, transparent);
+    transition: background var(--duration-normal) var(--easing-out);  }
+  .approach-seg.is-on { background: var(--fg-muted); }
+
+  /* Per the system's "Sub Service : Full" card: number above the title, the
+     description beneath, and the round + at the top right. */
+  .approach-card-body { display: grid; align-content: start; gap: var(--gap-1); min-width: 0; padding-top: var(--gap-1); }
+  /* Index and + on one row, both --chip-size tall, so the header keeps the
+     same height whichever it carries. Both come from the site-wide `.u-index`
+     / `.u-chip` pair in global.css. */
+  .approach-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-3);
+  }
+  /* The description is what the + reveals. `grid-template-rows: 0fr → 1fr`
+     animates a height the browser has to measure for itself, so there is no
+     scrollHeight bookkeeping and reflowing text stays correct. */
+  .approach-card-desc {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--duration-normal) var(--easing-out),                opacity var(--duration-fast) var(--easing-out);
+    opacity: var(--opacity-0);
+  }
+  .approach-card-desc > p { overflow: hidden; min-height: 0; }
+  .approach-card.is-open .approach-card-desc {
+    grid-template-rows: 1fr;
+    opacity: var(--opacity-100);
+    margin-top: var(--gap-2);
+  }
+
+  .approach-card.is-open .approach-toggle {
+    transform: rotate(45deg);
+    background: var(--neutral-2);
+    color: var(--neutral-10);
+  }
+  .approach-card h3 {
+    font-size: var(--fluid-body-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--fg);
+    line-height: var(--core-line-height-tight);
+    text-wrap: balance;
+  }
+  .approach-card p {
+    font-size: var(--fluid-body-sm);
+    color: var(--fg-muted);
+    line-height: var(--core-line-height-relaxed);
+  }
+
+  /* Hairline that draws down the left edge on hover. */
+  .approach-rule {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    border-radius: var(--radius-full);
+    background: var(--fg);
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform var(--duration-normal) var(--easing-out);  }
+
+  .approach-cards:hover .approach-card { filter: brightness(0.66); }
+  .approach-cards:hover .approach-card:hover { filter: none; }
+  .approach-card:hover {
+    border-color: color-mix(in srgb, var(--neutral-0) 22%, transparent);
+    background: color-mix(in srgb, var(--neutral-8) 100%, var(--bg));
+    box-shadow: var(--shadow-md);
+    z-index: var(--layer-card);
+  }
+  .approach-card:hover .approach-rule { transform: scaleY(1); }
+  .approach-card:hover .approach-seg.is-on { background: var(--fg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .approach-card, .approach-seg, .approach-rule,
+    .approach-card-desc, .approach-toggle { transition: none; }
+  }
+
+  /* ---- second column ---- */
+  .approach-cta {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--neutral-8) 62%, transparent);
+    border: var(--stroke-thin) solid var(--line);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--neutral-0) 7%, transparent);
+    padding: var(--gap-6);
+  }
+  /* Art-directed, not a background fill.
+     The picture holds the top two-thirds at full strength and is cut away
+     underneath by a scrim shaped to the copy, so the image is *seen* and the
+     type still reads at AA. Duotone rather than plain grayscale: the image is
+     desaturated and then warmed slightly, which sits it in the brand's own
+     temperature instead of leaving it a grey rectangle.
+     Ratio is never touched — `cover` fills, and nothing animates the box
+     (governance §8). Only a slow uniform scale runs on hover. */
+  .approach-cta-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    opacity: var(--opacity-90);
+    filter: grayscale(1) contrast(1.12) brightness(0.72) sepia(0.18);
+    transform: scale(1.02);
+    transition: transform 0.9s var(--easing-smooth), filter var(--duration-slow) var(--easing-smooth);  }
+  .approach-cta:hover .approach-cta-bg {
+    transform: scale(1.06);
+    filter: grayscale(0.85) contrast(1.16) brightness(0.78) sepia(0.14);
+  }
+  /* Scrim: transparent over the picture, opaque under the copy. Two stops do
+     the work — a soft top veil so the mark reads, then a hard ramp from 55%
+     down so the heading, body and button sit on near-solid ground. */
+  .approach-cta::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--neutral-10) 42%, transparent) 0%,
+        color-mix(in srgb, var(--neutral-10) 18%, transparent) 26%,
+        color-mix(in srgb, var(--neutral-10) 82%, transparent) 62%,
+        color-mix(in srgb, var(--neutral-10) 96%, transparent) 100%
+      );
+  }
+  /* A single hairline of light along the top edge — the same bevel the Bento
+     tiles and the Process Map panel carry, so the ad belongs to the set. */
+  .approach-cta {
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--neutral-0) 12%, transparent),
+      var(--shadow-md);
+  }
+  .approach-cta-inner { position: relative; z-index: var(--layer-base); }
+  .approach-cta-mark {
+    display: block;
+    width: 2.25rem; height: auto;
+    margin-bottom: var(--gap-5);
+    filter: drop-shadow(0 2px 12px color-mix(in srgb, var(--neutral-10) 70%, transparent));
+  }
+  @media (min-width: 1024px) {
+    .approach-cta { padding: var(--gap-8); }
+    /* Copy sits at the foot of the full-height panel, so the picture has room
+       above it and the button lands level with the last card. */
+    .approach-cta-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    /* The mark stays at the top while the copy holds the bottom. */
+    .approach-cta-mark { margin-bottom: auto; }
+  }
+  .approach-cta h3 {
+    font-size: var(--fluid-h3);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--core-line-height-tight);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .approach-cta-body {
+    margin-top: var(--gap-3);
+    font-size: var(--fluid-body-sm);
+    color: var(--fg-muted);
+    line-height: var(--core-line-height-relaxed);
+  }
+  .approach-cta-btn { margin-top: var(--gap-6); display: inline-flex; }
+  .approach-cta-link {
+    display: inline-block;
+    margin-top: var(--gap-4);
+    font-size: var(--fluid-label);
+    color: var(--fg-muted);
+    text-decoration: none;
+    border-bottom: var(--stroke-thin) solid color-mix(in srgb, var(--fg-muted) 40%, transparent);
+    transition: color var(--duration-normal) var(--easing-out),                border-color var(--duration-normal) var(--easing-out);
+  }
+  .approach-cta-link:hover { color: var(--fg); border-color: var(--fg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .approach-card, .approach-seg, .approach-rule,
+    .approach-card-desc, .approach-toggle { transition: none; }
+  }

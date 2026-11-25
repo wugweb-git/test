@@ -33,7 +33,7 @@
     }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-service",
+  "style": "file:./style.css",
   "icon": "megaphone",
   "description": "Service Mid Cta \u2014 Wugweb block."
 }

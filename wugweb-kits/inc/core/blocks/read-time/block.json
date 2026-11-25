@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "wugweb/read-time",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "title": "Wugweb Read Time",
   "category": "wugweb",
   "render": "file:./render.php",
@@ -19,6 +19,6 @@
     }
   },
   "icon": "clock",
-  "description": "Wugweb Read Time \u2014 Wugweb block.",
+  "description": "Wugweb Read Time — Wugweb block.",
   "attributes": {}
 }

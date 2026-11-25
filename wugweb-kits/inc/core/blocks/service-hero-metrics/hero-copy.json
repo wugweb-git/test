@@ -1,0 +1,73 @@
+{
+ "strategy": {
+  "subtitle": "Turn vision into direction. Direction into results.",
+  "tags": [
+   "Business Strategy",
+   "Product Strategy",
+   "AI Strategy",
+   "Transformation",
+   "Digital Transformation",
+   "Market Research",
+   "Product Discovery",
+   "Roadmapping",
+   "Innovation Strategy"
+  ],
+  "heroText": "Every successful business begins with the right strategy. Whether you're defining a new product, entering a market, adopting AI, or transforming existing operations, strategic decisions shape everything that follows. At Wugweb, we help organizations make those decisions with confidence. Through research, business insight, product thinking, and technology planning, we create practical strategies that reduce uncertainty, align stakeholders, and establish a clear path from ambition to execution.",
+  "body": "Around 70% of large-scale transformation initiatives fail to achieve their intended outcomes—often due to unclear strategy, poor alignment, or ineffective execution. The difference isn't ambition; it's having the right foundation before building. Our strategy practice helps organizations validate opportunities, prioritize investments, align stakeholders, and create practical roadmaps that guide confident decision-making from discovery through delivery."
+ },
+ "brand": {
+  "subtitle": "Create brands people remember.",
+  "tags": [
+   "Brand Strategy",
+   "Identity Systems",
+   "Naming",
+   "Brand Guidelines"
+  ],
+  "heroText": "Your brand is more than a logo — it's the sum of every interaction people have with you. We craft distinct brand identities that build emotional connection, inspire loyalty, and drive long-term growth. From naming and visual systems to voice and comprehensive guidelines, we ensure your brand stands out and stays consistent.",
+  "body": "A strong brand is a strategic asset. We help organisations define who they are, what they stand for, and how they show up in the world. Our brand process combines strategic thinking with creative excellence — resulting in identities that are not only beautiful but strategically grounded and built to last."
+ },
+ "experience": {
+  "subtitle": "Design products people love using.",
+  "tags": [
+   "UX Design",
+   "UI Design",
+   "Design Systems",
+   "User Research"
+  ],
+  "heroText": "We design digital experiences that people love to use. Rooted in human-centered design and rigorous user research, our UX/UI services cover everything from journey mapping and wireframing to polished visual design and scalable design systems — all focused on creating intuitive, engaging products that drive business results.",
+  "body": "In the experience economy, exceptional design is a competitive advantage. We design and engineer intuitive, engaging digital experiences that captivate users, build brand loyalty, and fuel sustainable growth. Our process is collaborative, data-informed, and relentlessly focused on delivering value to both users and businesses."
+ },
+ "growth": {
+  "subtitle": "Turn products into businesses.",
+  "tags": [
+   "Marketing",
+   "MarTech",
+   "Analytics",
+   "AI Marketing"
+  ],
+  "heroText": "Growth is driven by smart systems and sharper insights. We help businesses unlock data-driven marketing through MarTech consulting, marketing automation, AI integration, and lead generation strategies — turning your marketing into a measurable, scalable engine for acquisition and retention.",
+  "body": "Marketing success today is powered by smart systems and sharper insights. We help unlock your marketing potential through MarTech consulting that connects data, automates workflows, and creates tailored experiences. Our approach is holistic — we test, adapt, and optimise continuously using AI-powered marketing strategies to drive measurable growth."
+ },
+ "engineering": {
+  "subtitle": "Engineer products built to scale.",
+  "tags": [
+   "Web Development",
+   "App Development",
+   "Infrastructure",
+   "AI"
+  ],
+  "heroText": "We build robust, performant digital products using modern engineering practices. From responsive websites and e-commerce platforms to native mobile apps and cloud-native architectures, our engineering team delivers scalable solutions that are secure, fast, and built to last.",
+  "body": "It takes just 50 milliseconds for users to form an opinion about your website. We specialise in building scalable web solutions and custom digital products across marketing, eCommerce, and enterprise platforms. Our agile development process ensures speed, flexibility, and transparency from planning to deployment."
+ },
+ "operations": {
+  "subtitle": "Keep everything running and improving.",
+  "tags": [
+   "QA",
+   "Reliability",
+   "Support",
+   "Continuous Improvement"
+  ],
+  "heroText": "Great products need great operations behind them. We provide QA and testing services, no-code development for rapid delivery, workflow automation, and site reliability engineering — ensuring your digital products run smoothly, ship faster, and scale without friction.",
+  "body": "We build quality into every stage of the digital lifecycle. Our operations services ensure your products are reliable, high-performing, and ready for growth. From rigorous QA and testing to rapid no-code development and process automation, we provide the operational backbone that lets your team move fast with confidence."
+ }
+}

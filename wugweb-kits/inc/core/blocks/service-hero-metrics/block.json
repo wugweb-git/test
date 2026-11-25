@@ -33,7 +33,7 @@
     }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-service",
+  "style": "file:./style.css",
   "icon": "chart-bar",
   "description": "Service Hero Metrics \u2014 Wugweb block."
 }

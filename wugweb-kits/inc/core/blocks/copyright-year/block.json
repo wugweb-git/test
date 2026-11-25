@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "wugweb/copyright-year",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "title": "Wugweb Copyright Year",
   "category": "wugweb",
   "render": "file:./render.php",
@@ -19,6 +19,7 @@
     }
   },
   "icon": "info-outline",
-  "description": "Wugweb Copyright Year \u2014 Wugweb block.",
-  "attributes": {}
+  "description": "Wugweb Copyright Year — Wugweb block.",
+  "attributes": {},
+  "style": "file:./style.css"
 }

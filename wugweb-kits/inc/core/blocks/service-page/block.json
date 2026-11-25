@@ -33,7 +33,10 @@
     }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-service",
+  "style": [
+    "wugweb-core-service",
+    "file:./style.css"
+  ],
   "icon": "welcome-widgets-menus",
   "description": "Full service page for one pillar."
 }

@@ -1,0 +1,37 @@
+  /* Base Glass Panel Utilities */
+  .glass-panel {
+    background: color-mix(in srgb, var(--neutral-8) 60%, transparent);
+    border: var(--stroke-thin) solid color-mix(in srgb, var(--neutral-0) 12%, transparent);
+    backdrop-filter: var(--glass-medium);
+    -webkit-backdrop-filter: var(--glass-medium);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--duration-normal) ease, transform var(--duration-normal) ease;  }
+  
+  .glass-panel:hover {
+    border-color: color-mix(in srgb, var(--neutral-0) 22%, transparent);
+  }
+
+  /* Toolkit */
+  .toolkit-section { padding-block: var(--space-section-xl); }
+  .toolkit-section h2 { font-size: var(--t-h4); margin-top: var(--gap-3); max-width: 50ch; font-weight: var(--font-weight-semibold); }
+  .toolkit-grid { display: grid; gap: var(--gap-6); margin-top: var(--gap-10); }
+  @media (min-width: 640px) { .toolkit-grid { grid-template-columns: repeat(3, 1fr); } }
+  .toolkit-category { padding: var(--gap-8); }
+  .toolkit-category:hover { transform: translateY(-4px); }
+  .toolkit-category-header { font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); margin-bottom: var(--gap-4); text-transform: uppercase; letter-spacing: var(--tracking-label); }
+  .toolkit-items { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--gap-2); }
+  .toolkit-items li { display: inline-flex; align-items: center; gap: var(--gap-2); font-size: var(--fluid-label); padding: var(--gap-1) var(--gap-3); border: var(--stroke-thin) solid color-mix(in srgb, var(--neutral-0) 12%, transparent); border-radius: var(--r-pill); color: var(--fg-muted); background: color-mix(in srgb, var(--neutral-8) 40%, transparent);}
+  .toolkit-items li img { flex-shrink: 0; opacity: .9; transition: opacity var(--duration-fast) var(--easing-out); }
+  /* The chips were inert — 89 of them on a page, none reacting to the pointer. */
+  .toolkit-items li {
+    transition: border-color var(--duration-fast) var(--easing-out),                color var(--duration-fast) var(--easing-out),
+                background-color var(--duration-fast) var(--easing-out);
+  }
+  .toolkit-items li:hover {
+    border-color: color-mix(in srgb, var(--neutral-0) 28%, transparent);
+    background: color-mix(in srgb, var(--neutral-8) 75%, transparent);
+    color: var(--fg);
+  }
+  .toolkit-items li:hover img { opacity: 1; }

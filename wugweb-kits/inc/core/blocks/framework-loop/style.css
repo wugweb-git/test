@@ -1,0 +1,271 @@
+  /* ---- full-bleed stage ----
+     The section is its own viewport: 100vw wide, one screen tall, with the block
+     filling it. The 100vw bleed needs `overflow: clip` on an ancestor and
+     breaks inside any ancestor carrying transform / filter / contain — the
+     same constraint the Ambient Backdrop Layer documents. */
+  .process-map-section {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    /* One screen minus the sticky header, so a stage scrolled to the top of
+       the viewport still shows its own eyebrow instead of parking it under the
+       nav. `--header-height` is derived in global.css (100px mobile, 108px
+       from 768), so this tracks the header per breakpoint. svh first, dvh
+       where supported (kits shell-safe-areas-and-hero). */
+    min-height: calc(100svh - var(--header-height));
+    min-height: calc(100dvh - var(--header-height));
+    padding: var(--gap-6) max(var(--shell-gutter), calc((100% - 1200px) / 2));
+    display: flex;
+  }
+  /* Full-bleed stage, content still capped at 1200 like every section. */
+  @media (min-width: 1024px) { .process-map-section { padding: var(--gap-8) max(var(--shell-gutter), calc((100% - 1200px) / 2)); } }
+
+  /* ---- the block ---- */
+  .pm-panel {
+    margin: 0;
+    flex: 1 1 auto;
+    /* The panel is itself a flex item of the section, so it needs the same
+       min-width:0 as .pm-scroll — otherwise the 44rem figure inside pushes the
+       whole chain wide and the page scrolls sideways on a phone. Both are
+       required; fixing only the inner one does nothing. */
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding: var(--gap-6);
+    background: color-mix(in srgb, var(--neutral-8) 42%, transparent);
+    border: var(--stroke-thin) solid var(--line);
+    border-radius: var(--radius-2xl);
+    /* Same bevel as the Bento tile: two inset hairlines under one light
+       source, rather than a heavier border. */
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--neutral-0) 8%, transparent),
+      inset 0 -1px 0 color-mix(in srgb, var(--neutral-10) 40%, transparent),
+      var(--shadow-md);
+  }
+  @media (min-width: 1024px) { .pm-panel { padding: var(--gap-8); } }
+
+  .pm-title { max-width: 46ch; }
+  .pm-title h2 { font-size: var(--t-h3); margin-top: var(--gap-3); }
+  .pm-lede {
+    margin-top: var(--gap-4); color: var(--fg-muted);
+    font-size: var(--fluid-body-md); line-height: var(--core-line-height-relaxed);
+  }
+
+  /* ---- map ---- */
+  /* The map is the whole section now, so it can never be hidden. It grows to
+     take whatever the block has left after the title, and below the width it
+     needs it scrolls inside its own container — the page body still must not
+     scroll sideways. */
+  .pm-scroll {
+    /* The wide canvas is desktop-only; below 900px the vertical run replaces
+       it. `display` is set once, here and in the media query below — declaring
+       it again further down silently overrode the `none`. */
+    display: none;
+    margin-top: var(--gap-5);
+    flex: 1 1 auto;
+    /* min-width:0 is load-bearing, the same way min-height:0 is below. A flex
+       item will not shrink past its content, so without this the 44rem
+       min-width on .pm-figure pushed the scroll container — and the whole
+       panel — to 754px inside a 375px viewport, and `overflow-x` never got a
+       chance to scroll. */
+    min-width: 0;
+    /* min-height:0 is load-bearing: without it a flex item refuses to shrink
+       below its content, and the map overflows the full-height stage instead of
+       fitting inside it. */
+    min-height: 0;
+    align-items: center; justify-content: center;
+    overflow-x: auto; overscroll-behavior-x: contain;
+  }
+  @media (min-width: 1024px) { .pm-scroll { display: flex; } }
+  /* Fit-box: take the height the stage has left, derive width from the field's
+     own ratio, and clamp back by width on narrow screens. The ratio must stay
+     exact — the chips are positioned in percentages of this element, so any
+     letterboxing between it and the SVG would desync every label. */
+  .pm-figure {
+    position: relative;
+    aspect-ratio: 1280 / 720;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    min-width: 44rem;
+    margin-inline: auto;
+  }
+  .pm-svg { display: block; width: 100%; height: 100%; }
+
+  /* Palette: greys only, no hue anywhere.
+     Hierarchy is carried by brightness — the field sits low on the neutral
+     ramp, the loop and the lit phase step up it. Yellow was here first and was
+     wrong twice over: the pillar accent (--svc-experience is #09E2C0) read as
+     cyan across the whole section, and swapping it for the brand yellow just
+     moved the same problem to a colour capped at 10% of the page. A diagram
+     this dense does not need hue to separate its layers. */
+  .pm-ring {
+    fill: none;
+    stroke: color-mix(in srgb, var(--fg-muted) 15%, transparent);
+    stroke-width: 1; stroke-dasharray: 3 7;
+  }
+  .pm-ring.is-outer { stroke: color-mix(in srgb, var(--fg-muted) 9%, transparent); }
+  .pm-edge {
+    fill: none;
+    stroke: color-mix(in srgb, var(--fg-muted) 48%, transparent);
+    stroke-width: var(--pm-line-w, 1.25);
+    transition: stroke var(--duration-normal) var(--easing-smooth);
+  }
+  /* An edge belongs to the two phases it joins, so it lights for either. */
+  .pm-figure.is-focused .pm-edge { stroke: color-mix(in srgb, var(--fg-muted) 22%, transparent); }
+  .pm-figure.is-focused .pm-edge.is-lit { stroke: var(--neutral-2); }
+  .pm-figure.hide-cursor { cursor: none; }
+  .pm-spoke { stroke: color-mix(in srgb, var(--fg-muted) 30%, transparent); stroke-width: 1; }
+
+  .pm-hub-halo { fill: color-mix(in srgb, var(--neutral-0) 8%, transparent); }
+  .pm-hub-disc { fill: var(--fg); }
+  .pm-hub-n {
+    font-family: var(--font-mono); font-size: 15px;
+    font-weight: var(--font-weight-semibold); fill: var(--neutral-10);
+  }
+  .pm-hub-name { font-size: 15px; font-weight: var(--font-weight-semibold); fill: var(--fg); }
+
+  .pm-dot { fill: var(--fg); stroke: var(--bg); stroke-width: 2.5; }
+  .pm-dot.is-quiet { fill: var(--fg-muted); stroke-width: 2; }
+
+  /* the return loop — brighter grey, not a colour */
+  .pm-loop-path { fill: none; stroke: var(--neutral-3); stroke-width: 1.25; stroke-dasharray: 4 5; }
+  .pm-arrow { fill: var(--neutral-3); }
+  .pm-loop-label { font-size: 11px; font-weight: var(--font-weight-semibold); fill: var(--neutral-3); }
+
+  /* ---- satellites ---- */
+  .pm-sats { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+  .pm-sat { position: absolute; width: 8.4%; margin-left: -4.2%; }
+  /* Sit clear of the dot: fans that point up hang above it, fans that point
+     down hang below. */
+  .pm-sat.is-up { transform: translateY(calc(-100% - 12px)); }
+  .pm-sat.is-down { transform: translateY(12px); }
+  .pm-chip {
+    display: flex; align-items: center; gap: var(--gap-2);
+    padding: var(--gap-2) var(--gap-3);
+    background: color-mix(in srgb, var(--neutral-8) 92%, transparent);
+    border: 0;
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--neutral-0) 7%, transparent), var(--shadow-md);
+    font-size: var(--fluid-label);
+    line-height: var(--core-line-height-tight);
+    color: var(--fg);
+    text-wrap: balance;
+  }
+  .pm-icon {
+    flex: 0 0 auto; width: 15px; height: 15px; fill: none;
+    stroke: var(--fg-muted); stroke-width: 1.4;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .pm-chip-text { min-width: 0; }
+
+  /* ---- phase focus ----
+     Hovering or scrolling to a phase lights that hub, its rings, spokes, dots
+     and chips, and pushes everything else back. `filter`, not `opacity` — GSAP
+     owns opacity here for the draw-on sequence, and two owners on one property
+     is the bug that cost a day on the BentoBlock.
+
+     z-index is the other half, on the documented scale: chips rest at
+     --layer-base, the lit phase's rise to --layer-card so an overlapping label
+     can never be read half-under a neighbour's, and the chip actually under
+     the pointer rises again to --layer-popover over its own siblings. */
+  .pm-sat, .pm-hub, .pm-ring, .pm-spoke, .pm-dot {
+    transition: filter var(--duration-normal) var(--easing-smooth),
+                opacity var(--duration-normal) var(--easing-smooth);
+  }
+  .pm-sat { z-index: var(--layer-base); }
+
+  .pm-figure.is-focused .pm-sat { filter: brightness(0.62); }
+  .pm-figure.is-focused .pm-ring,
+  .pm-figure.is-focused .pm-spoke,
+  .pm-figure.is-focused .pm-dot { opacity: 0.42; }
+  .pm-figure.is-focused .pm-hub { filter: brightness(0.6); }
+
+  .pm-figure.is-focused .pm-sat.is-lit { filter: none; z-index: var(--layer-card); }
+  .pm-figure.is-focused .pm-ring.is-lit,
+  .pm-figure.is-focused .pm-spoke.is-lit,
+  .pm-figure.is-focused .pm-dot.is-lit { opacity: 1; }
+  .pm-figure.is-focused .pm-hub.is-lit { filter: none; }
+  .pm-figure.is-focused .pm-ring.is-lit { stroke: color-mix(in srgb, var(--neutral-2) 34%, transparent); }
+  .pm-figure.is-focused .pm-sat.is-lit .pm-chip {
+  }
+
+  /* The pointer's own target wins over the rest of its phase. */
+  .pm-figure .pm-sat:hover { filter: none !important; z-index: var(--layer-popover); }
+  .pm-figure .pm-sat:hover .pm-chip { }
+  .pm-figure .pm-sat:hover .pm-icon { stroke: var(--neutral-2); }
+
+  .pm-hub { cursor: pointer; }
+  .pm-hub:focus-visible { outline: var(--focus-primary); outline-offset: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pm-sat, .pm-hub, .pm-ring, .pm-spoke, .pm-dot { transition: none; }
+  }
+
+  /* ---- narrow-screen run ----
+     The same map, turned through 90°. A vertical rail carries the numbered
+     hubs; each phase's steps sit beside it as the same chips the wide canvas
+     uses, so nothing has to be learned twice. */
+  .pm-run { list-style: none; margin: var(--gap-6) 0 0; padding: 0; display: grid; gap: 0; }
+  @media (min-width: 1024px) { .pm-run { display: none; } }
+
+  .pm-run-phase {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: var(--gap-4);
+    padding-bottom: var(--gap-6);
+  }
+  /* The rail. Drawn per item and stopped on the last, so it never runs past
+     the final phase into empty space. */
+  .pm-run-phase::before {
+    content: '';
+    position: absolute;
+    left: calc(2.25rem / 2 - 0.5px);
+    top: 2.25rem; bottom: 0;
+    width: 1px;
+    background: color-mix(in srgb, var(--fg-muted) 30%, transparent);
+  }
+  .pm-run-phase:last-of-type { padding-bottom: 0; }
+  .pm-run-phase:last-of-type::before { display: none; }
+
+  .pm-run-node {
+    width: 2.25rem; height: 2.25rem;
+    display: grid; place-items: center;
+    border-radius: var(--radius-full);
+    background: var(--fg);
+    color: var(--neutral-10);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: var(--font-weight-semibold);
+  }
+  .pm-run-body { min-width: 0; padding-top: var(--gap-1); }
+  .pm-run-body h3 {
+    font-size: var(--fluid-body-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--fg);
+    line-height: var(--core-line-height-tight);
+  }
+  .pm-run-steps { list-style: none; margin: var(--gap-3) 0 0; padding: 0; display: grid; gap: var(--gap-2); }
+  .pm-run-steps li {
+    display: flex; align-items: center; gap: var(--gap-2);
+    padding: var(--gap-2) var(--gap-3);
+    background: color-mix(in srgb, var(--neutral-8) 70%, transparent);
+    border: var(--stroke-thin) solid var(--line);
+    border-radius: var(--radius-lg);
+    font-size: var(--fluid-label);
+    line-height: var(--core-line-height-tight);
+    color: var(--fg);
+  }
+  .pm-run-loop {
+    display: flex; align-items: center; gap: var(--gap-3);
+    margin-top: var(--gap-5);
+    padding-top: var(--gap-5);
+    border-top: var(--stroke-thin) solid color-mix(in srgb, var(--line) 70%, transparent);
+  }
+  .pm-run-loop-mark {
+    width: 1.75rem; flex: 0 0 auto;
+    border-top: 1.5px dashed var(--neutral-3);
+  }
+  .pm-run-loop p { margin: 0; font-size: var(--fluid-label); color: var(--fg-muted); }
+
+  .pm-note { margin: var(--gap-4) 0 0; font-size: var(--fluid-label); color: var(--fg-muted); max-width: 70ch; }

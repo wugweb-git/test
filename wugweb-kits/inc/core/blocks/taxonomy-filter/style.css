@@ -1,4 +1,25 @@
-.wugweb-taxonomy-filter{display:flex;flex-wrap:wrap;gap:8px}
-.wugweb-taxonomy-filter a{display:inline-flex;align-items:center;min-height:44px;border:0;border-radius:8px;background:var(--wp--preset--color--neutral-6);color:var(--wp--preset--color--neutral-1);padding:8px 16px;font-size:var(--wp--preset--font-size--label);font-weight:500;text-decoration:none;transition:background 300ms cubic-bezier(0,0,.2,1)}
-.wugweb-taxonomy-filter a:hover,.wugweb-taxonomy-filter a[aria-current],.wugweb-taxonomy-filter a.is-active{background:var(--wp--preset--color--yellow);color:var(--wp--preset--color--ash)}
-.wugweb-taxonomy-filter a:focus-visible{outline:2px solid var(--wp--preset--color--neutral-3);outline-offset:3px}
+.work-filters, .blog-filters { display: flex; gap: var(--gap-2); flex-wrap: wrap; margin-bottom: var(--gap-8); }
+.filter-chip { text-decoration: none; } /* adapted: chips are links here, buttons in the source */
+
+/* work/index.astro */
+.work-filters .filter-chip {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  padding: var(--gap-2) var(--gap-5);
+  border-radius: var(--r-pill);
+  border: 0;
+  background: transparent;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+.work-filters .filter-chip:hover { color: var(--fg); }
+.work-filters .filter-chip.active {
+  color: var(--neutral-0);
+  background: var(--color-accent-primary);
+}
+
+/* blog/index.astro */
+.blog-filters .filter-chip { font-family: var(--font-mono); font-size: var(--t-sm); padding: var(--gap-2) var(--gap-4); border: 0; border-radius: var(--r-pill); background: transparent; color: var(--fg-muted); cursor: pointer; transition: border-color var(--duration-fast) var(--easing-out), color var(--duration-fast) var(--easing-out), background var(--duration-fast) var(--easing-out); }
+.blog-filters .filter-chip:hover { color: var(--fg); }
+.blog-filters .filter-chip.active { color: var(--fg); background: color-mix(in srgb, var(--neutral-0) 10%, transparent); }

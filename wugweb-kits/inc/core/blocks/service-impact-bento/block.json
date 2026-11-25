@@ -30,10 +30,15 @@
         "operations"
       ],
       "default": "strategy"
+    },
+    "mediaImage": {
+      "type": "string",
+      "default": ""
     }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-service",
+  "style": "file:./style.css",
   "icon": "layout",
-  "description": "Service Impact Bento \u2014 Wugweb block."
+  "description": "Service Impact Bento — Wugweb block.",
+  "viewScript": "file:./view.js"
 }

@@ -13,7 +13,7 @@ add_action('init', function () {
     wp_register_style('wugweb-core-cards', get_theme_file_uri('inc/core/assets/cards.css'), array(), '0.3.0');
     $blocks = array(
         // cards
-        'blog-card', 'portfolio-card', 'industry-card', 'client-card', 'service-card', 'team-card', 'stat-card', 'testimonial-card',
+        'blog-card', 'portfolio-card', 'industry-card', 'client-card', 'team-card', 'stat-card', 'testimonial-card',
         // interactive / runtime
         'pillar-scope', 'copyright-year', 'marquee', 'taxonomy-filter',
         // service pages (data from includes/service-data.json)
@@ -27,7 +27,7 @@ add_action('init', function () {
     );
     foreach ($blocks as $b) { register_block_type(__DIR__ . '/blocks/' . $b); }
     register_block_pattern_category('wugweb-cards', array('label' => 'Wugweb Cards'));
-    foreach (array('blog','portfolio','industry','client','service','team','stat','testimonial') as $c) {
+    foreach (array('blog','portfolio','industry','client','team','stat','testimonial') as $c) {
         register_block_pattern('wugweb-core/' . $c . '-card', array('title' => ucfirst($c) . ' Card', 'categories' => array('wugweb-cards'), 'content' => '<!-- wp:wugweb/' . $c . '-card /-->'));
     }
     register_block_pattern_category('wugweb-sections', array('label' => 'Wugweb Sections'));

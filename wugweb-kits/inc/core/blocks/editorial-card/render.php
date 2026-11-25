@@ -1,2 +1,5 @@
 <?php
-$post_id=get_the_ID(); ?><article <?php echo get_block_wrapper_attributes(array('class'=>'wugweb-content-card wugweb-editorial-card')); ?>><?php if(has_post_thumbnail($post_id)): ?><div class="wugweb-editorial-card__media"><?php echo get_the_post_thumbnail($post_id,'large',array('loading'=>'lazy')); ?></div><?php endif; ?><p class="wugweb-content-eyebrow"><?php echo wp_kses_post(get_the_category_list(' · ', '', $post_id)); ?></p><h3><a href="<?php the_permalink($post_id); ?>"><?php echo esc_html(get_the_title($post_id)); ?></a></h3><p><?php echo esc_html(wp_trim_words(get_the_excerpt($post_id),24)); ?></p><small><?php echo esc_html(get_the_date('', $post_id)); ?> · <?php echo esc_html(max(1,ceil(str_word_count(wp_strip_all_tags(get_post_field('post_content',$post_id)))/200))); ?> min read</small></article>
+/** Editorial Card: PostCard.astro port. Renders the current post via the shared PostCard helper. */
+$id = get_the_ID();
+if (!$id || !function_exists('wugweb_post_card_data')) { return; }
+echo '<div ' . get_block_wrapper_attributes() . '>' . wugweb_post_card_html(wugweb_post_card_data($id)) . '</div>';

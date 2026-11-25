@@ -1,0 +1,127 @@
+.contact-v2-container {
+  padding-block: var(--space-page-head) var(--space-section-xl);
+}
+.contact-v2-hero {
+  max-width: 800px;
+  margin-bottom: var(--space-section-md);
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-2);
+  padding: var(--gap-1) var(--gap-3);
+  border-radius: var(--radius-full);
+  background: var(--surface-elevated);
+  border: var(--stroke-thin) solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--fluid-label);
+  color: var(--fg-muted);
+  margin-bottom: var(--gap-4);
+}
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-feedback-success);
+  box-shadow: 0 0 8px var(--color-feedback-success);
+}
+.hero-statement {
+  margin-top: var(--gap-5);
+  font-size: var(--fluid-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--core-line-height-tight);
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  max-width: 24ch;
+}
+.hero-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-3);
+  margin-top: var(--gap-6);
+}
+.quick-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-2);
+  padding: var(--gap-2) var(--gap-4);
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  border: var(--stroke-thin) solid var(--line);
+  color: var(--fg);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--fluid-label);
+  transition: var(--transition-fast);
+}
+.quick-chip:hover {
+  border-color: var(--accent-warm);
+  color: var(--accent-warm);
+}
+.quick-sla {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-1);
+  font-family: var(--font-mono);
+  font-size: var(--fluid-label);
+  color: var(--fg-muted);
+}
+
+/* Form Card */
+.form-card {
+  background: var(--surface-elevated);
+  border: var(--stroke-thin) solid var(--line);
+  border-radius: var(--r-2);
+  padding: var(--gap-8);
+}
+
+/* Adapted: the source's .field-group / .submit-btn / .checkbox-optin rules,
+   applied to the Fluent Forms classes that render inside .form-card. */
+.form-card .ff-el-group { margin-bottom: var(--gap-4); }
+.form-card .ff-el-input--label label {
+  font-family: var(--font-mono);
+  font-size: var(--fluid-label);
+  color: var(--fg-muted);
+}
+.form-card .ff-el-form-control {
+  background: var(--surface-2);
+  border: var(--stroke-thin) solid var(--line);
+  border-radius: var(--r-1);
+  padding: var(--gap-3) var(--gap-4);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--fluid-body-md);
+  transition: var(--transition-fast);
+}
+.form-card .ff-el-form-control:focus {
+  outline: none;
+  border-color: var(--accent-warm);
+  background: var(--surface-hover);
+}
+.form-card .ff-el-form-control:focus-visible {
+  outline: var(--focus-input);
+  outline-offset: 2px;
+}
+.form-card .ff-el-form-check label,
+.form-card .ff_t_c {
+  font-size: var(--t-sm);
+  color: var(--fg-muted);
+}
+.form-card .ff-btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-2);
+  padding: var(--gap-3) var(--gap-6);
+  border-radius: var(--radius-sm);
+  background: var(--accent-warm);
+  color: var(--neutral-10);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.form-card .ff-btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-yellow) 30%, transparent);
+}

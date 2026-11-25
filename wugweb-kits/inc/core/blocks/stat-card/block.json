@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/stat-card",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "title": "Stat Card",
   "category": "wugweb",
   "keywords": [
@@ -67,7 +67,7 @@
     }
   ],
   "render": "file:./render.php",
-  "style": "wugweb-core-cards",
+  "style": "file:./style.css",
   "icon": "chart-line",
-  "description": "Stat Card \u2014 Wugweb block."
+  "description": "Stat Card — Wugweb block."
 }

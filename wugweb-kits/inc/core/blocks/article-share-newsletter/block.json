@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/article-share-newsletter",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "title": "Article Share & Newsletter",
   "category": "wugweb",
   "supports": {
@@ -19,8 +19,14 @@
     }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-content",
+  "style": "file:./style.css",
   "icon": "share",
-  "description": "Article Share & Newsletter \u2014 Wugweb block.",
-  "attributes": {}
+  "description": "Share row and newsletter signup for articles. Optionally set a Fluent Forms ID to replace the built-in form.",
+  "attributes": {
+    "formId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "viewScript": "file:./view.js"
 }

@@ -1,0 +1,98 @@
+  /* ---- second column ---- */
+  .approach-cta {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--neutral-8) 62%, transparent);
+    border: var(--stroke-thin) solid var(--line);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--neutral-0) 7%, transparent);
+    padding: var(--gap-6);
+  }
+  /* Art-directed, not a background fill.
+     The picture holds the top two-thirds at full strength and is cut away
+     underneath by a scrim shaped to the copy, so the image is *seen* and the
+     type still reads at AA. Duotone rather than plain grayscale: the image is
+     desaturated and then warmed slightly, which sits it in the brand's own
+     temperature instead of leaving it a grey rectangle.
+     Ratio is never touched — `cover` fills, and nothing animates the box
+     (governance §8). Only a slow uniform scale runs on hover. */
+  .approach-cta-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    opacity: var(--opacity-90);
+    filter: grayscale(1) contrast(1.12) brightness(0.72) sepia(0.18);
+    transform: scale(1.02);
+    transition: transform 0.9s var(--easing-smooth), filter var(--duration-slow) var(--easing-smooth);  }
+  .approach-cta:hover .approach-cta-bg {
+    transform: scale(1.06);
+    filter: grayscale(0.85) contrast(1.16) brightness(0.78) sepia(0.14);
+  }
+  /* Scrim: transparent over the picture, opaque under the copy. Two stops do
+     the work — a soft top veil so the mark reads, then a hard ramp from 55%
+     down so the heading, body and button sit on near-solid ground. */
+  .approach-cta::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--neutral-10) 42%, transparent) 0%,
+        color-mix(in srgb, var(--neutral-10) 18%, transparent) 26%,
+        color-mix(in srgb, var(--neutral-10) 82%, transparent) 62%,
+        color-mix(in srgb, var(--neutral-10) 96%, transparent) 100%
+      );
+  }
+  /* A single hairline of light along the top edge — the same bevel the Bento
+     tiles and the Process Map panel carry, so the ad belongs to the set. */
+  .approach-cta {
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--neutral-0) 12%, transparent),
+      var(--shadow-md);
+  }
+  .approach-cta-inner { position: relative; z-index: var(--layer-base); }
+  .approach-cta-mark {
+    display: block;
+    width: 2.25rem; height: auto;
+    margin-bottom: var(--gap-5);
+    filter: drop-shadow(0 2px 12px color-mix(in srgb, var(--neutral-10) 70%, transparent));
+  }
+  @media (min-width: 1024px) {
+    .approach-cta { padding: var(--gap-8); }
+    /* Copy sits at the foot of the full-height panel, so the picture has room
+       above it and the button lands level with the last card. */
+    .approach-cta-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    /* The mark stays at the top while the copy holds the bottom. */
+    .approach-cta-mark { margin-bottom: auto; }
+  }
+  .approach-cta h3 {
+    font-size: var(--fluid-h3);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--core-line-height-tight);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .approach-cta-body {
+    margin-top: var(--gap-3);
+    font-size: var(--fluid-body-sm);
+    color: var(--fg-muted);
+    line-height: var(--core-line-height-relaxed);
+  }
+  .approach-cta-btn { margin-top: var(--gap-6); display: inline-flex; }
+  .approach-cta-link {
+    display: inline-block;
+    margin-top: var(--gap-4);
+    font-size: var(--fluid-label);
+    color: var(--fg-muted);
+    text-decoration: none;
+    border-bottom: var(--stroke-thin) solid color-mix(in srgb, var(--fg-muted) 40%, transparent);
+    transition: color var(--duration-normal) var(--easing-out),                border-color var(--duration-normal) var(--easing-out);
+  }
+  .approach-cta-link:hover { color: var(--fg); border-color: var(--fg); }

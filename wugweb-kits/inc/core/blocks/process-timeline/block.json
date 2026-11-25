@@ -30,10 +30,15 @@
         "operations"
       ],
       "default": "strategy"
+    },
+    "adImage": {
+      "type": "string",
+      "default": ""
     }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-service",
+  "style": "file:./style.css",
   "icon": "backup",
-  "description": "Process Timeline \u2014 Wugweb block."
+  "description": "Process Timeline — Wugweb block.",
+  "viewScript": "file:./view.js"
 }

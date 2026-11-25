@@ -1,2 +1,23 @@
 <?php
-$id=get_the_ID();$meta=array('Client'=>get_post_meta($id,'_client',true),'Partner'=>get_post_meta($id,'_partner',true),'Industry'=>get_the_term_list($id,'industry','',' · '),'Disciplines'=>get_the_term_list($id,'discipline','',' · '),'Team'=>get_post_meta($id,'_team',true),'Special Thanks'=>get_post_meta($id,'_special_thanks',true)); ?><section <?php echo get_block_wrapper_attributes(array('class'=>'wugweb-content-block wugweb-case-study-brief-matrix')); ?>><div class="wugweb-content-grid"><?php foreach($meta as $label=>$value): if(!$value||is_wp_error($value)){continue;} ?><div class="wugweb-content-card"><p class="wugweb-content-eyebrow"><?php echo esc_html($label); ?></p><p><?php echo wp_kses_post($value); ?></p></div><?php endforeach; ?></div></section>
+/** Case Study Brief Matrix: components/work/CaseHero.astro meta list (dt/dd pairs). */
+$id = get_the_ID();
+if (!$id) { return; }
+$m = function ($k) use ($id) { return trim((string) get_post_meta($id, 'wugweb_cs_' . $k, true)); };
+$terms = function ($tax) use ($id) {
+    $t = get_the_terms($id, $tax);
+    return ($t && !is_wp_error($t)) ? implode(', ', wp_list_pluck($t, 'name')) : '';
+};
+$industry = $m('industry'); if ($industry === '') { $industry = $terms('industry'); }
+$disc = array_filter(array_unique(array_map('trim', array_merge(explode(',', $m('primary_discipline')), explode(',', $m('additional_disciplines'))))));
+$disciplines = $disc ? implode(', ', $disc) : $terms('discipline');
+$meta = array(
+    'Client' => $m('client'),
+    'Partner' => $m('partner'),
+    'Industry' => $industry,
+    'Disciplines' => $disciplines,
+    'Team' => $m('team'),
+    'Special Thanks' => $m('special_thanks'),
+);
+$meta = array_filter($meta, function ($v) { return $v !== ''; });
+if (!$meta) { return; }
+?><dl <?php echo get_block_wrapper_attributes(array('class' => 'case-hero-meta')); ?>><?php foreach ($meta as $label => $value): ?><dt><?php echo esc_html($label); ?></dt><dd><?php echo esc_html($value); ?></dd><?php endforeach; ?></dl>

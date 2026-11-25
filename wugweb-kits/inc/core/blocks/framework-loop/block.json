@@ -33,7 +33,8 @@
     }
   },
   "render": "file:./render.php",
-  "style": "wugweb-core-service",
+  "style": "file:./style.css",
   "icon": "update",
-  "description": "Framework Loop \u2014 Wugweb block."
+  "description": "Framework Loop — Wugweb block.",
+  "viewScript": "file:./view.js"
 }

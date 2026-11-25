@@ -81,3 +81,16 @@ if (!in_array('wugweb-core/wugweb-core.php', (array) get_option('active_plugins'
     require_once __DIR__ . '/inc/core/bootstrap.php';
 }
 require_once __DIR__ . '/inc/seo-head.php';
+
+/* Motion: GSAP (self-hosted) + the site's scroll-animations / draggable-tags / lazy-video, bundled from wugweb_site. */
+add_action('wp_head', function () {
+    if (is_admin()) return;
+    echo '<script>document.documentElement.classList.add("js-reveal");window.__revealWatchdog=setTimeout(function(){document.documentElement.classList.remove("js-reveal")},5000);</script>' . "\n";
+}, 1);
+add_action('wp_enqueue_scripts', function () {
+    $v = wp_get_theme()->get('Version'); $u = get_theme_file_uri('assets/js/');
+    wp_enqueue_script('gsap', $u . 'vendor/gsap.min.js', array(), '3.15.0', true);
+    $deps = array('gsap');
+    foreach (array('ScrollTrigger', 'Draggable', 'Flip', 'InertiaPlugin') as $p) { wp_enqueue_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); $deps[] = 'gsap-' . $p; }
+    wp_enqueue_script('wugweb-motion', $u . 'wugweb-motion.js', $deps, $v, true);
+});

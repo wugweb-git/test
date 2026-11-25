@@ -1,2 +1,25 @@
 <?php
-$content=get_post_field('post_content',get_the_ID()); preg_match_all('/<h([2-3])[^>]*>(.*?)<\/h[2-3]>/is',$content,$matches); ?><section <?php echo get_block_wrapper_attributes(array('class'=>'wugweb-content-block wugweb-article-meta-toc')); ?>><div class="wugweb-content-card"><p class="wugweb-content-eyebrow">Article</p><p><strong><?php echo esc_html(get_the_author()); ?></strong> · <?php echo esc_html(get_the_date()); ?> · <?php echo esc_html(max(1,ceil(str_word_count(wp_strip_all_tags($content))/200))); ?> min read</p><?php if(!empty($matches[2])): ?><nav aria-label="Contents"><strong>Contents</strong><ol><?php foreach($matches[2] as $heading): ?><li><?php echo esc_html(wp_strip_all_tags($heading)); ?></li><?php endforeach; ?></ol></nav><?php endif; ?></div></section>
+/** Article Meta & Contents: pages/blog/[slug].astro .article-meta + .article-toc. */
+$id = get_the_ID();
+static $wugweb_toc_busy = false;
+if (!$id || $wugweb_toc_busy) { return; }
+$wugweb_toc_busy = true;
+$content = (string) get_post_field('post_content', $id);
+$author_id = (int) get_post_field('post_author', $id);
+$author = get_the_author_meta('display_name', $author_id);
+$avatar = $author_id ? get_avatar_url($author_id, array('size' => 48)) : '';
+$cats = get_the_category($id);
+$category = $cats ? $cats[0]->name : '';
+$minutes = max(1, (int) ceil(str_word_count(wp_strip_all_tags($content)) / 200));
+$slugify = function ($t) { return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($t)), '-'); };
+$toc = array();
+if (preg_match_all('/<h([23])([^>]*)>(.*?)<\/h\1>/is', do_blocks(preg_replace('/<!-- wp:wugweb\/article-meta-toc[^>]*-->/', '', $content)), $mm, PREG_SET_ORDER)) {
+    foreach ($mm as $h) {
+        $text = trim(wp_strip_all_tags($h[3]));
+        if ($text === '') { continue; }
+        $anchor = preg_match('/\sid=["\']([^"\']+)["\']/', $h[2], $im) ? $im[1] : $slugify($text);
+        $toc[] = array('level' => (int) $h[1], 'text' => $text, 'id' => $anchor);
+    }
+}
+$wugweb_toc_busy = false;
+?><div <?php echo get_block_wrapper_attributes(array('class' => 'article-meta-toc')); ?>><dl class="article-meta" data-reveal><?php if ($author): ?><div><dt class="meta-label">Author</dt><dd class="meta-author"><?php if ($avatar): ?><img src="<?php echo esc_url($avatar); ?>" alt="" class="meta-avatar"><?php endif; ?><?php echo esc_html($author); ?></dd></div><?php endif; ?><div><dt class="meta-label">Published</dt><dd><time datetime="<?php echo esc_attr(get_the_date('c', $id)); ?>"><?php echo esc_html(get_the_date('', $id)); ?></time></dd></div><div><dt class="meta-label">Reading time</dt><dd><?php echo esc_html($minutes . ' min read'); ?></dd></div><?php if ($category): ?><div><dt class="meta-label">Category</dt><dd><?php echo esc_html($category); ?></dd></div><?php endif; ?></dl><?php if ($toc): ?><nav class="article-toc" aria-label="Table of contents"><p class="toc-title">Contents</p><ol><?php foreach ($toc as $t): ?><li class="toc-item<?php echo $t['level'] === 3 ? ' toc-h3' : ''; ?>"><a href="#<?php echo esc_attr($t['id']); ?>"><?php echo esc_html($t['text']); ?></a></li><?php endforeach; ?></ol></nav><?php endif; ?></div>

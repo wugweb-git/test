@@ -1,3 +1,4 @@
+if (window.gsap && window.Draggable) { /* draggable-tags.ts (wugweb-motion.js) owns the field */ } else {
 document.querySelectorAll('[data-tag-field]').forEach(function (field) {
   var tags = field.querySelectorAll('[data-tag]');
   tags.forEach(function (tag) {
@@ -10,3 +11,4 @@ document.querySelectorAll('[data-tag-field]').forEach(function (field) {
     });
   });
 });
+}
