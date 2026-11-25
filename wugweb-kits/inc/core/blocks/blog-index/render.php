@@ -13,6 +13,7 @@ foreach ($ids as $id) {
   $c['slug_topic'] = $c['topic'] !== '' ? sanitize_title($c['topic']) : '';
   $c['date'] = get_the_date('j M Y', $id);
   $c['author'] = $f['author'];
+  $c['tags'] = array_slice(array_values(array_filter((array) $f['tags'])), 0, 3);
   $cards[] = $c;
   if ($c['slug_topic'] !== '') { if (!isset($topics[$c['slug_topic']])) { $topics[$c['slug_topic']] = array('name' => $c['topic'], 'count' => 0); } $topics[$c['slug_topic']]['count']++; }
 }
