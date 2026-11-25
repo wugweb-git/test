@@ -243,3 +243,9 @@
 
 /* Old split-layout grid areas must not leak into the new grid. */
 .wugweb-article-post :is(.post-hero,.post-cover,.post-body){grid-area:auto}
+
+/* Bigger banner: full content width, like the case-study hero. */
+.wugweb-article-post .post-hero{max-width:none}
+.wugweb-article-post .post-cover{max-width:none;border-radius:24px}
+.wugweb-article-post .post-cover img{aspect-ratio:16/9}
+@media (min-width:1200px){.wugweb-article-post .post-cover img{aspect-ratio:21/9}}
