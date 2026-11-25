@@ -2901,6 +2901,35 @@
             "fontSize": "var(--wp--preset--font-size--body-sm)"
           }
         }
+      },
+      "wugweb/overlay": {
+        "color": {
+          "background": "var(--wp--preset--color--neutral-9)",
+          "text": "var(--wp--preset--color--neutral-0)"
+        },
+        "border": {
+          "radius": "20px",
+          "color": "var(--wp--custom--line-strong)",
+          "width": "1px",
+          "style": "solid"
+        },
+        "spacing": {
+          "padding": "var(--gap-6)",
+          "blockGap": "var(--gap-4)"
+        },
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--body-md)"
+        },
+        "@tablet": {
+          "spacing": {
+            "padding": "var(--gap-6)"
+          }
+        },
+        "@mobile": {
+          "spacing": {
+            "padding": "var(--gap-5)"
+          }
+        }
       }
     },
     "color": {
