@@ -13,6 +13,7 @@ $btn = function ($l, $u, $cls) { return $l !== '' ? '<a href="' . esc_url($u) . 
 $b1 = $btn((string) ($a['primaryLabel'] ?? ''), (string) ($a['primaryUrl'] ?? '#'), 'btn-solid');
 $b2 = $btn((string) ($a['secondaryLabel'] ?? ''), (string) ($a['secondaryUrl'] ?? '#'), 'btn-ghost');
 $media = (string) ($a['mediaUrl'] ?? ''); $poster = (string) ($a['posterUrl'] ?? '');
+if ($v === 'about') { if ($media === '') { $hp = $pid ? (string) get_post_meta($pid, 'wugweb_page_hero_path', true) : ''; $media = $hp !== '' ? (preg_match('#^https?://#', $hp) ? $hp : wugweb_r2_url($hp)) : wugweb_r2_url('assets/site/about/about__about-message.mp4'); } if ($poster === '') { $poster = wugweb_r2_url('assets/site/about/about-section.jpg'); } }
 $is_vid = (bool) preg_match('/\.(mp4|webm)(\?|$)/i', $media);
 $e = 'esc_html';
 $h1 = '<h1 class="page-title" data-reveal id="page-hero-title">' . $e($title) . '</h1>';

@@ -1,4 +1,10 @@
 <?php
+if (!function_exists('wugweb_r2_url')) {
+  /** Public media base (R2) + path; base is filterable (wugweb_assets_base). */
+  function wugweb_r2_url($path) { $b = rtrim((string) apply_filters('wugweb_assets_base', 'https://pub-39ad1d03baec440faf48303be95c3782.r2.dev'), '/'); return $b . '/' . ltrim((string) $path, '/'); }
+  /** Team photos on R2, exact files as published on uat (assets/site/about/team). */
+  function wugweb_team_photo($name) { static $m = array('vedanshu-srivastava'=>'jpg','praneet-verma'=>'jpg','vaibhav-shukla'=>'jpg','shreya-khot'=>'jpg','satish-kumar'=>'jpg','kartik-chaturvedi'=>'jpg','swarndeep-singh'=>'jpg','sunil-thapa'=>'jpg','divyanshu-pundir'=>'jpg','ojaswa-verma'=>'png'); $k = sanitize_title((string) $name); return isset($m[$k]) ? wugweb_r2_url('assets/site/about/team/team-' . $k . '.' . $m[$k]) : ''; }
+}
 /** Site-wide post date: published date only, "DD Month YY" (17 July 25). Never the modified date. */
 if (!function_exists('wugweb_post_date_label')) { function wugweb_post_date_label($id) { return get_the_date('j F y', $id); } }
 /** Data schema -> card fields. One place that maps WordPress records (post, case_study, client, industry term, user) to what the card blocks show. */

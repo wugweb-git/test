@@ -13,12 +13,12 @@ if ($variant === 'about') {
   $lede = 'In a world clamoring for attention, your brand deserves more than fleeting visibility. It requires a strategic partner that architects compelling narratives, cultivates authentic connections, and engineers brand experiences designed to stand the test of time.';
   $tools = array('Figma', 'Notion', 'Slack', 'Webflow', 'Framer', 'Shopify', 'Zapier', 'HubSpot');
   $tiles = array(
-    array('col'=>0,'span'=>'tall','title'=>'Strategic Brand Vision','body'=>'Resonant brand foundations are architected through the synthesis of strategic insight and creative brilliance, driving measurable business growth.','tone'=>'light','ph'=>'cover','fit'=>'cover'),
+    array('col'=>0,'span'=>'tall','title'=>'Strategic Brand Vision','body'=>'Resonant brand foundations are architected through the synthesis of strategic insight and creative brilliance, driving measurable business growth.','tone'=>'light','image'=>wugweb_r2_url('assets/site/services/service_benefit_6.webp'),'fit'=>'cover'),
     array('col'=>0,'span'=>'strip','kind'=>'cta','href'=>'/contact-us','linkLabel'=>"Let's talk"),
     array('col'=>1,'span'=>'short','title'=>'Data-Driven Brand Evolution','body'=>'Data and analytics inform brand strategy, optimizing brand performance and fueling sustainable brand evolution.'),
-    array('col'=>1,'span'=>'mid','title'=>'Authentic Brand Storytelling','body'=>"Brand's core essence is unearthed, crafting authentic narratives that forge emotional connections and inspire unwavering loyalty.",'ph'=>'inset','fit'=>'inset'),
+    array('col'=>1,'span'=>'mid','title'=>'Authentic Brand Storytelling','body'=>"Brand's core essence is unearthed, crafting authentic narratives that forge emotional connections and inspire unwavering loyalty.",'video'=>wugweb_r2_url('assets/site/about/about-7.mp4'),'fit'=>'inset'),
     array('col'=>2,'span'=>'slim','kind'=>'stack','items'=>array_map(function ($n) { return array('name' => $n); }, $tools)),
-    array('col'=>2,'span'=>'tall','title'=>'Holistic Brand Experience Design','body'=>'Cohesive brand experiences are engineered across all touchpoints, ensuring consistency, impact, and a seamless customer journey.','ph'=>'cover','fit'=>'cover'),
+    array('col'=>2,'span'=>'tall','title'=>'Holistic Brand Experience Design','body'=>'Cohesive brand experiences are engineered across all touchpoints, ensuring consistency, impact, and a seamless customer journey.','image'=>wugweb_r2_url('assets/site/about/about_5.webp'),'fit'=>'cover'),
   );
 } elseif ($variant === 'why') {
   // services/index.astro "Why Wugweb?" bento: media opens the left column, weight falls to the middle.

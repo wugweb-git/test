@@ -101,6 +101,7 @@ add_action('wp_enqueue_scripts', function () {
     $deps = array('gsap');
     foreach (array('ScrollTrigger', 'Draggable', 'Flip', 'InertiaPlugin') as $p) { wp_enqueue_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); $deps[] = 'gsap-' . $p; }
     wp_enqueue_script('wugweb-motion', $u . 'wugweb-motion.js', $deps, $v, true);
+    wp_enqueue_script('wugweb-media', $u . 'wugweb-media.js', array(), $v, true);
 });
 
 add_action('init', function () {

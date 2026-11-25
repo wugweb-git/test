@@ -32,7 +32,7 @@ $culture = array('We Create Trust', 'We listen closely', 'We define your value',
       <h2 data-reveal id="culture-title">Culture Reigns Supreme</h2>
       <p data-reveal>Establishing a robust foundational culture within our organisation is vital to Wugweb's long-term vision, growth, and success. We are driven by four core values: intimacy, transparency, urgency, and pivoting.</p>
     </div>
-    <div class="culture-visual wugweb-ph" role="img" aria-label="Wugweb team culture"></div>
+    <img class="culture-visual" src="<?php echo esc_url(wugweb_r2_url('assets/site/about/about-section-2.jpg')); ?>" alt="Wugweb team culture" loading="lazy" decoding="async">
   </div>
   <ul class="culture-grid"><?php foreach ($culture as $c) : ?><li data-reveal><?php echo esc_html($c); ?></li><?php endforeach; ?></ul>
 </section>
