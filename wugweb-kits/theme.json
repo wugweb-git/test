@@ -2930,6 +2930,27 @@
             "padding": "var(--gap-5)"
           }
         }
+      },
+      "wugweb/chart": {
+        "color": {
+          "text": "var(--wp--preset--color--neutral-0)"
+        },
+        "spacing": {
+          "blockGap": "var(--gap-3)"
+        },
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--body-md)"
+        },
+        "@tablet": {
+          "spacing": {
+            "blockGap": "var(--gap-3)"
+          }
+        },
+        "@mobile": {
+          "spacing": {
+            "blockGap": "var(--gap-2)"
+          }
+        }
       }
     },
     "color": {
