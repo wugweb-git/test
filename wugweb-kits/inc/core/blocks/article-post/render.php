@@ -77,7 +77,8 @@ $cat_pills = array();
 foreach ((array) get_the_category($id) as $c) { if (strtolower($c->name) !== 'uncategorized') { $cat_pills[] = array($c->name, get_category_link($c)); } }
 if (!$cat_pills && $f['category']) { $cat_pills[] = array($f['category'], ''); }
 $tag_terms = get_the_tags($id);
-if (is_array($tag_terms)) { foreach ($tag_terms as $tt) { if (count($cat_pills) < 3) { $cat_pills[] = array($tt->name, get_tag_link($tt)); } } }
+if (is_array($tag_terms)) { $have = array_map(function ($c) { return strtolower($c[0]); }, $cat_pills);
+  foreach ($tag_terms as $tt) { if (count($cat_pills) < 3 && !in_array(strtolower($tt->name), $have, true)) { $cat_pills[] = array($tt->name, get_tag_link($tt)); } } }
 elseif ($tags) { foreach ((array) $tags as $tg) { if (count($cat_pills) < 3 && $tg !== '') { $cat_pills[] = array($tg, ''); } } }
 $cat_pills = array_slice($cat_pills, 0, 3);
 $cover = $f['image'];
