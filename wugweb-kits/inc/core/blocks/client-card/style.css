@@ -1,0 +1,131 @@
+/* Full-screen band: one viewport tall, full viewport wide, content centred.
+     `dvh` (with an `svh` fallback) so mobile browser chrome collapsing does
+     not clip it, and `min-height`
+     rather than `height` so the section can still grow if the logo set outruns
+     the screen instead of cutting logos off. */
+  .logos-band {
+    min-height: 100svh;
+    min-height: 100dvh;
+    width: 100%;
+    display: grid;
+    /* Centre: row and column gaps must stay equal, so the grid keeps its
+       natural height and the leftover is split evenly above and below. */
+    align-content: center;
+    padding-block: var(--gap-8);
+    border-top: var(--stroke-thin) solid var(--line);
+    /* Clips the scattered tiles while they are outside the grid's box. */
+    overflow: hidden;
+  }
+  /* No padding-block: the band is already a full viewport tall and centres its
+     content, so section padding here only pushes the grid past 1vh. */
+  .logos { width: 100%; display: flex; flex-direction: column; }
+  /* Centred display heading, matching the live section (36px, regular weight,
+     centred in the 1200px container) — not a left eyebrow. */
+  .logos-heading {
+    margin: 0;
+    text-align: center;
+    font-size: var(--fluid-h2);
+    /* Bold. It was regular, which left a section heading reading lighter than
+       the body copy around it. */
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    line-height: var(--core-line-height-tight);
+    color: var(--fg);
+  }
+  /* Two lines, split on the colour change — bright line over muted line. */
+  .logos-heading span { display: block; color: var(--fg-muted); }
+
+  /* A cell in the grid, not a full-width band: two columns wide and exactly one
+     tile tall, so the whole block still reads as one uniform grid. */
+  .logo-grid-title {
+    flex: 0 0 calc(var(--logo-col) * 2 + var(--gap-3));
+    height: calc(var(--logo-col) * 9 / 16);
+    display: grid;
+    place-items: center;
+  }
+
+  /* A declared column count per breakpoint, not flex-wrap. Every tile is the
+     same width, so rows can never go ragged. */
+  .logo-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    /* Column width is published as a variable so the title cell can be exactly
+       two columns wide and exactly one tile tall. `cqw` (not `%`) because a
+       percentage would resolve against the container's *height* when used for
+       height — this element is the query container. */
+    container-type: inline-size;
+    --logo-col: calc((100cqw - (var(--logo-cols) - 1) * var(--gap-3)) / var(--logo-cols));
+    /* Centred so a partial last row reads as deliberate instead of hanging
+       left — 20 logos over 6 columns will always leave one short row. */
+    justify-content: center;
+    /* Without this, flex items stretch to the tallest in their row and silently
+       override `aspect-ratio`. */
+    align-items: flex-start;
+    gap: var(--gap-3);
+    /* 3 on phones. At 4 the logo inside a 16:9 tile was too small to read -
+       the old site uses 3 and its marks are legible. */
+    --logo-cols: 3;
+  }
+  /* 6 from tablet up. */
+  @media (min-width: 640px) { .logo-grid { --logo-cols: 6; } }
+
+  .logo-tile {
+    /* Fixed share of the row, so width never varies with the logo's aspect. */
+    flex: 0 0 var(--logo-col);
+    /* Fixed box ratio. Width comes from the column count and height follows it
+       proportionally, so the tile is the same shape at every breakpoint (see
+       governance.md §8). */
+    aspect-ratio: 16 / 9;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    /* No stroke - the tile reads as a surface a step above the page, the way
+       the rest of the system separates things. It was a hairline over a 35%
+       wash, which left the card barely visible against the background. */
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-elevated);
+    transition:
+      background-color var(--duration-normal) var(--easing-smooth),
+      border-color var(--duration-normal) var(--easing-smooth);
+  }
+
+  /* Logos are a set first and brands second: desaturated and softened so the
+     grid reads as one block, resolving to full colour on hover. Sized as a
+     share of the tile, not in px, so it can't exceed the tile's aspect-ratio
+     height and force the box taller. */
+  .logo-tile img {
+    max-width: 72%;
+    max-height: 54%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1) brightness(1.9);
+    opacity: var(--opacity-90);
+    transition:
+      filter var(--duration-normal) var(--easing-smooth),
+      opacity var(--duration-normal) var(--easing-smooth);
+  }
+  .logo-tile:hover { background: var(--surface-2); }
+  .logo-tile:hover img { filter: grayscale(0) brightness(1); opacity: var(--opacity-100); }
+
+  /* Phones: the first group drops from 14 to 12 so it stays 3 full rows of 4,
+     the title spans the full width on its own row, and runs on one line. */
+  /* 639.98, not 640: `min-width: 640px` above is "6 from tablet up", but
+     `max-width: 640px` also matched AT 640px, so a 640px viewport got six
+     columns and the phone gap together. Same off-by-one as ServiceTagField. */
+  @media (max-width: 639.98px) {
+    .logo-grid { gap: var(--gap-2); }
+    .logos-heading span { display: inline; }
+    .logo-grid-title { flex-basis: 100%; }
+    /* (the 4-column row-filling hack is gone with the padding) */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-tile, .logo-tile img { transition: none; }
+  }
+
+.wp-block-wugweb-client-card{--logo-col:240px;max-width:var(--logo-col)}

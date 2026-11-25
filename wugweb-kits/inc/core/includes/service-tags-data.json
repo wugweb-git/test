@@ -1,0 +1,80 @@
+[
+ {
+  "slug": "strategy",
+  "title": "Strategy",
+  "n": "01",
+  "q": "What should we build?",
+  "pos": [
+   6,
+   10
+  ],
+  "rot": -6,
+  "video": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/services/strategy/digital-transformation-and-innovation.mp4",
+  "poster": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/services/strategy/posters/digital-transformation-and-innovation.webp"
+ },
+ {
+  "slug": "brand",
+  "title": "Brand",
+  "n": "03",
+  "q": "How should we be perceived?",
+  "pos": [
+   52,
+   0
+  ],
+  "rot": 4,
+  "video": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/home/brand-strategy.mp4",
+  "poster": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/home/brand-strategy-poster.webp"
+ },
+ {
+  "slug": "experience",
+  "title": "Experience",
+  "n": "06",
+  "q": "How should people interact with us?",
+  "pos": [
+   30,
+   26
+  ],
+  "rot": -3,
+  "video": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/home/experience-design.mp4",
+  "poster": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/home/experience-design-poster.webp"
+ },
+ {
+  "slug": "engineering",
+  "title": "Engineering",
+  "n": "02",
+  "q": "How do we build and scale it?",
+  "pos": [
+   2,
+   40
+  ],
+  "rot": 7,
+  "video": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/home/web-app-development.mp4",
+  "poster": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/home/web-app-development-poster.webp"
+ },
+ {
+  "slug": "growth",
+  "title": "Growth",
+  "n": "04",
+  "q": "How do we acquire and retain customers?",
+  "pos": [
+   55,
+   54
+  ],
+  "rot": -5,
+  "video": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/home/martech-genai.mp4",
+  "poster": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/home/martech-genai-poster.webp"
+ },
+ {
+  "slug": "operations",
+  "title": "Operations",
+  "n": "05",
+  "q": "How do we run, secure and improve it?",
+  "pos": [
+   26,
+   68
+  ],
+  "rot": 6,
+  "video": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/services/growth/seo.mp4",
+  "poster": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/services/growth/posters/seo.webp"
+ }
+]

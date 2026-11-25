@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/industry-card",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "title": "Industry Card",
   "category": "wugweb",
   "keywords": [
@@ -67,7 +67,7 @@
     }
   ],
   "render": "file:./render.php",
-  "style": "wugweb-core-cards",
+  "style": "file:./style.css",
   "icon": "building",
   "description": "Industry Card \u2014 Wugweb block."
 }
