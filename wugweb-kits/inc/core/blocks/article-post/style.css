@@ -283,3 +283,12 @@
 .byline-card{min-height:110px}
 .byline-text{align-self:center}
 .byline-sub:empty{display:none}
+
+/* Left-align everything to the cover's left edge: rail, reading column, author, newsletter, prev/next. */
+.wugweb-article-post .post-grid{justify-content:start}
+.wugweb-article-post .post-layout .post-body,
+.wugweb-article-post .post-layout:not(.has-cover) .post-body{margin-inline:0}
+.wugweb-article-post .article-body,
+.wugweb-article-post :is(.article-author,.article-newsletter,.article-prevnext,.article-share-newsletter){margin-inline:0}
+.wugweb-article-post .article-newsletter{text-align:left}
+.wugweb-article-post .article-newsletter h2,.wugweb-article-post .nl-form{margin-inline:0}
