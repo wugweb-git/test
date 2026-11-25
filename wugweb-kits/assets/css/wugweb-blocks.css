@@ -125,3 +125,11 @@ body.wugweb-tenant-wugweb{line-height:var(--core-line-height-normal)}
 /*w*/:where([class*="wp-block-wugweb-"]) :where(p){margin:0;color:var(--fg-muted);font-size:var(--fluid-body-md);font-weight:var(--font-weight-regular);line-height:var(--core-line-height-normal)}
 :where([class*="wp-block-wugweb-"]) :where(a:not(.btn):not(.wp-element-button)){color:inherit}
 :where([class*="wp-block-wugweb-"]) :where(h1,h2,h3,h4,h5,h6){margin:0;letter-spacing:0}
+
+/* Image placeholder: grey box until the R2 URL meta is filled (neutral-5, 16px radius, ratio from --ph-ar). */
+.wugweb-ph{display:block;box-sizing:border-box;width:100%;background:var(--neutral-5,#7d7d7d);border-radius:16px;aspect-ratio:var(--ph-ar,16/10);overflow:hidden}
+.pc-thumb-wrap .wugweb-ph{height:100%;aspect-ratio:auto;border-radius:0}
+.team-photo .wugweb-ph{border-radius:16px}
+.pt-quote-avatar.wugweb-ph,.meta-avatar.wugweb-ph{aspect-ratio:1;border-radius:50%;display:inline-block}
+.case-related-media.wugweb-ph{aspect-ratio:16/10}
+.logo-tile .wugweb-ph{height:100%;aspect-ratio:auto}
