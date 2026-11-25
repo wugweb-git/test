@@ -381,3 +381,11 @@
 .article-byline a.byline-tag{border:var(--stroke-thin) solid var(--line-strong);background:transparent;color:var(--fg-muted)}
 .article-byline a.byline-tag:hover{color:var(--fg)}
 .article-byline span.byline-tag{border:var(--stroke-thin) solid var(--line-strong);background:transparent;color:var(--fg-muted)}
+
+/* Linked pills: hover / focus-visible, larger hit area without larger pills. */
+.article-byline a.byline-card{position:relative;transition:background var(--duration-fast,.2s) var(--easing-out,ease-out),color var(--duration-fast,.2s) var(--easing-out,ease-out),border-color var(--duration-fast,.2s) var(--easing-out,ease-out)}
+.article-byline a.byline-card::after{content:"";position:absolute;inset:-4px}
+.article-byline a.byline-card:hover{background:color-mix(in srgb,var(--neutral-0) 10%,var(--color-surface-elevated));color:var(--color-text-primary);border-color:var(--line-strong)}
+.article-byline a.byline-card:hover .byline-icon{color:var(--color-text-primary)}
+.article-byline a.byline-card:focus-visible{outline:2px solid var(--color-accent-primary);outline-offset:2px}
+.article-byline a.byline-author .byline-main{color:inherit}
