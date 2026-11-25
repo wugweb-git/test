@@ -1,0 +1,46 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/subscription-page",
+  "version": "3.0.0",
+  "title": "Subscription Page",
+  "category": "wugweb",
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "attributes": {},
+  "icon": "money-alt",
+  "description": "Subscription page body (footer/subscription.astro). The mock checkout modal is not ported; Start subscription links to contact.",
+  "viewScript": "file:./view.js"
+}
