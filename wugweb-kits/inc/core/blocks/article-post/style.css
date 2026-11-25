@@ -292,3 +292,11 @@
 .wugweb-article-post :is(.article-author,.article-newsletter,.article-prevnext,.article-share-newsletter){margin-inline:0}
 .wugweb-article-post .article-newsletter{text-align:left}
 .wugweb-article-post .article-newsletter h2,.wugweb-article-post .nl-form{margin-inline:0}
+
+/* Compact meta cards: 72px tall, 56px photo/icon, 15px text. */
+.byline-card{min-height:72px;gap:var(--gap-4);padding:var(--gap-2)}
+.byline-card .meta-avatar{width:56px;height:56px}
+.byline-icon{width:56px;height:56px;padding:12px;flex:0 0 56px}
+.byline-main{font-size:15px;line-height:1.3}
+.byline-sub{font-size:13px;line-height:1.35;margin-top:2px!important}
+.wugweb-article-post .article-byline{max-width:620px}
