@@ -86,3 +86,5 @@
   @media (prefers-reduced-motion: reduce) {
     .team-card, .team-photo img { transition: none; }
   }
+
+.team-cards>:nth-child(even){--stagger:1}

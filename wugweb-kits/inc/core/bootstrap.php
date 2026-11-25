@@ -24,7 +24,7 @@ add_action('init', function () {
         'contact-form', 'editorial-card', 'case-study-card', 'article-meta-toc',
         'article-share-newsletter', 'case-study-brief-matrix', 'post-cross-sell-rail', 'faq-list',
         // page sections
-        'service-tags', 'intro-statement', 'hero-section', 'industries-served', 'clients-served', 'case-studies-grid', 'recent-thoughts', 'cta-band', 'page-hero', 'team-grid', 'values-section', 'value-item', 'stats-section',
+        'service-tags', 'intro-statement', 'hero-section', 'industries-served', 'clients-served', 'case-studies-grid', 'recent-thoughts', 'cta-band', 'page-hero', 
     );
     foreach ($blocks as $b) { register_block_type(__DIR__ . '/blocks/' . $b); }
     register_block_pattern_category('wugweb-cards', array('label' => 'Wugweb Cards'));

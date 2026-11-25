@@ -133,3 +133,18 @@ body.wugweb-tenant-wugweb{line-height:var(--core-line-height-normal)}
 .pt-quote-avatar.wugweb-ph,.meta-avatar.wugweb-ph{aspect-ratio:1;border-radius:50%;display:inline-block}
 .case-related-media.wugweb-ph{aspect-ratio:16/10}
 .logo-tile .wugweb-ph{height:100%;aspect-ratio:auto}
+
+/* Group style variations replacing the stats/values/team-grid blocks (compose stat-card + team-card inside). */
+.wp-block-group.is-style-stats-row,.wp-block-group.is-style-values-row,.wp-block-group.is-style-team-cards{display:grid;gap:var(--gap-6);list-style:none;padding:0}
+.wp-block-group.is-style-stats-row,.wp-block-group.is-style-values-row{margin-top:var(--gap-12)}
+@media (min-width:768px){.wp-block-group.is-style-stats-row,.wp-block-group.is-style-values-row{grid-template-columns:repeat(4,1fr)}}
+.wp-block-group.is-style-team-cards{margin-top:var(--gap-12);gap:var(--gap-5);grid-template-columns:repeat(2,1fr)}
+@media (min-width:768px){.wp-block-group.is-style-team-cards{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1024px){.wp-block-group.is-style-team-cards{grid-template-columns:repeat(5,1fr);gap:var(--gap-4)}}
+.wp-block-group.is-style-team-cards:hover .team-card{filter:brightness(.62)}
+.wp-block-group.is-style-team-cards:hover .team-card:hover{filter:none}
+.wp-block-group.is-style-team-block,.team-block{padding-block:var(--space-section-xl)}
+.team-heading{margin-top:var(--gap-3);font-size:var(--fluid-h2);font-weight:var(--font-weight-semibold);line-height:var(--core-line-height-tight);letter-spacing:-.02em;max-width:18ch;color:var(--fg-muted)}
+.team-heading strong{color:var(--fg);font-weight:inherit}
+.wp-block-group.stats-wrap,.wp-block-group.values-wrap{padding-block:var(--space-section-xl);border-top:var(--stroke-thin) solid var(--line)}
+.values-lede{margin-top:var(--gap-5);max-width:65ch;color:var(--fg-muted)}

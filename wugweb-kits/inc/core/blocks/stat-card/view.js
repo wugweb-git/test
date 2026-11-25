@@ -1,7 +1,7 @@
 (function(){
   var g=window.gsap, ST=window.ScrollTrigger; if(!g||!ST) return; g.registerPlugin(ST);
   var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('[data-counters]').forEach(function(ul){
+  document.querySelectorAll('.stat-card-wrap').forEach(function(ul){
     if(ul.dataset.countBound==='1') return; ul.dataset.countBound='1';
     ul.querySelectorAll('[data-count-to]').forEach(function(el){
       var to=parseFloat(el.getAttribute('data-count-to')); if(isNaN(to)) return;

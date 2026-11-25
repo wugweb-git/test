@@ -67,6 +67,9 @@ add_action('enqueue_block_editor_assets', function () { wp_enqueue_style('wugweb
 add_action('wp_enqueue_scripts', function () { wp_enqueue_style('wugweb-layout-shell', get_theme_file_uri('assets/css/layout-shell.css'), array(), wp_get_theme()->get('Version')); });
 
 add_action('init', function () {
+    register_block_style('core/group', array('name' => 'stats-row', 'label' => 'Stats row'));
+    register_block_style('core/group', array('name' => 'values-row', 'label' => 'Values row'));
+    register_block_style('core/group', array('name' => 'team-cards', 'label' => 'Team cards grid'));
     register_block_style('core/button', array('name' => 'magnetic', 'label' => 'Magnetic Pill'));
     register_block_style('core/button', array('name' => 'ghost', 'label' => 'Ghost'));
     register_block_style('core/paragraph', array('name' => 'label', 'label' => 'Label'));

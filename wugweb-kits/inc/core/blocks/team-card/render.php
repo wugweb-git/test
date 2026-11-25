@@ -1,7 +1,7 @@
 <?php
 /** Team Card: components/TeamGrid.astro card. title = name, eyebrow = role, meta = suffix, imageUrl = photo; or userId / post author. */
 require_once get_template_directory() . '/inc/core/includes/team-card-html.php';
-$uid = (int) ($attributes['userId'] ?? 0); if (!$uid && is_object($block ?? null) && !empty($block->context['postId'])) $uid = (int) get_post_field('post_author', (int) $block->context['postId']);
+$uid = (int) ($attributes['userId'] ?? 0); if (!$uid && (($attributes['title'] ?? 'Name') === 'Name') && is_object($block ?? null) && !empty($block->context['postId']) && get_post_type((int) $block->context['postId']) === 'post') $uid = (int) get_post_field('post_author', (int) $block->context['postId']);
 $u = $uid ? wugweb_fields_user($uid) : array();
 $m = array('name' => (string) ($u['name'] ?? $attributes['title'] ?? ''), 'role' => (string) ($u['role'] ?? $attributes['eyebrow'] ?? ''), 'photo' => (string) ($u['image'] ?? $attributes['imageUrl'] ?? ''));
 $suffix = (string) ($attributes['meta'] ?? '') !== '' ? $attributes['meta'] : 'at wugweb';
