@@ -256,3 +256,7 @@
 .article-byline .meta-author{padding-left:var(--gap-1);font-weight:var(--font-weight-medium)}
 .article-byline .meta-avatar{width:32px;height:32px;border-radius:50%;background:var(--neutral-10);border:var(--stroke-thin) solid var(--line-strong);object-fit:cover}
 .article-byline .byline-dot{display:none}
+
+/* Old no-cover 720 cap must not narrow the header or body of the new layout. */
+.wugweb-article-post .post-layout:not(.has-cover) .post-hero{max-width:none;margin-inline:0}
+.wugweb-article-post .post-layout:not(.has-cover) .post-body{max-width:680px;margin-inline:auto}
