@@ -1,0 +1,71 @@
+{
+  "_note": "Image slots mapped from uat.wugweb.com. status=pending means no file imported yet; render a grey box (neutral-5, 16px radius) until the file arrives.",
+  "slots": [
+    {
+      "slot": "site-logo",
+      "wp": "Site Editor > Identity > Logo / core/site-logo",
+      "uat": "/brand/logo-large.svg",
+      "status": "pending"
+    },
+    {
+      "slot": "site-logo-compact",
+      "wp": "mobile header",
+      "uat": "/brand/logo-small.svg",
+      "status": "pending"
+    },
+    {
+      "slot": "favicon",
+      "wp": "Identity > Site Icon (needs PNG, 512px)",
+      "uat": "/brand/favicon.svg",
+      "status": "pending"
+    },
+    {
+      "slot": "pwa-192",
+      "wp": "manifest icon",
+      "uat": "/brand/pwa-192.png",
+      "status": "pending"
+    },
+    {
+      "slot": "pwa-512",
+      "wp": "manifest icon + Site Icon",
+      "uat": "/brand/pwa-512.png",
+      "status": "pending"
+    },
+    {
+      "slot": "og-image",
+      "wp": "Open Graph default",
+      "uat": "/brand/og.jpg",
+      "status": "missing on uat (404)"
+    },
+    {
+      "slot": "cta-laptop",
+      "wp": "CTA band device image",
+      "uat": "/brand/cta/laptop.png",
+      "status": "pending"
+    },
+    {
+      "slot": "cta-mobile",
+      "wp": "CTA band device image",
+      "uat": "/brand/cta/mobile.png",
+      "status": "pending"
+    },
+    {
+      "slot": "capability-posters",
+      "wp": "capability-showcase media (per pillar)",
+      "uat": "/brand/posters/*.webp and https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/site/services/<pillar>/posters/*.webp",
+      "status": "pending"
+    },
+    {
+      "slot": "client-logos",
+      "wp": "wugweb/marquee",
+      "uat": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/logos/grey/*.png",
+      "status": "pending (marquee shows names)"
+    },
+    {
+      "slot": "blog-covers",
+      "wp": "post featured images",
+      "uat": "https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/blog/<slug>/cover.png",
+      "status": "pending"
+    }
+  ]
+}

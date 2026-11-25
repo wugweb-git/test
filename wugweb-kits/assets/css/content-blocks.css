@@ -1,0 +1,19 @@
+.wp-block-quote,.is-style-wugweb-ash-quote{background:var(--wp--preset--color--ash);border-left:3px solid var(--wp--preset--color--yellow);border-radius:0 16px 16px 0;padding:1.25rem 1.5rem;margin-block:1.75rem;color:var(--wp--preset--color--neutral-0)}
+.wp-block-table,.is-style-wugweb-table{overflow-x:auto;border:1px solid var(--wp--preset--color--neutral-8);border-radius:16px}
+.wp-block-table table{width:100%;border-collapse:collapse}
+.wp-block-table th{background:var(--wp--preset--color--ash);color:var(--wp--preset--color--yellow);text-align:left;padding:.85rem 1rem}
+.wp-block-table td{padding:.85rem 1rem;border-top:1px solid var(--wp--preset--color--neutral-8)}
+.is-style-wugweb-details{border:1px solid var(--wp--preset--color--neutral-8);border-radius:16px;background:var(--wp--preset--color--ash);padding:1rem}
+.wugweb-kpi-strip{padding-block:var(--wp--preset--spacing--50)}
+.wugweb-kpi-strip .wp-block-column{padding:1.25rem;border:1px solid var(--wp--preset--color--neutral-8);border-radius:16px;background:var(--wp--preset--color--ash)}
+.wugweb-kpi-strip strong{display:block;color:var(--wp--preset--color--yellow);font-size:var(--wp--preset--font-size--display);line-height:1;font-weight:800}
+.wugweb-kpi-strip p{color:var(--wp--preset--color--neutral-2)}
+.wugweb-case-study-chapter{padding-block:var(--wp--preset--spacing--50)}
+.wugweb-case-study-chapter .wp-block-image img{border-radius:20px}
+.wugweb-form-shell{max-width:760px;padding:var(--wp--preset--spacing--50);border:1px solid var(--wp--preset--color--neutral-8);border-radius:24px;background:var(--wp--preset--color--ash);color:var(--wp--preset--color--neutral-0)}
+.wugweb-form-shell .ff-el-form-control{background:var(--wp--preset--color--neutral-9)!important;color:var(--wp--preset--color--neutral-0)!important;border:1px solid var(--wp--preset--color--neutral-8)!important;border-radius:12px!important;min-height:48px}
+.wugweb-form-shell .ff-el-form-control:focus{border-color:var(--wp--preset--color--yellow)!important}
+.wugweb-form-shell .ff-btn-submit{background:var(--wp--preset--color--yellow)!important;color:var(--wp--preset--color--neutral-10)!important;border-radius:9999px!important;font-weight:600!important;padding:.85rem 1.75rem!important}
+.wp-block-gallery.has-nested-images figure.wp-block-image img{border-radius:16px}
+.wp-block-code,.wp-block-preformatted{border-radius:16px;background:var(--wp--preset--color--neutral-9);border:1px solid var(--wp--preset--color--neutral-8)}
+@media(max-width:767px){.wugweb-kpi-strip .wp-block-columns{flex-direction:column}.wugweb-form-shell{margin-inline:var(--shell-gutter,16px)}}
