@@ -154,7 +154,6 @@ body.wugweb-tenant-wugweb{line-height:var(--core-line-height-normal)}
 section:not(section section):not(.global-final-cta){padding-block:var(--section-y)!important;margin-block:0!important;width:100%;isolation:isolate;scroll-margin-top:var(--header-height)}
 section:not(section section)>.wrap{padding-block:0!important}
 .wp-site-blocks h1.page-title{font-size:var(--t-display);font-weight:var(--font-weight-semibold);line-height:.96;letter-spacing:-.03em;text-wrap:balance}
-.wp-site-blocks .blog-hero-content h1.page-title{font-size:var(--fluid-h1);line-height:.96}
 
 /* Base text (global.css): paragraphs carry no margin and the muted colour; links inherit. */
 body p{margin:0;color:var(--fg-muted);font-size:var(--fluid-body-md);font-weight:var(--font-weight-regular);line-height:var(--core-line-height-normal)}
