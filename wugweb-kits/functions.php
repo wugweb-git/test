@@ -82,3 +82,4 @@ require_once __DIR__ . '/inc/design-system.php';
 if (!in_array('wugweb-core/wugweb-core.php', (array) get_option('active_plugins', array()), true)) {
     require_once __DIR__ . '/inc/core/bootstrap.php';
 }
+require_once __DIR__ . '/inc/seo-head.php';
