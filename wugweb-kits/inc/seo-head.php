@@ -17,8 +17,8 @@ add_action('wp_head', function () {
         $title = wp_get_document_title();
         $url = home_url(add_query_arg(array()));
     }
-    if (is_page('blog') && $desc === '') { $desc = "Field notes from Wugweb's design, engineering, and strategy work: what we're learning, testing, and shipping."; }
-    if (is_page('work') && $desc === '') { $desc = 'Case studies from Wugweb: UX, design, martech, AI, and web projects for ambitious teams.'; }
+    if (is_page('blog')) { $desc = "Field notes from Wugweb's design, engineering, and strategy work: what we're learning, testing, and shipping."; }
+    if (is_page('work')) { $desc = 'Case studies from Wugweb: UX, design, martech, AI, and web projects for ambitious teams.'; }
     $desc = trim(preg_replace('/\s+/', ' ', (string) $desc));
     if ($desc !== '') echo '<meta name="description" content="' . esc_attr($desc) . '">' . "\n";
     echo '<meta property="og:type" content="' . (is_front_page() ? 'website' : 'article') . '">' . "\n";

@@ -193,4 +193,4 @@ body a{color:inherit}
 .wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip.active,.wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip[aria-current=page]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .wp-site-blocks :is(.wugweb-blog-index,.work-grid-section,.wugweb-article-post,.wugweb-case-study,.wp-block-wugweb-work-index) :is(a,button,summary,[tabindex],.filter-chip):focus-visible{outline:2px solid var(--color-accent-primary);outline-offset:3px;border-radius:var(--radius-sm)}
 .wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip:focus-visible{border-radius:var(--radius-full)}
-.services-hero,.work-hero,.blog-hero{padding-bottom:var(--gap-6)}
+.wp-site-blocks :is(.services-hero,.work-hero,.blog-hero){padding-bottom:var(--gap-6)}
