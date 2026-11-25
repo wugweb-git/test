@@ -86,6 +86,14 @@
           "profileUrl": "https://www.youtube.com/channel/UC7qGSNvbvZqxZI8cA-Fijlg"
         }
       ]
+    },
+    "laptopUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mobileUrl": {
+      "type": "string",
+      "default": ""
     }
   },
   "keywords": [

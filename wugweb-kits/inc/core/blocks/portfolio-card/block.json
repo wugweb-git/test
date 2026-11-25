@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/portfolio-card",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "title": "Portfolio Card",
   "category": "wugweb",
   "keywords": [
@@ -97,5 +97,6 @@
   "usesContext": [
     "postId",
     "postType"
-  ]
+  ],
+  "viewScript": "file:./view.js"
 }
