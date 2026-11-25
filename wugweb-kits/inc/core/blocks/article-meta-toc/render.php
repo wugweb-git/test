@@ -1,6 +1,6 @@
 <?php
 /** Article Meta & Contents: pages/blog/[slug].astro .article-meta + .article-toc. */
-$id = get_the_ID();
+$id = wugweb_block_post_id($block ?? null, $attributes, array('post'));
 static $wugweb_toc_busy = false;
 if (!$id || $wugweb_toc_busy) { return; }
 $wugweb_toc_busy = true;

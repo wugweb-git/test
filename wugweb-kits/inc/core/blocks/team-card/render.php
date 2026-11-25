@@ -1,10 +1,12 @@
 <?php
 /** Team Card: components/TeamGrid.astro single member card. eyebrow = role, title = name, meta = suffix. */
-$name = (string) ($attributes['title'] ?? '');
-$role = (string) ($attributes['eyebrow'] ?? '');
+$uid = (int) ($attributes['userId'] ?? 0); if (!$uid && is_object($block ?? null) && !empty($block->context['postId'])) $uid = (int) get_post_field('post_author', (int) $block->context['postId']);
+$u = $uid ? wugweb_fields_user($uid) : array();
+$name = (string) ($u['name'] ?? $attributes['title'] ?? '');
+$role = (string) ($u['role'] ?? $attributes['eyebrow'] ?? '');
 $suffix = (string) ($attributes['meta'] ?? '');
 if ($suffix === '') { $suffix = 'at wugweb'; }
-$img = (string) ($attributes['imageUrl'] ?? '');
+$img = (string) ($u['image'] ?? $attributes['imageUrl'] ?? '');
 $alt = (string) ($attributes['imageAlt'] ?? '');
 $initials = '';
 foreach (array_slice(preg_split('/\s+/', trim($name), -1, PREG_SPLIT_NO_EMPTY), 0, 2) as $w) { $initials .= mb_substr($w, 0, 1); }

@@ -1,6 +1,6 @@
 <?php
 /** Case Study Brief Matrix: components/work/CaseHero.astro meta list (dt/dd pairs). */
-$id = get_the_ID();
+$id = wugweb_block_post_id($block ?? null, $attributes, array('case_study'));
 if (!$id) { return; }
 $m = function ($k) use ($id) { return trim((string) get_post_meta($id, 'wugweb_cs_' . $k, true)); };
 $terms = function ($tax) use ($id) {

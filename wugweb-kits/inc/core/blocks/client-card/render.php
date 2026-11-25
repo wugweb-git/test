@@ -1,4 +1,6 @@
 <?php
-$img = $attributes['imageUrl'] ?? '';
-if (!$img && get_post_type() === 'client') { $img = (string) get_the_post_thumbnail_url(get_the_ID(), 'medium'); }
-$name = $attributes['title'] ?? ''; ?><div <?php echo get_block_wrapper_attributes(); ?>><div class="logo-tile"><?php if ($img): ?><img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name ? $name . ' logo' : ''); ?>" loading="lazy" decoding="async" /><?php endif; ?></div></div>
+$id = wugweb_block_post_id($block ?? null, $attributes, array('client'));
+$img = $attributes['imageUrl'] ?? ''; $name = $attributes['title'] ?? ''; $link = $attributes['url'] ?? '';
+if ($id) { $f = wugweb_fields_client($id); $img = $f['logo']; $name = $f['name']; $link = $f['website']; }
+$tag = ($link && $link !== '#') ? 'a' : 'div';
+?><div <?php echo get_block_wrapper_attributes(); ?>><<?php echo $tag; ?> class="logo-tile"<?php if ($tag === 'a') echo ' href="' . esc_url($link) . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr($name) . '"'; ?>><?php if ($img): ?><img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($name ? $name . ' logo' : ''); ?>" loading="lazy" decoding="async" /><?php endif; ?></<?php echo $tag; ?>></div>

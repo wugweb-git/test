@@ -1,6 +1,6 @@
 <?php
 /** Post Cross-Sell Rail: pages/blog/[slug].astro related sections ("More insights" PostCard row cards + "Featured case studies" related-card). */
-$cur = (int) get_the_ID();
+$cur = wugweb_block_post_id($block ?? null, $attributes, array());
 $posts = array();
 if ($cur && function_exists('wugweb_post_card_data')) {
     $cats = wp_get_post_categories($cur);

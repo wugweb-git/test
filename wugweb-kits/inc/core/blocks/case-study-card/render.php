@@ -1,6 +1,6 @@
 <?php
 /** Case Study Card: components/work/CaseRelated.astro item (card markup). */
-$id = get_the_ID();
+$id = wugweb_block_post_id($block ?? null, $attributes, array('case_study'));
 if (!$id) { return; }
 $title = (string) get_post_meta($id, 'wugweb_cs_short_title', true);
 if ($title === '') { $title = get_the_title($id); }

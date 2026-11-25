@@ -58,18 +58,13 @@ function wugweb_render_card($type, array $a, $wrapper) {
 
 /** PostCard markup (components/PostCard.astro). $c: slug-less url, title, excerpt, topic, author, minutes, cover, alt, accent, initials. */
 function wugweb_post_card_data($id) {
-    $cat = get_the_category($id);
-    $topic = $cat ? $cat[0]->name : 'Strategy';
+    $f = wugweb_fields_post($id);
     $pillars = array('Strategy', 'Brand', 'Experience', 'Engineering', 'Growth', 'Operations');
-    $pillar = in_array($topic, $pillars, true) ? $topic : 'Strategy';
-    $title = get_the_title($id);
-    $w = preg_split('/\s+/', trim(preg_replace('/[^\w\s]/', '', $title)), -1, PREG_SPLIT_NO_EMPTY);
+    $pillar = in_array($f['category'], $pillars, true) ? $f['category'] : 'Strategy';
+    $w = preg_split('/\s+/', trim(preg_replace('/[^\w\s]/', '', $f['title'])), -1, PREG_SPLIT_NO_EMPTY);
     $ini = $w ? strtoupper(substr($w[0], 0, 1) . (isset($w[1]) ? substr($w[1], 0, 1) : '')) : 'Ww';
-    return array('url' => get_permalink($id), 'title' => $title, 'excerpt' => wp_trim_words(get_the_excerpt($id), 24), 'topic' => $topic,
-        'author' => get_the_author_meta('display_name', get_post_field('post_author', $id)),
-        'minutes' => max(1, (int) ceil(str_word_count(wp_strip_all_tags((string) get_post_field('post_content', $id))) / 200)),
-        'cover' => (string) get_the_post_thumbnail_url($id, 'large'), 'alt' => $title,
-        'accent' => 'var(--svc-' . strtolower($pillar) . ')', 'initials' => $ini);
+    return array('url' => $f['url'], 'title' => $f['title'], 'excerpt' => $f['excerpt'], 'topic' => $f['category'] ?: 'Strategy', 'author' => $f['author'], 'minutes' => $f['minutes'],
+        'cover' => $f['image'], 'alt' => $f['title'], 'accent' => 'var(--svc-' . strtolower($pillar) . ')', 'initials' => $ini);
 }
 function wugweb_post_card_html(array $c, $row = false, $wrapper = '') {
     $cls = 'post-card' . ($row ? ' post-card--row' : '');
