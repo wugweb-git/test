@@ -37,7 +37,11 @@
             el(TextControl, { label: 'Image alt text', value: copy[ak] !== undefined ? copy[ak] : it.alt, onChange: function (v) { var c = Object.assign({}, copy); if (v === it.alt) delete c[ak]; else c[ak] = v; set({ copy: c }); }, __nextHasNoMarginBottom: true }));
         }
         var cur = copy[it.key] !== undefined ? copy[it.key] : it.key;
-        return el(TextControl, { key: it.kind + it.key, label: it.kind === 'link' ? 'Link' : 'Text', value: cur, onChange: function (v) { put(it.key, v); }, __nextHasNoMarginBottom: true });
+        var main = el(TextControl, { key: it.kind + it.key, label: it.kind === 'link' ? 'Link' : 'Text', value: cur, onChange: function (v) { put(it.key, v); }, __nextHasNoMarginBottom: true });
+        if (it.kind !== 'link') return main;
+        var ak2 = 'aria:' + it.key;
+        return el(wp.element.Fragment, { key: 'lk' + it.key }, main,
+          el(TextControl, { label: 'Link aria-label (only if the visible text does not describe the action)', value: copy[ak2] || '', onChange: function (v) { put(ak2, v); }, __nextHasNoMarginBottom: true }));
       }),
       Object.keys(copy).length ? el(Button, { variant: 'link', isDestructive: true, onClick: function () { set({ copy: {} }); } }, 'Reset all') : null
     );

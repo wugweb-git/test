@@ -52,6 +52,12 @@ add_filter('render_block', function ($html, $block) {
     $html = preg_replace_callback('#href="([^"]*)"#', function ($m) use ($copy) {
         $h = html_entity_decode($m[1], ENT_QUOTES); return array_key_exists($h, $copy) ? 'href="' . esc_url((string) $copy[$h]) . '"' : $m[0];
     }, $html);
+    $html = preg_replace_callback('#<a\b[^>]*\shref="([^"]*)"[^>]*>#i', function ($m) use ($copy) {
+        $h = html_entity_decode($m[1], ENT_QUOTES);
+        if (!isset($copy['aria:' . $h]) || $copy['aria:' . $h] === '') return $m[0];
+        $tag = preg_replace('#\saria-label="[^"]*"#i', '', $m[0]);
+        return preg_replace('#^<a\b#i', '<a aria-label="' . esc_attr((string) $copy['aria:' . $h]) . '"', $tag, 1);
+    }, $html);
     $html = preg_replace_callback('#<img\b[^>]*>#i', function ($m) use ($copy) {
         $tag = $m[0];
         if (!preg_match('#\ssrc="([^"]*)"#i', $tag, $sm)) return $tag;
@@ -74,7 +80,7 @@ add_action('enqueue_block_editor_assets', function () {
 
 /** Site Identity logo: header/footer logo images follow the Site Identity logo when one is set (the DB header part keeps its theme-asset fallback). */
 add_filter('render_block', function ($html, $block) {
-    if (($block['blockName'] ?? '') !== 'core/html' || strpos($html, 'site-logo-img') === false) return $html;
+    if (strpos($html, 'site-logo-img') === false) return $html;
     $id = (int) get_option('site_logo') ?: (int) get_theme_mod('custom_logo');
     if (!$id) return $html;
     $src = wp_get_attachment_image_url($id, 'full');
@@ -90,7 +96,7 @@ add_action('init', function () {
     remove_action('wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link');
 }, 20);
 add_filter('render_block', function ($html, $block) {
-    if (($block['blockName'] ?? '') === 'core/html' && strpos($html, 'class="skip-link"') !== false) {
+    if (strpos($html, 'class="skip-link"') !== false && strpos($html, 'href="#content-main"') !== false) {
         return str_replace('href="#content-main"', 'href="#main"', $html);
     }
     return $html;
@@ -113,8 +119,8 @@ add_filter('render_block_core/group', function ($html, $block) {
         $depth++;
     }
     $html = implode('', $parts);
-    $open = $om[0];
+    $open = ltrim($om[0]);
     $new = preg_replace('#\s(id|tabindex|aria-label|data-scroll-flow)="[^"]*"#', '', $open);
     $new = preg_replace('#^<main\b#', '<main id="main" tabindex="-1" aria-label="' . esc_attr($title) . '"' . ($ids ? ' data-scroll-flow="' . esc_attr(implode(' ', $ids)) . '"' : ''), $new);
-    return preg_replace('#^\s*<main\b[^>]*>#', $new, $html, 1);
+    return preg_replace('#^\s*<main\b[^>]*>#', addcslashes($new, '\\$'), $html, 1);
 }, 10, 2);
