@@ -7,7 +7,7 @@
   const moreBtn = document.querySelector('.blog-more-btn');
   const count = document.querySelector('.blog-count');
   function paginate() {
-    const items = [...document.querySelectorAll('.blog-grid li')].filter((li) => !li.classList.contains('hidden'));
+    const items = [...document.querySelectorAll('.blog-grid > li')].filter((li) => !li.classList.contains('hidden'));
     items.forEach((li, i) => li.classList.toggle('is-later', i >= shown));
     if (!more) return;
     more.hidden = items.length <= shown;
@@ -22,7 +22,7 @@
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
     // The featured post is outside the grid; hide it too when its topic doesn't match.
     const q = (document.getElementById('blog-search')?.value || '').trim().toLowerCase();
-    document.querySelectorAll('.blog-grid li').forEach((el) => {
+    document.querySelectorAll('.blog-grid > li').forEach((el) => {
       const topicOk = !active || el.dataset.topic === active;
       const textOk = !q || el.textContent.toLowerCase().includes(q);
       el.classList.toggle('hidden', !(topicOk && textOk));
