@@ -1,0 +1,59 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/article-post",
+  "version": "3.0.0",
+  "title": "Article Post",
+  "category": "wugweb",
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "render": "file:./render.php",
+  "style": [
+    "wugweb-article-meta-toc-style",
+    "wugweb-article-share-newsletter-style",
+    "file:./style.css"
+  ],
+  "attributes": {
+    "postId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "icon": "media-document",
+  "description": "Blog post layout: hero, cover, contents, body, author, share/newsletter, previous/next (blog/[slug].astro).",
+  "usesContext": [
+    "postId",
+    "postType"
+  ],
+  "viewScript": "file:./view.js"
+}
