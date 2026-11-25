@@ -11,13 +11,12 @@ $policy = !empty($a['policyUrl']) ? '<a class="cookie-policy-link" href="' . esc
 <div id="wugweb-cookie-banner" class="cookie-banner-wrap" role="region" aria-label="<?php echo esc_attr($a['title'] ?? 'Cookies'); ?>" hidden>
   <div class="cookie-banner-inner">
     <div class="cookie-banner-text">
-      <p class="cookie-title"><?php echo $e('title'); ?></p>
-      <p><?php echo $e('subtitle'); ?> <?php echo $policy; ?></p>
+      <div class="cookie-head"><p class="cookie-title"><?php echo $e('title'); ?></p><?php if (!empty($a['byLabel'])) : ?><span class="cookie-by"><?php echo $e('byLabel'); ?></span><?php endif; ?></div>
+      <p class="cookie-body"><?php echo $e('subtitle'); ?> <button type="button" id="cookie-btn-manage" class="cookie-more"><?php echo $e('manage'); ?></button></p>
     </div>
     <div class="cookie-banner-actions">
-      <button type="button" id="cookie-btn-accept-all" class="btn btn-solid btn-sm-cookie"><?php echo $e('accept'); ?></button>
-      <button type="button" id="cookie-btn-reject-optional" class="btn btn-ghost btn-sm-cookie"><?php echo $e('reject'); ?></button>
-      <button type="button" id="cookie-btn-manage" class="btn btn-ghost btn-sm-cookie"><?php echo $e('manage'); ?></button>
+      <button type="button" id="cookie-btn-accept-all" class="btn btn-solid btn-sm-cookie cookie-accept"><?php echo $e('accept'); ?></button>
+      <button type="button" id="cookie-btn-reject-optional" class="btn btn-ghost btn-sm-cookie cookie-reject"><?php echo $e('reject'); ?></button>
     </div>
   </div>
 </div>
