@@ -1,0 +1,62 @@
+/* ── Featured card: state 1 — the one bold thing on the page ── */
+  .blog-featured { padding-bottom: var(--space-section-sm); }
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-6);
+    text-decoration: none;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-surface-elevated);
+    border: 0;
+    transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);  }
+  @media (min-width: 768px) {
+    .featured-card { grid-template-columns: 1.1fr 1fr; gap: 0; }
+  }
+  .featured-card:hover { }
+  .featured-visual { aspect-ratio: 16/10; overflow: hidden; position: relative; }
+  @media (min-width: 768px) { .featured-visual { aspect-ratio: auto; height: 100%; min-height: 420px; } }
+  .featured-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  .featured-card:hover .featured-visual img { transform: scale(1.035); }
+  .featured-visual-fallback {
+    position: relative; width: 100%; height: 100%; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--card-accent) 30%, transparent), transparent 60%),
+      linear-gradient(160deg, var(--color-surface-elevated) 0%, var(--color-surface-page) 100%);
+  }
+  .fvf-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--card-accent) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--card-accent) 10%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .fvf-initials {
+    position: relative; font-family: var(--font-display); font-weight: var(--font-weight-extrabold);
+    font-size: clamp(3rem, 8vw, 5.5rem); color: var(--fg); opacity: var(--opacity-strong); line-height: 1;
+  }
+  .featured-content { padding: var(--gap-8); display: flex; flex-direction: column; justify-content: center; gap: var(--gap-4); }
+  .pillar-tag { display: inline-flex; align-items: center; gap: var(--gap-2); align-self: flex-start; font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: 0.06em; text-transform: uppercase; color: var(--card-accent); }
+  .pillar-tag i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--card-accent); font-style: normal; }
+  .featured-content h2 { font-size: var(--fluid-h2); line-height: var(--core-line-height-tight); color: var(--fg); max-width: 22ch; }
+  .featured-excerpt { color: var(--fg-muted); font-size: var(--fluid-body-md); line-height: 1.65; max-width: 56ch; }
+
+  .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-3); font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); }
+  .post-meta span:not(:last-child)::after {
+    content: ''; display: inline-block; width: 1px; height: 0.85em; background: var(--line-strong); margin-left: var(--gap-3); vertical-align: -0.1em;
+  }
+
+  /* ── Filters ── */
+  .blog-filters { display: flex; gap: var(--gap-2); flex-wrap: wrap; margin-bottom: var(--gap-8); } /* top space comes from the section now */
+  .filter-chip { font-family: var(--font-mono); font-size: var(--t-sm); padding: var(--gap-2) var(--gap-4); border: 0; border-radius: var(--r-pill); background: transparent; color: var(--fg-muted); cursor: pointer; transition: border-color var(--duration-fast) var(--easing-out), color var(--duration-fast) var(--easing-out), background var(--duration-fast) var(--easing-out); }
+  .filter-chip:hover { color: var(--fg); }
+  .filter-chip.active { color: var(--fg); background: color-mix(in srgb, var(--neutral-0) 10%, transparent); }
+
+  /* ── Grid: state 2 — the quiet, repeatable card ── */
+  .blog-grid-section { border-top: var(--stroke-thin) solid var(--line); padding-block: var(--space-section-md) var(--space-section-xl); }
+  .blog-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--gap-6); }
+  /* Card size by breakpoint: sm 1 across, md (768) 2, lg (1200) 3. */
+  @media (min-width: 768px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1200px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+  .blog-grid li.hidden, .blog-featured.hidden { display: none; }
