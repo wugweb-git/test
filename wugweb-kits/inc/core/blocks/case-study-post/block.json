@@ -1,0 +1,14 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/case-study-post",
+  "version": "1.0.0",
+  "title": "Case Study Post",
+  "category": "wugweb",
+  "supports": { "html": false, "autoRegister": true, "anchor": true, "align": ["wide", "full"] },
+  "render": "file:./render.php",
+  "style": ["file:./style.css"],
+  "attributes": { "postId": { "type": "integer", "default": 0 } },
+  "icon": "portfolio",
+  "description": "Single case study: hero, meta, cover, bento body sections, more case studies (work/[slug].astro).",
+  "usesContext": ["postId", "postType"]
+}
