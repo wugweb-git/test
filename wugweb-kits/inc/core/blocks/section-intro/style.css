@@ -1,0 +1,6 @@
+.services-intro { padding-block: var(--space-section-xl); border-top: var(--stroke-thin) solid var(--line); }
+.services-intro h2 { font-size: var(--t-h3); max-width: 20ch; }
+.services-intro p { margin-top: var(--gap-5); max-width: 65ch; }
+.why-wugweb { padding-block: var(--space-section-xl); border-top: var(--stroke-thin) solid var(--line); }
+.why-wugweb h2 { font-size: var(--t-h2); margin-bottom: var(--gap-4); }
+.why-wugweb p { max-width: 65ch; }

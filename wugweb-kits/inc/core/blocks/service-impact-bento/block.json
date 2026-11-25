@@ -54,6 +54,18 @@
     "mediaImage": {
       "type": "string",
       "default": ""
+    },
+    "variant": {
+      "type": "string",
+      "enum": [
+        "pillar",
+        "why"
+      ],
+      "default": "pillar"
+    },
+    "reasons": {
+      "type": "array",
+      "default": []
     }
   },
   "render": "file:./render.php",
