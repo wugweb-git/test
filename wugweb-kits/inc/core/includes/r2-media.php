@@ -229,3 +229,22 @@ add_filter('get_post_metadata', function ($v, $id, $key, $single) {
     return $single ? $out : array($out);
 }, 10, 4);
 
+/**
+ * Case-study pages only: a lazy body <video> (src in data-src, preload none) has nothing to show until it loads. When the video has a generated poster
+ * (inc/core/video-posters.json), add it as the poster attribute. Listing pages are left alone on purpose: a poster is fetched at once, and /work/ has ~20 videos.
+ * Needs the option wugweb_video_posters_enabled = 1.
+ */
+add_filter('render_block', function ($html) {
+    if (!is_string($html) || strpos($html, '<video') === false || !get_option('wugweb_video_posters_enabled', 0) || !is_singular('case_study')) { return $html; }
+    static $map = null;
+    if (null === $map) { $f = dirname(__DIR__) . '/video-posters.json'; $map = is_readable($f) ? (array) json_decode((string) file_get_contents($f), true) : array(); }
+    if (!$map) { return $html; }
+    return preg_replace_callback('#<video\b[^>]*>#i', function ($m) use ($map) {
+        $tag = $m[0];
+        if (stripos($tag, ' poster=') !== false || !preg_match('#\s(?:data-)?src="([^"]+)"#i', $tag, $s)) { return $tag; }
+        $k = wugweb_r2_key_from_url(html_entity_decode($s[1], ENT_QUOTES));
+        if ($k === '' || empty($map[$k])) { return $tag; }
+        return substr($tag, 0, -1) . ' poster="' . esc_url(wugweb_r2_key_url($map[$k])) . '">';
+    }, $html);
+}, 19);
+
