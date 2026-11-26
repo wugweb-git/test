@@ -125,7 +125,7 @@ function wugweb_cl2_collect($id) {
     foreach ($secs as $i => $sec) { $secs[$i]['kind'] = $key($sec['title']); $secs[$i]['media'] = $by[$i] ?? array(); }
 
     // Results: the record's results field, one "value | what | source | as of" line each.
-    $results = wugweb_cl2_parse_results(preg_split('/\R/', (string) get_post_meta($id, 'wugweb_cs_results', true)));
+    $results = wugweb_cl2_parse_results(preg_split('~\R|<br\s*/?>~i', (string) get_post_meta($id, 'wugweb_cs_results', true)));
 
     // Credits from the record (same keys as credits() in case-layout.ts).
     $credits = array();
@@ -137,26 +137,40 @@ function wugweb_cl2_collect($id) {
         if ($u !== '' && preg_match('#^https?://#i', $u)) { $links[] = array('value' => $k, 'text' => preg_replace('#^www\.#i', '', (string) wp_parse_url($u, PHP_URL_HOST)), 'href' => $u); }
     }
 
-    // Related: the 3 most recent other case studies in the same industry (distinct titles).
-    $related = array();
-    $q = array('post_type' => 'case_study', 'post_status' => 'publish', 'numberposts' => 12, 'post__not_in' => array($id), 'orderby' => 'date', 'order' => 'DESC');
-    $tt = get_the_terms($id, 'industry');
-    if ($tt && !is_wp_error($tt)) { $q['tax_query'] = array(array('taxonomy' => 'industry', 'field' => 'term_id', 'terms' => wp_list_pluck($tt, 'term_id'))); }
-    elseif ($m('industry') !== '') { $q['meta_query'] = array(array('key' => 'wugweb_cs_industry', 'value' => $m('industry'))); }
-    else { $q = null; }
-    if ($q) {
-        $seen = array(strtolower($title));
-        foreach (get_posts($q) as $p) {
-            $t = strtolower(get_the_title($p)); if (in_array($t, $seen, true)) continue; $seen[] = $t;
-            $f = wugweb_fields_case_study($p->ID);
-            $related[] = array('url' => $f['url'], 'title' => $f['short_title'] ?: $f['title'], 'industry' => $f['industry'] ? implode(', ', $f['industry']) : '', 'img' => $ok($f['image']) ? $f['image'] : '');
-            if (count($related) >= 3) break;
-        }
+    // Related: the studies the record names (wugweb_cs_related_cases, comma separated slugs, in that order), then the most recent in the same industry,
+    // then the most recent overall. Distinct titles, never this page, at most 3.
+    $related = array(); $seen = array(strtolower($title)); $used = array($id);
+    $add = function ($p) use (&$related, &$seen, &$used, $ok) {
+        if (count($related) >= 3 || in_array($p->ID, $used, true)) return;
+        $t = strtolower(get_the_title($p)); if (in_array($t, $seen, true)) return;
+        $seen[] = $t; $used[] = $p->ID;
+        $f = wugweb_fields_case_study($p->ID);
+        $related[] = array('url' => $f['url'], 'title' => $f['short_title'] ?: $f['title'], 'industry' => $f['industry'] ? implode(', ', $f['industry']) : '', 'img' => $ok($f['image']) ? $f['image'] : '');
+    };
+    foreach (array_filter(array_map('trim', explode(',', (string) get_post_meta($id, 'wugweb_cs_related_cases', true)))) as $slug) {
+        $p = get_page_by_path(sanitize_title($slug), OBJECT, 'case_study');
+        if ($p && $p->post_status === 'publish') $add($p);
+    }
+    if (count($related) < 3) {
+        $q = array('post_type' => 'case_study', 'post_status' => 'publish', 'numberposts' => 12, 'post__not_in' => $used, 'orderby' => 'date', 'order' => 'DESC');
+        $tt = get_the_terms($id, 'industry');
+        if ($tt && !is_wp_error($tt)) { $q['tax_query'] = array(array('taxonomy' => 'industry', 'field' => 'term_id', 'terms' => wp_list_pluck($tt, 'term_id'))); foreach (get_posts($q) as $p) $add($p); }
+    }
+    if (count($related) < 3) {
+        foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish', 'numberposts' => 12, 'post__not_in' => $used, 'orderby' => 'date', 'order' => 'DESC')) as $p) $add($p);
+    }
+    // Up next: the case study published just before this one (the newest when this is the oldest). Not one already shown as related.
+    $next = null;
+    $prev = get_posts(array('post_type' => 'case_study', 'post_status' => 'publish', 'numberposts' => 1, 'post__not_in' => array($id), 'orderby' => 'date', 'order' => 'DESC', 'date_query' => array(array('before' => get_post_field('post_date', $id), 'inclusive' => false))));
+    if (!$prev) $prev = get_posts(array('post_type' => 'case_study', 'post_status' => 'publish', 'numberposts' => 1, 'post__not_in' => array($id), 'orderby' => 'date', 'order' => 'DESC'));
+    if ($prev) {
+        $f = wugweb_fields_case_study($prev[0]->ID);
+        $next = array('url' => $f['url'], 'title' => $f['short_title'] ?: $f['title'], 'industry' => $f['industry'] ? implode(', ', $f['industry']) : '', 'img' => $ok($f['image']) ? $f['image'] : '');
     }
 
     return array('id' => $id, 'title' => $title, 'brand' => $brand, 'subtitle' => $m('subtitle'), 'summary' => $m('ai_summary') ?: $m('seo_description'),
         'tags' => $tags, 'meta' => $meta, 'cover' => $ok($cover) ? $cover : '', 'secs' => $secs, 'closing' => $closing, 'results' => $results,
-        'credits' => $credits, 'links' => $links, 'related' => $related);
+        'credits' => $credits, 'links' => $links, 'related' => $related, 'next' => $next);
 }
 
 /** Resolver: data -> ordered blocks (port of resolveLayout, WordPress subset). */
@@ -196,6 +210,7 @@ function wugweb_cl2_resolve(array $d) {
     if ($results) { $blocks[] = array('type' => 'results', 'items' => $results); }
     if ($d['credits']) { $blocks[] = array('type' => 'credits', 'items' => $d['credits']); }
     if ($d['links']) { $blocks[] = array('type' => 'presence', 'links' => $d['links']); }
-    if ($d['related']) { $blocks[] = array('type' => 'related', 'items' => $d['related']); $blocks[] = array('type' => 'next', 'item' => $d['related'][0]); }
+    if ($d['related']) { $blocks[] = array('type' => 'related', 'items' => $d['related']); }
+    if (!empty($d['next'])) { $blocks[] = array('type' => 'next', 'item' => $d['next']); }
     return $blocks;
 }
