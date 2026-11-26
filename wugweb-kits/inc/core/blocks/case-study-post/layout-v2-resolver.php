@@ -117,6 +117,7 @@ function wugweb_cl2_collect($id) {
     foreach ($media as $md) {
         if (preg_match('/logo/i', $md['alt']) || preg_match('/^cover/i', $md['alt'])) continue;
         if (!$ok($md['src'])) continue; // missing stays missing: no grey box in v2
+        if (function_exists('wugweb_cl3_active') && wugweb_cl3_active() && wugweb_cl3_skipped((string) get_post_field('post_name', $id), $md['src'])) continue; // manifest: dead link or duplicate
         $k = $key($md['alt']);
         $hit = -1; foreach ($secs as $i => $sec) { if ($key($sec['title']) === $k) { $hit = $i; break; } }
         if ($hit < 0 && $k === 'outcome' && $secs) $hit = count($secs) - 1;

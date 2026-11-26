@@ -207,7 +207,13 @@ add_filter('render_block', function ($html) {
         $tag = $m[0];
         if (preg_match('#\s(?:width|height)\s*=#i', $tag) || !preg_match('#\ssrc="([^"]+)"#i', $tag, $s)) { return $tag; }
         $key = wugweb_r2_key_from_url(html_entity_decode($s[1], ENT_QUOTES));
-        if ($key === '' || empty($d[$key][0]) || empty($d[$key][1])) { return $tag; }
+        if ($key === '' || empty($d[$key][0]) || empty($d[$key][1])) {
+            // Media Library sizes carry their real size in the file name (name-1024x575.webp): use it for files in wp-content/uploads.
+            if (preg_match('#/wp-content/uploads/[^"\s]*-(\d{2,5})x(\d{2,5})\.(?:webp|jpe?g|png|gif)(?:[?\#][^"\s]*)?$#i', html_entity_decode($s[1], ENT_QUOTES), $wh)) {
+                return preg_replace('#<img\b#i', '<img width="' . (int) $wh[1] . '" height="' . (int) $wh[2] . '"', $tag, 1);
+            }
+            return $tag;
+        }
         return preg_replace('#<img\b#i', '<img width="' . (int) $d[$key][0] . '" height="' . (int) $d[$key][1] . '"', $tag, 1);
     }, $html);
 }, 19);

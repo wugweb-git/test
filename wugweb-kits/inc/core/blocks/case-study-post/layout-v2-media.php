@@ -48,10 +48,18 @@ function wugweb_cl3_manifest() {
     foreach ($j as $slug => $entries) {
         if (!is_array($entries)) { continue; }
         foreach ($entries as $e) {
-            if (empty($e['url']) || (isset($e['status']) && 200 !== (int) $e['status']) || !empty($e['dupOf'])) { continue; }
+            if (empty($e['url'])) { continue; }
             $k = wugweb_cl3_key($e['url']);
             if ($k === '') { continue; }
+            $k_before = $k;
             if (isset($rm[$k])) { $k = $rm[$k]; }
+            // Dead links and duplicates are a skip-list, never rendered (the manifest is a skip-list, not an allow-list).
+            if ((isset($e['status']) && 200 !== (int) $e['status']) || !empty($e['dupOf'])) {
+                // A dead URL that the R2 remap points at a live file was reorganised, not lost: the remap serves it, so it is not skipped.
+                $raw = ltrim(rawurldecode((string) wp_parse_url(strtok((string) $e['url'], '?#'), PHP_URL_PATH)), '/');
+                if (!isset($rm[$raw]) && !isset($rm[$k_before])) { $GLOBALS['wugweb_cl3_skip'][$slug][$k] = true; }
+                continue;
+            }
             $m[$slug][$k] = $e;
         }
     }
@@ -247,4 +255,12 @@ function wugweb_cl3_enqueue_script() {
     $file = __DIR__ . '/layout-v2-blocks.js';
     $ver = (string) wp_get_theme()->get('Version');
     wp_enqueue_script('wugweb-case-layout-v2-blocks', get_theme_file_uri('inc/core/blocks/case-study-post/layout-v2-blocks.js'), array(), is_readable($file) ? $ver . '.' . filemtime($file) : $ver, true);
+}
+
+
+/** True when the manifest marks this file of this case study as dead (status not 200) or a duplicate. Only meaningful while the media blocks are on. */
+function wugweb_cl3_skipped($slug, $url) {
+    wugweb_cl3_manifest();
+    $k = wugweb_cl3_key($url);
+    return $k !== '' && !empty($GLOBALS['wugweb_cl3_skip'][$slug][$k]);
 }
