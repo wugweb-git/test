@@ -86,17 +86,6 @@ add_filter('rank_math/frontend/robots', function ($r) {
 add_action('init', function () { if (wugweb_is_test_host() && !headers_sent()) header('X-Robots-Tag: noindex, nofollow'); }, 0);
 
 /* ── 3. JSON-LD by template ────────────────────────────────────────── */
-function wugweb_seo_faq_items($post) {
-    $o = array();
-    $walk = function ($blocks) use (&$walk, &$o) {
-        foreach ($blocks as $b) {
-            if (($b['blockName'] ?? '') === 'wugweb/faq-list') { foreach ((array) ($b['attrs']['items'] ?? array()) as $it) { $q = trim(wp_strip_all_tags((string) ($it['q'] ?? ''))); $a = trim(wp_strip_all_tags((string) ($it['a'] ?? ''))); if ($q !== '' && $a !== '') $o[] = array($q, $a); } }
-            if (!empty($b['innerBlocks'])) $walk($b['innerBlocks']);
-        }
-    };
-    $walk(parse_blocks((string) $post->post_content));
-    return $o;
-}
 /** Main image as ImageObject with Wugweb credit (no license URLs). */
 function wugweb_seo_image($url) { return array('@type' => 'ImageObject', 'url' => $url, 'creator' => array('@type' => 'Organization', 'name' => 'Wugweb'), 'creditText' => 'Wugweb', 'copyrightNotice' => '© Wugweb'); }
 /** R2 mp4 videos in a case study body. VideoObject needs a thumbnail: only videos with a real poster file (post meta wugweb_cs_video_poster, one per video in order) qualify. */
@@ -168,11 +157,6 @@ function wugweb_seo_entities() {
             $s = array('@type' => 'Service', '@id' => $url . '#service', 'name' => wp_strip_all_tags(get_the_title($id)), 'url' => $url, 'provider' => array('@id' => $org_id), 'serviceType' => ucfirst($q->post_name));
             if ($desc !== '') $s['description'] = $desc;
             $ent['Service'] = $s;
-        }
-        $faq = wugweb_seo_faq_items($q);
-        if ($faq) {
-            $qs = array(); foreach ($faq as $f) { $qs[] = array('@type' => 'Question', 'name' => $f[0], 'acceptedAnswer' => array('@type' => 'Answer', 'text' => $f[1])); }
-            $ent['FAQPage'] = array('@type' => 'FAQPage', '@id' => $url . '#faq', 'mainEntity' => $qs);
         }
     }
     return $ent;
