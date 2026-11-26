@@ -42,10 +42,37 @@ function wugweb_seo_deep($v) {
 add_filter('rank_math/frontend/canonical', 'wugweb_seo_url');
 add_filter('rank_math/opengraph/url', 'wugweb_seo_url');
 // Version-independent: rewrite the finished <head> for canonical, og:url, og:image and JSON-LD bodies.
-add_action('wp_head', function () { if (wugweb_seo_origin() !== '') ob_start(); }, 0);
+/** Share image for the current page: Rank Math's per-page image, the post's own cover, Rank Math's global default, then the theme default. */
+function wugweb_seo_share_image() {
+    $ok = function ($u) { $u = trim((string) $u); return preg_match('#^https?://#i', $u) && !preg_match('/(framerusercontent|dribbble)\./i', $u) ? $u : ''; };
+    if (is_singular()) {
+        $id = get_queried_object_id();
+        foreach (array('rank_math_facebook_image', 'wugweb_og_image', 'wugweb_cover_url', 'wugweb_cs_cover_image') as $k) { $u = $ok(get_post_meta($id, $k, true)); if ($u !== '') return $u; }
+        if (has_post_thumbnail($id)) { $u = $ok(get_the_post_thumbnail_url($id, 'large')); if ($u !== '') return $u; }
+    }
+    $o = get_option('rank-math-options-titles'); $u = is_array($o) ? $ok($o['open_graph_image'] ?? '') : '';
+    return $u !== '' ? $u : get_theme_file_uri('assets/brand/og-default.png');
+}
+add_action('wp_head', function () { if (wugweb_seo_origin() !== '' || wugweb_rank_math_active()) ob_start(); }, 0);
 add_action('wp_head', function () {
-    if (wugweb_seo_origin() === '') return;
+    if (wugweb_seo_origin() === '' && !wugweb_rank_math_active()) return;
     $h = (string) ob_get_clean();
+    // Rank Math prints no image tags for external (R2) URLs: add them once, only where missing.
+    if (wugweb_rank_math_active()) {
+        $img = wugweb_seo_share_image(); $add = '';
+        if (!preg_match('#<meta[^>]+property=["\']og:image["\']#i', $h)) {
+            $ext = strtolower(pathinfo((string) wp_parse_url($img, PHP_URL_PATH), PATHINFO_EXTENSION)); $mime = array('png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'webp' => 'image/webp', 'gif' => 'image/gif');
+            $alt = is_singular() ? wp_strip_all_tags(get_the_title(get_queried_object_id())) : get_bloginfo('name');
+            $add .= '<meta property="og:image" content="' . esc_url($img) . '" />' . "\n";
+            if (strpos($img, 'https://') === 0) $add .= '<meta property="og:image:secure_url" content="' . esc_url($img) . '" />' . "\n";
+            if (isset($mime[$ext])) $add .= '<meta property="og:image:type" content="' . $mime[$ext] . '" />' . "\n";
+            $add .= '<meta property="og:image:alt" content="' . esc_attr($alt) . '" />' . "\n";
+        }
+        if (!preg_match('#<meta[^>]+name=["\']twitter:image["\']#i', $h)) { $add .= '<meta name="twitter:image" content="' . esc_url($img) . '" />' . "\n"; }
+        if (!preg_match('#<meta[^>]+name=["\']twitter:card["\']#i', $h)) { $add .= '<meta name="twitter:card" content="summary_large_image" />' . "\n"; }
+        $h .= $add;
+    }
+    if (wugweb_seo_origin() === '') { echo $h; return; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- head markup already built and escaped by Rank Math / this file
     // Rank Math drops the canonical on noindex pages (the whole test host): emit the production one so each page has exactly one.
     if (!preg_match('#<link[^>]+rel=["\']canonical["\']#i', $h)) {
         $u = '';
