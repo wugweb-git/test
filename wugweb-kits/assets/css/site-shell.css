@@ -10,7 +10,7 @@
 @media (min-width: 1200px){:root{--shell-gutter:48px;--grid-gap:32px;--article-cols:minmax(0, 5fr) minmax(0, 7fr);--article-areas:"cover hero" "cover body";--article-column:none;--article-cover-ratio:auto;--article-cover-height:calc(100svh - var(--header-height) - var(--gap-8));--article-cover-position:sticky;--article-title-size:var(--t-h1);--space-section-xs:96px;--space-section-sm:96px;--space-section-md:96px;--space-section-lg:96px;--space-section-xl:96px;}}
 :root{--section-y:var(--space-section-xl);}
 *{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; }
+html{ scroll-behavior: auto; }
 @media (prefers-reduced-motion: reduce){html{ scroll-behavior: auto; }*, *::before, *::after{
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

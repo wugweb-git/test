@@ -102,7 +102,10 @@ add_action('wp_enqueue_scripts', function () {
     $v = wp_get_theme()->get('Version'); $u = get_theme_file_uri('assets/js/');
     wp_enqueue_script('gsap', $u . 'vendor/gsap.min.js', array(), '3.15.0', true);
     $deps = array('gsap');
-    foreach (array('ScrollTrigger', 'Draggable', 'Flip', 'InertiaPlugin') as $p) { wp_enqueue_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); $deps[] = 'gsap-' . $p; }
+    foreach (array('ScrollTrigger') as $p) { wp_enqueue_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); $deps[] = 'gsap-' . $p; }
+    // Draggable, Flip and InertiaPlugin are only used by the draggable service tags; the block enqueues 'wugweb-gsap-extras' when it renders.
+    foreach (array('Draggable', 'Flip', 'InertiaPlugin') as $p) { wp_register_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); }
+    wp_register_script('wugweb-gsap-extras', false, array('gsap-Draggable', 'gsap-Flip', 'gsap-InertiaPlugin'), '3.15.0', true);
     wp_enqueue_script('wugweb-motion', $u . 'wugweb-motion.js', $deps, $v, true);
     wp_enqueue_script('wugweb-media', $u . 'wugweb-media.js', array(), $v, true);
 });

@@ -1,4 +1,9 @@
 <?php
+if (!wp_script_is('wugweb-gsap-extras', 'enqueued')) {
+  wp_enqueue_script('wugweb-gsap-extras');
+  $wugweb_motion = wp_scripts()->query('wugweb-motion', 'registered');
+  if ($wugweb_motion && !in_array('wugweb-gsap-extras', $wugweb_motion->deps, true)) { $wugweb_motion->deps[] = 'wugweb-gsap-extras'; }
+}
 $tags = json_decode((string) file_get_contents(__DIR__ . '/../../includes/service-tags-data.json'), true) ?: array();
  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap services tone-recessed', 'id' => 'services-content', 'data-scroll' => 'rise', 'aria-labelledby' => 'services-content-title')); ?>>
 <h2 data-reveal id="services-content-title"><?php echo esc_html($attributes['heading'] ?? 'Crafting UI, UX, and Brand Systems that drive meaning'); ?></h2>
