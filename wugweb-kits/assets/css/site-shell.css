@@ -832,3 +832,7 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 /* extra global classes from global.css */
 .t-display, .type-display{font-family: var(--core-font-family-base); font-size: var(--fluid-display); font-weight: var(--font-weight-extrabold); line-height: var(--core-line-height-tight); letter-spacing: 0;}
 .u-index{display: inline-flex; align-items: center; height: var(--chip-size); min-width: var(--chip-size); font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: var(--tracking-label); color: var(--fg-muted);}
+
+/* 44px hit area for footer text controls: padding grown, margin pulled back, so layout and look are unchanged (axe target-size counts the element box). */
+.footer-links a, .footer-action-btn, .footer-email a { display: inline-block; padding: 15px 10px; margin: -15px -10px; }
+.footer-links a::after, .footer-action-btn::after { left: 10px; right: 10px; bottom: calc(15px - 0.25em); }

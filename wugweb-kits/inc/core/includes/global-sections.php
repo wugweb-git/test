@@ -187,3 +187,6 @@ add_filter('wp_sitemaps_posts_entry', function ($entry, $post) {
     if ($post && $post->post_type === 'page' && $post->post_name === 'our-work') { $entry['loc'] = home_url('/work/'); }
     return $entry;
 }, 10, 2);
+
+/** The footer template part is already a <footer> (the page's contentinfo); an inner role="contentinfo" would be a second landmark. */
+add_filter('render_block_core/template-part', function ($html) { return strpos($html, 'role="contentinfo"') === false ? $html : str_replace(' role="contentinfo"', '', $html); });
