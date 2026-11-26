@@ -129,7 +129,8 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
   if ($kind === 'outcome') {
     $facts = array(); foreach ($meta as $r) { if (in_array($r[0], array('Timeline', 'Platform'), true)) { $facts[] = $r; } }
     if ($disc) { $facts[] = array('Disciplines', (string) count($disc), ''); }
-    if ($facts) { echo '<dl class="b-facts">'; foreach ($facts as $f) { echo '<div><dt>' . esc_html($f[0]) . '</dt><dd>' . esc_html($f[1]) . '</dd></div>'; } echo '</dl>'; }
+    $tool_chips = wugweb_tool_chips_html($id, 'tool');
+    if ($facts || $tool_chips) { echo '<dl class="b-facts">'; foreach ($facts as $f) { echo '<div><dt>' . esc_html($f[0]) . '</dt><dd>' . esc_html($f[1]) . '</dd></div>'; } if ($tool_chips) { echo '<div><dt>Tool Stack</dt><dd>' . $tool_chips . '</dd></div>'; } echo '</dl>'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- chips built with esc_url/esc_html
   }
   ?>
 </section>

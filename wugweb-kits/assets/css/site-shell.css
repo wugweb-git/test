@@ -858,3 +858,8 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 /* 44px hit area for footer text controls: padding grown, margin pulled back, so layout and look are unchanged (axe target-size counts the element box). */
 .footer-links a, .footer-action-btn, .footer-email a { display: inline-block; padding: 15px 10px; margin: -15px -10px; }
 .footer-links a::after, .footer-action-btn::after { left: 10px; right: 10px; bottom: calc(15px - 0.25em); }
+
+/* Tool / platform chips with a small icon (alt="": the name is beside it). */
+.wugweb-chip-list{display:flex;flex-wrap:wrap;gap:var(--gap-2);list-style:none;margin:0;padding:0}
+.wugweb-chip{display:inline-flex;align-items:center;gap:var(--gap-2);padding:2px var(--gap-3);border:var(--stroke-thin,1px) solid var(--line);border-radius:var(--radius-full,999px);font-size:var(--fluid-label,.875rem)}
+.wugweb-chip img{width:16px;height:16px;object-fit:contain;border-radius:0}

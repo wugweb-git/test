@@ -85,6 +85,31 @@ function wugweb_icon_url( $kind, $id ) {
 	return function_exists( 'wugweb_r2_key_url' ) ? wugweb_r2_key_url( $p ) : $p;
 }
 
+/**
+ * Tool and platform chips for a case study: small icon (wugweb_icon_path, alt="" as the name sits beside it) + name.
+ * Tools come from the tool terms; platforms from the platform meta text matched to platform terms. A missing icon shows the name only.
+ * Returns an HTML string (escaped), '' when there is nothing to show.
+ */
+function wugweb_tool_chips_html( $id, $kind = 'tool' ) {
+	$names = array();
+	if ( 'tool' === $kind ) {
+		$t = get_the_terms( $id, 'tool' );
+		foreach ( (array) ( $t && ! is_wp_error( $t ) ? $t : array() ) as $term ) { $names[] = $term; }
+	} else {
+		foreach ( preg_split( '/\s*,\s*/', (string) get_post_meta( $id, 'wugweb_cs_platform', true ), -1, PREG_SPLIT_NO_EMPTY ) as $nm ) {
+			$term = get_term_by( 'name', $nm, 'platform' );
+			$names[] = $term ? $term : (object) array( 'name' => $nm, 'term_id' => 0 );
+		}
+	}
+	if ( ! $names ) { return ''; }
+	$o = '<ul class="wugweb-chip-list">';
+	foreach ( $names as $term ) {
+		$icon = $term->term_id ? wugweb_icon_url( 'term', $term->term_id ) : '';
+		$o .= '<li class="wugweb-chip">' . ( $icon ? '<img src="' . esc_url( $icon ) . '" alt="" width="16" height="16" loading="lazy" decoding="async">' : '' ) . '<span>' . esc_html( html_entity_decode( $term->name, ENT_QUOTES ) ) . '</span></li>';
+	}
+	return $o . '</ul>';
+}
+
 add_action( 'init', function () {
 	add_post_type_support( 'case_study', 'custom-fields' );
 	add_post_type_support( 'case_study', 'excerpt' );
