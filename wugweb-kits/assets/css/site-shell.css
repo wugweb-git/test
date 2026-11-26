@@ -863,3 +863,6 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 .wugweb-chip-list{display:flex;flex-wrap:wrap;gap:var(--gap-2);list-style:none;margin:0;padding:0}
 .wugweb-chip{display:inline-flex;align-items:center;gap:var(--gap-2);padding:2px var(--gap-3);border:var(--stroke-thin,1px) solid var(--line);border-radius:var(--radius-full,999px);font-size:var(--fluid-label,.875rem)}
 .wugweb-chip img{width:16px;height:16px;object-fit:contain;border-radius:0}
+
+/* No pillar/preset accent colours on service pages: text stays on the neutral tokens (project rule; uat has none). */
+.wugweb-service-page :is(.has-aqua-color,.has-pink-color,.has-peach-color,.has-green-color,.has-blue-color){color:var(--fg-muted) !important}

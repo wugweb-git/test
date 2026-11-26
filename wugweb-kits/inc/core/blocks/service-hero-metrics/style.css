@@ -50,7 +50,7 @@
     padding: var(--gap-2) var(--gap-5); 
     border: var(--stroke-thin) solid color-mix(in srgb, var(--neutral-0) 25%, transparent); 
     border-radius: var(--r-pill); 
-    color: var(--neutral-0);
+    color: var(--text, #f4f4f4);
     background: color-mix(in srgb, var(--neutral-0) 12%, transparent);
     backdrop-filter: var(--glass-light);
     -webkit-backdrop-filter: var(--glass-light);
