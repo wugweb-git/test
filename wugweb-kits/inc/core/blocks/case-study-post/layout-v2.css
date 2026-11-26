@@ -41,7 +41,7 @@
   margin: 0;
   color: var(--color-text-primary);
   font-family: var(--font-display, inherit);
-  font-size: var(--t-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   line-height: 1.1;
   font-weight: var(--font-weight-semibold);
   overflow-wrap: break-word;
@@ -49,7 +49,7 @@
 .case-hero-subtitle {
   margin-block-start: var(--space-page-md);
   color: var(--color-text-secondary);
-  font-size: var(--fluid-body-lg);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
   line-height: 1.5;
   max-inline-size: 60ch;
 }
@@ -87,7 +87,7 @@
   background: var(--color-surface-elevated);
 }
 .case-hero-media { inline-size: 100%; block-size: auto; display: block; }
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .case-hero {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
     align-items: start;
@@ -105,7 +105,7 @@
 .case-chapter-title {
   margin: 0;
   color: var(--color-text-primary);
-  font-size: var(--fluid-h2);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
   line-height: 1.2;
   font-weight: var(--font-weight-semibold);
   max-inline-size: 30ch;
@@ -114,7 +114,7 @@
 .case-chapter-lead {
   margin-block-start: var(--space-page-md);
   color: var(--color-text-secondary);
-  font-size: var(--fluid-body-lg);
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
   line-height: 1.6;
   max-inline-size: 60ch;
 }
@@ -143,17 +143,17 @@
 .case-point-title {
   margin: 0 0 var(--space-page-xs);
   color: var(--color-text-primary);
-  font-size: var(--fluid-body-lg);
+  font-size: 1.125rem;
   font-weight: var(--font-weight-semibold);
 }
 .case-point-text {
   margin: 0;
   color: var(--color-text-secondary);
-  font-size: var(--fluid-body-md);
+  font-size: 0.95rem;
   line-height: 1.6;
 }
 @media (min-width: 768px) { .case-points { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1440px) { .case-points { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .case-points { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* Figure (CaseFigure.astro) */
 .case-figure { margin: var(--space-page-lg) 0; display: grid; gap: var(--space-page-sm); }
@@ -365,7 +365,7 @@
 }
 .case-related-industry { margin: var(--space-page-xs) 0 0; color: var(--color-text-muted); font-size: var(--fluid-caption); }
 @media (min-width: 768px) { .case-related-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1440px) { .case-related:not(.case-related--next) .case-related-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .case-related:not(.case-related--next) .case-related-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .case-related--next .case-related-list { grid-template-columns: 1fr; }
 
 /* Closing media: WordPress stand-in for the Astro All screens block (files no chapter claimed, plain figures, no viewer). */
@@ -384,7 +384,7 @@
 }
 .case-closing-summary:focus-visible { outline: var(--focus-primary); outline-offset: 2px; }
 @media (min-width: 768px) { .case-closing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1440px) { .case-closing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .case-closing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* A broken image is removed by layout-v2.js, never shown as a broken icon. */
 .case-figure[hidden],
