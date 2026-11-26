@@ -86,6 +86,21 @@ add_filter('rank_math/frontend/robots', function ($r) {
 add_action('init', function () { if (wugweb_is_test_host() && !headers_sent()) header('X-Robots-Tag: noindex, nofollow'); }, 0);
 
 /* ── 3. JSON-LD by template ────────────────────────────────────────── */
+function wugweb_seo_faq_items($post) {
+    $o = array();
+    $walk = function ($blocks) use (&$walk, &$o) {
+        foreach ($blocks as $b) {
+            if (($b['blockName'] ?? '') === 'wugweb/service-page' && function_exists('wugweb_core_service_data')) {
+                $d = wugweb_core_service_data(sanitize_key($b['attrs']['pillar'] ?? 'brand'));
+                foreach ((array) ($d['faqs'] ?? array()) as $f) { $q = trim(wp_strip_all_tags((string) ($f['q'] ?? ''))); $a = trim(wp_strip_all_tags((string) ($f['a'] ?? ''))); if ($q !== '' && $a !== '') $o[] = array($q, $a); }
+            }
+            if (($b['blockName'] ?? '') === 'wugweb/faq-list') { foreach ((array) ($b['attrs']['items'] ?? array()) as $it) { $q = trim(wp_strip_all_tags((string) ($it['q'] ?? ''))); $a = trim(wp_strip_all_tags((string) ($it['a'] ?? ''))); if ($q !== '' && $a !== '') $o[] = array($q, $a); } }
+            if (!empty($b['innerBlocks'])) $walk($b['innerBlocks']);
+        }
+    };
+    $walk(parse_blocks((string) $post->post_content));
+    return $o;
+}
 /** Main image as ImageObject with Wugweb credit (no license URLs). */
 function wugweb_seo_image($url) { return array('@type' => 'ImageObject', 'url' => $url, 'creator' => array('@type' => 'Organization', 'name' => 'Wugweb'), 'creditText' => 'Wugweb', 'copyrightNotice' => '© Wugweb'); }
 /** R2 mp4 videos in a case study body. VideoObject needs a thumbnail: only videos with a real poster file (post meta wugweb_cs_video_poster, one per video in order) qualify. */
@@ -102,7 +117,7 @@ function wugweb_seo_entities() {
     $is_front = is_front_page();
     $logo = array('@type' => 'ImageObject', 'url' => 'https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/brand/logo.png', 'width' => 1014, 'height' => 352);
     $is_contact = is_page('contact-us');
-    $ent['Organization'] = array('@type' => ($is_front || $is_contact) ? array('Organization', 'ProfessionalService') : 'Organization', '@id' => $org_id, 'name' => 'Wugweb', 'url' => $home, 'logo' => $logo,
+    $ent['Organization'] = array('@type' => ($is_front || $is_contact) ? array('Organization', 'ProfessionalService') : 'Organization', '@id' => $org_id, 'name' => 'Wugweb', 'legalName' => 'Wug Web Services Private Limited', 'url' => $home, 'logo' => $logo,
         'email' => 'hello@wugweb.com', 'telephone' => '+919205996219', 'foundingDate' => '2020-12-04',
         'address' => array('@type' => 'PostalAddress', 'streetAddress' => 'Floor 19, WeWork Berger Delhi One, C-001/A2, Sector 16B', 'addressLocality' => 'Noida', 'addressRegion' => 'Uttar Pradesh', 'postalCode' => '201301', 'addressCountry' => 'IN'),
         'sameAs' => array('https://www.linkedin.com/company/wugweb', 'https://x.com/wugweb', 'https://www.facebook.com/wugweb', 'https://www.instagram.com/wugweb', 'https://www.youtube.com/channel/UC7qGSNvbvZqxZI8cA-Fijlg'));
@@ -158,6 +173,11 @@ function wugweb_seo_entities() {
             if ($desc !== '') $s['description'] = $desc;
             $ent['Service'] = $s;
         }
+        $faq = wugweb_seo_faq_items($q);
+        if ($faq) {
+            $qs = array(); foreach ($faq as $f) { $qs[] = array('@type' => 'Question', 'name' => $f[0], 'acceptedAnswer' => array('@type' => 'Answer', 'text' => $f[1])); }
+            $ent['FAQPage'] = array('@type' => 'FAQPage', '@id' => $url . '#faq', 'mainEntity' => $qs);
+        }
     }
     return $ent;
 }
@@ -178,6 +198,7 @@ function wugweb_seo_merge(array $graph, array $ours) {
         $hit = null;
         foreach ($graph as $k => $g) { if (!is_array($g)) continue; $t = (array) ($g['@type'] ?? array()); if (array_intersect($t, $types)) { $hit = $k; break; } }
         if ($hit === null) { $graph[$key] = $e; continue; }
+        if ($key === 'FAQPage') { continue; }   // Rank Math already emits one for this page: leave it alone
         if ($key === 'BreadcrumbList') { $graph[$hit] = $e; continue; }   // ours is the complete trail
         $keep_id = $graph[$hit]['@id'] ?? null;
         $graph[$hit] = array_replace($graph[$hit], $e);
