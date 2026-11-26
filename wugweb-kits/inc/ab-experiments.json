@@ -26,7 +26,7 @@
     },
     {
       "id": "nav-cta",
-      "enabled": false,
+      "enabled": true,
       "paths": [],
       "variants": [
         {

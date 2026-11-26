@@ -1,0 +1,11 @@
+{
+ "_readme": "Old R2 keys that were reorganised: old -> new. Applied by r2-media.php (key URLs, <img>/<video> URLs in rendered blocks, key lookups). Verified 200 in R2.",
+ "map": {
+  "assets/work/adtech/adtech-about.mp4": "assets/work/adtech-and-imedia-sculpting-the-visual-identity-of-global-martech-summits/adtech-about.mp4",
+  "assets/work/itc-citadel/citadel-about.mp4": "assets/work/itc-dark-fantasy-x-citadel-personalizing-the-spy-experience/citadel-about.mp4",
+  "assets/work/sbs-transit/sbs-about.mp4": "assets/work/sbs-transit-engineering-the-future-of-multimodal-urban-mobility/sbs-about.mp4",
+  "assets/work/plufo/Group-56973.png": "assets/work/plufo/Group-56970.png",
+  "assets/work/plufo/Plufo.png": "assets/work/plufo/mapped-assets__Plufo.png",
+  "assets/work/inkompass/02_Program-Details-copy-1.png": "assets/work/inkompass/02_Program-Details-copy.png"
+ }
+}

@@ -11,9 +11,22 @@ if (!defined('WUGWEB_R2_BASE_URL')) { define('WUGWEB_R2_BASE_URL', 'https://pub-
 /** Bucket key for an attachment, or '' when it is an ordinary upload. */
 function wugweb_r2_key($id) { return trim((string) get_post_meta((int) $id, '_wugweb_r2_key', true)); }
 
+/** Old key -> new key for files that were reorganised in R2 (inc/core/r2-remap.json). */
+function wugweb_r2_remap() {
+    static $m = null;
+    if ($m === null) {
+        $f = dirname(__DIR__) . '/r2-remap.json';
+        $j = is_readable($f) ? json_decode((string) file_get_contents($f), true) : array();
+        $m = is_array($j['map'] ?? null) ? $j['map'] : array();
+    }
+    return $m;
+}
+
 /** Public URL for a bucket key: base + key, each path segment rawurlencoded, slashes kept. */
 function wugweb_r2_key_url($key) {
     $base = rtrim((string) apply_filters('wugweb_r2_base_url', WUGWEB_R2_BASE_URL), '/');
+    $rm = wugweb_r2_remap();
+    if (isset($rm[ltrim($key, '/')])) { $key = $rm[ltrim($key, '/')]; }
     return $base . '/' . implode('/', array_map('rawurlencode', explode('/', ltrim($key, '/'))));
 }
 
@@ -125,7 +138,7 @@ function wugweb_r2_key_from_url($url) {
     $url = strtok((string) $url, '?#');
     foreach (array((string) apply_filters('wugweb_r2_base_url', WUGWEB_R2_BASE_URL), (string) apply_filters('wugweb_assets_base', 'https://pub-39ad1d03baec440faf48303be95c3782.r2.dev')) as $b) {
         $b = rtrim($b, '/') . '/';
-        if ($b !== '/' && strpos($url, $b) === 0) { return rawurldecode(substr($url, strlen($b))); }
+        if ($b !== '/' && strpos($url, $b) === 0) { $k = rawurldecode(substr($url, strlen($b))); $rm = wugweb_r2_remap(); return isset($rm[$k]) ? $rm[$k] : $k; }
     }
     return '';
 }
@@ -161,3 +174,13 @@ add_filter('render_block', function ($html) {
         return preg_replace('#<img\b#i', '<img srcset="' . esc_attr($v['srcset']) . '" sizes="' . esc_attr($v['sizes']) . '"', $tag, 1);
     }, $html);
 }, 20);
+
+/** Rendered block HTML that still names a reorganised R2 file gets the new URL. Plain str_replace on the few known old URLs, so it costs nothing on pages that do not use them. */
+add_filter('render_block', function ($html) {
+    if (!is_string($html) || $html === '' || strpos($html, 'assets/work/') === false) { return $html; }
+    foreach (wugweb_r2_remap() as $old => $new) {
+        if (strpos($html, $old) === false && strpos($html, str_replace(' ', '%20', $old)) === false) { continue; }
+        foreach (array($old, str_replace(' ', '%20', $old)) as $o) { $html = str_replace($o, $new, $html); }
+    }
+    return $html;
+}, 5);
