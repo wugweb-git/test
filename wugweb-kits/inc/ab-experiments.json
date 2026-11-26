@@ -4,20 +4,68 @@
     {
       "id": "home-hero-cta",
       "enabled": false,
-      "paths": ["^/$"],
-      "variants": [{"id": "a", "weight": 50}, {"id": "b", "weight": 50}],
+      "paths": [
+        "^/$"
+      ],
+      "variants": [
+        {
+          "id": "a",
+          "weight": 50
+        },
+        {
+          "id": "b",
+          "weight": 50
+        }
+      ],
       "selector": ".hero-ctas .btn-solid",
-      "labels": {"a": "Start a project", "b": "Book a call"},
+      "labels": {
+        "a": "Start a project",
+        "b": "Book a call"
+      },
       "goal": ".hero-ctas .btn-solid"
     },
     {
       "id": "nav-cta",
       "enabled": false,
       "paths": [],
-      "variants": [{"id": "a", "weight": 50}, {"id": "b", "weight": 50}],
+      "variants": [
+        {
+          "id": "a",
+          "weight": 50
+        },
+        {
+          "id": "b",
+          "weight": 50
+        }
+      ],
       "selector": ".nav-cta a, a.nav-cta",
-      "labels": {"a": "Let's Talk", "b": "Start a project"},
+      "labels": {
+        "a": "Let's Talk",
+        "b": "Start a project"
+      },
       "goal": ".nav-cta a, a.nav-cta"
+    },
+    {
+      "id": "mobile-blog-cards",
+      "enabled": false,
+      "paths": [
+        "^/$",
+        "^/blog/?$",
+        "^/blog/.+"
+      ],
+      "variants": [
+        {
+          "id": "a",
+          "weight": 50
+        },
+        {
+          "id": "b",
+          "weight": 50
+        }
+      ],
+      "selector": "",
+      "labels": {},
+      "goal": ".post-card .pc-link"
     }
   ]
 }

@@ -17,7 +17,10 @@ A small, consent-aware split-test framework built into the theme (`inc/ab-testin
 | id | where | A | B | conversion |
 |---|---|---|---|---|
 | `home-hero-cta` | home page only (`^/$`) | "Start a project" | "Book a call" | click on `.hero-ctas .btn-solid` |
+| `mobile-blog-cards` | home, /blog/, articles (`^/$`, `^/blog/?$`, `^/blog/.+`), phones only in effect | stacked card (image on top) | compact side-by-side row | click on `.post-card .pc-link` |
 | `nav-cta` | every page | "Let's Talk" (current) | "Start a project" | click on `.nav-cta` |
+
+`mobile-blog-cards` has no `selector`: variant B only adds `ab-mobile-blog-cards-b` to `<html>`, which turns the stacked override in `site-shell.css` off so the compact row returns at 767px and below. ab_assign / ab_goal carry the variant.
 
 Note: the home hero button currently reads "Get in Touch". If A should keep today's text, set `"a": null` in `labels` (null leaves the page text alone) before switching it on.
 
