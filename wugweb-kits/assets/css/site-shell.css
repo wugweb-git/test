@@ -866,3 +866,10 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 
 /* No pillar/preset accent colours on service pages: text stays on the neutral tokens (project rule; uat has none). */
 .wugweb-service-page :is(.has-aqua-color,.has-pink-color,.has-peach-color,.has-green-color,.has-blue-color){color:var(--fg-muted) !important}
+
+/* Skip link: first focusable element, visible on focus, 44px target (WCAG 2.4.1 / 2.5.8). */
+.wugweb-skip-link{position:absolute;left:var(--gap-4,16px);top:-100px;z-index:10000;display:inline-flex;align-items:center;min-height:44px;padding:0 var(--gap-5,20px);border-radius:var(--radius-sm,8px);background:var(--fg,#f4f4f4);color:var(--bg,#191919);font-weight:600;text-decoration:none}
+.wugweb-skip-link:focus,.wugweb-skip-link:focus-visible{top:calc(env(safe-area-inset-top,0px) + var(--gap-3,12px));outline:2px solid var(--bg,#191919);outline-offset:2px}
+/* Target size: disclosure toggles and prev/next links are at least 44px tall. */
+.wp-site-blocks summary{min-height:44px;box-sizing:border-box;padding-block:var(--gap-2,8px)}
+.wp-site-blocks .pn-prev-link,.wp-site-blocks .pn-next-link{display:inline-flex;align-items:center;min-height:44px}

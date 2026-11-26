@@ -108,7 +108,7 @@
     font-size: var(--fluid-label);
     letter-spacing: var(--tracking-label);
     line-height: var(--core-line-height-none);
-    color: color-mix(in srgb, var(--neutral-9) 55%, transparent);
+    color: var(--neutral-9);
     align-self: flex-start;
     padding-top: var(--gap-1);
   }
@@ -164,7 +164,7 @@
     margin: 0;
     font-size: var(--fluid-body-md);
     line-height: var(--core-line-height-normal);
-    color: color-mix(in srgb, var(--neutral-9) 78%, transparent);
+    color: var(--neutral-9);
   }
   .tag-link {
     display: inline-flex;
