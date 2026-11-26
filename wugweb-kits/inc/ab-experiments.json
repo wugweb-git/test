@@ -15,9 +15,9 @@
       "enabled": false,
       "paths": [],
       "variants": [{"id": "a", "weight": 50}, {"id": "b", "weight": 50}],
-      "selector": ".nav-cta",
+      "selector": ".nav-cta a, a.nav-cta",
       "labels": {"a": "Let's Talk", "b": "Start a project"},
-      "goal": ".nav-cta"
+      "goal": ".nav-cta a, a.nav-cta"
     }
   ]
 }
