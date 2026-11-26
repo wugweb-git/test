@@ -184,3 +184,30 @@ add_filter('render_block', function ($html) {
     }
     return $html;
 }, 5);
+
+/**
+ * Intrinsic width/height on R2 <img> tags that have neither, so the browser reserves the space before the file loads (no layout shift).
+ * inc/core/img-dims.json maps R2 key => [width, height], read from the files themselves. Images not in it, or that already
+ * carry width or height, are left alone. CSS keeps height:auto, so the attributes only supply the aspect ratio.
+ */
+function wugweb_r2_img_dims() {
+    static $m = null;
+    if (null === $m) {
+        $f = dirname(__DIR__) . '/img-dims.json';
+        $m = is_readable($f) ? json_decode((string) file_get_contents($f), true) : array();
+        if (!is_array($m)) { $m = array(); }
+    }
+    return $m;
+}
+add_filter('render_block', function ($html) {
+    if (!is_string($html) || $html === '' || strpos($html, '<img') === false) { return $html; }
+    $d = wugweb_r2_img_dims();
+    if (!$d) { return $html; }
+    return preg_replace_callback('#<img\b[^>]*>#i', function ($m) use ($d) {
+        $tag = $m[0];
+        if (preg_match('#\s(?:width|height)\s*=#i', $tag) || !preg_match('#\ssrc="([^"]+)"#i', $tag, $s)) { return $tag; }
+        $key = wugweb_r2_key_from_url(html_entity_decode($s[1], ENT_QUOTES));
+        if ($key === '' || empty($d[$key][0]) || empty($d[$key][1])) { return $tag; }
+        return preg_replace('#<img\b#i', '<img width="' . (int) $d[$key][0] . '" height="' . (int) $d[$key][1] . '"', $tag, 1);
+    }, $html);
+}, 19);
