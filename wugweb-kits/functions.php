@@ -142,3 +142,5 @@ add_action('init', function () {
     wp_register_style('wugweb-post-card', get_theme_file_uri('assets/css/post-card.css'), array(), $v);
     wp_register_style('wugweb-work-card', get_theme_file_uri('assets/css/work-card.css'), array(), $v);
 }, 5);
+
+add_action('wp_head', function () { echo "<script>(function(){try{var n=performance.getEntriesByType('navigation')[0];if('scrollRestoration' in history){if(n&&n.type==='back_forward'){history.scrollRestoration='auto';}else{history.scrollRestoration='manual';if(!location.hash){window.scrollTo(0,0);}}}}catch(e){}})();</script>\n"; }, 1);
