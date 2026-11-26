@@ -76,7 +76,7 @@ add_filter('rank_math/frontend/robots', function ($r) {
 }, 99);
 add_action('init', function () { if (wugweb_is_test_host() && !headers_sent()) header('X-Robots-Tag: noindex, nofollow'); }, 0);
 
-/* ── 3. JSON-LD: Rank Math's standard schema is used as is; the only thing added is FAQPage from authored wugweb/faq-list items ── */
+/* ── 3. JSON-LD by template ────────────────────────────────────────── */
 function wugweb_seo_faq_items($post) {
     $o = array();
     $walk = function ($blocks) use (&$walk, &$o) {
@@ -88,16 +88,94 @@ function wugweb_seo_faq_items($post) {
     $walk(parse_blocks((string) $post->post_content));
     return $o;
 }
-add_filter('rank_math/json_ld', function ($data) {
-    if (is_admin() || !is_array($data)) return $data;
+function wugweb_seo_entities() {
+    $home = home_url('/'); $org_id = $home . '#organization'; $site_id = $home . '#website';
+    $ent = array();
+    $ent['Organization'] = array('@type' => 'Organization', '@id' => $org_id, 'name' => 'Wugweb', 'url' => $home,
+        'logo' => array('@type' => 'ImageObject', 'url' => get_theme_file_uri('assets/brand/pwa-512.png'), 'width' => 512, 'height' => 512),
+        'sameAs' => array('https://www.linkedin.com/company/wugweb', 'https://x.com/wugweb', 'https://www.facebook.com/wugweb', 'https://www.instagram.com/wugweb', 'https://www.youtube.com/channel/UC7qGSNvbvZqxZI8cA-Fijlg'));
+    $ent['WebSite'] = array('@type' => 'WebSite', '@id' => $site_id, 'url' => $home, 'name' => 'Wugweb', 'inLanguage' => 'en', 'publisher' => array('@id' => $org_id));
+    if (is_front_page()) { $ent['WebSite']['potentialAction'] = array('@type' => 'SearchAction', 'target' => array('@type' => 'EntryPoint', 'urlTemplate' => $home . '?s={search_term_string}'), 'query-input' => 'required name=search_term_string'); }
+    // Breadcrumbs: Home › section › page.
+    $crumbs = array(array('Home', $home));
     $q = get_queried_object();
-    if ($q instanceof WP_Post) {
+    if (is_singular()) {
+        $id = get_the_ID(); $pt = get_post_type($id);
+        if ($pt === 'post') $crumbs[] = array('Blog', home_url('/blog/'));
+        elseif ($pt === 'case_study') $crumbs[] = array('Work', home_url('/work/'));
+        elseif ($pt === 'page' && in_array($q->post_name, array('brand', 'strategy', 'experience', 'engineering', 'growth', 'operations'), true)) $crumbs[] = array('Services', home_url('/services/'));
+        if (!is_front_page()) $crumbs[] = array(wp_strip_all_tags(get_the_title($id)), get_permalink($id));
+    } elseif (is_post_type_archive('case_study')) { $crumbs[] = array('Work', home_url('/work/')); }
+    if (count($crumbs) > 1) {
+        $items = array(); foreach ($crumbs as $i => $c) { $items[] = array('@type' => 'ListItem', 'position' => $i + 1, 'name' => $c[0], 'item' => $c[1]); }
+        $ent['BreadcrumbList'] = array('@type' => 'BreadcrumbList', '@id' => (is_singular() ? get_permalink() : $home) . '#breadcrumb', 'itemListElement' => $items);
+    }
+    if (is_singular()) {
+        $id = get_the_ID(); $url = get_permalink($id); $pt = get_post_type($id);
+        $desc = trim(wp_strip_all_tags((string) (get_post_meta($id, 'wugweb_seo_description', true) ?: get_post_meta($id, 'wugweb_page_seo_description', true) ?: get_the_excerpt($id))));
+        if ($pt === 'post') {
+            $cover = get_post_meta($id, 'wugweb_og_image', true) ?: get_post_meta($id, 'wugweb_cover_url', true) ?: (has_post_thumbnail($id) ? get_the_post_thumbnail_url($id, 'full') : '');
+            $author = get_post_meta($id, 'wugweb_author_name', true) ?: get_the_author_meta('display_name', get_post_field('post_author', $id));
+            $a = array('@type' => get_post_meta($id, 'wugweb_schema_type', true) ?: 'BlogPosting', '@id' => $url . '#article', 'headline' => wp_strip_all_tags(get_the_title($id)), 'url' => $url, 'mainEntityOfPage' => array('@id' => $url . '#webpage'),
+                'datePublished' => get_the_date('c', $id), 'dateModified' => get_the_modified_date('c', $id), 'inLanguage' => 'en', 'publisher' => array('@id' => $org_id));
+            if ($desc !== '') $a['description'] = $desc;
+            if ($author) $a['author'] = array('@type' => 'Person', 'name' => $author);
+            if ($cover) $a['image'] = $cover;
+            if (get_post_meta($id, 'wugweb_subtitle', true)) $a['alternativeHeadline'] = get_post_meta($id, 'wugweb_subtitle', true);
+            if (get_post_meta($id, 'wugweb_focus_keyword', true)) $a['keywords'] = get_post_meta($id, 'wugweb_focus_keyword', true);
+            if ((int) get_post_meta($id, 'wugweb_word_count', true)) $a['wordCount'] = (int) get_post_meta($id, 'wugweb_word_count', true);
+            $ent['Article'] = $a;
+        } elseif ($pt === 'case_study') {
+            $m = function ($k) use ($id) { return trim((string) get_post_meta($id, 'wugweb_cs_' . $k, true)); };
+            $cw = array('@type' => 'CreativeWork', '@id' => $url . '#case-study', 'name' => wp_strip_all_tags(get_the_title($id)), 'url' => $url, 'mainEntityOfPage' => array('@id' => $url . '#webpage'),
+                'datePublished' => get_the_date('c', $id), 'dateModified' => get_the_modified_date('c', $id), 'inLanguage' => 'en', 'creator' => array('@id' => $org_id), 'publisher' => array('@id' => $org_id));
+            if ($m('subtitle') !== '') $cw['alternativeHeadline'] = $m('subtitle');
+            if ($desc !== '') $cw['description'] = $desc; elseif ($m('subtitle') !== '') $cw['description'] = $m('subtitle');
+            if ($m('client') !== '') $cw['about'] = array('@type' => 'Organization', 'name' => $m('client'));
+            $ind = $m('industry'); if ($ind === '') { $t = get_the_terms($id, 'industry'); if ($t && !is_wp_error($t)) $ind = html_entity_decode($t[0]->name, ENT_QUOTES); }
+            if ($ind !== '') $cw['genre'] = $ind;
+            $disc = array_values(array_filter(array_unique(array_map('trim', array_merge(explode(',', $m('primary_discipline')), explode(',', $m('additional_disciplines')))))));
+            if ($disc) $cw['keywords'] = implode(', ', $disc);
+            $cv = $m('cover_image'); if ($cv === '' && has_post_thumbnail($id)) $cv = get_the_post_thumbnail_url($id, 'full');
+            if ($cv !== '' && !preg_match('/(framerusercontent|dribbble)\./', $cv)) $cw['image'] = $cv;
+            $ent['CreativeWork'] = $cw;
+        } elseif ($pt === 'page' && in_array($q->post_name, array('brand', 'strategy', 'experience', 'engineering', 'growth', 'operations'), true)) {
+            $s = array('@type' => 'Service', '@id' => $url . '#service', 'name' => wp_strip_all_tags(get_the_title($id)), 'url' => $url, 'provider' => array('@id' => $org_id), 'serviceType' => ucfirst($q->post_name));
+            if ($desc !== '') $s['description'] = $desc;
+            $ent['Service'] = $s;
+        }
         $faq = wugweb_seo_faq_items($q);
-        $has = false; foreach ($data as $g) { if (is_array($g) && in_array('FAQPage', (array) ($g['@type'] ?? array()), true)) { $has = true; } }
-        if ($faq && !$has) {
+        if ($faq) {
             $qs = array(); foreach ($faq as $f) { $qs[] = array('@type' => 'Question', 'name' => $f[0], 'acceptedAnswer' => array('@type' => 'Answer', 'text' => $f[1])); }
-            $data['wugweb_faq'] = array('@type' => 'FAQPage', '@id' => get_permalink($q) . '#faq', 'mainEntity' => $qs);
+            $ent['FAQPage'] = array('@type' => 'FAQPage', '@id' => $url . '#faq', 'mainEntity' => $qs);
         }
     }
+    return $ent;
+}
+/** Merge our entities into a graph: same @type present = merge into it (keeps its @id); otherwise add. */
+function wugweb_seo_merge(array $graph, array $ours) {
+    $alias = array('Article' => array('Article', 'BlogPosting', 'TechArticle', 'NewsArticle'));
+    foreach ($ours as $key => $e) {
+        $types = $alias[$key] ?? array($e['@type']);
+        $hit = null;
+        foreach ($graph as $k => $g) { if (!is_array($g)) continue; $t = (array) ($g['@type'] ?? array()); if (array_intersect($t, $types)) { $hit = $k; break; } }
+        if ($hit === null) { $graph[$key] = $e; continue; }
+        if ($key === 'BreadcrumbList') { $graph[$hit] = $e; continue; }   // ours is the complete trail
+        $keep_id = $graph[$hit]['@id'] ?? null;
+        $graph[$hit] = array_replace($graph[$hit], $e);
+        if ($keep_id) $graph[$hit]['@id'] = $keep_id;
+    }
+    return $graph;
+}
+add_filter('rank_math/json_ld', function ($data) {
+    if (is_admin() || !is_array($data)) return $data;
+    $data = wugweb_seo_merge($data, wugweb_seo_entities());
     return wugweb_seo_origin() !== '' ? wugweb_seo_deep($data) : $data;
 }, 99);
+// Rank Math inactive: the same entities as one @graph (never alongside Rank Math's).
+add_action('wp_head', function () {
+    if (is_admin() || wugweb_rank_math_active()) return;
+    $g = array_values(wugweb_seo_entities());
+    $g = wugweb_seo_origin() !== '' ? wugweb_seo_deep($g) : $g;
+    echo '<script type="application/ld+json">' . wp_json_encode(array('@context' => 'https://schema.org', '@graph' => $g), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n"; // phpcs:ignore
+}, 6);
