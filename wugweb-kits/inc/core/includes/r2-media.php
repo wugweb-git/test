@@ -102,3 +102,62 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $att) {
     if ($t !== '') { $attr['alt'] = $t; }
     return $attr;
 }, 10, 2);
+
+/**
+ * Resized WebP variants of cover/card images (generated outside WordPress, uploaded to R2 next to the originals as
+ * <key without extension>-640.webp / -960.webp). OFF until the option wugweb_r2_variants_enabled is 1: with it off nothing changes.
+ * inc/core/r2-variants.json maps each source R2 key to the variant widths that exist.
+ */
+function wugweb_r2_variants_enabled() { return (bool) get_option('wugweb_r2_variants_enabled', 0); }
+
+function wugweb_r2_variant_map() {
+    static $m = null;
+    if (null === $m) {
+        $f = dirname(__DIR__) . '/r2-variants.json';
+        $m = is_readable($f) ? json_decode((string) file_get_contents($f), true) : array();
+        if (!is_array($m)) { $m = array(); }
+    }
+    return $m;
+}
+
+/** R2 key for a public URL (either R2 base used by the theme), or ''. */
+function wugweb_r2_key_from_url($url) {
+    $url = strtok((string) $url, '?#');
+    foreach (array((string) apply_filters('wugweb_r2_base_url', WUGWEB_R2_BASE_URL), (string) apply_filters('wugweb_assets_base', 'https://pub-39ad1d03baec440faf48303be95c3782.r2.dev')) as $b) {
+        $b = rtrim($b, '/') . '/';
+        if ($b !== '/' && strpos($url, $b) === 0) { return rawurldecode(substr($url, strlen($b))); }
+    }
+    return '';
+}
+
+/**
+ * srcset + sizes for an R2 image URL or key, or null (feature off, not in the manifest, not R2).
+ * The original is listed last with a nominal 1920w (its real width is not in the manifest), so a wide or high-density slot still gets the full image.
+ */
+function wugweb_r2_srcset($src_or_key, $sizes = '(max-width:767px) 100vw, (max-width:1199px) 50vw, 33vw') {
+    if (!wugweb_r2_variants_enabled()) { return null; }
+    $src = (string) $src_or_key;
+    $key = preg_match('#^https?://#i', $src) ? wugweb_r2_key_from_url($src) : ltrim($src, '/');
+    $map = wugweb_r2_variant_map();
+    if ($key === '' || empty($map[$key])) { return null; }
+    $base = preg_replace('/\.[A-Za-z0-9]+$/', '', $key);
+    $parts = array();
+    foreach ((array) $map[$key] as $w) { $w = (int) $w; if ($w > 0) { $parts[] = wugweb_r2_key_url($base . '-' . $w . '.webp') . ' ' . $w . 'w'; } }
+    if (!$parts) { return null; }
+    $parts[] = wugweb_r2_key_url($key) . ' 1920w';
+    return array('srcset' => implode(', ', $parts), 'sizes' => $sizes);
+}
+
+/** Adds srcset/sizes to every <img> in rendered block HTML whose src is a mapped R2 image (og/twitter meta are not <img> tags and keep the original). */
+add_filter('render_block', function ($html) {
+    if (!is_string($html) || $html === '' || strpos($html, '<img') === false || !wugweb_r2_variants_enabled()) { return $html; }
+    return preg_replace_callback('#<img\b[^>]*>#i', function ($m) {
+        $tag = $m[0];
+        if (stripos($tag, ' srcset=') !== false || !preg_match('#\ssrc="([^"]+)"#i', $tag, $s)) { return $tag; }
+        $sizes = (stripos($tag, 'fetchpriority="high"') !== false || stripos($tag, 'loading="eager"') !== false)
+            ? '(max-width:1199px) 100vw, 50vw' : '(max-width:767px) 100vw, (max-width:1199px) 50vw, 33vw';
+        $v = wugweb_r2_srcset(html_entity_decode($s[1], ENT_QUOTES), $sizes);
+        if (!$v) { return $tag; }
+        return preg_replace('#<img\b#i', '<img srcset="' . esc_attr($v['srcset']) . '" sizes="' . esc_attr($v['sizes']) . '"', $tag, 1);
+    }, $html);
+}, 20);
