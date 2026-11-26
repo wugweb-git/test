@@ -1,0 +1,24 @@
+{
+  "apiVersion": 3,
+  "name": "wugweb/blog-bento",
+  "version": "1.0.0",
+  "title": "Blog Bento (mosaic)",
+  "category": "wugweb",
+  "description": "The blog mosaic as one block: featured card, list, case-study strip, picks, case-study cards and newsletter. Pick posts by ID in the sidebar; blank fields keep the automatic choice.",
+  "icon": "screenoptions",
+  "supports": { "html": false, "autoRegister": true },
+  "render": "file:./render.php",
+  "style": ["wugweb-post-card"],
+  "attributes": {
+    "hero": { "type": "string", "default": "" },
+    "side": { "type": "string", "default": "" },
+    "sideLabel": { "type": "string", "default": "" },
+    "picksRows": { "type": "string", "default": "" },
+    "picksBig": { "type": "string", "default": "" },
+    "picksLabel": { "type": "string", "default": "" },
+    "cases": { "type": "string", "default": "" },
+    "hideStrip": { "type": "boolean", "default": false },
+    "hideCases": { "type": "boolean", "default": false },
+    "hideNewsletter": { "type": "boolean", "default": false }
+  }
+}

@@ -8,13 +8,13 @@ $slot = (string) ($attributes['slot'] ?? 'featured');
 switch ($slot) {
 case 'featured':
   if (!$hero) { return; }
-  ?><a href="<?php echo esc_url($hero['url']); ?>" class="featured-card blog-featured" id="blog-featured" style="--card-accent: <?php echo esc_attr($hero['accent']); ?>">
-    <div class="featured-visual"><?php if (!empty($hero['topic'])) : ?><span class="pc-chip"><?php echo esc_html($hero['topic']); ?></span><?php endif; ?><?php if (!empty($hero['cover'])) : ?><img src="<?php echo esc_url($hero['cover']); ?>" alt="<?php echo esc_attr($hero['alt']); ?>" loading="eager" decoding="async"><?php else : ?><div class="wugweb-ph" style="height:100%;aspect-ratio:auto;border-radius:0" aria-hidden="true"></div><?php endif; ?></div>
+  ?><div class="featured-card blog-featured" id="blog-featured" style="--card-accent: <?php echo esc_attr($hero['accent']); ?>">
+    <div class="featured-visual"><?php if (!empty($hero['topic'])) : ?><a class="pc-chip" href="<?php echo esc_url(wugweb_topic_url($hero['topic'])); ?>"><?php echo esc_html($hero['topic']); ?></a><?php endif; ?><?php if (!empty($hero['cover'])) : ?><img src="<?php echo esc_url($hero['cover']); ?>" alt="<?php echo esc_attr($hero['alt']); ?>" loading="eager" decoding="async"><?php else : ?><div class="wugweb-ph" style="height:100%;aspect-ratio:auto;border-radius:0" aria-hidden="true"></div><?php endif; ?></div>
     <div class="featured-content">
-      <h2><?php echo esc_html($hero['title']); ?></h2>
+      <h2><a class="pc-link" href="<?php echo esc_url($hero['url']); ?>"><?php echo esc_html($hero['title']); ?></a></h2>
       <p class="featured-excerpt"><?php echo esc_html($hero['excerpt']); ?></p>
       <div class="post-meta"><span class="pc-date"><?php echo $cal; // phpcs:ignore ?><?php echo esc_html($hero['date']); ?></span></div>
-    </div></a><?php
+    </div></div><?php
   break;
 case 'list':
   if (!$side) { return; }

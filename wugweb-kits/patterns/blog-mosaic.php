@@ -23,7 +23,8 @@ if (!function_exists('wugweb_gb_grid')) {
 }
 $one = 'minmax(0,1fr)';
 echo wugweb_gb_grid('b10feat1', 'featured-grid', array('' => $one, '(min-width:1100px)' => 'minmax(0,7fr) minmax(0,5fr)'), 'var(--gap-10)', wugweb_blog_slot('featured') . wugweb_blog_slot('list') . '</div>'); // phpcs:ignore
-echo wugweb_blog_slot('strip'); // phpcs:ignore
+$bo = isset($GLOBALS['wugweb_blog_bento']) ? (array) $GLOBALS['wugweb_blog_bento'] : array();
+if (empty($bo['hideStrip'])) { echo wugweb_blog_slot('strip'); } // phpcs:ignore
 echo wugweb_gb_grid('b10pick1', 'picks-grid', array('' => $one, '(min-width:1100px)' => 'minmax(0,5fr) minmax(0,7fr)'), 'var(--gap-10)', wugweb_blog_slot('picks-rows') . wugweb_blog_slot('picks-big') . '</div>'); // phpcs:ignore
-echo wugweb_gb_grid('b10case1', 'blog-work', array('' => $one), 'var(--grid-gap)', wugweb_blog_slot('cases') . '</div>'); // phpcs:ignore
-echo wugweb_blog_slot('newsletter'); // phpcs:ignore
+if (empty($bo['hideCases'])) echo wugweb_gb_grid('b10case1', 'blog-work', array('' => $one), 'var(--grid-gap)', wugweb_blog_slot('cases') . '</div>'); // phpcs:ignore
+if (empty($bo['hideNewsletter'])) { echo wugweb_blog_slot('newsletter'); } // phpcs:ignore
