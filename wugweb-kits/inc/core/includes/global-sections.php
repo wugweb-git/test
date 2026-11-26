@@ -134,7 +134,7 @@ add_filter('render_block_core/group', function ($html, $block) {
 /** Cookie consent: render the banner + modal in the footer; hold analytics scripts (Site Kit / gtag) until consent (view.js releases them). */
 add_action('wp_footer', function () {
     if (is_admin() || is_feed() || is_embed()) return;
-    echo do_blocks('<!-- wp:wugweb/cookie-consent /-->');
+    echo do_blocks('<!-- wp:wugweb/cookie-consent /-->'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- block markup; every block escapes its own output 
 }, 5);
 add_action('template_redirect', function () {
     if (is_admin() || is_feed() || is_embed() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_customize_preview()) return;

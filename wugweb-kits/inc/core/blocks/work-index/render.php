@@ -23,7 +23,7 @@ foreach (array_merge($feat, $rest) as $p) {
   $items[] = array('client' => $f['client'], 'category' => $disc ? implode(', ', $disc) : 'UX Design', 'pillar' => $pillar, 'title' => $f['title'], 'url' => $f['url'], 'media' => $f['image']);
 }
 if (!$items) { return; }
-?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap work-grid-section', 'id' => 'work-grid-section', 'aria-labelledby' => 'work-grid-title')); ?>>
+ // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap work-grid-section', 'id' => 'work-grid-section', 'aria-labelledby' => 'work-grid-title')); ?>>
   <h2 class="sr-only" id="work-grid-title">Case studies</h2>
   <div class="work-filters" role="toolbar" aria-label="Filter case studies" data-reveal>
     <?php foreach (array_merge(array('All'), $pillars) as $c) : ?><button class="filter-chip" data-category="<?php echo esc_attr($c); ?>"><?php echo esc_html($c); ?></button><?php endforeach; ?>

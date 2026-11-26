@@ -2,4 +2,4 @@
 /** Editorial Card: PostCard.astro port. Renders the current post via the shared PostCard helper. */
 $id = wugweb_block_post_id($block ?? null, $attributes, array('post'));
 if (!$id || !function_exists('wugweb_post_card_data')) { return; }
-echo '<div ' . get_block_wrapper_attributes() . '>' . wugweb_post_card_html(wugweb_post_card_data($id), strpos((string) ($attributes['className'] ?? ''), 'is-style-row') !== false) . '</div>';
+echo '<div ' . get_block_wrapper_attributes() . '>' . wugweb_post_card_html(wugweb_post_card_data($id), strpos((string) ($attributes['className'] ?? ''), 'is-style-row') !== false) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core 

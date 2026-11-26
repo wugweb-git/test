@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 $platforms = array(array('Clutch', 'https://clutch.co/profile/wugweb'), array('DesignRush', 'https://www.designrush.com/agency/profile/wugweb'), array('GoodFirms', 'https://www.goodfirms.co/company/wugweb'));
 ?>
-<div <?php echo get_block_wrapper_attributes(array('class' => 'reviews-page')); ?>>
+<div <?php echo get_block_wrapper_attributes(array('class' => 'reviews-page')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
 <section class="wrap reviews-section" id="reviews-section" aria-labelledby="reviews-section-title">
   <div class="section-header">
     <h2 data-reveal id="reviews-section-title">Agency reviews</h2>

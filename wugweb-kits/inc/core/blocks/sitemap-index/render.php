@@ -19,7 +19,7 @@ $svc = array(); foreach ($services as $s) { $svc[wp_make_link_relative(get_perma
 $csl = array(); foreach (array_slice($cs, 0, 24) as $id) { $csl[wp_make_link_relative(get_permalink($id))] = get_the_title($id); }
 $pl = array(); foreach (array_slice($posts, 0, 24) as $id) { $pl[wp_make_link_relative(get_permalink($id))] = get_the_title($id); }
 ?>
-<section <?php echo get_block_wrapper_attributes(array('class' => 'wrap static-page sitemap', 'id' => 'static-page')); ?>>
+<section <?php echo get_block_wrapper_attributes(array('class' => 'wrap static-page sitemap', 'id' => 'static-page')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <div class="sitemap-grid" data-reveal>
     <?php
     $col('01', 'Pages', $pages);

@@ -20,7 +20,7 @@ $heading = $d['capsTitle'] ?? 'What we can do';
 $theme = 'var(--color-accent-primary)';
 $wrap = get_block_wrapper_attributes(array('class' => 'wrap capabilities-section wugweb-capability-showcase', 'id' => 'capabilities-section', 'aria-labelledby' => 'caps-heading'));
 ?>
-<section <?php echo $wrap; ?>>
+<section <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <h2 class="eyebrow caps-heading" id="caps-heading" data-reveal><?php echo esc_html($heading); ?></h2>
   <div class="showcase" data-showcase style="--theme-base: <?php echo esc_attr($theme); ?>;">
     <div class="showcase-bg" aria-hidden="true">

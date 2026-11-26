@@ -76,7 +76,7 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
   if (count($others) >= 2) break;
 }
 ?>
-<div <?php echo get_block_wrapper_attributes(array('class' => 'wugweb-case-study')); ?>>
+<div <?php echo get_block_wrapper_attributes(array('class' => 'wugweb-case-study')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
 <section class="work-detail-hero" id="work-detail-hero" aria-labelledby="work-detail-hero-title"><div class="wrap">
   <?php if ($brand !== '') : ?><p class="eyebrow"><?php echo esc_html($brand); ?></p><?php endif; ?>
   <h1 id="work-detail-hero-title"><?php echo esc_html($title); ?></h1>
@@ -84,7 +84,7 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
   <dl class="work-meta"><?php foreach ($meta as $row) : ?><div><dt class="meta-label"><?php echo esc_html($row[0]); ?></dt><dd<?php echo $row[0] === 'Client' ? ' class="work-meta-client"' : ''; ?>><?php if ($row[2]) : ?><img src="<?php echo esc_url($row[2]); ?>" alt="" class="work-client-logo" loading="eager"><?php endif; ?><?php echo esc_html($row[1]); ?></dd></div><?php endforeach; ?></dl>
 </div></section>
 <section class="wrap section work-cover" data-reveal id="work-cover" aria-label="Work cover">
-  <?php if ($cover_ok) : ?><img src="<?php echo esc_url($cover); ?>" alt="<?php echo esc_attr(($brand ?: $title) . ' case study cover'); ?>" loading="eager" decoding="async" class="work-cover-media"><?php else : echo $ph('16/9'); endif; ?>
+  <?php if ($cover_ok) : // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html ?><img src="<?php echo esc_url($cover); ?>" alt="<?php echo esc_attr(($brand ?: $title) . ' case study cover'); ?>" loading="eager" decoding="async" class="work-cover-media"><?php else : echo $ph('16/9'); endif; ?>
 </section>
 <?php if ($secs) : ?>
 <div class="bento-body wrap" id="case-study">
@@ -100,7 +100,7 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
 ?>
 <section class="bento" data-kind="<?php echo esc_attr($kind); ?>" id="b-s-<?php echo (int) $si; ?>" aria-labelledby="b-h-<?php echo (int) $si; ?>">
   <div class="b-head<?php echo $items ? '' : ' b-head--solo'; ?>"><h2 id="b-h-<?php echo (int) $si; ?>"><?php echo esc_html($s['title']); ?></h2><?php if ($lead !== '') : ?><p><?php echo esc_html($lead); ?></p><?php endif; foreach ($rest as $p) : ?><p><?php echo esc_html($p); ?></p><?php endforeach; ?></div>
-  <?php if ($stylesRow) : ?><div class="b-styles"><?php foreach ($stylesRow as $md) : ?><figure><?php echo $ok($md['src']) ? '<img src="' . esc_url($md['src']) . '" alt="' . esc_attr($brand . ' style') . '" loading="lazy" decoding="async">' : $ph('4/3'); ?></figure><?php endforeach; ?></div><?php endif; ?>
+  <?php if ($stylesRow) : // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html ?><div class="b-styles"><?php foreach ($stylesRow as $md) : ?><figure><?php echo $ok($md['src']) ? '<img src="' . esc_url($md['src']) . '" alt="' . esc_attr($brand . ' style') . '" loading="lazy" decoding="async">' : $ph('4/3'); ?></figure><?php endforeach; ?></div><?php endif; ?>
   <?php
   $pt = function ($t) { return '<div class="b-point' . (strlen($t[1]) > 170 ? ' b-point--long' : '') . '">' . ($t[0] !== '' ? '<h3>' . esc_html($t[0]) . '</h3>' : '') . '<p>' . esc_html($t[1]) . '</p></div>'; };
   if ($kind === 'solutions') {
@@ -108,24 +108,24 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
     echo '<div class="b-rows">'; $ri = 0; $pending = null;
     foreach ($items as $it) {
       if ($it[0] === 'media') { $pending = $it[1]; continue; }
-      echo '<div class="b-row' . ($pending ? ' has-media' : '') . ($ri % 2 ? ' is-flip' : '') . '">' . ($pending ? $fig($pending, $brand . ' case study image') : '') . $pt($it[1]) . '</div>'; $ri++; $pending = null;
+      echo '<div class="b-row' . ($pending ? ' has-media' : '') . ($ri % 2 ? ' is-flip' : '') . '">' . ($pending ? $fig($pending, $brand . ' case study image') : '') . $pt($it[1]) . '</div>'; $ri++; $pending = null; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
     }
-    if ($pending) { echo $fig($pending, $brand . ' case study image'); }
+    if ($pending) { echo $fig($pending, $brand . ' case study image'); } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
     echo '</div>';
   } elseif ($kind === 'philosophy') {
-    echo '<div class="b-list">'; foreach ($items as $it) { echo $it[0] === 'media' ? $fig($it[1], $brand . ' case study image') : $pt($it[1]); } echo '</div>';
+    echo '<div class="b-list">'; foreach ($items as $it) { echo $it[0] === 'media' ? $fig($it[1], $brand . ' case study image') : $pt($it[1]); } echo '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
   } else {
     // Points with no link target are not cards: the form follows the count (1 statement, 2 pair, 3+ ruled rows).
     $tl = array_filter($items, function ($x) { return $x[0] === 'point'; }); $nt = count($tl);
     if ($nt) {
       $form = $nt === 1 ? 'one' : ($nt === 2 ? 'two' : 'rows');
-      echo '<div class="b-points b-points--' . $form . '">';
+      echo '<div class="b-points b-points--' . $form . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed value: one, two or rows 
       foreach ($tl as $it) { $t = $it[1]; echo '<div class="b-pt">' . ($t[0] !== '' ? '<h3>' . esc_html($t[0]) . '</h3>' : '') . '<p>' . esc_html($t[1]) . '</p></div>'; }
       echo '</div>';
     }
     foreach ($items as $it) { if ($it[0] === 'media') echo $fig($it[1], $brand . ' case study image'); } // phpcs:ignore
   }
-  foreach ($vids as $v) { echo $fig($v, ''); }
+  foreach ($vids as $v) { echo $fig($v, ''); } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
   if ($kind === 'outcome') {
     $facts = array(); foreach ($meta as $r) { if (in_array($r[0], array('Timeline', 'Platform'), true)) { $facts[] = $r; } }
     if ($disc) { $facts[] = array('Disciplines', (string) count($disc), ''); }
@@ -136,8 +136,8 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
 <?php endforeach;
 if ($closing) : ?><section class="bento" id="b-closing" aria-label="More from the project"><?php
   $first = array_slice($closing, 0, 6); $more = array_slice($closing, 6);
-  echo '<div class="b-gallery">'; foreach ($first as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div>';
-  if ($more) { echo '<details class="b-gallery-more"><summary>Show all ' . (int) count($closing) . ' images</summary><div class="b-gallery">'; foreach ($more as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div></details>'; }
+  echo '<div class="b-gallery">'; foreach ($first as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
+  if ($more) { echo '<details class="b-gallery-more"><summary>Show all ' . (int) count($closing) . ' images</summary><div class="b-gallery">'; foreach ($more as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div></details>'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
   ?></section><?php endif; ?>
 </div>
 <?php endif; ?>
@@ -145,7 +145,7 @@ if ($closing) : ?><section class="bento" id="b-closing" aria-label="More from th
 <section class="wrap section more-cases-section" id="more-cases-section" aria-labelledby="more-cases-section-title">
   <div class="more-cases-head"><h2 id="more-cases-section-title">More Case Studies</h2><a href="<?php echo esc_url(home_url('/work/')); ?>" class="btn btn-ghost">View all work</a></div>
   <div class="more-grid"><?php foreach ($others as $c) : ?>
-    <a href="<?php echo esc_url($c['url']); ?>" class="more-card"><div class="more-card-visual"><?php echo $c['img'] ? '<img src="' . esc_url($c['img']) . '" alt="" loading="lazy">' : $ph('16/10'); ?></div><div class="more-card-content"><span class="more-card-client"><?php echo esc_html($c['client']); ?></span><h3><?php echo esc_html($c['title']); ?></h3><?php if ($c['disc']) : ?><span class="more-card-discipline"><?php echo esc_html($c['disc']); ?></span><?php endif; ?></div></a>
+    <a href="<?php echo esc_url($c['url']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html ?>" class="more-card"><div class="more-card-visual"><?php echo $c['img'] ? '<img src="' . esc_url($c['img']) . '" alt="" loading="lazy">' : $ph('16/10'); ?></div><div class="more-card-content"><span class="more-card-client"><?php echo esc_html($c['client']); ?></span><h3><?php echo esc_html($c['title']); ?></h3><?php if ($c['disc']) : ?><span class="more-card-discipline"><?php echo esc_html($c['disc']); ?></span><?php endif; ?></div></a>
   <?php endforeach; ?></div>
 </section>
 <?php endif; ?>

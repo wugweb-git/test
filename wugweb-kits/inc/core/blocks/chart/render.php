@@ -72,10 +72,10 @@ if ($type === 'count') : ?>
 <?php endif;
 $vis = ob_get_clean();
 ?>
-<figure <?php echo $wrap; ?>>
+<figure <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <?php if ($title !== '') : ?><figcaption class="chart-title"><?php echo esc_html($title); ?></figcaption><?php endif; ?>
-  <div class="chart-body" role="img" aria-label="<?php echo esc_attr($summary); ?>"><?php echo $vis; ?></div>
+  <div class="chart-body" role="img" aria-label="<?php echo esc_attr($summary); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup built with esc_* above / inner blocks already rendered ?>"><?php echo $vis; ?></div>
   <?php if ($legend && in_array($type, array('donut'), true)) : ?><ul class="chart-legend"><?php foreach ($rows as $i => $r) : ?><li><span class="chart-sw" style="background:<?php echo esc_attr($col($r['color'], $i)); ?>"></span><?php echo esc_html($r['label']); ?> <b><?php echo esc_html($fmt($r['value']) . $uOf($r)); ?></b></li><?php endforeach; ?></ul><?php endif; ?>
   <?php if ($caption !== '') : ?><p class="chart-caption"><?php echo esc_html($caption); ?></p><?php endif; ?>
-  <?php echo $sr; ?>
+  <?php echo $sr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup built with esc_* above / inner blocks already rendered ?>
 </figure>

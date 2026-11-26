@@ -1,6 +1,6 @@
 <?php
 $tags = json_decode((string) file_get_contents(__DIR__ . '/../../includes/service-tags-data.json'), true) ?: array();
-?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap services tone-recessed', 'id' => 'services-content', 'data-scroll' => 'rise', 'aria-labelledby' => 'services-content-title')); ?>>
+ // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap services tone-recessed', 'id' => 'services-content', 'data-scroll' => 'rise', 'aria-labelledby' => 'services-content-title')); ?>>
 <h2 data-reveal id="services-content-title"><?php echo esc_html($attributes['heading'] ?? 'Crafting UI, UX, and Brand Systems that drive meaning'); ?></h2>
 <p class="services-lede" data-reveal><?php echo esc_html($attributes['lede'] ?? 'In a world where the unexpected is becoming the norm, we build custom digital solutions through user experience design, delivering UX design services that are prepared for what is possible and what is probable. As a UI UX design agency, we craft experiences that adapt, evolve, and perform.'); ?></p>
 <div class="tag-field" data-tag-field><?php foreach ($tags as $t): ?>

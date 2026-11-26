@@ -26,7 +26,7 @@ $cross = array_slice($hero, 0, 3);
 $arrows = array(1 => array('|'), 2 => array('\\', '/'), 3 => array('\\', '|', '/'));
 $cross_arrows = $arrows[count($cross)] ?? array();
 ?>
-<div <?php echo get_block_wrapper_attributes(array('class' => 'industries-page')); ?>>
+<div <?php echo get_block_wrapper_attributes(array('class' => 'industries-page')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
 <section class="ind-hero wrap" id="hero-section" aria-labelledby="hero-section-title">
   <div class="ind-hero-copy">
     <h1 id="hero-section-title" data-reveal><?php echo esc_html($title); ?></h1>

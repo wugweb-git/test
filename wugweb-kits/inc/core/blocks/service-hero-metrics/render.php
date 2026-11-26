@@ -18,7 +18,7 @@ $body = $d['body'] ?? ($c['body'] ?? '');
 $style = '--theme-base: var(--color-accent-primary); --theme-dark: var(--color-ash); --theme-light: var(--color-surface-inverse); --theme-gradient: linear-gradient(135deg, var(--theme-base), var(--theme-light));';
 $wrap = get_block_wrapper_attributes(array('class' => 'wugweb-service-hero-metrics service-page-wrapper', 'style' => $style));
 ?>
-<div <?php echo $wrap; ?>>
+<div <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <section class="detail-hero" id="detail-hero" aria-labelledby="detail-hero-title">
     <div class="hero-glow" data-reveal></div>
     <div class="wrap detail-hero-content">

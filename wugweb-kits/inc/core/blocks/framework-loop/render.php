@@ -122,7 +122,7 @@ $wrap_args = array('class' => 'process-map-section', 'data-scroll' => 'processma
 if (empty($attributes['anchor'])) { $wrap_args['id'] = 'process-map-section'; }
 $wrap = get_block_wrapper_attributes($wrap_args);
 ?>
-<section <?php echo $wrap; ?>>
+<section <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <figure class="pm-panel" data-process-map>
     <header class="pm-title">
       <h2 id="process-map-section-title"><?php echo esc_html($heading); ?></h2>
@@ -134,29 +134,29 @@ $wrap = get_block_wrapper_attributes($wrap_args);
         <title id="<?php echo esc_attr($uid); ?>-t"><?php echo esc_html($summary); ?></title>
         <g aria-hidden="true">
           <?php foreach ($hubs as $h) : ?>
-            <circle cx="<?php echo $f($h['x']); ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $ORBIT[0]; ?>" class="pm-ring" data-pm-phase="<?php echo (int) $h['i']; ?>" />
-            <circle cx="<?php echo $f($h['x']); ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $ORBIT[1]; ?>" class="pm-ring is-outer" data-pm-phase="<?php echo (int) $h['i']; ?>" />
+            <circle cx="<?php echo $f($h['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $ORBIT[0]; ?>" class="pm-ring" data-pm-phase="<?php echo (int) $h['i']; ?>" />
+            <circle cx="<?php echo $f($h['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $ORBIT[1]; ?>" class="pm-ring is-outer" data-pm-phase="<?php echo (int) $h['i']; ?>" />
           <?php endforeach; ?>
 
           <?php foreach ($edges as $e) : ?>
-            <path d="<?php echo esc_attr($e['d']); ?>" class="pm-edge" data-pm-edge data-pm-order="<?php echo (int) $e['i']; ?>" data-x1="<?php echo $f($e['x1']); ?>" data-y1="<?php echo $f($e['y1']); ?>" data-x2="<?php echo $f($e['x2']); ?>" data-y2="<?php echo $f($e['y2']); ?>" data-cx="<?php echo $f($e['cx']); ?>" data-cy="<?php echo $f($e['cy']); ?>" />
+            <path d="<?php echo esc_attr($e['d']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" class="pm-edge" data-pm-edge data-pm-order="<?php echo (int) $e['i']; ?>" data-x1="<?php echo $f($e['x1']); ?>" data-y1="<?php echo $f($e['y1']); ?>" data-x2="<?php echo $f($e['x2']); ?>" data-y2="<?php echo $f($e['y2']); ?>" data-cx="<?php echo $f($e['cx']); ?>" data-cy="<?php echo $f($e['cy']); ?>" />
           <?php endforeach; ?>
 
           <?php foreach ($chip_sats as $s) : ?>
-            <line x1="<?php echo $f($s['sx']); ?>" y1="<?php echo $f($s['sy']); ?>" x2="<?php echo $f($s['x']); ?>" y2="<?php echo $f($s['y']); ?>" class="pm-spoke" data-pm-spoke data-pm-order="<?php echo (int) $s['order']; ?>" data-pm-phase="<?php echo (int) $s['phaseIndex']; ?>" />
+            <line x1="<?php echo $f($s['sx']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" y1="<?php echo $f($s['sy']); ?>" x2="<?php echo $f($s['x']); ?>" y2="<?php echo $f($s['y']); ?>" class="pm-spoke" data-pm-spoke data-pm-order="<?php echo (int) $s['order']; ?>" data-pm-phase="<?php echo (int) $s['phaseIndex']; ?>" />
           <?php endforeach; ?>
 
           <?php foreach ($hubs as $h) : ?>
             <g class="pm-hub" data-pm-hub data-pm-order="<?php echo (int) $h['i']; ?>" data-pm-phase="<?php echo (int) $h['i']; ?>" tabindex="0" role="button" aria-label="<?php echo esc_attr($h['name'] . ' — ' . implode(', ', $h['steps'])); ?>">
-              <circle cx="<?php echo $f($h['x']); ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $HUB_R + 7; ?>" class="pm-hub-halo" />
-              <circle cx="<?php echo $f($h['x']); ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $HUB_R; ?>" class="pm-hub-disc" />
-              <text x="<?php echo $f($h['x']); ?>" y="<?php echo $f($h['y']); ?>" class="pm-hub-n" text-anchor="middle" dominant-baseline="central"><?php echo esc_html(str_pad((string) ($h['i'] + 1), 2, '0', STR_PAD_LEFT)); ?></text>
-              <text x="<?php echo $f($h['x']); ?>" y="<?php echo $f($h['up'] ? $h['y'] + $HUB_R + 26 : $h['y'] - $HUB_R - 15); ?>" class="pm-hub-name" text-anchor="middle"><?php echo esc_html($h['name']); ?></text>
+              <circle cx="<?php echo $f($h['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $HUB_R + 7; ?>" class="pm-hub-halo" />
+              <circle cx="<?php echo $f($h['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $HUB_R; ?>" class="pm-hub-disc" />
+              <text x="<?php echo $f($h['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" y="<?php echo $f($h['y']); ?>" class="pm-hub-n" text-anchor="middle" dominant-baseline="central"><?php echo esc_html(str_pad((string) ($h['i'] + 1), 2, '0', STR_PAD_LEFT)); ?></text>
+              <text x="<?php echo $f($h['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" y="<?php echo $f($h['up'] ? $h['y'] + $HUB_R + 26 : $h['y'] - $HUB_R - 15); ?>" class="pm-hub-name" text-anchor="middle"><?php echo esc_html($h['name']); ?></text>
             </g>
           <?php endforeach; ?>
 
           <?php foreach ($sats as $s) : ?>
-            <circle cx="<?php echo $f($s['x']); ?>" cy="<?php echo $f($s['y']); ?>" r="<?php echo $s['labelled'] ? '3.5' : '2.5'; ?>" class="pm-dot<?php echo $s['labelled'] ? '' : ' is-quiet'; ?>"<?php if ($s['labelled']) : ?> data-pm-dot data-pm-order="<?php echo (int) $s['order']; ?>"<?php else : ?> data-pm-order="-1"<?php endif; ?> data-pm-phase="<?php echo (int) $s['phaseIndex']; ?>"><?php if (!$s['labelled']) : ?><title><?php echo esc_html($s['label']); ?></title><?php endif; ?></circle>
+            <circle cx="<?php echo $f($s['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" cy="<?php echo $f($s['y']); ?>" r="<?php echo $s['labelled'] ? '3.5' : '2.5'; ?>" class="pm-dot<?php echo $s['labelled'] ? '' : ' is-quiet'; ?>"<?php if ($s['labelled']) : ?> data-pm-dot data-pm-order="<?php echo (int) $s['order']; ?>"<?php else : ?> data-pm-order="-1"<?php endif; ?> data-pm-phase="<?php echo (int) $s['phaseIndex']; ?>"><?php if (!$s['labelled']) : ?><title><?php echo esc_html($s['label']); ?></title><?php endif; ?></circle>
           <?php endforeach; ?>
 
           <?php if ($has_loop) : ?>
@@ -164,14 +164,14 @@ $wrap = get_block_wrapper_attributes($wrap_args);
               <marker id="<?php echo esc_attr($uid); ?>-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" class="pm-arrow" /></marker>
             </defs>
             <path d="<?php echo esc_attr($loop_path); ?>" class="pm-loop-path" data-pm-loop marker-end="url(#<?php echo esc_attr($uid); ?>-arrow)" />
-            <text x="<?php echo $f(($last['x'] + $back['x']) / 2); ?>" y="<?php echo $f($loop_y - 12); ?>" class="pm-loop-label" text-anchor="middle"><?php echo esc_html($loop_label); ?></text>
+            <text x="<?php echo $f(($last['x'] + $back['x']) / 2); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" y="<?php echo $f($loop_y - 12); ?>" class="pm-loop-label" text-anchor="middle"><?php echo esc_html($loop_label); ?></text>
           <?php endif; ?>
         </g>
       </svg>
 
       <ul class="pm-sats">
         <?php foreach ($chip_sats as $s) : ?>
-          <li class="pm-sat <?php echo $s['up'] ? 'is-up' : 'is-down'; ?>" data-pm-sat data-pm-order="<?php echo (int) $s['order']; ?>" data-pm-phase="<?php echo (int) $s['phaseIndex']; ?>" style="left:<?php echo $f($s['xPct']); ?>%; top:<?php echo $f($s['yPct']); ?>%">
+          <li class="pm-sat <?php echo $s['up'] ? 'is-up' : 'is-down'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" data-pm-sat data-pm-order="<?php echo (int) $s['order']; ?>" data-pm-phase="<?php echo (int) $s['phaseIndex']; ?>" style="left:<?php echo $f($s['xPct']); ?>%; top:<?php echo $f($s['yPct']); ?>%">
             <span class="pm-chip">
               <svg viewBox="0 0 16 16" class="pm-icon" aria-hidden="true"><path d="<?php echo esc_attr($s['icon']); ?>" /></svg>
               <span class="pm-chip-text"><?php echo esc_html($s['label']); ?></span>

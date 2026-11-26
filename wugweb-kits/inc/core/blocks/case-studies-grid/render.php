@@ -12,7 +12,7 @@ if (count($ids) < $count) {
 }
 $ids = array_slice($ids, 0, $count);
 $url = !empty($attributes['buttonUrl']) ? $attributes['buttonUrl'] : (get_post_type_archive_link('case_study') ?: '/work/');
-?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap work', 'id' => 'work', 'data-scroll' => 'rise', 'aria-labelledby' => 'work-title')); ?>>
+ // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap work', 'id' => 'work', 'data-scroll' => 'rise', 'aria-labelledby' => 'work-title')); ?>>
 <div class="work-head"><h2 data-reveal id="work-title"><?php echo esc_html($attributes['heading'] ?? 'Work that Leads with Clarity and Delivers with Impact'); ?></h2><a href="<?php echo esc_url($url); ?>" class="btn btn-ghost"><?php echo esc_html($attributes['buttonLabel'] ?? 'View case studies'); ?></a></div>
 <ul class="work-grid"><?php foreach ($ids as $id):
     $client = (string) get_post_meta($id, 'wugweb_cs_client', true);
@@ -20,5 +20,5 @@ $url = !empty($attributes['buttonUrl']) ? $attributes['buttonUrl'] : (get_post_t
     if ($disc === '') $disc = (string) get_post_meta($id, 'wugweb_cs_primary_discipline', true);
     $media = get_the_post_thumbnail_url($id, 'large') ?: (string) get_post_meta($id, 'wugweb_cs_cover_image', true);
     ?>
-<?php echo wugweb_work_card_html(array('url' => get_permalink($id), 'client' => $client . ' — ' . $disc, 'title' => get_the_title($id), 'media' => $media)); ?>
+<?php echo wugweb_work_card_html(array('url' => get_permalink($id), 'client' => $client . ' — ' . $disc, 'title' => get_the_title($id), 'media' => $media)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- card helper escapes every value it prints ?>
 <?php endforeach; ?></ul></section>

@@ -48,7 +48,7 @@ function wugweb_kits_tenant_css() {
         '.wugweb-tenant-name{content:"' . esc_attr($t['tenant']) . '";}';
 }
 add_action('wp_head', function () {
-    if (!is_admin()) echo '<style id="wugweb-tenant-design-system">' . wugweb_kits_tenant_css() . '</style>';
+    if (!is_admin()) echo '<style id="wugweb-tenant-design-system">' . wugweb_kits_tenant_css() . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- every value passes through esc_attr inside the function 
 }, 20);
 add_action('enqueue_block_editor_assets', function () {
     wp_register_style('wugweb-tenant-editor', false, array(), wp_get_theme()->get('Version'));

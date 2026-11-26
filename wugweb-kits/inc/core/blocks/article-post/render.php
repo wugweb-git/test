@@ -99,7 +99,7 @@ if (preg_match('#<aside class="article-newsletter".*?</aside>#s', $share_news, $
       <div class="byline-card byline-date"><svg class="byline-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg><time datetime="<?php echo esc_attr(get_the_date('c', $id)); ?>"><?php echo esc_html(wugweb_post_date_label($id)); ?></time></div>
     </div>
 <?php $byline_tpl = ob_get_clean(); ?>
-<div <?php echo $wrap; ?>>
+<div <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
 <div id="reading-progress" class="reading-progress-bar" style="--bar-accent: <?php echo esc_attr($accent); ?>" aria-hidden="true"></div>
 <article class="post-article">
 <section class="wrap post-layout" id="article" style="--accent: <?php echo esc_attr($accent); ?>" aria-labelledby="article-hero-title">
@@ -107,14 +107,14 @@ if (preg_match('#<aside class="article-newsletter".*?</aside>#s', $share_news, $
     <nav class="article-crumbs" aria-label="Breadcrumb"><a href="<?php echo esc_url(home_url('/blog/')); ?>"><span aria-hidden="true">&lsaquo;</span> Blog</a><?php if ($f['category']) : ?><span class="crumb-sep" aria-hidden="true">/</span><span class="crumb-current"><?php echo esc_html($f['category']); ?></span><?php endif; ?></nav>
     <h1 id="article-hero-title" data-reveal><?php echo esc_html(get_the_title($id)); ?></h1>
     <?php if ($excerpt) : ?><p class="article-intro" data-reveal><?php echo esc_html(wp_strip_all_tags($excerpt)); ?></p><?php endif; ?>
-    <?php echo str_replace('%CLS%', 'is-hero', $byline_tpl); ?>
+    <?php echo str_replace('%CLS%', 'is-hero', $byline_tpl); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from escaped parts ?>
   </header>
   <?php if ($cover) : ?>
   <figure class="post-cover" id="article-cover" data-reveal><img src="<?php echo esc_url($cover); ?>" alt="<?php echo esc_attr(get_the_title($id)); ?>" loading="eager" fetchpriority="high" decoding="async"></figure>
   <?php endif; ?>
   <div class="post-grid">
     <aside class="post-rail" aria-label="Article tools">
-      <?php echo str_replace('%CLS%', 'is-rail', $byline_tpl); ?>
+      <?php echo str_replace('%CLS%', 'is-rail', $byline_tpl); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from escaped parts ?>
       <?php if ($toc) : ?>
       <nav class="article-toc" aria-label="Table of contents"><details class="toc-details" open><summary class="toc-title">In this article</summary><ol>
         <?php foreach ($toc as $t) : if ($t['level'] !== 2) { continue; } ?><li class="toc-item"><a href="#<?php echo esc_attr($t['id']); ?>"><?php echo esc_html($t['text']); ?></a></li><?php endforeach; ?>
@@ -144,7 +144,7 @@ if (preg_match('#<aside class="article-newsletter".*?</aside>#s', $share_news, $
       <?php if ($next) :
         $nc = wugweb_post_card_data($next->ID);
         echo '<p class="pn-kicker">Next article</p>';
-        echo do_blocks('<!-- wp:wugweb/media-card ' . wp_json_encode(array('className' => 'is-style-wide', 'title' => get_the_title($next), 'text' => wp_trim_words(get_the_excerpt($next), 24), 'url' => get_permalink($next), 'imageUrl' => (string) ($nc['cover'] ?? ''), 'imageAlt' => (string) ($nc['alt'] ?? ''), 'cta' => 'Read next')) . ' /-->');
+        echo do_blocks('<!-- wp:wugweb/media-card ' . wp_json_encode(array('className' => 'is-style-wide', 'title' => get_the_title($next), 'text' => wp_trim_words(get_the_excerpt($next), 24), 'url' => get_permalink($next), 'imageUrl' => (string) ($nc['cover'] ?? ''), 'imageAlt' => (string) ($nc['alt'] ?? ''), 'cta' => 'Read next')) . ' /-->'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- block markup; every block escapes its own output 
       endif; ?>
       <?php if ($prev) : ?><a href="<?php echo esc_url(get_permalink($prev)); ?>" class="pn-prev-link"><span aria-hidden="true">&larr;</span> Previous: <?php echo esc_html(get_the_title($prev)); ?></a><?php endif; ?>
     </nav>

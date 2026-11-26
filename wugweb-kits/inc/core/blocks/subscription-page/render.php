@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 ?>
 
-  <div <?php echo get_block_wrapper_attributes(array('class' => 'sub-page')); ?>>
+  <div <?php echo get_block_wrapper_attributes(array('class' => 'sub-page')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
 
     <!-- 01 — HERO -->
     <section class="hero-section wrap" id="hero-section" aria-labelledby="hero-section-title">

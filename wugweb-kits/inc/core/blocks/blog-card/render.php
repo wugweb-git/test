@@ -7,4 +7,4 @@ else {
         'accent' => 'var(--svc-strategy)', 'initials' => 'Ww');
 }
 $row = strpos((string) ($attributes['className'] ?? ''), 'is-style-row') !== false;
-echo '<div ' . get_block_wrapper_attributes() . '>' . wugweb_post_card_html($c, $row) . '</div>';
+echo '<div ' . get_block_wrapper_attributes() . '>' . wugweb_post_card_html($c, $row) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core 

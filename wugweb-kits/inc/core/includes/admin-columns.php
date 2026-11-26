@@ -106,7 +106,7 @@ if ( is_admin() ) {
 		public function __construct( $tbl, $hook, $visible ) {
 			global $wpdb;
 			$this->tbl = $wpdb->prefix . $tbl; $this->hook = $hook; $this->visible = $visible;
-			foreach ( $wpdb->get_results( "SHOW COLUMNS FROM {$this->tbl}" ) as $c ) { $this->types[ $c->Field ] = $c->Type; }
+			foreach ( $wpdb->get_results( "SHOW COLUMNS FROM {$this->tbl}" ) as $c ) { $this->types[ $c->Field ] = $c->Type; } // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table is $wpdb->prefix plus a name registered in this file, no user input
 			parent::__construct( array( 'plural' => $tbl, 'singular' => $tbl, 'screen' => $hook ) );
 		}
 		public function get_columns() {
@@ -141,9 +141,9 @@ if ( is_admin() ) {
 				$where = '(' . implode( ' OR ', $parts ) . ')';
 			}
 			$sql_total = "SELECT COUNT(*) FROM {$this->tbl} WHERE $where";
-			$total = (int) ( $args ? $wpdb->get_var( $wpdb->prepare( $sql_total, $args ) ) : $wpdb->get_var( $sql_total ) );
+			$total = (int) ( $args ? $wpdb->get_var( $wpdb->prepare( $sql_total, $args ) ) : $wpdb->get_var( $sql_total ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $sql_total holds identifiers from SHOW COLUMNS and %s placeholders; values go through prepare() when present
 			$sql = "SELECT * FROM {$this->tbl} WHERE $where ORDER BY `$ob` $od LIMIT %d OFFSET %d";
-			$this->items = $wpdb->get_results( $wpdb->prepare( $sql, array_merge( $args, array( $per, ( $page - 1 ) * $per ) ) ), ARRAY_A );
+			$this->items = $wpdb->get_results( $wpdb->prepare( $sql, array_merge( $args, array( $per, ( $page - 1 ) * $per ) ) ), ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- identifiers whitelisted (table prefix, SHOW COLUMNS, orderby checked against it), values via prepare()
 			$this->set_pagination_args( array( 'total_items' => $total, 'per_page' => $per ) );
 			$this->_column_headers = array( $this->get_columns(), get_hidden_columns( $this->screen ), $this->get_sortable_columns() );
 		}

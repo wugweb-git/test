@@ -24,7 +24,7 @@ foreach ($posts as $p) {
 usort($rows, function ($a, $b) { return (int) $b['featured'] - (int) $a['featured']; });
 $rows = array_slice($rows, 0, $limit);
 if (!$rows) { return; }
-?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap svc-work', 'id' => 'svc-work', 'aria-labelledby' => 'svc-work-title')); ?>>
+ // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap svc-work', 'id' => 'svc-work', 'aria-labelledby' => 'svc-work-title')); ?>>
   <div class="svc-work-head">
     <h2 data-reveal id="svc-work-title">Work that leads with clarity and delivers with impact</h2>
     <a href="<?php echo esc_url(home_url('/work/')); ?>" class="btn btn-ghost" data-reveal>View all case studies</a>

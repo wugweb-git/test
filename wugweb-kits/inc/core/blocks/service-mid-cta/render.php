@@ -12,7 +12,7 @@ $style = '--theme-base: var(--color-accent-primary);';
 $wrap = get_block_wrapper_attributes(array('class' => 'approach-cta wugweb-service-mid-cta', 'style' => $style, 'data-reveal' => ''));
 $btn = $cta['btn'] ?? array('Start a project', 'See the work first');
 ?>
-<aside <?php echo $wrap; ?>>
+<aside <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <img class="approach-cta-bg" src="<?php echo esc_url($img); ?>" alt="" loading="lazy" decoding="async">
   <div class="approach-cta-inner">
     <img class="approach-cta-mark" src="<?php echo esc_url($logo); ?>" alt="Wugweb" width="36" height="36">

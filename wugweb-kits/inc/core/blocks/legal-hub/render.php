@@ -7,7 +7,7 @@ if ($title === '') { $title = get_the_title(); }
 $updated = (string) ($attributes['updated'] ?? '');
 $nav = array('privacy-policy' => array('Privacy Policy', '/privacy-policy/'), 'terms-of-use' => array('Terms of Use', '/terms-of-use/'), 'refund-policy' => array('Refund Policy', '/refund-policy/'), 'cookie-policy' => array('Cookie Policy', '/cookie-policy/'));
 ?>
-<section <?php echo get_block_wrapper_attributes(array('class' => 'wrap legal-hub', 'id' => 'legal-hub', 'aria-labelledby' => 'legal-hub-title')); ?>>
+<section <?php echo get_block_wrapper_attributes(array('class' => 'wrap legal-hub', 'id' => 'legal-hub', 'aria-labelledby' => 'legal-hub-title')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <header class="legal-hub-head">
     <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>" class="legal-hub-crumb" data-reveal>Legal &amp; Policies</a>
     <h1 class="page-title" id="legal-hub-title" data-reveal><?php echo esc_html($title); ?></h1>

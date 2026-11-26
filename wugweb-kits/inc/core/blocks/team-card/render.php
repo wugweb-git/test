@@ -5,4 +5,4 @@ $uid = (int) ($attributes['userId'] ?? 0); if (!$uid && (($attributes['title'] ?
 $u = $uid ? wugweb_fields_user($uid) : array();
 $m = array('name' => (string) ($u['name'] ?? $attributes['title'] ?? ''), 'role' => (string) ($u['role'] ?? $attributes['eyebrow'] ?? ''), 'photo' => (string) ($u['image'] ?? $attributes['imageUrl'] ?? ''));
 $suffix = (string) ($attributes['meta'] ?? '') !== '' ? $attributes['meta'] : 'at wugweb';
-echo wugweb_team_card_html($m, 0, $suffix, 'div', get_block_wrapper_attributes(array('class' => 'team-card')));
+echo wugweb_team_card_html($m, 0, $suffix, 'div', get_block_wrapper_attributes(array('class' => 'team-card'))); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core 

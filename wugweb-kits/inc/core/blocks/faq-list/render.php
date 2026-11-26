@@ -1,7 +1,7 @@
 <?php
 $items = !empty($attributes['items']) ? $attributes['items'] : array(array('q' => 'What does a typical engagement look like?', 'a' => 'We begin with context, align on the opportunity, then move through strategy, design and delivery.'), array('q' => 'How do you work with internal teams?', 'a' => 'We make the system legible, collaborative and useful for the people who will carry it forward.'), array('q' => 'Can you support delivery after launch?', 'a' => 'Yes. Stewardship, measurement and iteration can be part of the engagement.'));
 $heading = $attributes['heading'] ?? ''; $lede = $attributes['lede'] ?? ''; $framed = $heading || $lede; $uid = 'faq-' . wp_unique_id();
-?><div <?php echo get_block_wrapper_attributes(array('class' => $framed ? 'wrap faq-block' : '')); ?>>
+ // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><div <?php echo get_block_wrapper_attributes(array('class' => $framed ? 'wrap faq-block' : '')); ?>>
 <?php if ($framed): ?><div class="faq-head"><?php if ($heading): ?><h2 data-reveal><?php echo esc_html($heading); ?></h2><?php endif; ?><?php if ($lede): ?><p class="faq-lede" data-reveal><?php echo esc_html($lede); ?></p><?php endif; ?></div><?php endif; ?>
 <?php if (!$framed): ?><h2 class="sr-only">Frequently asked questions</h2><?php endif; ?>
 <ul class="faq-list<?php echo $framed ? '' : ' is-bare'; ?>" data-faq><?php foreach ($items as $i => $f): $o = $i === 0; ?>

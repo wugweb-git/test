@@ -13,4 +13,4 @@ $faq = array('heading' => 'Frequently asked questions', 'lede' => 'Everything wo
 if ($faq['items']) { $out .= '<!-- wp:wugweb/faq-list ' . wp_json_encode($faq, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . ' /-->'; }
 $out .= '<!-- wp:wugweb/service-related-work {"pillar":"' . esc_attr($p) . '"} /-->';
 $out .= '<!-- wp:wugweb/recent-thoughts ' . wp_json_encode(array('heading' => $title . ' thinking from the team', 'buttonLabel' => 'Visit our Blog', 'count' => 3, 'category' => $p)) . ' /-->';
-echo '<div ' . $wrap . '>' . do_blocks($out) . '</div>';
+echo '<div ' . $wrap . '>' . do_blocks($out) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core 

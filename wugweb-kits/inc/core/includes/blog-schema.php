@@ -82,7 +82,7 @@ add_action('wp_head', function () {
     if ($desc) { $out[] = '<meta property="og:description" content="' . esc_attr($desc) . '" />'; }
     $out[] = '<meta property="og:url" content="' . esc_url($canon) . '" />';
     if ($img) { $out[] = '<meta property="og:image" content="' . esc_url($img) . '" />'; $out[] = '<meta name="twitter:card" content="summary_large_image" />'; }
-    echo implode("\n", $out) . "\n";
+    echo implode("\n", $out) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- each tag is built with esc_attr/esc_url 
 }, 1);
 if (!(function_exists('wugweb_rank_math_active') && wugweb_rank_math_active())) { remove_action('wp_head', 'rel_canonical'); }
 

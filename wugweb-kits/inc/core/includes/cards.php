@@ -36,7 +36,7 @@ function wugweb_card_dynamic($type, array $a) {
 function wugweb_render_card($type, array $a, $wrapper) {
     $a = wugweb_card_dynamic($type, $a);
     $url = !empty($a['url']) ? $a['url'] : '';
-    echo '<article ' . $wrapper . '>';
+    echo '<article ' . $wrapper . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core 
     if ($type === 'stat') echo '<p class="wugweb-card__value">' . esc_html($a['eyebrow']) . '</p>';
     if ($type === 'testimonial') echo '<blockquote class="wugweb-card__quote">' . esc_html($a['text']) . '</blockquote>';
     if (empty($a['imageUrl']) && in_array($type, array('blog', 'portfolio'), true) && get_the_ID()) {
@@ -48,7 +48,7 @@ function wugweb_render_card($type, array $a, $wrapper) {
     if ($type !== 'stat' && !empty($a['eyebrow'])) echo '<p class="wugweb-card__eyebrow">' . esc_html($a['eyebrow']) . '</p>';
     $t = esc_html($a['title']);
     if ($url) $t = '<a href="' . esc_url($url) . '">' . $t . '</a>';
-    echo '<h3 class="wugweb-card__title">' . $t . '</h3>';
+    echo '<h3 class="wugweb-card__title">' . $t . '</h3>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from escaped parts 
     if ($type !== 'testimonial' && !empty($a['text'])) echo '<p class="wugweb-card__text">' . esc_html($a['text']) . '</p>';
     if (!empty($a['meta'])) echo '<p class="wugweb-card__meta">' . esc_html($a['meta']) . '</p>';
     echo '</div>';

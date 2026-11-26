@@ -40,6 +40,8 @@ foreach ( array( 'show_user_profile', 'edit_user_profile' ) as $hook ) {
 }
 foreach ( array( 'personal_options_update', 'edit_user_profile_update' ) as $hook ) {
 	add_action( $hook, function ( $uid ) {
+		// Same nonce core checks on the profile / user-edit screens (action update-user_<id>); verified again here before saving.
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'update-user_' . $uid ) ) { return; }
 		if ( current_user_can( 'edit_user', $uid ) && isset( $_POST['wugweb_avatar_url'] ) ) {
 			update_user_meta( $uid, 'wugweb_avatar_url', esc_url_raw( wp_unslash( $_POST['wugweb_avatar_url'] ) ) );
 		}

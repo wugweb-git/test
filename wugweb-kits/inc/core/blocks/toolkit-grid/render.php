@@ -9,7 +9,7 @@ foreach ((array) ($tk['icons'] ?? array()) as $k => $u) { $icons[strtolower((str
 $style = '--theme-base: var(--color-accent-primary);';
 $wrap = get_block_wrapper_attributes(array('class' => 'wrap toolkit-section wugweb-toolkit-grid', 'id' => 'toolkit-section', 'aria-labelledby' => 'toolkit-section-title', 'style' => $style));
 ?>
-<section <?php echo $wrap; ?>>
+<section <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <h2 data-reveal id="toolkit-section-title"><?php echo esc_html($tk['title']); ?></h2>
   <div class="toolkit-grid">
     <?php foreach ($tk['groups'] as $cat => $items) : ?>

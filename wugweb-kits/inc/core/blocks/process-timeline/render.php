@@ -53,7 +53,7 @@ $wrap_args = array('class' => 'wrap approach-section', 'aria-labelledby' => 'app
 if (empty($attributes['anchor'])) { $wrap_args['id'] = 'approach-section'; }
 $wrap = get_block_wrapper_attributes($wrap_args);
 ?>
-<section <?php echo $wrap; ?>>
+<section <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <h2 data-reveal id="approach-section-title"><?php echo esc_html($title); ?></h2>
 
   <div class="approach-layout">
@@ -91,7 +91,7 @@ $wrap = get_block_wrapper_attributes($wrap_args);
     </ol>
 
     <aside class="approach-cta" data-reveal>
-      <?php if ($ad_image) : ?><img class="approach-cta-bg" src="<?php echo $ad_image; ?>" alt="" loading="lazy" decoding="async" /><?php endif; ?>
+      <?php if ($ad_image) : // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- esc_url() applied at assignment ?><img class="approach-cta-bg" src="<?php echo $ad_image; ?>" alt="" loading="lazy" decoding="async" /><?php endif; ?>
       <div class="approach-cta-inner">
         <img class="approach-cta-mark" src="<?php echo esc_url(get_theme_file_uri($mark_rel)); ?>" alt="Wugweb" width="36" height="36" />
         <h3><?php echo esc_html($cta_title); ?></h3>

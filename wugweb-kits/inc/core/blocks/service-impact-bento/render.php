@@ -94,7 +94,7 @@ if ($heading !== '') { $wrap_args['aria-labelledby'] = 'bento-block-title'; } el
 if (!$anchor) { $wrap_args['id'] = 'bento-block'; }
 $wrap = get_block_wrapper_attributes($wrap_args);
 ?>
-<section <?php echo $wrap; ?>>
+<section <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <?php if ($heading !== '') : ?><h2 data-reveal id="bento-block-title"><?php echo esc_html($heading); ?></h2><?php endif; ?>
   <?php if ($lede !== '') : ?><p class="bento-lede" data-reveal><?php echo esc_html($lede); ?></p><?php endif; ?>
 
@@ -119,7 +119,7 @@ $wrap = get_block_wrapper_attributes($wrap_args);
         if (!empty($t['headline'])) { $cls[] = 'has-headline'; }
         if ($media) { $cls[] = 'media-' . $fit; }
       ?>
-      <<?php echo $tag; ?><?php echo !empty($t['href']) ? ' href="' . esc_url($t['href']) . '"' : ''; ?> class="<?php echo esc_attr(implode(' ', $cls)); ?>">
+      <<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- tag name is a fixed a/div choice; attributes escaped ?><?php echo !empty($t['href']) ? ' href="' . esc_url($t['href']) . '"' : ''; ?> class="<?php echo esc_attr(implode(' ', $cls)); ?>">
         <?php if (!empty($t['eyebrow'])) : ?><span class="bento-eyebrow"><?php echo esc_html($t['eyebrow']); ?></span><?php endif; ?>
         <?php if (!empty($t['mark'])) : ?>
           <span class="bento-mark" aria-hidden="true">
@@ -178,7 +178,7 @@ $wrap = get_block_wrapper_attributes($wrap_args);
             <?php if (!empty($t['caption'])) : ?><span class="bento-caption"><?php echo esc_html($t['caption']); ?></span><?php endif; ?>
           <?php endif; ?>
         </div>
-      </<?php echo $tag; ?>>
+      </<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- tag name is a fixed a/div choice; attributes escaped ?>>
       <?php endforeach; ?>
     </div>
     <?php endfor; ?>
