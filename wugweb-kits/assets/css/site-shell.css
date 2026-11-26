@@ -864,8 +864,6 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 .wugweb-chip{display:inline-flex;align-items:center;gap:var(--gap-2);padding:2px var(--gap-3);border:var(--stroke-thin,1px) solid var(--line);border-radius:var(--radius-full,999px);font-size:var(--fluid-label,.875rem)}
 .wugweb-chip img{width:16px;height:16px;object-fit:contain;border-radius:0}
 
-/* No pillar/preset accent colours on service pages: text stays on the neutral tokens (project rule; uat has none). */
-.wugweb-service-page :is(.has-aqua-color,.has-pink-color,.has-peach-color,.has-green-color,.has-blue-color){color:var(--fg-muted) !important}
 
 /* Skip link: first focusable element, visible on focus, 44px target (WCAG 2.4.1 / 2.5.8). */
 .wugweb-skip-link{position:absolute;left:var(--gap-4,16px);top:-100px;z-index:10000;display:inline-flex;align-items:center;min-height:44px;padding:0 var(--gap-5,20px);border-radius:var(--radius-sm,8px);background:var(--fg,#f4f4f4);color:var(--bg,#191919);font-weight:600;text-decoration:none}
@@ -878,5 +876,3 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
    stylesheet declaration beats a non-important inline one), so every consumer falls back to the muted token. */
 .wugweb-service-page,.wugweb-service-page :is(section,div,details,ul,li){--pillar-accent:var(--fg-muted,#bababa) !important}
 .wugweb-service-page .wugweb-capability-showcase summary span,.wugweb-service-page .wugweb-eyebrow{color:var(--fg-muted,#bababa) !important}
-/* Preset accent text classes inside the page content of service pages (case-study card groups) stay on neutral tokens. */
-body.page-child .entry-content :is(.has-aqua-color,.has-pink-color,.has-peach-color,.has-green-color,.has-blue-color){color:var(--fg-muted,#bababa) !important}
