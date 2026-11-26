@@ -891,3 +891,9 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
   .blog-grid,.wugweb-blog-index .blog-grid,.blog-teaser-grid,.related-grid,.related-grid.is-posts,.wugweb-blog-index .picks-big ul{grid-template-columns:minmax(0,1fr)}
   .blog-teaser-grid>li{max-width:none}
 }
+
+/* Phones: the open menu sheet is an out-of-flow overlay, so opening or closing it never changes document height (the in-flow growth made the scroll-lock restore land ~480px short). .site-header is the containing block (will-change:transform), so the sheet sits exactly where the closed bar is. */
+@media (max-width:767.98px){
+  .site-header{min-height:calc(var(--safe-top) + var(--header-pad-block) * 2 + var(--nav-height))}
+  .site-header-inner[data-open='true']{position:absolute;top:calc(var(--safe-top) + var(--header-pad-block));left:calc(var(--safe-left) + 16px);right:calc(var(--safe-right) + 16px);margin-inline:0;max-width:none}
+}
