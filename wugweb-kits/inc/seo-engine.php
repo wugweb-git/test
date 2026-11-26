@@ -46,6 +46,15 @@ add_action('wp_head', function () { if (wugweb_seo_origin() !== '') ob_start(); 
 add_action('wp_head', function () {
     if (wugweb_seo_origin() === '') return;
     $h = (string) ob_get_clean();
+    // Rank Math drops the canonical on noindex pages (the whole test host): emit the production one so each page has exactly one.
+    if (!preg_match('#<link[^>]+rel=["\']canonical["\']#i', $h)) {
+        $u = '';
+        if (is_singular()) { $u = (string) get_permalink(get_queried_object_id()); }
+        elseif (is_front_page()) { $u = home_url('/'); }
+        elseif (is_post_type_archive()) { $u = (string) get_post_type_archive_link(get_query_var('post_type')); }
+        elseif (is_tax() || is_category() || is_tag()) { $t = get_term_link(get_queried_object()); $u = is_wp_error($t) ? '' : (string) $t; }
+        if ($u !== '') { $h .= '<link rel="canonical" href="' . esc_url($u) . '" />' . "\n"; }
+    }
     $h = preg_replace_callback('#<link[^>]+rel=["\']canonical["\'][^>]*>#i', function ($m) { return wugweb_seo_url($m[0]); }, $h);
     $h = preg_replace_callback('#<meta[^>]+(?:property|name)=["\'](?:og:url|og:image|og:image:secure_url|twitter:image|twitter:url)["\'][^>]*>#i', function ($m) { return wugweb_seo_url($m[0]); }, $h);
     $h = preg_replace_callback('#<script[^>]+application/ld\+json[^>]*>.*?</script>#is', function ($m) { return wugweb_seo_url($m[0]); }, $h);

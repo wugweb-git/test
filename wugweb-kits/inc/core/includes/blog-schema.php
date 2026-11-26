@@ -57,7 +57,7 @@ add_action('init', function () {
 
 /** SEO head: title, description, canonical and social tags from the Notion columns (no SEO plugin is installed). */
 add_filter('pre_get_document_title', function ($title) {
-    if (is_singular('post')) {
+    if (is_singular('post') && !(function_exists('wugweb_rank_math_active') && wugweb_rank_math_active())) {
         $t = get_post_meta(get_the_ID(), 'wugweb_seo_title', true);
         if ($t) { return $t; }
     }
@@ -65,6 +65,7 @@ add_filter('pre_get_document_title', function ($title) {
 });
 add_action('wp_head', function () {
     if (!is_singular('post')) { return; }
+    if (function_exists('wugweb_rank_math_active') && wugweb_rank_math_active()) { return; } // Rank Math prints description, canonical, og:* itself
     $id = get_the_ID();
     $m = function ($k) use ($id) { return get_post_meta($id, $k, true); };
     $title = $m('wugweb_seo_title') ?: get_the_title($id);
@@ -83,7 +84,7 @@ add_action('wp_head', function () {
     if ($img) { $out[] = '<meta property="og:image" content="' . esc_url($img) . '" />'; $out[] = '<meta name="twitter:card" content="summary_large_image" />'; }
     echo implode("\n", $out) . "\n";
 }, 1);
-remove_action('wp_head', 'rel_canonical');
+if (!(function_exists('wugweb_rank_math_active') && wugweb_rank_math_active())) { remove_action('wp_head', 'rel_canonical'); }
 
 /** Show the R2 cover where a post has no media-library featured image. */
 add_filter('render_block_core/post-featured-image', function ($html, $block) {
