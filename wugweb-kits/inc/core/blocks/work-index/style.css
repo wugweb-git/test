@@ -55,8 +55,8 @@
     transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;  }
   .filter-chip:hover { color: var(--fg); }
   .filter-chip.active {
-    color: var(--neutral-0);
-    background: var(--color-accent-primary);
+    color: var(--bg);
+    background: var(--fg);
   }
   .work-grid li.hidden { display: none; }
 

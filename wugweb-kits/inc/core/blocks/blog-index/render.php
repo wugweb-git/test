@@ -8,8 +8,8 @@ extract($D);
 <section class="wrap blog-main" id="blog-main" aria-label="Articles">
   <div class="blog-toolbar">
     <div class="blog-filters" role="toolbar" aria-label="Filter articles by topic">
-      <button class="filter-chip" data-topic="">All</button>
-      <?php foreach ($topics as $slug => $t) : ?><button class="filter-chip" data-topic="<?php echo esc_attr($slug); ?>"><?php echo esc_html($t['name']); ?></button><?php endforeach; ?>
+      <button type="button" class="filter-chip" data-topic="" aria-pressed="false">All</button>
+      <?php foreach ($topics as $slug => $t) : ?><button type="button" class="filter-chip" data-topic="<?php echo esc_attr($slug); ?>" aria-pressed="false"><?php echo esc_html($t['name']); ?></button><?php endforeach; ?>
     </div>
     <label class="blog-search"><span class="sr-only">Search articles</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="blog-search" placeholder="What would you like to read about?" autocomplete="off"></label>
   </div>

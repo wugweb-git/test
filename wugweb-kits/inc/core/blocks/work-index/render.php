@@ -26,7 +26,7 @@ if (!$items) { return; }
  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap work-grid-section', 'id' => 'work-grid-section', 'aria-labelledby' => 'work-grid-title')); ?>>
   <h2 class="sr-only" id="work-grid-title">Case studies</h2>
   <div class="work-filters" role="toolbar" aria-label="Filter case studies" data-reveal>
-    <?php foreach (array_merge(array('All'), $pillars) as $c) : ?><button class="filter-chip" data-category="<?php echo esc_attr($c); ?>"><?php echo esc_html($c); ?></button><?php endforeach; ?>
+    <?php foreach (array_merge(array('All'), $pillars) as $c) : ?><button type="button" class="filter-chip" data-category="<?php echo esc_attr($c); ?>" aria-pressed="false"><?php echo esc_html($c); ?></button><?php endforeach; ?>
   </div>
   <ul class="work-grid">
     <?php foreach ($items as $w) : $video = (bool) preg_match('/\.(mp4|webm)(\?|$)/i', $w['media']); ?>

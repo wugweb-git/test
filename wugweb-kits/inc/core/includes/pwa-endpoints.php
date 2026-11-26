@@ -23,7 +23,8 @@ add_action('init', function(){
 });
 add_filter('query_vars', function($vars){ $vars[]='wugweb_pwa'; return $vars; });
 // viewport-fit=cover so env(safe-area-inset-*) is real in an installed (standalone) app: replace core's viewport tag with ours.
-add_action('init', function () { remove_action('wp_head', '_block_template_viewport_meta_tag', 0); });
+// template-canvas.php adds core's viewport tag at render time (after init), so remove it just before it would print.
+add_action('wp_head', function () { remove_action('wp_head', '_block_template_viewport_meta_tag', 0); }, -1);
 add_action('wp_head', function () {
     if (is_admin()) return;
     echo '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">' . "\n";

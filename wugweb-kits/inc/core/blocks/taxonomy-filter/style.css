@@ -15,8 +15,8 @@
 }
 .work-filters .filter-chip:hover { color: var(--fg); }
 .work-filters .filter-chip.active {
-  color: var(--neutral-0);
-  background: var(--color-accent-primary);
+  color: var(--bg);
+  background: var(--fg);
 }
 
 /* blog/index.astro */
