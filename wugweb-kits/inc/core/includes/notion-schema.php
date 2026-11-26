@@ -102,11 +102,11 @@ add_action( 'init', function () {
 			'rest_base' => $slug, 'hierarchical' => false, 'rewrite' => false, 'show_admin_column' => true,
 		) );
 	}
-	foreach ( array( 'industry', 'discipline', 'post_tag' ) as $s ) {
+	// Tags are not used on case studies or clients; Categories/Tags stay on Posts only. Detach only: terms stay in the database.
+	foreach ( array( 'industry', 'discipline' ) as $s ) {
 		register_taxonomy_for_object_type( $s, 'case_study' );
 	}
-	foreach ( array( 'industry', 'discipline', 'sector', 'category' ) as $s ) { register_taxonomy_for_object_type( $s, 'client' ); }
-	register_taxonomy_for_object_type( 'post_tag', 'client' );
+	foreach ( array( 'industry', 'sector' ) as $s ) { register_taxonomy_for_object_type( $s, 'client' ); }
 	foreach ( array( 'industry', 'service_group' ) as $s ) { register_taxonomy_for_object_type( $s, 'post' ); }
 
 	foreach ( array_merge( array_keys( $tax ), array( 'industry', 'discipline', 'post_tag' ) ) as $s ) {

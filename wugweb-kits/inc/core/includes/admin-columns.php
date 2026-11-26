@@ -155,7 +155,7 @@ if ( is_admin() ) {
 			'wugweb-tools'       => array( 'Tools', 'wugweb_tools', array( 'technology_id', 'name', 'capability_area', 'status', 'official_website' ) ),
 			'wugweb-engagements' => array( 'Client - Engagement', 'wugweb_client_engagements', array() ),
 		);
-		add_menu_page( 'Notion Data', 'Notion Data', 'manage_options', 'wugweb-platforms', '__return_null', 'dashicons-database', 58 );
+		add_menu_page( 'Master', 'Master', 'manage_options', 'wugweb-platforms', '__return_null', 'dashicons-database', 58 );
 		foreach ( $pages as $slug => $p ) {
 			$hook = add_submenu_page( 'wugweb-platforms', $p[0], $p[0], 'manage_options', $slug, function () use ( $slug, $p, &$hook ) {
 				global $wpdb;
