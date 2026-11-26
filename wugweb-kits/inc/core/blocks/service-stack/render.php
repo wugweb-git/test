@@ -21,7 +21,7 @@ $resolve = function ($key) use ($cs_all, $norm) {
     $client = $norm(get_post_meta($p->ID, 'wugweb_cs_client', true));
     if (($slug !== '' && strpos($slug, $kn) !== false) || ($client !== '' && (strpos($client, $kn) !== false || strpos($kn, substr($client, 0, 8)) !== false))) {
       $f = wugweb_fields_case_study($p->ID);
-      return array('media' => $f['image'], 'label' => $f['client'] ?: $key, 'url' => $f['url']);
+      return array('media' => $f['image'], 'label' => $f['client'] ?: $key, 'url' => $f['url'], 'id' => $p->ID);
     }
   }
   return array('media' => '', 'label' => ucwords(str_replace('-', ' ', $key)), 'url' => home_url('/work/'));
@@ -53,7 +53,7 @@ $wrap = get_block_wrapper_attributes(array('class' => 'svc-stack'));
         <?php endforeach; ?>
       </div>
       <div class="svc-gallery">
-        <?php foreach ($s['gallery'] as $g) : $item = $resolve($g);
+        <?php $svc_ids = array(); foreach ($s['gallery'] as $g) : $item = $resolve($g); if (!empty($item['id'])) { $svc_ids[] = $item['id']; }
           $is_video = (bool) preg_match('/\.(mp4|webm)(\?|$)/i', $item['media']); ?>
         <a href="<?php echo esc_url($item['url']); ?>" aria-label="<?php echo esc_attr($item['label'] . ' — case study'); ?>">
           <?php if ($is_video) : ?><video aria-hidden="true" muted loop playsinline preload="none" data-src="<?php echo esc_url($item['media']); ?>"></video>
@@ -63,6 +63,7 @@ $wrap = get_block_wrapper_attributes(array('class' => 'svc-stack'));
         </a>
         <?php endforeach; ?>
       </div>
+      <?php $svc_tools = $svc_ids ? wugweb_tool_chips_html($svc_ids, 'tool', 8) : ''; if ($svc_tools !== '') : ?><div class="svc-tools"><span class="svc-tools-label">Tools used on this work</span><?php echo $svc_tools; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with esc_url/esc_html ?></div><?php endif; ?>
     </div>
   </section>
 <?php endforeach; ?>

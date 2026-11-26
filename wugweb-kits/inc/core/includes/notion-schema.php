@@ -90,11 +90,16 @@ function wugweb_icon_url( $kind, $id ) {
  * Tools come from the tool terms; platforms from the platform meta text matched to platform terms. A missing icon shows the name only.
  * Returns an HTML string (escaped), '' when there is nothing to show.
  */
-function wugweb_tool_chips_html( $id, $kind = 'tool' ) {
+function wugweb_tool_chips_html( $id, $kind = 'tool', $limit = 0 ) {
 	$names = array();
 	if ( 'tool' === $kind ) {
-		$t = get_the_terms( $id, 'tool' );
-		foreach ( (array) ( $t && ! is_wp_error( $t ) ? $t : array() ) as $term ) { $names[] = $term; }
+		// $id may be an array of post ids: the union of their tools (first $limit).
+		$seen = array();
+		foreach ( (array) $id as $one ) {
+			$t = get_the_terms( (int) $one, 'tool' );
+			foreach ( (array) ( $t && ! is_wp_error( $t ) ? $t : array() ) as $term ) { if ( ! isset( $seen[ $term->term_id ] ) ) { $seen[ $term->term_id ] = 1; $names[] = $term; } }
+		}
+		if ( $limit > 0 ) { $names = array_slice( $names, 0, $limit ); }
 	} else {
 		foreach ( preg_split( '/\s*,\s*/', (string) get_post_meta( $id, 'wugweb_cs_platform', true ), -1, PREG_SPLIT_NO_EMPTY ) as $nm ) {
 			$term = get_term_by( 'name', $nm, 'platform' );

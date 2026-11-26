@@ -46,3 +46,7 @@
   .svc-tab { min-height: 40px; }
   .svc-panel .svc-btn { min-height: 44px; display: inline-flex; align-items: center; }
 }
+
+.svc-tools{margin-top:var(--gap-6);display:flex;flex-wrap:wrap;align-items:center;gap:var(--gap-3)}
+.svc-tools-label{font-family:var(--font-mono);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.05em;opacity:.8}
+.svc-tools .wugweb-chip{border-color:currentColor}
