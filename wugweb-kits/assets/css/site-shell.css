@@ -873,3 +873,10 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 /* Target size: disclosure toggles and prev/next links are at least 44px tall. */
 .wp-site-blocks summary{min-height:44px;box-sizing:border-box;padding-block:var(--gap-2,8px)}
 .wp-site-blocks .pn-prev-link,.wp-site-blocks .pn-next-link{display:inline-flex;align-items:center;min-height:44px}
+
+/* No pillar colours on service pages (approved rule; uat has none). If any block or cached markup sets --pillar-accent inline, this wins (an !important
+   stylesheet declaration beats a non-important inline one), so every consumer falls back to the muted token. */
+.wugweb-service-page,.wugweb-service-page :is(section,div,details,ul,li){--pillar-accent:var(--fg-muted,#bababa) !important}
+.wugweb-service-page .wugweb-capability-showcase summary span,.wugweb-service-page .wugweb-eyebrow{color:var(--fg-muted,#bababa) !important}
+/* Preset accent text classes inside the page content of service pages (case-study card groups) stay on neutral tokens. */
+body.page-child .entry-content :is(.has-aqua-color,.has-pink-color,.has-peach-color,.has-green-color,.has-blue-color){color:var(--fg-muted,#bababa) !important}

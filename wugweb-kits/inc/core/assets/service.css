@@ -1,4 +1,4 @@
-.wugweb-service-page>section,.wugweb-service-page{--pillar-accent:var(--wp--preset--color--yellow)}
+.wugweb-service-page>section,.wugweb-service-page{--pillar-accent:var(--fg-muted,#bababa)}
 .wugweb-service-page>section{padding-block:var(--section-y,48px)}
 .wugweb-eyebrow{color:var(--pillar-accent);text-transform:uppercase;letter-spacing:.08em;font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--caption)}
 .wugweb-lede{color:var(--wp--preset--color--neutral-3);font-size:var(--wp--preset--font-size--body-lg)}
