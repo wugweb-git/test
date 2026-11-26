@@ -12,6 +12,8 @@ function wugweb_cl2_img($src, $alt, $class, $eager = false) {
         $k = wugweb_r2_key_from_url($src); $dm = wugweb_r2_img_dims();
         if ($k !== '' && !empty($dm[$k][0]) && !empty($dm[$k][1])) { $dims = ' width="' . (int) $dm[$k][0] . '" height="' . (int) $dm[$k][1] . '"'; }
     }
+    // Media blocks on: a file missing from img-dims.json takes its measured size from the manifest (nothing changes with the switch off).
+    if ($dims === '' && function_exists('wugweb_cl3_active') && wugweb_cl3_active()) { $dims = wugweb_cl3_dims_attr($src); }
     return '<img class="' . esc_attr($class) . '" src="' . esc_url($src) . '" alt="' . esc_attr($alt) . '"' . $dims . ($eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') . ' decoding="async">';
 }
 
@@ -102,6 +104,8 @@ function wugweb_cl2_block($b) {
             return $o . '</ul></section>';
         case 'related':
         case 'next': return wugweb_cl2_related($b);
+        case 'split': case 'mosaic': case 'wall': case 'rail': case 'loop': case 'scrollshot': case 'screens':
+            return function_exists('wugweb_cl3_block') ? wugweb_cl3_block($b) : ''; // media blocks: only ever in the plan when the switch is on
     }
     return '';
 }

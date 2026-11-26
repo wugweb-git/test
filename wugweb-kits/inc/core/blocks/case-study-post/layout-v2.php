@@ -7,9 +7,12 @@
 defined('ABSPATH') || exit;
 require_once __DIR__ . '/layout-v2-resolver.php';
 require_once __DIR__ . '/layout-v2-components.php';
+require_once __DIR__ . '/layout-v2-media.php';
+require_once __DIR__ . '/layout-v2-media-components.php';
 if (function_exists('wugweb_case_layout_v2_enqueue')) { wugweb_case_layout_v2_enqueue(); } // normally already in <head>; this covers a block used outside the single template
 
 $wugweb_cl2 = wugweb_cl2_resolve(wugweb_cl2_collect($id));
+if (wugweb_cl3_active() && wugweb_cl3_has_script_blocks($wugweb_cl2)) { wugweb_cl3_enqueue_script(); } // rail, chips, viewer and loops need the small script
 
 // Group like CaseBlocks.astro: a chapter owns the blocks that carry its chapterId; everything else sits beside it.
 $wugweb_cl2_groups = array(); $wugweb_cl2_cur = null;

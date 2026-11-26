@@ -1,7 +1,8 @@
 <?php
 /**
  * Case-study layout v2: the switch and the asset hook. Loaded on every request, so it stays tiny.
- * v2 is OFF unless the option `wugweb_case_layout_v2` is truthy or the URL has ?cl=2 (preview).
+ * v2 is OFF unless the option `wugweb_case_layout_v2` is truthy or the URL has ?cl=2 or ?cl=3 (preview).
+ * The media blocks (split, mosaic, wall, rail, scrollshot, loop, All screens) additionally need the option `wugweb_case_blocks_v2` or ?cl=3.
  * Everything else lives in layout-v2.php / layout-v2-resolver.php, which only load when v2 renders.
  */
 defined('ABSPATH') || exit;
@@ -11,7 +12,8 @@ function wugweb_case_layout_v2_active() {
     if (get_option('wugweb_case_layout_v2')) { return true; }
     // Read-only display switch for previews; nothing is stored or changed.
     // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-    return isset($_GET['cl']) && '2' === sanitize_text_field(wp_unslash((string) $_GET['cl']));
+    // cl=3 is v2 plus the media blocks (layout-v2-media.php), so it switches v2 on too.
+    return isset($_GET['cl']) && in_array(sanitize_text_field(wp_unslash((string) $_GET['cl'])), array('2', '3'), true);
 }
 
 /** CSS + the small video-toggle script, only on a case-study page that renders v2. */

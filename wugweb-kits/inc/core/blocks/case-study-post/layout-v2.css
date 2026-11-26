@@ -394,3 +394,304 @@
 @media (prefers-reduced-motion: reduce) {
   .case-related-link { transition: none; }
 }
+
+/* ===== Media blocks (layout-v2-media.php): only on a page rendered with the switch on. Ported from CaseSplit / CaseMosaic / CaseWall / CaseRail / CaseLoop / CaseFigure / CaseScreens. ===== */
+
+/* Split (CaseSplit.astro): two files side by side, each at its own ratio. */
+.case-split { display: grid; gap: var(--space-page-md); margin: var(--space-page-lg) 0; align-items: start; }
+.case-split-item { margin: 0; display: grid; gap: var(--space-page-sm); min-inline-size: 0; }
+.case-split-media {
+  inline-size: 100%;
+  block-size: auto;
+  display: block;
+  border-radius: var(--radius-3);
+  background: var(--color-surface-elevated);
+}
+@media (min-width: 768px) { .case-split { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Mosaic (CaseMosaic.astro): 3 to 6 files, each at its own ratio. */
+.case-mosaic { display: grid; gap: var(--space-page-md); margin: var(--space-page-lg) 0; grid-template-columns: minmax(0, 1fr); align-items: start; }
+.case-mosaic-item { margin: 0; display: grid; gap: var(--space-page-xs); min-inline-size: 0; }
+.case-mosaic-media {
+  inline-size: 100%;
+  block-size: auto;
+  display: block;
+  border-radius: var(--radius-3);
+  background: var(--color-surface-elevated);
+}
+@media (min-width: 768px) { .case-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .case-mosaic { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Wall (CaseWall.astro): 7 or more files in fixed 4/3 frames. The file is shown whole (contain), never cropped. */
+.case-wall { display: grid; gap: var(--space-page-sm); margin: var(--space-page-lg) 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.case-wall-item { margin: 0; min-inline-size: 0; }
+.case-wall-link { display: block; border-radius: var(--radius-2); cursor: zoom-in; }
+.case-wall-link:focus-visible { outline: var(--focus-primary); outline-offset: 2px; }
+.case-wall-media {
+  inline-size: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  display: block;
+  border-radius: var(--radius-2);
+  background: var(--color-surface-elevated);
+}
+@media (min-width: 768px) { .case-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .case-wall { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* Loop (CaseLoop.astro): the box takes the file's own ratio (inline aspect-ratio from the manifest), so nothing jumps when it starts. */
+.case-loop { margin: var(--space-page-lg) 0; display: grid; gap: var(--space-page-sm); }
+.case-loop-media {
+  inline-size: 100%;
+  block-size: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: var(--radius-3);
+  background: var(--color-surface-elevated);
+}
+
+/* Scrollshot (CaseFigure.astro, tall): a fixed-height window on the top of a long page; "View full page" opens the whole file. */
+.case-figure--tall .case-figure-media {
+  max-block-size: 80vh;
+  object-fit: cover;
+  object-position: top;
+}
+.case-figure-full {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding: var(--space-page-xs) var(--space-page-sm);
+  border: var(--stroke-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  font-size: var(--fluid-body-sm);
+  text-decoration: none;
+}
+.case-figure-full:hover { border-color: var(--color-text-secondary); }
+.case-figure-full:focus-visible { outline: var(--focus-primary); outline-offset: 2px; }
+
+/* Rail (CaseRail.astro): W3C carousel. The scroller scrolls inside itself, never the page. */
+.case-rail { margin: var(--space-page-lg) 0; display: grid; gap: var(--space-page-md); min-inline-size: 0; max-inline-size: 100%; }
+.case-rail:focus-visible { outline: var(--focus-primary); outline-offset: 4px; border-radius: var(--radius-3); }
+.case-rail-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-page-sm); }
+.case-rail-title { margin: 0; color: var(--color-text-primary); font-size: 1.125rem; font-weight: var(--font-weight-semibold); }
+.case-rail-controls { display: flex; align-items: center; gap: var(--space-page-sm); color: var(--color-text-secondary); font-size: var(--fluid-body-sm); }
+.case-rail-controls[hidden] { display: none; }
+.case-rail-btn {
+  inline-size: var(--control-size);
+  block-size: var(--control-size);
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  border: var(--stroke-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+  font: inherit;
+  cursor: pointer;
+}
+.case-rail-btn:hover { background: var(--color-surface-hover); }
+.case-rail-btn:focus-visible { outline: var(--focus-primary); outline-offset: 2px; }
+.case-rail-btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+.case-rail-counter { min-inline-size: 6ch; text-align: center; font-variant-numeric: tabular-nums; }
+.case-rail-track {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(85%, 420px); /* 85% so the next slide peeks in */
+  gap: var(--space-page-md);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  overscroll-behavior-inline: contain;
+  min-inline-size: 0;
+}
+.case-rail-slide { scroll-snap-align: start; min-inline-size: 0; }
+.case-rail-item { margin: 0; display: grid; gap: var(--space-page-xs); }
+.case-rail-media {
+  inline-size: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  display: block;
+  border-radius: var(--radius-3);
+  background: var(--color-surface-elevated);
+}
+
+/* All screens (CaseScreens.astro): chips with counts, one set of thumbnails at a time. Thumbnails keep their own ratio. */
+.case-screens {
+  margin: var(--space-section-md) 0;
+  display: grid;
+  gap: var(--space-page-md);
+  padding-block-start: var(--space-section-sm);
+  border-block-start: var(--stroke-thin) solid var(--color-border-subtle);
+  min-inline-size: 0;
+}
+.case-screens-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-page-xs); }
+.case-screens-head { margin: 0; color: var(--color-text-primary); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: var(--font-weight-semibold); line-height: 1.2; }
+.case-screens-total { margin: 0; color: var(--color-text-secondary); font-size: var(--fluid-body-sm); }
+.case-screens-chips {
+  display: flex;
+  gap: var(--space-page-xs);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-block: var(--stroke-thin);
+  min-inline-size: 0;
+}
+.case-screens-chips[hidden] { display: none; }
+.case-screens-chips::-webkit-scrollbar { display: none; }
+.case-screens-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-page-xs);
+  min-block-size: var(--control-size);
+  min-inline-size: 44px;
+  padding: 0 var(--space-page-sm);
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  border: var(--stroke-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: var(--fluid-body-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+.case-screens-chip-count { color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.case-screens-chip:hover { background: var(--color-surface-hover); }
+.case-screens-chip[aria-pressed='true'] { background: var(--color-text-primary); color: var(--color-surface-page); border-color: var(--color-text-primary); }
+.case-screens-chip[aria-pressed='true'] .case-screens-chip-count { color: inherit; }
+.case-screens-chip:focus-visible { outline: var(--focus-primary); outline-offset: 2px; }
+.case-screens-set { display: grid; gap: var(--space-page-sm); min-inline-size: 0; }
+.case-screens-set[hidden] { display: none; }
+.case-screens-set-head { margin: 0; display: flex; align-items: baseline; gap: var(--space-page-xs); color: var(--color-text-primary); font-size: 1.125rem; font-weight: var(--font-weight-semibold); }
+.case-screens-set-count { color: var(--color-text-secondary); font-weight: 400; font-variant-numeric: tabular-nums; }
+/* With the chips running, the selected chip is the set's visible name. */
+.case-screens[data-enhanced='true'] .case-screens-set-head { display: none; }
+.case-screens-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-page-xs);
+  align-items: start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.case-screens-set[data-shape='wide'] .case-screens-grid { grid-template-columns: minmax(0, 1fr); }
+.case-screens-item { min-inline-size: 0; }
+.case-screens-figure { margin: 0; display: grid; gap: var(--space-page-xs); }
+.case-screens-link { display: block; border-radius: var(--radius-1); cursor: zoom-in; }
+.case-screens-link:focus-visible { outline: var(--focus-primary); outline-offset: 2px; }
+.case-screens-media {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  border-radius: var(--radius-1);
+  background: var(--color-surface-elevated);
+}
+@media (min-width: 480px) { .case-screens-set[data-shape='wide'] .case-screens-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 768px) {
+  .case-screens-chips { flex-wrap: wrap; overflow-x: visible; }
+  .case-screens-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-page-sm); }
+  .case-screens-set[data-shape='wide'] .case-screens-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .case-screens-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .case-screens-set[data-shape='wide'] .case-screens-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Viewer: the <dialog> is created by layout-v2-blocks.js and sits outside the case page. Whole file, never above its natural size. */
+.case-lightbox {
+  position: fixed;
+  inset: 0;
+  inline-size: 100vw;
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  padding: var(--space-page-xs);
+  border: 0;
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
+  overflow: hidden;
+}
+.case-lightbox[open] { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: var(--space-page-xs); }
+.case-lightbox::backdrop { background: var(--color-surface-page); }
+.case-lightbox-stage {
+  margin: 0;
+  min-block-size: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
+  gap: var(--space-page-xs);
+  padding-block-start: calc(var(--control-size) + var(--space-page-xs));
+}
+.case-lightbox-image {
+  display: block;
+  align-self: center;
+  inline-size: auto;
+  block-size: auto;
+  max-inline-size: 100%;
+  max-block-size: 100%;
+  min-block-size: 0;
+  border-radius: var(--radius-1);
+}
+.case-lightbox-caption { max-inline-size: 60ch; text-align: center; color: var(--color-text-primary); font-size: var(--fluid-body-sm); line-height: 1.4; }
+.case-lightbox-counter {
+  margin: 0;
+  min-block-size: var(--control-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-size: var(--fluid-body-sm);
+  font-variant-numeric: tabular-nums;
+}
+.case-lightbox-btn {
+  position: absolute;
+  inline-size: var(--control-size);
+  block-size: var(--control-size);
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  border: var(--stroke-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 1.125rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.case-lightbox-btn:hover { background: var(--color-surface-hover); }
+.case-lightbox-btn:focus-visible { outline: var(--focus-primary); outline-offset: 2px; }
+.case-lightbox-btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+.case-lightbox-close { inset-block-start: var(--space-page-xs); inset-inline-end: var(--space-page-xs); }
+/* On a phone, previous and next sit beside the counter, under the thumb. */
+.case-lightbox-prev { inset-block-end: var(--space-page-xs); inset-inline-start: var(--space-page-xs); }
+.case-lightbox-next { inset-block-end: var(--space-page-xs); inset-inline-end: var(--space-page-xs); }
+@media (min-width: 768px) {
+  .case-lightbox { padding: var(--space-page-md); }
+  .case-lightbox-stage { padding-inline: calc(var(--control-size) + var(--space-page-md)); padding-block-start: 0; }
+  .case-lightbox-prev,
+  .case-lightbox-next { inset-block-end: auto; inset-block-start: 50%; translate: 0 -50%; }
+  .case-lightbox-prev { inset-inline-start: var(--space-page-md); }
+  .case-lightbox-next { inset-inline-end: var(--space-page-md); }
+  .case-lightbox-close { inset-block-start: var(--space-page-md); inset-inline-end: var(--space-page-md); }
+}
+
+.case-split-item[hidden],
+.case-mosaic-item[hidden],
+.case-wall-item[hidden],
+.case-loop[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .case-rail-track { scroll-behavior: auto; }
+}

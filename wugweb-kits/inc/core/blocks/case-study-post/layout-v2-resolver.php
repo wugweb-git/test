@@ -4,7 +4,8 @@
  * wugweb_cl2_collect() reads the same post meta and parses the same post_content blocks as the legacy renderer (render.php, left untouched).
  * wugweb_cl2_resolve() is the WordPress subset of src/lib/case-layout.ts in the Astro site: it turns that data into an ordered block plan.
  * The resolver never invents fact or media: a field or file that is missing stays missing.
- * Not ported (no WP data to feed them): layoutHint, media manifest (status/dupOf/step/posterAt), rail, mosaic, wall, loop, scrollshot, split, quote, table, timeline, All screens.
+ * Media blocks (split, mosaic, wall, rail, scrollshot, loop, All screens) live in layout-v2-media.php and run only behind the switch (option wugweb_case_blocks_v2 or ?cl=3).
+ * Not ported (no WP data to feed them): layoutHint, step/posterAt/audience/set, quote, table, timeline.
  */
 defined('ABSPATH') || exit;
 
@@ -181,6 +182,9 @@ function wugweb_cl2_resolve(array $d) {
     if ($d['summary'] !== '') { $blocks[] = array('type' => 'summary', 'text' => $d['summary']); }
     $results = $d['results'];
     $secs = array(); $used = array();
+    // Media blocks (layout-v2-media.php): only with the switch on AND the case study in the measured manifest; otherwise $idx stays empty and nothing below changes.
+    $idx = array(); $overflow = array();
+    if (function_exists('wugweb_cl3_active') && wugweb_cl3_active()) { $idx = wugweb_cl3_index((string) get_post_field('post_name', $d['id'])); }
     foreach ($d['secs'] as $s) {
         // A "Results" section made of value | what lines is the results list, not a chapter.
         if (preg_match('/^results$/i', trim($s['title']))) { $r = wugweb_cl2_parse_results($s['raw']); if ($r) { $results = $r; continue; } }
@@ -194,7 +198,12 @@ function wugweb_cl2_resolve(array $d) {
         $imgs = array(); $vids = array();
         foreach ($s['media'] as $md) { if ($md['video']) { $vids[] = $md; } else { $imgs[] = $md; } }
         // Videos first, then images (as in the resolver), then the styles pair.
-        foreach ($vids as $v) { $blocks[] = array('type' => 'video', 'src' => $v['src'], 'label' => $brand . ' case study video', 'poster' => wugweb_cl2_poster($v['src']), 'chapterId' => $cid); }
+        if ($idx) {
+            // Measured manifest: loops, videos, scrollshots, figures (split / pair / mosaic / wall), rail.
+            foreach (wugweb_cl3_chapter_blocks($s, $cid, $brand, $idx, $overflow) as $nb) { $blocks[] = $nb; }
+        } else {
+            foreach ($vids as $v) { $blocks[] = array('type' => 'video', 'src' => $v['src'], 'label' => $brand . ' case study video', 'poster' => wugweb_cl2_poster($v['src']), 'chapterId' => $cid); }
+        }
         $label = $brand . ' case study image';
         if ($s['kind'] === 'styles') {
             // The styles images are the colour and type pair: two by two, a last odd one stands alone.
@@ -202,11 +211,14 @@ function wugweb_cl2_resolve(array $d) {
                 if (isset($imgs[$k + 1])) { $blocks[] = array('type' => 'pair', 'left' => array('src' => $imgs[$k]['src'], 'alt' => $brand . ' style'), 'right' => array('src' => $imgs[$k + 1]['src'], 'alt' => $brand . ' style'), 'chapterId' => $cid); }
                 else { $blocks[] = array('type' => 'figure', 'src' => $imgs[$k]['src'], 'alt' => $brand . ' style', 'chapterId' => $cid); }
             }
-        } else {
+        } elseif (!$idx) {
             foreach ($imgs as $im) { $blocks[] = array('type' => 'figure', 'src' => $im['src'], 'alt' => $label, 'chapterId' => $cid); }
         }
     }
-    if ($d['closing']) { $blocks[] = array('type' => 'closing', 'items' => $d['closing'], 'label' => $brand . ' case study image', 'vlabel' => $brand . ' case study video'); }
+    if ($idx && ($d['closing'] || $overflow)) {
+        // All screens (image files grouped into sets) + a plain closing grid for any videos.
+        foreach (wugweb_cl3_closing($d['closing'], $overflow, $idx, $brand, $brand . ' case study video') as $nb) { $blocks[] = $nb; }
+    } elseif ($d['closing']) { $blocks[] = array('type' => 'closing', 'items' => $d['closing'], 'label' => $brand . ' case study image', 'vlabel' => $brand . ' case study video'); }
     if ($results) { $blocks[] = array('type' => 'results', 'items' => $results); }
     if ($d['credits']) { $blocks[] = array('type' => 'credits', 'items' => $d['credits']); }
     if ($d['links']) { $blocks[] = array('type' => 'presence', 'links' => $d['links']); }
