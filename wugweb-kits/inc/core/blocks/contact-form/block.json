@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "wugweb/contact-form",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "title": "Contact Form",
   "category": "wugweb-pages",
   "supports": {
@@ -40,23 +40,15 @@
   },
   "render": "file:./render.php",
   "style": "file:./style.css",
-  "attributes": {
-    "heading": {
-      "type": "string",
-      "default": "Tell us what you are building."
-    },
-    "formId": {
-      "type": "integer",
-      "default": 0
-    }
-  },
+  "attributes": {},
   "icon": "email",
-  "description": "Contact form block (Fluent Forms).",
+  "description": "Contact enquiry form and offices sidebar (native, posts to admin-post.php).",
   "textdomain": "wugweb-kits",
   "keywords": [
     "contact",
     "form",
     "enquiry",
     "message"
-  ]
+  ],
+  "viewScript": "file:./view.js"
 }
