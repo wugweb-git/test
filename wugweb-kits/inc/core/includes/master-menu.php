@@ -25,6 +25,12 @@ function wugweb_master_taxonomies() {
 	);
 }
 
+// The kits-core plugin lists Categories and Tags under its own Classification menu. They live under Master here,
+// so take them off its list (any other shared taxonomy, such as linked campaigns, stays where the plugin puts it).
+add_filter( 'kits_admin_shared_taxonomies', function ( $list ) {
+	return array_values( array_diff( (array) $list, array( 'category', 'post_tag' ) ) );
+} );
+
 // Hide the per-post-type menu entries (the taxonomy keeps its post types).
 add_filter( 'register_taxonomy_args', function ( $args, $taxonomy ) {
 	if ( isset( wugweb_master_taxonomies()[ $taxonomy ] ) ) { $args['show_in_menu'] = false; }
