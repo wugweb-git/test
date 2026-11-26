@@ -2,8 +2,15 @@
 /** toolkit-grid: Astro .toolkit-section. Data: shared _toolkit {title, groups{category:[items]}}; optional icons{name:url}. */
 defined('ABSPATH') || exit;
 $p = sanitize_key($attributes['pillar'] ?? 'brand');
-$tk = wugweb_core_service_toolkit();
-if (!$tk || empty($tk['groups'])) { return; }
+// Per-service tools (service-data.json `tools`: [{category, items[]}]). A service without its own list shows no toolkit section; the old shared engineering list is no longer used for other pillars.
+$svc = wugweb_core_service_data($p);
+$tk = null;
+if (!empty($svc['tools']) && is_array($svc['tools'])) {
+  $groups = array();
+  foreach ($svc['tools'] as $g) { if (!empty($g['category']) && !empty($g['items'])) { $groups[(string) $g['category']] = (array) $g['items']; } }
+  if ($groups) { $tk = array('title' => 'Toolkit of industry-leading technologies', 'groups' => $groups); }
+}
+if (!$tk) { return; }
 $icons = array();
 foreach ((array) ($tk['icons'] ?? array()) as $k => $u) { $icons[strtolower((string) $k)] = $u; }
 $style = '--theme-base: var(--color-accent-primary);';
