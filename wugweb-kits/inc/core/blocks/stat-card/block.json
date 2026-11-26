@@ -4,7 +4,7 @@
   "name": "wugweb/stat-card",
   "version": "1.5.0",
   "title": "Stat Card",
-  "category": "wugweb",
+  "category": "wugweb-cards",
   "keywords": [
     "stat",
     "counter",
@@ -102,5 +102,6 @@
   "style": "file:./style.css",
   "icon": "chart-line",
   "description": "Stat / counter / value card. Styles: Light (services), Dark (about), Value. Number counts up with GSAP; metric pulls a live count (years, projects, industries, clients).",
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits"
 }

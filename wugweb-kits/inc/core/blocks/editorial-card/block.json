@@ -4,7 +4,7 @@
   "name": "wugweb/editorial-card",
   "version": "3.0.0",
   "title": "Editorial Card",
-  "category": "wugweb",
+  "category": "wugweb-cards",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -42,7 +42,7 @@
     "wugweb-post-card"
   ],
   "icon": "format-aside",
-  "description": "Editorial Card \u2014 Wugweb block.",
+  "description": "Editorial Card — Wugweb block.",
   "attributes": {
     "postId": {
       "type": "integer",
@@ -63,5 +63,12 @@
       "name": "row",
       "label": "Row (stacked, mobile)"
     }
+  ],
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "editorial",
+    "article",
+    "card",
+    "feature"
   ]
 }

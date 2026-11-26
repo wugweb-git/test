@@ -3,7 +3,7 @@
   "name": "wugweb/blog-index",
   "version": "3.0.0",
   "title": "Blog Index",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -50,5 +50,13 @@
   },
   "icon": "grid-view",
   "description": "Featured post, topic filter chips and the post grid (blog/index.astro).",
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "blog",
+    "posts",
+    "archive",
+    "filter",
+    "search"
+  ]
 }

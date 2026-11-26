@@ -1,7 +1,10 @@
 <?php
-/** Title: media-card-list
- * Slug: wugweb-kits/Media cards — horizontal list
+/**
+ * Title: Media Cards: Horizontal List
+ * Slug: wugweb-kits/media-card-list
  * Categories: wugweb-cards
+ * Description: Vertical list of horizontal media cards.
+ * Keywords: media,cards,list
  */
 ?>
 <!-- wp:group {"className":"wrap","layout":{"type":"grid","columnCount":1,"minimumColumnWidth":null}} -->

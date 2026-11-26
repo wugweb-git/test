@@ -4,7 +4,7 @@
   "name": "wugweb/service-related-work",
   "version": "1.3.0",
   "title": "Service Related Work",
-  "category": "wugweb",
+  "category": "wugweb-service",
   "supports": {
     "html": false,
     "align": [
@@ -51,5 +51,12 @@
   "render": "file:./render.php",
   "style": "file:./style.css",
   "icon": "portfolio",
-  "description": "Related case studies for a pillar (services/[slug].astro #svc-work)."
+  "description": "Related case studies for a pillar (services/[slug].astro #svc-work).",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "service",
+    "related",
+    "work",
+    "case studies"
+  ]
 }

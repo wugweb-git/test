@@ -1,7 +1,10 @@
 <?php
-/** Title: Overlay — Bottom banner (non-modal)
+/**
+ * Title: Overlay: Bottom Banner
  * Slug: wugweb-kits/overlay-banner-bottom
  * Categories: featured
+ * Description: Banner overlay pinned to the bottom of the screen.
+ * Keywords: overlay,banner,bottom
  */
 ?>
 <!-- wp:buttons -->

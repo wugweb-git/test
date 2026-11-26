@@ -4,7 +4,7 @@
   "name": "wugweb/post-cross-sell-rail",
   "version": "3.0.0",
   "title": "Post Cross-Sell Rail",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -44,7 +44,7 @@
     "file:./style.css"
   ],
   "icon": "networking",
-  "description": "Post Cross-Sell Rail \u2014 Wugweb block.",
+  "description": "Post Cross-Sell Rail — Wugweb block.",
   "attributes": {
     "postId": {
       "type": "integer",
@@ -54,5 +54,12 @@
   "usesContext": [
     "postId",
     "postType"
+  ],
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "related",
+    "posts",
+    "rail",
+    "cross-sell"
   ]
 }

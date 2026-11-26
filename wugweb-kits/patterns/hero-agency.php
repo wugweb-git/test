@@ -1,8 +1,10 @@
 <?php
 /**
- * Title: Wugweb Hero — Vision & Velocity
+ * Title: Hero: Vision and Velocity
  * Slug: wugweb-kits/hero-agency
  * Categories: banner, featured
+ * Description: Agency hero with headline, supporting line and primary action.
+ * Keywords: hero,banner,headline
  */
 ?>
 <!-- wp:group {"align":"full","templateLock":"contentOnly","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"backgroundColor":"neutral-10","textColor":"neutral-0","layout":{"type":"constrained","wideSize":"1200px"}} -->

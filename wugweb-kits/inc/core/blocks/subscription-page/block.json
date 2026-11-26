@@ -3,7 +3,7 @@
   "name": "wugweb/subscription-page",
   "version": "3.0.0",
   "title": "Subscription Page",
-  "category": "wugweb",
+  "category": "wugweb-pages",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -42,5 +42,12 @@
   "attributes": {},
   "icon": "money-alt",
   "description": "Subscription page body (footer/subscription.astro). The mock checkout modal is not ported; Start subscription links to contact.",
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "subscription",
+    "newsletter",
+    "subscribe",
+    "page"
+  ]
 }

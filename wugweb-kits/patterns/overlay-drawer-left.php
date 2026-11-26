@@ -1,7 +1,10 @@
 <?php
-/** Title: Overlay — Drawer from the left
+/**
+ * Title: Overlay: Left Drawer
  * Slug: wugweb-kits/overlay-drawer-left
  * Categories: featured
+ * Description: Drawer overlay that slides in from the left.
+ * Keywords: overlay,drawer,left
  */
 ?>
 <!-- wp:buttons -->

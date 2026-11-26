@@ -1,7 +1,10 @@
 <?php
-/** Title: Overlay — Bottom sheet drawer
+/**
+ * Title: Overlay: Bottom Drawer
  * Slug: wugweb-kits/overlay-drawer-bottom
  * Categories: featured
+ * Description: Drawer overlay that slides up from the bottom.
+ * Keywords: overlay,drawer,bottom
  */
 ?>
 <!-- wp:buttons -->

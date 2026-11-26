@@ -4,7 +4,7 @@
   "name": "wugweb/article-meta-toc",
   "version": "1.6.0",
   "title": "Article Meta & Contents",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -41,7 +41,7 @@
   "render": "file:./render.php",
   "style": "file:./style.css",
   "icon": "list-view",
-  "description": "Article Meta & Contents \u2014 Wugweb block.",
+  "description": "Article Meta & Contents — Wugweb block.",
   "attributes": {
     "postId": {
       "type": "integer",
@@ -52,5 +52,13 @@
   "usesContext": [
     "postId",
     "postType"
+  ],
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "article",
+    "table of contents",
+    "toc",
+    "meta",
+    "reading time"
   ]
 }

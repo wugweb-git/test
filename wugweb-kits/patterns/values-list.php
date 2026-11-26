@@ -1,7 +1,10 @@
 <?php
-/** Title: values-list
- * Slug: wugweb-kits/Values — numbered media cards
+/**
+ * Title: Values: Numbered Media Cards
+ * Slug: wugweb-kits/values-list
  * Categories: wugweb-cards
+ * Description: Numbered list of company values as media cards.
+ * Keywords: values,numbered,cards
  */
 ?>
 <!-- wp:group {"className":"wrap","layout":{"type":"grid","columnCount":2,"minimumColumnWidth":null}} -->

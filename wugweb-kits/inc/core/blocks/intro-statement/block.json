@@ -4,7 +4,7 @@
   "name": "wugweb/intro-statement",
   "version": "1.3.0",
   "title": "Team Statement",
-  "category": "wugweb",
+  "category": "wugweb-layout",
   "icon": "editor-quote",
   "description": "Headline, two paragraphs and tag chips (home intro).",
   "attributes": {
@@ -61,5 +61,12 @@
     "shadow": true
   },
   "render": "file:./render.php",
-  "style": "file:./style.css"
+  "style": "file:./style.css",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "intro",
+    "statement",
+    "team",
+    "about"
+  ]
 }

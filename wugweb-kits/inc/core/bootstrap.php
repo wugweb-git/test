@@ -5,8 +5,18 @@ require_once __DIR__ . '/includes/service-data.php';
 require_once __DIR__ . '/includes/cards.php';
 require_once __DIR__ . '/includes/card-data.php';
 add_filter('block_categories_all', function ($cats) {
-    array_unshift($cats, array('slug' => 'wugweb', 'title' => 'Wugweb'));
-    return $cats;
+    $mine = array(
+        array('slug' => 'wugweb-layout', 'title' => 'Wugweb: Layout'),
+        array('slug' => 'wugweb-content', 'title' => 'Wugweb: Content'),
+        array('slug' => 'wugweb-cards', 'title' => 'Wugweb: Cards'),
+        array('slug' => 'wugweb-service', 'title' => 'Wugweb: Services'),
+        array('slug' => 'wugweb-blog-work', 'title' => 'Wugweb: Blog and Work'),
+        array('slug' => 'wugweb-charts', 'title' => 'Wugweb: Charts'),
+        array('slug' => 'wugweb-overlays', 'title' => 'Wugweb: Overlays'),
+        array('slug' => 'wugweb-pages', 'title' => 'Wugweb: Pages'),
+        array('slug' => 'wugweb', 'title' => 'Wugweb (other)'),
+    );
+    return array_merge($mine, $cats);
 });
 add_action('init', function () {
     wp_register_style('wugweb-core-service', get_theme_file_uri('inc/core/assets/service.css'), array(), '0.3.0');

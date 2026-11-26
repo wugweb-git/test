@@ -3,7 +3,7 @@
   "name": "wugweb/cta-band",
   "version": "2.0.0",
   "title": "Yellow CTA Box",
-  "category": "wugweb",
+  "category": "wugweb-layout",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -106,5 +106,6 @@
     "banner",
     "box"
   ],
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits"
 }

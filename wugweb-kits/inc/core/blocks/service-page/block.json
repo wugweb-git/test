@@ -4,7 +4,7 @@
   "name": "wugweb/service-page",
   "version": "1.3.0",
   "title": "Service Page",
-  "category": "wugweb",
+  "category": "wugweb-service",
   "supports": {
     "html": false,
     "align": [
@@ -58,5 +58,12 @@
     "file:./style.css"
   ],
   "icon": "welcome-widgets-menus",
-  "description": "Full service page for one pillar."
+  "description": "Full service page for one pillar.",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "service",
+    "pillar",
+    "page",
+    "services"
+  ]
 }

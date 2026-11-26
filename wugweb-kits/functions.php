@@ -90,6 +90,7 @@ if (!in_array('wugweb-core/wugweb-core.php', (array) get_option('active_plugins'
 }
 require_once __DIR__ . '/inc/seo-engine.php';
 require_once __DIR__ . '/inc/a11y-names.php';
+if (is_admin()) { require_once __DIR__ . '/inc/admin-registry.php'; }
 require_once __DIR__ . '/inc/seo-head.php';
 
 /* Motion: GSAP (self-hosted) + the site's scroll-animations / draggable-tags / lazy-video, bundled from wugweb_site. */

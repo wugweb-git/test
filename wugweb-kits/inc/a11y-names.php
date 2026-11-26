@@ -92,3 +92,13 @@ add_filter('render_block', function ($html, $block) {
     }
     return $html;
 }, 20, 2);
+
+/** Every wugweb/* block's root element carries wp-block-wugweb-<folder> (added only where the render did not already print it). */
+add_filter('render_block', function ($html, $block) {
+    $n = $block['blockName'] ?? '';
+    if (strpos($n, 'wugweb/') !== 0 || trim($html) === '') return $html;
+    $cls = 'wp-block-wugweb-' . substr($n, 7);
+    $p = new WP_HTML_Tag_Processor($html);
+    if ($p->next_tag() && !$p->has_class($cls)) { $p->add_class($cls); return $p->get_updated_html(); }
+    return $html;
+}, 5, 2);

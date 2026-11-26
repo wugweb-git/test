@@ -1,7 +1,10 @@
 <?php
-/** Title: Kits Bento Grid
+/**
+ * Title: Bento Grid
  * Slug: wugweb-kits/bento-grid
  * Categories: columns, featured
+ * Description: Responsive bento grid of mixed-size tiles for highlights.
+ * Keywords: bento,grid,tiles
  */
 ?>
 <!-- wp:columns {"align":"wide","templateLock":"contentOnly","style":{"spacing":{"blockGap":"var:preset|spacing|40"}}} -->

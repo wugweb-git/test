@@ -3,7 +3,7 @@
   "name": "wugweb/clients-served",
   "version": "1.3.0",
   "title": "Client Logos",
-  "category": "wugweb",
+  "category": "wugweb-content",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -50,5 +50,12 @@
     }
   },
   "icon": "groups",
-  "description": "Clients served section."
+  "description": "Clients served section.",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "clients",
+    "logos",
+    "customers",
+    "trust"
+  ]
 }

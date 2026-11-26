@@ -3,11 +3,30 @@
   "name": "wugweb/blog-cards",
   "version": "1.0.0",
   "title": "Blog Cards (slot)",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "description": "One slot of the blog mosaic: featured card, featured list, case-study strip, picks rows, picks big card, or case-study cards. Real posts, no repeats across slots.",
   "icon": "screenoptions",
-  "supports": { "html": false, "autoRegister": true },
+  "supports": {
+    "html": false,
+    "autoRegister": true
+  },
   "render": "file:./render.php",
-  "style": ["wugweb-post-card", "file:./style.css"],
-  "attributes": { "slot": { "type": "string", "default": "featured" } }
+  "style": [
+    "wugweb-post-card",
+    "file:./style.css"
+  ],
+  "attributes": {
+    "slot": {
+      "type": "string",
+      "default": "featured"
+    }
+  },
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "blog",
+    "mosaic",
+    "cards",
+    "featured",
+    "posts"
+  ]
 }

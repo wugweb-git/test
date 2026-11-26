@@ -3,7 +3,7 @@
   "name": "wugweb/industries-served",
   "version": "1.3.0",
   "title": "Industries Served",
-  "category": "wugweb",
+  "category": "wugweb-content",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -58,5 +58,12 @@
     }
   },
   "icon": "building",
-  "description": "Industries served section."
+  "description": "Industries served section.",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "industries",
+    "sectors",
+    "served",
+    "showcase"
+  ]
 }

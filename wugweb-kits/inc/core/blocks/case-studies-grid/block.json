@@ -3,7 +3,7 @@
   "name": "wugweb/case-studies-grid",
   "version": "3.0.0",
   "title": "Portfolio Grid",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -62,5 +62,12 @@
   },
   "icon": "portfolio",
   "description": "Latest case studies from the Case Study post type.",
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "case studies",
+    "portfolio",
+    "work",
+    "grid"
+  ]
 }

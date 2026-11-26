@@ -3,7 +3,7 @@
   "name": "wugweb/work-index",
   "version": "3.0.0",
   "title": "Work Index",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -47,5 +47,12 @@
   },
   "icon": "portfolio",
   "description": "Case study grid with pillar filter chips (work/index.astro).",
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "work",
+    "portfolio",
+    "case studies",
+    "index"
+  ]
 }

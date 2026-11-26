@@ -4,7 +4,7 @@
   "name": "wugweb/article-share-newsletter",
   "version": "1.6.0",
   "title": "Article Share & Newsletter",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -48,5 +48,12 @@
       "default": 0
     }
   },
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "share",
+    "newsletter",
+    "subscribe",
+    "article"
+  ]
 }

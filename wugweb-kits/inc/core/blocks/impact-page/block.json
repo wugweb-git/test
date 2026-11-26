@@ -3,7 +3,7 @@
   "name": "wugweb/impact-page",
   "version": "3.0.0",
   "title": "Impact Page",
-  "category": "wugweb",
+  "category": "wugweb-pages",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -41,5 +41,12 @@
   "style": "file:./style.css",
   "attributes": {},
   "icon": "heart",
-  "description": "Purpose & Impact page body (footer/impact.astro). Visual slots are grey placeholders until imagery arrives."
+  "description": "Purpose & Impact page body (footer/impact.astro). Visual slots are grey placeholders until imagery arrives.",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "impact",
+    "sustainability",
+    "social",
+    "page"
+  ]
 }

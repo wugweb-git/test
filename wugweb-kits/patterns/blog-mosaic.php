@@ -1,8 +1,10 @@
 <?php
-/** Title: Blog Mosaic
+/**
+ * Title: Blog Mosaic
  * Slug: wugweb-kits/blog-mosaic
  * Categories: featured
  * Description: Blog index mosaic on GenerateBlocks grids (columns per breakpoint are editable in the block editor); cards are real posts / case studies.
+ * Keywords: blog,mosaic,featured
  * Inserter: no
  */
 defined('ABSPATH') || exit;

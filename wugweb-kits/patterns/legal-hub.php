@@ -1,7 +1,10 @@
 <?php
-/** Title: Legal Hub (Privacy)
+/**
+ * Title: Legal Hub
  * Slug: wugweb-kits/legal-hub
  * Categories: featured
+ * Description: Index page linking all legal and policy pages.
+ * Keywords: legal,policies,privacy
  */
 ?>
 <!-- wp:wugweb/legal-hub {"active":"privacy-policy"} -->

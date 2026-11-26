@@ -3,7 +3,7 @@
   "name": "wugweb/taxonomy-filter",
   "version": "1.3.0",
   "title": "Wugweb Taxonomy Filter",
-  "category": "wugweb",
+  "category": "wugweb-content",
   "icon": "filter",
   "description": "Accessible case-study discipline and industry filters.",
   "render": "file:./render.php",
@@ -51,5 +51,12 @@
         "post_tag"
       ]
     }
-  }
+  },
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "filter",
+    "taxonomy",
+    "categories",
+    "chips"
+  ]
 }

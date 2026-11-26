@@ -3,7 +3,7 @@
   "name": "wugweb/recent-thoughts",
   "version": "3.0.0",
   "title": "Recent Blog Posts",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -65,5 +65,13 @@
     }
   },
   "icon": "admin-post",
-  "description": "Latest blog posts."
+  "description": "Latest blog posts.",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "recent",
+    "posts",
+    "blog",
+    "teaser",
+    "insights"
+  ]
 }

@@ -1,8 +1,10 @@
 <?php
 /**
- * Title: Wugweb Industry CTA — Request Quote
+ * Title: Industry CTA: Request a Quote
  * Slug: wugweb-kits/cta-request-quote
  * Categories: call-to-action
+ * Description: Call to action inviting a quote request for an industry page.
+ * Keywords: cta,quote,industry
  */
 ?>
 <!-- wp:group {"align":"wide","templateLock":"contentOnly","backgroundColor":"ash","textColor":"neutral-0","layout":{"type":"constrained","wideSize":"1000px"},"style":{"spacing":{"padding":"var:preset|spacing|60"},"border":{"radius":"24px","width":"1px"}}} -->

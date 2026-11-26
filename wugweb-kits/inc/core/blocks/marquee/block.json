@@ -3,7 +3,7 @@
   "name": "wugweb/marquee",
   "version": "1.3.0",
   "title": "Wugweb Logo Marquee",
-  "category": "wugweb",
+  "category": "wugweb-layout",
   "icon": "slides",
   "description": "Accessible pauseable text/logo track.",
   "render": "file:./render.php",
@@ -43,5 +43,12 @@
     },
     "shadow": true
   },
-  "attributes": {}
+  "attributes": {},
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "marquee",
+    "logos",
+    "ticker",
+    "scroll"
+  ]
 }

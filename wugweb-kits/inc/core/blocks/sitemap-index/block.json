@@ -3,7 +3,7 @@
   "name": "wugweb/sitemap-index",
   "version": "3.0.0",
   "title": "Sitemap Index",
-  "category": "wugweb",
+  "category": "wugweb-pages",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -41,5 +41,12 @@
   "style": "file:./style.css",
   "attributes": {},
   "icon": "list-view",
-  "description": "Sitemap columns: pages, services, case studies, posts, legal (footer/sitemap.astro)."
+  "description": "Sitemap columns: pages, services, case studies, posts, legal (footer/sitemap.astro).",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "sitemap",
+    "index",
+    "pages",
+    "links"
+  ]
 }

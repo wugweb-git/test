@@ -1,7 +1,10 @@
 <?php
-/** Title: media-card-grid
- * Slug: wugweb-kits/Media cards — 2 column grid
+/**
+ * Title: Media Cards: 2-Column Grid
+ * Slug: wugweb-kits/media-card-grid
  * Categories: wugweb-cards
+ * Description: Two-column grid of media cards with image and text.
+ * Keywords: media,cards,grid
  */
 ?>
 <!-- wp:group {"className":"wrap","layout":{"type":"grid","columnCount":2,"minimumColumnWidth":null}} -->

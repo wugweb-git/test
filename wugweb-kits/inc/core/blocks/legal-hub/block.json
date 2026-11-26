@@ -3,7 +3,7 @@
   "name": "wugweb/legal-hub",
   "version": "3.0.0",
   "title": "Legal Hub",
-  "category": "wugweb",
+  "category": "wugweb-pages",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -61,5 +61,12 @@
   },
   "icon": "privacy",
   "description": "Legal pages chrome: breadcrumb, title, updated date, legal nav and content column (layouts/LegalLayout.astro). Wrap the policy text in it.",
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "legal",
+    "policies",
+    "privacy",
+    "terms"
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "wugweb/reviews-page",
   "version": "3.0.0",
   "title": "Reviews Page",
-  "category": "wugweb",
+  "category": "wugweb-pages",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -41,5 +41,12 @@
   "style": "file:./style.css",
   "attributes": {},
   "icon": "star-filled",
-  "description": "Reviews sections: agency platforms, employee reviews, other recognition (footer/reviews.astro)."
+  "description": "Reviews sections: agency platforms, employee reviews, other recognition (footer/reviews.astro).",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "reviews",
+    "ratings",
+    "testimonials",
+    "page"
+  ]
 }

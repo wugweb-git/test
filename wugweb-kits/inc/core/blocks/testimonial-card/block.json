@@ -4,7 +4,7 @@
   "name": "wugweb/testimonial-card",
   "version": "1.6.0",
   "title": "Testimonial Card",
-  "category": "wugweb",
+  "category": "wugweb-cards",
   "keywords": [
     "card",
     "wugweb"
@@ -89,5 +89,6 @@
   "render": "file:./render.php",
   "style": "file:./style.css",
   "icon": "format-quote",
-  "description": "Testimonial Card \u2014 Wugweb block."
+  "description": "Testimonial Card — Wugweb block.",
+  "textdomain": "wugweb-kits"
 }

@@ -4,7 +4,7 @@
   "name": "wugweb/service-stack",
   "version": "1.3.0",
   "title": "Service Stack",
-  "category": "wugweb",
+  "category": "wugweb-service",
   "supports": {
     "html": false,
     "align": [
@@ -48,5 +48,12 @@
   "style": "file:./style.css",
   "icon": "layout",
   "description": "Sticky stack of the six service panels with tier tabs and work gallery (services/index.astro).",
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "services",
+    "stack",
+    "panels",
+    "pillars"
+  ]
 }

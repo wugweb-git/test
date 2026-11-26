@@ -1,7 +1,10 @@
 <?php
-/** Title: Overlay — Modal (centred)
+/**
+ * Title: Overlay: Modal
  * Slug: wugweb-kits/overlay-modal
  * Categories: featured
+ * Description: Centred modal dialog overlay.
+ * Keywords: overlay,modal,dialog
  */
 ?>
 <!-- wp:buttons -->

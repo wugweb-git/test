@@ -3,7 +3,7 @@
   "name": "wugweb/about-section",
   "version": "3.0.0",
   "title": "About Section",
-  "category": "wugweb",
+  "category": "wugweb-content",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -52,5 +52,12 @@
     }
   },
   "icon": "groups",
-  "description": "About page bands: Culture Reigns Supreme and the reviews teaser (about.astro)."
+  "description": "About page bands: Culture Reigns Supreme and the reviews teaser (about.astro).",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "about",
+    "culture",
+    "team",
+    "story"
+  ]
 }

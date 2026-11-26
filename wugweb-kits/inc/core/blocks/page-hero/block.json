@@ -3,7 +3,7 @@
   "name": "wugweb/page-hero",
   "version": "1.1.0",
   "title": "Page Hero",
-  "category": "wugweb",
+  "category": "wugweb-layout",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -141,5 +141,6 @@
     "postId",
     "postType"
   ],
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits"
 }

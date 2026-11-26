@@ -3,7 +3,7 @@
   "name": "wugweb/copyright-year",
   "version": "1.3.0",
   "title": "Wugweb Copyright Year",
-  "category": "wugweb",
+  "category": "wugweb-layout",
   "render": "file:./render.php",
   "supports": {
     "html": false,
@@ -39,7 +39,14 @@
     "shadow": true
   },
   "icon": "info-outline",
-  "description": "Wugweb Copyright Year \u2014 Wugweb block.",
+  "description": "Wugweb Copyright Year — Wugweb block.",
   "attributes": {},
-  "style": "file:./style.css"
+  "style": "file:./style.css",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "copyright",
+    "year",
+    "footer",
+    "date"
+  ]
 }

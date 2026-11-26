@@ -3,7 +3,7 @@
   "name": "wugweb/industries-directory",
   "version": "3.0.0",
   "title": "Industries Directory",
-  "category": "wugweb",
+  "category": "wugweb-content",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -50,5 +50,12 @@
     }
   },
   "icon": "networking",
-  "description": "Industries page: hero diagram, sector directory, cross-industry diagram, missing-industry and final CTA (footer/industries.astro)."
+  "description": "Industries page: hero diagram, sector directory, cross-industry diagram, missing-industry and final CTA (footer/industries.astro).",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "industries",
+    "directory",
+    "sectors",
+    "list"
+  ]
 }

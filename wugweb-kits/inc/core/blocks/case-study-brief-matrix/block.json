@@ -4,7 +4,7 @@
   "name": "wugweb/case-study-brief-matrix",
   "version": "1.7.0",
   "title": "Case Study Brief Matrix",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -41,7 +41,7 @@
   "render": "file:./render.php",
   "style": "file:./style.css",
   "icon": "editor-table",
-  "description": "Case Study Brief Matrix \u2014 Wugweb block.",
+  "description": "Case Study Brief Matrix — Wugweb block.",
   "attributes": {
     "postId": {
       "type": "integer",
@@ -51,5 +51,12 @@
   "usesContext": [
     "postId",
     "postType"
+  ],
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "case study",
+    "brief",
+    "matrix",
+    "details"
   ]
 }

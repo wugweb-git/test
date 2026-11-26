@@ -3,7 +3,7 @@
   "name": "wugweb/article-post",
   "version": "3.0.0",
   "title": "Article Post",
-  "category": "wugweb",
+  "category": "wugweb-blog-work",
   "supports": {
     "html": false,
     "autoRegister": true,
@@ -55,5 +55,12 @@
     "postId",
     "postType"
   ],
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "article",
+    "post",
+    "blog",
+    "single"
+  ]
 }

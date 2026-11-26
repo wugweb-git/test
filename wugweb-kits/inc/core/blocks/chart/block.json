@@ -3,34 +3,110 @@
   "name": "wugweb/chart",
   "version": "1.0.0",
   "title": "Chart / graph",
-  "category": "wugweb",
+  "category": "wugweb-charts",
   "icon": "chart-bar",
   "description": "Dependency-free animated chart: count-up, horizontal/vertical bars, progress bars, line, area, sparkline, donut, ring, before/after. Final state always rendered; draws on when it enters the viewport.",
   "supports": {
     "html": false,
     "anchor": true,
-    "align": ["wide", "full"],
-    "color": { "background": true, "text": true },
-    "spacing": { "padding": true, "margin": true, "blockGap": true },
-    "__experimentalBorder": { "radius": true, "color": true, "width": true, "style": true },
-    "typography": { "fontSize": true }
+    "align": [
+      "wide",
+      "full"
+    ],
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": true
+    },
+    "__experimentalBorder": {
+      "radius": true,
+      "color": true,
+      "width": true,
+      "style": true
+    },
+    "typography": {
+      "fontSize": true
+    }
   },
   "attributes": {
-    "type": { "type": "string", "enum": ["count", "bar-h", "bar-v", "progress", "line", "area", "sparkline", "donut", "ring", "compare"], "default": "bar-h" },
-    "title": { "type": "string", "default": "" },
-    "caption": { "type": "string", "default": "" },
-    "unit": { "type": "string", "default": "" },
-    "max": { "type": "number", "default": 0 },
-    "showLegend": { "type": "boolean", "default": true },
-    "summary": { "type": "string", "default": "" },
-    "rows": { "type": "array", "default": [
-      { "label": "Strategy", "value": 80, "unit": "", "color": "" },
-      { "label": "Design", "value": 64, "unit": "", "color": "" },
-      { "label": "Engineering", "value": 92, "unit": "", "color": "" }
-    ] }
+    "type": {
+      "type": "string",
+      "enum": [
+        "count",
+        "bar-h",
+        "bar-v",
+        "progress",
+        "line",
+        "area",
+        "sparkline",
+        "donut",
+        "ring",
+        "compare"
+      ],
+      "default": "bar-h"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "caption": {
+      "type": "string",
+      "default": ""
+    },
+    "unit": {
+      "type": "string",
+      "default": ""
+    },
+    "max": {
+      "type": "number",
+      "default": 0
+    },
+    "showLegend": {
+      "type": "boolean",
+      "default": true
+    },
+    "summary": {
+      "type": "string",
+      "default": ""
+    },
+    "rows": {
+      "type": "array",
+      "default": [
+        {
+          "label": "Strategy",
+          "value": 80,
+          "unit": "",
+          "color": ""
+        },
+        {
+          "label": "Design",
+          "value": 64,
+          "unit": "",
+          "color": ""
+        },
+        {
+          "label": "Engineering",
+          "value": 92,
+          "unit": "",
+          "color": ""
+        }
+      ]
+    }
   },
   "render": "file:./render.php",
   "style": "file:./style.css",
   "viewScript": "file:./view.js",
-  "editorScript": "file:./edit.js"
+  "editorScript": "file:./edit.js",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "chart",
+    "graph",
+    "data",
+    "visualization",
+    "statistics"
+  ]
 }
