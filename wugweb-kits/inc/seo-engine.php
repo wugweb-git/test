@@ -135,7 +135,19 @@ function wugweb_seo_videos($post) {
     $out = array(); $posters = array_values(array_filter(array_map('trim', explode(',', (string) get_post_meta($post->ID, 'wugweb_cs_video_poster', true)))));
     $walk = function ($blocks) use (&$walk, &$out) { foreach ($blocks as $b) { if (($b['blockName'] ?? '') === 'core/video' && preg_match('/src="([^"]+\.mp4[^"]*)"/i', (string) $b['innerHTML'], $m) && strpos($m[1], 'r2.dev') !== false) { $out[] = $m[1]; } if (!empty($b['innerBlocks'])) $walk($b['innerBlocks']); } };
     $walk(parse_blocks((string) $post->post_content));
-    $res = array(); foreach ($out as $i => $src) { if (!empty($posters[$i])) { $res[] = array($src, $posters[$i]); } }
+    // Poster per video: the per-post meta (by order) wins; otherwise the generated poster for that exact video file (inc/core/video-posters.json: R2 video key -> R2 poster key).
+    // The generated posters only count once they are uploaded and the option wugweb_video_posters_enabled is 1 (default 0), so no schema points at a missing file.
+    $map = array();
+    if (get_option('wugweb_video_posters_enabled', 0)) {
+        $f = __DIR__ . '/core/video-posters.json';
+        $map = is_readable($f) ? (array) json_decode((string) file_get_contents($f), true) : array();
+    }
+    $res = array();
+    foreach ($out as $i => $src) {
+        $poster = !empty($posters[$i]) ? $posters[$i] : '';
+        if ($poster === '' && $map && function_exists('wugweb_r2_key_from_url')) { $k = wugweb_r2_key_from_url($src); if ($k !== '' && !empty($map[$k])) { $poster = wugweb_r2_key_url($map[$k]); } }
+        if ($poster !== '') { $res[] = array($src, $poster); }
+    }
     return $res;
 }
 function wugweb_seo_entities() {
