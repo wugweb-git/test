@@ -97,12 +97,27 @@ function wugweb_seo_faq_items($post) {
     $walk(parse_blocks((string) $post->post_content));
     return $o;
 }
+/** Main image as ImageObject with Wugweb credit (no license URLs). */
+function wugweb_seo_image($url) { return array('@type' => 'ImageObject', 'url' => $url, 'creator' => array('@type' => 'Organization', 'name' => 'Wugweb'), 'creditText' => 'Wugweb', 'copyrightNotice' => '© Wugweb'); }
+/** R2 mp4 videos in a case study body. VideoObject needs a thumbnail: only videos with a real poster file (post meta wugweb_cs_video_poster, one per video in order) qualify. */
+function wugweb_seo_videos($post) {
+    $out = array(); $posters = array_values(array_filter(array_map('trim', explode(',', (string) get_post_meta($post->ID, 'wugweb_cs_video_poster', true)))));
+    $walk = function ($blocks) use (&$walk, &$out) { foreach ($blocks as $b) { if (($b['blockName'] ?? '') === 'core/video' && preg_match('/src="([^"]+\.mp4[^"]*)"/i', (string) $b['innerHTML'], $m) && strpos($m[1], 'r2.dev') !== false) { $out[] = $m[1]; } if (!empty($b['innerBlocks'])) $walk($b['innerBlocks']); } };
+    $walk(parse_blocks((string) $post->post_content));
+    $res = array(); foreach ($out as $i => $src) { if (!empty($posters[$i])) { $res[] = array($src, $posters[$i]); } }
+    return $res;
+}
 function wugweb_seo_entities() {
     $home = home_url('/'); $org_id = $home . '#organization'; $site_id = $home . '#website';
     $ent = array();
-    $ent['Organization'] = array('@type' => 'Organization', '@id' => $org_id, 'name' => 'Wugweb', 'url' => $home,
-        'logo' => array('@type' => 'ImageObject', 'url' => get_theme_file_uri('assets/brand/pwa-512.png'), 'width' => 512, 'height' => 512),
+    $is_front = is_front_page();
+    $logo = array('@type' => 'ImageObject', 'url' => 'https://pub-39ad1d03baec440faf48303be95c3782.r2.dev/assets/brand/logo.png', 'width' => 1014, 'height' => 352);
+    $is_contact = is_page('contact-us');
+    $ent['Organization'] = array('@type' => ($is_front || $is_contact) ? array('Organization', 'ProfessionalService') : 'Organization', '@id' => $org_id, 'name' => 'Wugweb', 'url' => $home, 'logo' => $logo,
+        'email' => 'hello@wugweb.com', 'telephone' => '+919205996219', 'foundingDate' => '2020-12-04',
+        'address' => array('@type' => 'PostalAddress', 'streetAddress' => 'Floor 19, WeWork Berger Delhi One, C-001/A2, Sector 16B', 'addressLocality' => 'Noida', 'addressRegion' => 'Uttar Pradesh', 'postalCode' => '201301', 'addressCountry' => 'IN'),
         'sameAs' => array('https://www.linkedin.com/company/wugweb', 'https://x.com/wugweb', 'https://www.facebook.com/wugweb', 'https://www.instagram.com/wugweb', 'https://www.youtube.com/channel/UC7qGSNvbvZqxZI8cA-Fijlg'));
+    if ($is_front || $is_contact) { $ent['Organization']['image'] = $logo['url']; }
     $ent['WebSite'] = array('@type' => 'WebSite', '@id' => $site_id, 'url' => $home, 'name' => 'Wugweb', 'inLanguage' => 'en', 'publisher' => array('@id' => $org_id));
     if (is_front_page()) { $ent['WebSite']['potentialAction'] = array('@type' => 'SearchAction', 'target' => array('@type' => 'EntryPoint', 'urlTemplate' => $home . '?s={search_term_string}'), 'query-input' => 'required name=search_term_string'); }
     // Breadcrumbs: Home › section › page.
@@ -126,10 +141,10 @@ function wugweb_seo_entities() {
             $cover = get_post_meta($id, 'wugweb_og_image', true) ?: get_post_meta($id, 'wugweb_cover_url', true) ?: (has_post_thumbnail($id) ? get_the_post_thumbnail_url($id, 'full') : '');
             $author = get_post_meta($id, 'wugweb_author_name', true) ?: get_the_author_meta('display_name', get_post_field('post_author', $id));
             $a = array('@type' => get_post_meta($id, 'wugweb_schema_type', true) ?: 'BlogPosting', '@id' => $url . '#article', 'headline' => wp_strip_all_tags(get_the_title($id)), 'url' => $url, 'mainEntityOfPage' => array('@id' => $url . '#webpage'),
-                'datePublished' => get_the_date('c', $id), 'dateModified' => get_the_modified_date('c', $id), 'inLanguage' => 'en', 'publisher' => array('@id' => $org_id));
+                'datePublished' => get_the_date('c', $id), 'dateModified' => get_the_modified_date('c', $id), 'inLanguage' => 'en', 'publisher' => array('@type' => 'Organization', 'name' => 'Wugweb', 'url' => $home, 'logo' => $logo));
             if ($desc !== '') $a['description'] = $desc;
-            if ($author) $a['author'] = array('@type' => 'Person', 'name' => $author);
-            if ($cover) $a['image'] = $cover;
+            if ($author) $a['author'] = array('@type' => 'Person', 'name' => $author, 'url' => home_url('/about/'));
+            if ($cover) $a['image'] = array(wugweb_seo_image($cover));
             if (get_post_meta($id, 'wugweb_subtitle', true)) $a['alternativeHeadline'] = get_post_meta($id, 'wugweb_subtitle', true);
             if (get_post_meta($id, 'wugweb_focus_keyword', true)) $a['keywords'] = get_post_meta($id, 'wugweb_focus_keyword', true);
             if ((int) get_post_meta($id, 'wugweb_word_count', true)) $a['wordCount'] = (int) get_post_meta($id, 'wugweb_word_count', true);
@@ -146,8 +161,9 @@ function wugweb_seo_entities() {
             $disc = array_values(array_filter(array_unique(array_map('trim', array_merge(explode(',', $m('primary_discipline')), explode(',', $m('additional_disciplines')))))));
             if ($disc) $cw['keywords'] = implode(', ', $disc);
             $cv = $m('cover_image'); if ($cv === '' && has_post_thumbnail($id)) $cv = get_the_post_thumbnail_url($id, 'full');
-            if ($cv !== '' && !preg_match('/(framerusercontent|dribbble)\./', $cv)) $cw['image'] = $cv;
+            if ($cv !== '' && !preg_match('/(framerusercontent|dribbble)\./', $cv)) $cw['image'] = array(wugweb_seo_image($cv));
             $ent['CreativeWork'] = $cw;
+            foreach (wugweb_seo_videos($q) as $vi => $v) { $ent['VideoObject' . $vi] = array('@type' => 'VideoObject', '@id' => $url . '#video-' . ($vi + 1), 'name' => wp_strip_all_tags(get_the_title($id)) . ' (video ' . ($vi + 1) . ')', 'description' => $desc !== '' ? $desc : wp_strip_all_tags(get_the_title($id)), 'thumbnailUrl' => $v[1], 'uploadDate' => get_the_date('c', $id), 'contentUrl' => $v[0]); }
         } elseif ($pt === 'page' && in_array($q->post_name, array('brand', 'strategy', 'experience', 'engineering', 'growth', 'operations'), true)) {
             $s = array('@type' => 'Service', '@id' => $url . '#service', 'name' => wp_strip_all_tags(get_the_title($id)), 'url' => $url, 'provider' => array('@id' => $org_id), 'serviceType' => ucfirst($q->post_name));
             if ($desc !== '') $s['description'] = $desc;
@@ -162,6 +178,15 @@ function wugweb_seo_entities() {
     return $ent;
 }
 /** Merge our entities into a graph: same @type present = merge into it (keeps its @id); otherwise add. */
+/** Strip placeholder / unsupported business fields Rank Math may add (hours, price range, geo). */
+function wugweb_seo_clean(array $graph) {
+    foreach ($graph as $k => $g) {
+        if (!is_array($g)) continue;
+        $t = (array) ($g['@type'] ?? array());
+        if (array_intersect($t, array('Organization', 'LocalBusiness', 'ProfessionalService', 'Corporation'))) { unset($graph[$k]['openingHoursSpecification'], $graph[$k]['openingHours'], $graph[$k]['priceRange'], $graph[$k]['geo'], $graph[$k]['hasMap'], $graph[$k]['aggregateRating'], $graph[$k]['review']); if (isset($graph[$k]['location']) && is_array($graph[$k]['location']) && isset($graph[$k]['location']['openingHoursSpecification'])) unset($graph[$k]['location']['openingHoursSpecification']); }
+    }
+    return $graph;
+}
 function wugweb_seo_merge(array $graph, array $ours) {
     $alias = array('Article' => array('Article', 'BlogPosting', 'TechArticle', 'NewsArticle'));
     foreach ($ours as $key => $e) {
@@ -178,7 +203,7 @@ function wugweb_seo_merge(array $graph, array $ours) {
 }
 add_filter('rank_math/json_ld', function ($data) {
     if (is_admin() || !is_array($data)) return $data;
-    $data = wugweb_seo_merge($data, wugweb_seo_entities());
+    $data = wugweb_seo_clean(wugweb_seo_merge($data, wugweb_seo_entities()));
     return wugweb_seo_origin() !== '' ? wugweb_seo_deep($data) : $data;
 }, 99);
 // Rank Math inactive: the same entities as one @graph (never alongside Rank Math's).
