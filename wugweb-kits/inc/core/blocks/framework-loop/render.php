@@ -130,7 +130,7 @@ $wrap = get_block_wrapper_attributes($wrap_args);
 
     <div class="pm-scroll">
      <div class="pm-figure" data-pm-sensitivity="<?php echo esc_attr($f($sensitivity)); ?>" data-pm-return="<?php echo esc_attr($f($return_speed)); ?>" data-pm-oscillation="<?php echo esc_attr($f($oscillation)); ?>" style="--pm-line-w:<?php echo esc_attr($f($line_w)); ?>">
-      <svg viewBox="0 0 <?php echo (int) $W; ?> <?php echo (int) $H; ?>" class="pm-svg" role="img" aria-labelledby="<?php echo esc_attr($uid); ?>-t">
+      <svg viewBox="0 0 <?php echo (int) $W; ?> <?php echo (int) $H; ?>" class="pm-svg" role="group" aria-labelledby="<?php echo esc_attr($uid); ?>-t">
         <title id="<?php echo esc_attr($uid); ?>-t"><?php echo esc_html($summary); ?></title>
         <g aria-hidden="true">
           <?php foreach ($hubs as $h) : ?>
@@ -146,6 +146,8 @@ $wrap = get_block_wrapper_attributes($wrap_args);
             <line x1="<?php echo $f($s['sx']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" y1="<?php echo $f($s['sy']); ?>" x2="<?php echo $f($s['x']); ?>" y2="<?php echo $f($s['y']); ?>" class="pm-spoke" data-pm-spoke data-pm-order="<?php echo (int) $s['order']; ?>" data-pm-phase="<?php echo (int) $s['phaseIndex']; ?>" />
           <?php endforeach; ?>
 
+        </g>
+        <?php /* The focusable hubs sit outside the aria-hidden decoration (aria-hidden must not contain focusable elements). */ ?>
           <?php foreach ($hubs as $h) : ?>
             <g class="pm-hub" data-pm-hub data-pm-order="<?php echo (int) $h['i']; ?>" data-pm-phase="<?php echo (int) $h['i']; ?>" tabindex="0" role="button" aria-label="<?php echo esc_attr($h['name'] . ' — ' . implode(', ', $h['steps'])); ?>">
               <circle cx="<?php echo $f($h['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" cy="<?php echo $f($h['y']); ?>" r="<?php echo $HUB_R + 7; ?>" class="pm-hub-halo" />
@@ -154,6 +156,7 @@ $wrap = get_block_wrapper_attributes($wrap_args);
               <text x="<?php echo $f($h['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" y="<?php echo $f($h['up'] ? $h['y'] + $HUB_R + 26 : $h['y'] - $HUB_R - 15); ?>" class="pm-hub-name" text-anchor="middle"><?php echo esc_html($h['name']); ?></text>
             </g>
           <?php endforeach; ?>
+        <g aria-hidden="true">
 
           <?php foreach ($sats as $s) : ?>
             <circle cx="<?php echo $f($s['x']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- numeric SVG geometry (number_format / integer constants) ?>" cy="<?php echo $f($s['y']); ?>" r="<?php echo $s['labelled'] ? '3.5' : '2.5'; ?>" class="pm-dot<?php echo $s['labelled'] ? '' : ' is-quiet'; ?>"<?php if ($s['labelled']) : ?> data-pm-dot data-pm-order="<?php echo (int) $s['order']; ?>"<?php else : ?> data-pm-order="-1"<?php endif; ?> data-pm-phase="<?php echo (int) $s['phaseIndex']; ?>"><?php if (!$s['labelled']) : ?><title><?php echo esc_html($s['label']); ?></title><?php endif; ?></circle>

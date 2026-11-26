@@ -23,3 +23,7 @@
 @media(max-width:767px){.wugweb-service-hero-metrics-grid,.wugweb-service-impact-bento-grid,.wugweb-capability-showcase-grid{grid-template-columns:1fr}}
 
 @media(prefers-reduced-motion:reduce){.wugweb-card,.wugweb-capability-showcase-item,.wugweb-toolkit-grid-items span{transition:none}}
+
+/* Text on the yellow mid-CTA panel is the dark token (the block CSS sets muted light text for a dark panel). */
+.wugweb-service-mid-cta>div :is(h3,p,.approach-cta-body,.approach-cta-link){color:var(--wp--preset--color--neutral-10,#050505)}
+.wugweb-service-mid-cta>div .approach-cta-link{border-bottom-color:currentColor}
