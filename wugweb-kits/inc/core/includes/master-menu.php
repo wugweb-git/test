@@ -1,7 +1,7 @@
 <?php
 /**
  * Master: one top-level admin menu group (slug wugweb-platforms, the Notion-data tables live there too).
- * Holds Clients and every Notion taxonomy once. Categories and Tags stay under Posts.
+ * Holds Clients, Categories, Tags and every Notion taxonomy once.
  * Menu entries only: taxonomies stay attached to their post types, no URLs or data change.
  */
 defined( 'ABSPATH' ) || exit;
@@ -9,6 +9,8 @@ defined( 'ABSPATH' ) || exit;
 function wugweb_master_taxonomies() {
 	// taxonomy => array( menu label, post type the list screen opens under ).
 	return array(
+		'category'      => array( 'Categories', 'post' ),
+		'post_tag'      => array( 'Tags', 'post' ),
 		'industry'      => array( 'Industry', 'case_study' ),
 		'sector'        => array( 'Sectors', 'client' ),
 		'country'       => array( 'Countries', 'client' ),
