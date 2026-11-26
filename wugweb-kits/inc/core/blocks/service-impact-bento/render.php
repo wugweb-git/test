@@ -155,7 +155,7 @@ $wrap = get_block_wrapper_attributes($wrap_args);
           <?php elseif ($kind === 'stack') : ?>
             <ul class="bento-stack">
               <?php foreach (($t['items'] ?? array()) as $s) : ?>
-                <li><?php if (!empty($s['iconPath'])) : ?><img src="<?php echo esc_url($s['iconPath']); ?>" alt="" width="18" height="18" loading="lazy" /><?php endif; ?><?php echo esc_html($s['name']); ?></li>
+                <li><?php $s_icon = wugweb_tool_icon_by_name($s['name'] ?? '') ?: ($s['iconPath'] ?? ''); if (!empty($s_icon)) : ?><img src="<?php echo esc_url($s_icon); ?>" alt="" width="18" height="18" loading="lazy" /><?php endif; ?><?php echo esc_html($s['name']); ?></li>
               <?php endforeach; ?>
             </ul>
           <?php elseif ($kind === 'cta') : ?>

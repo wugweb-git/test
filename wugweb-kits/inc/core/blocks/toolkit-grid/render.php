@@ -16,7 +16,7 @@ $wrap = get_block_wrapper_attributes(array('class' => 'wrap toolkit-section wugw
     <div class="glass-panel toolkit-category" data-reveal>
       <div class="toolkit-category-header"><?php echo esc_html($cat); ?></div>
       <ul class="toolkit-items">
-        <?php foreach ($items as $item) : $ic = $icons[strtolower((string) $item)] ?? ''; ?>
+        <?php foreach ($items as $item) : $ic = wugweb_tool_icon_by_name($item) ?: ($icons[strtolower((string) $item)] ?? ''); ?>
         <li><?php if ($ic) : ?><img src="<?php echo esc_url($ic); ?>" alt="" width="16" height="16" loading="lazy"><?php endif; ?><span><?php echo esc_html($item); ?></span></li>
         <?php endforeach; ?>
       </ul>

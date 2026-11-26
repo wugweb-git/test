@@ -63,7 +63,11 @@ $wrap = get_block_wrapper_attributes(array('class' => 'svc-stack'));
         </a>
         <?php endforeach; ?>
       </div>
-      <?php $svc_tools = $svc_ids ? wugweb_tool_chips_html($svc_ids, 'tool', 8) : ''; if ($svc_tools !== '') : ?><div class="svc-tools"><span class="svc-tools-label">Tools used on this work</span><?php echo $svc_tools; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with esc_url/esc_html ?></div><?php endif; ?>
+      <?php
+        // Tool names for this pillar: the panel's own `tools` list, else the engineering toolkit for the engineering panel, else the tools of its case studies.
+        $svc_names = (!empty($s['tools']) && is_array($s['tools'])) ? $s['tools'] : array();
+        if (!$svc_names && ($s['slug'] ?? '') === 'engineering' && function_exists('wugweb_core_service_toolkit') && ($svc_tk = wugweb_core_service_toolkit()) && !empty($svc_tk['groups'])) { foreach ($svc_tk['groups'] as $svc_g) { $svc_names = array_merge($svc_names, (array) $svc_g); } }
+        $svc_tools = $svc_names ? wugweb_tool_name_chips_html($svc_names, 8) : ($svc_ids ? wugweb_tool_chips_html($svc_ids, 'tool', 8) : ''); if ($svc_tools !== '') : ?><div class="svc-tools"><span class="svc-tools-label">Tools used on this work</span><?php echo $svc_tools; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with esc_url/esc_html ?></div><?php endif; ?>
     </div>
   </section>
 <?php endforeach; ?>

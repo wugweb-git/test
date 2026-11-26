@@ -115,6 +115,43 @@ function wugweb_tool_chips_html( $id, $kind = 'tool', $limit = 0 ) {
 	return $o . '</ul>';
 }
 
+/** Lower-case alphanumerics only, so "Next.js", "next js" and "NextJS" compare equal. */
+function wugweb_tool_key( $s ) { return preg_replace( '/[^a-z0-9]+/', '', strtolower( html_entity_decode( (string) $s, ENT_QUOTES ) ) ); }
+
+/**
+ * Icon URL for a displayed tool/platform NAME: matches a `tool` (then `platform`) term on name, then slug,
+ * case and punctuation insensitive, and reads wugweb_icon_path from it. '' when no term or no icon.
+ */
+function wugweb_tool_icon_by_name( $name ) {
+	static $map = null;
+	if ( null === $map ) {
+		$map = array();
+		foreach ( array( 'platform', 'tool' ) as $tax ) { // tool last so it wins on a clash
+			$terms = get_terms( array( 'taxonomy' => $tax, 'hide_empty' => false ) );
+			foreach ( (array) ( is_wp_error( $terms ) ? array() : $terms ) as $t ) {
+				$u = wugweb_icon_url( 'term', $t->term_id );
+				if ( '' === $u ) { continue; }
+				$map[ wugweb_tool_key( $t->name ) ] = $u;
+				$k = wugweb_tool_key( $t->slug ); if ( ! isset( $map[ $k ] ) ) { $map[ $k ] = $u; }
+			}
+		}
+	}
+	return $map[ wugweb_tool_key( $name ) ] ?? '';
+}
+
+/** Chip list for a list of displayed tool names (icon matched by name; none = name only). Escaped HTML, '' for no names. */
+function wugweb_tool_name_chips_html( $names, $limit = 0 ) {
+	$names = array_values( array_unique( array_filter( array_map( 'trim', (array) $names ) ) ) );
+	if ( $limit > 0 ) { $names = array_slice( $names, 0, $limit ); }
+	if ( ! $names ) { return ''; }
+	$o = '<ul class="wugweb-chip-list">';
+	foreach ( $names as $nm ) {
+		$icon = wugweb_tool_icon_by_name( $nm );
+		$o .= '<li class="wugweb-chip">' . ( $icon ? '<img src="' . esc_url( $icon ) . '" alt="" width="16" height="16" loading="lazy" decoding="async">' : '' ) . '<span>' . esc_html( $nm ) . '</span></li>';
+	}
+	return $o . '</ul>';
+}
+
 add_action( 'init', function () {
 	add_post_type_support( 'case_study', 'custom-fields' );
 	add_post_type_support( 'case_study', 'excerpt' );
