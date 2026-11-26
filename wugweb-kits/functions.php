@@ -88,6 +88,7 @@ require_once __DIR__ . '/inc/design-system.php';
 if (!in_array('wugweb-core/wugweb-core.php', (array) get_option('active_plugins', array()), true)) {
     require_once __DIR__ . '/inc/core/bootstrap.php';
 }
+require_once __DIR__ . '/inc/seo-engine.php';
 require_once __DIR__ . '/inc/seo-head.php';
 
 /* Motion: GSAP (self-hosted) + the site's scroll-animations / draggable-tags / lazy-video, bundled from wugweb_site. */

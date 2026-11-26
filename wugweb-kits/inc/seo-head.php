@@ -3,6 +3,9 @@
 defined('ABSPATH') || exit;
 add_action('wp_head', function () {
     if (is_admin()) return;
+    if (!has_site_icon()) echo '<link rel="icon" href="' . esc_url(get_theme_file_uri('assets/brand/favicon.svg')) . '" type="image/svg+xml">' . "\n" . '<link rel="apple-touch-icon" href="' . esc_url(get_theme_file_uri('assets/brand/apple-touch-icon.png')) . '">' . "\n";
+    // Rank Math owns description, canonical, robots, og:*, twitter:* and JSON-LD when active: nothing duplicated from here.
+    if (function_exists('wugweb_rank_math_active') && wugweb_rank_math_active()) return;
     $home_desc = 'Wugweb is a digital experience agency crafting brand strategy, UX design, martech, AI, and web development for ambitious teams.';
     if (is_front_page()) {
         $desc = $home_desc;
@@ -32,6 +35,4 @@ add_action('wp_head', function () {
     echo '<meta property="og:image" content="' . esc_url($og) . '">' . "\n";
     echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
     if (!has_action('wp_head', 'rel_canonical')) echo '<link rel="canonical" href="' . esc_url($url) . '">' . "\n";
-    if (!has_site_icon()) echo '<link rel="icon" href="' . esc_url(get_theme_file_uri('assets/brand/favicon.svg')) . '" type="image/svg+xml">' . "\n";
-    if (!has_site_icon()) echo '<link rel="apple-touch-icon" href="' . esc_url(get_theme_file_uri('assets/brand/apple-touch-icon.png')) . '">' . "\n";
 }, 5);

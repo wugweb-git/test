@@ -98,30 +98,7 @@ add_filter('render_block_core/post-featured-image', function ($html, $block) {
     return '<figure class="wp-block-post-featured-image">' . $img . '</figure>';
 }, 10, 2);
 
-/** Article structured data (JSON-LD) for single posts. */
-add_action('wp_head', function () {
-    if (!is_singular('post')) { return; }
-    $id = get_the_ID();
-    $cover = get_post_meta($id, 'wugweb_cover_url', true);
-    if (!$cover && has_post_thumbnail($id)) { $cover = get_the_post_thumbnail_url($id, 'full'); }
-    $author = get_post_meta($id, 'wugweb_author_name', true) ?: get_the_author_meta('display_name', get_post_field('post_author', $id));
-    $data = array(
-        '@context' => 'https://schema.org', '@type' => get_post_meta($id, 'wugweb_schema_type', true) ?: 'BlogPosting',
-        'headline' => get_the_title($id), 'description' => get_post_meta($id, 'wugweb_seo_description', true) ?: wp_strip_all_tags(get_the_excerpt($id)),
-        'alternativeHeadline' => get_post_meta($id, 'wugweb_subtitle', true) ?: null,
-        'keywords' => get_post_meta($id, 'wugweb_focus_keyword', true) ?: null,
-        'wordCount' => (int) get_post_meta($id, 'wugweb_word_count', true) ?: null,
-        'inLanguage' => 'en',
-        'datePublished' => get_the_date('c', $id), 'dateModified' => get_the_modified_date('c', $id),
-        'author' => array('@type' => 'Person', 'name' => $author),
-        'publisher' => array('@type' => 'Organization', 'name' => 'Wugweb', 'url' => home_url('/')),
-        'mainEntityOfPage' => get_permalink($id),
-    );
-    $cover = get_post_meta($id, 'wugweb_og_image', true) ?: $cover;
-    if ($cover) { $data['image'] = $cover; }
-    $data = array_filter($data, function ($v) { return $v !== null; });
-    echo '<script type="application/ld+json">' . wp_json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n";
-});
+/** Article structured data now comes from inc/seo-engine.php (one @graph, merged into Rank Math's when active). */
 
 /** Reading time fallback when no stored label exists (200 wpm). */
 function wugweb_core_reading_time($post_id) {
