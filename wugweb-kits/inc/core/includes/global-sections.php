@@ -14,7 +14,11 @@ function wugweb_global_sections_for_page() {
 add_filter('render_block', function ($html, $block) {
     $name = $block['blockName'] ?? '';
     if (!in_array($name, array('wugweb/industries-served', 'wugweb/recent-thoughts', 'wugweb/cta-band'), true)) return $html;
-    if (strpos((string) ($block['attrs']['className'] ?? ''), 'is-global') === false) return $html;
+    $global = strpos((string) ($block['attrs']['className'] ?? ''), 'is-global') !== false;
+    static $teaser_in_content = false;
+    // A page that already renders its own blog teaser (service pages) drops the footer's global one: no duplicate teaser or ids.
+    if ($name === 'wugweb/recent-thoughts') { if (!$global) { $teaser_in_content = true; return $html; } if ($teaser_in_content) return ''; }
+    if (!$global) return $html;
     $r = wugweb_global_sections_for_page();
     $key = $name === 'wugweb/industries-served' ? 'sectors' : ($name === 'wugweb/recent-thoughts' ? 'teaser' : 'cta');
     return $r[$key] ? $html : '';
