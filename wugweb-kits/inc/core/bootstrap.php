@@ -55,3 +55,4 @@ require_once __DIR__ . '/includes/db-tables.php';
 require_once __DIR__ . '/includes/author-avatar.php';
 require_once __DIR__ . '/includes/admin-columns.php';
 require_once __DIR__ . '/includes/page-schema.php';
+require_once __DIR__ . '/includes/r2-media.php';
