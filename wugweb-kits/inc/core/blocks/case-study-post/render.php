@@ -3,6 +3,8 @@
 defined('ABSPATH') || exit;
 $id = wugweb_block_post_id($block ?? null, $attributes, array('case_study'));
 if (!$id) { return; }
+// Layout v2 (off unless the option wugweb_case_layout_v2 is on or the URL has ?cl=2): separate files, this legacy path below is unchanged.
+if (function_exists('wugweb_case_layout_v2_active') && wugweb_case_layout_v2_active()) { require __DIR__ . '/layout-v2.php'; return; }
 $m = function ($k) use ($id) { return trim((string) get_post_meta($id, 'wugweb_cs_' . $k, true)); };
 // Media is linked only where the file exists on our own storage; Framer / Dribbble CDN links stay grey boxes.
 $ok = function ($u) { $u = (string) $u; if (!preg_match('#^https?://#i', $u)) return false; $h = strtolower((string) wp_parse_url($u, PHP_URL_HOST)); return !preg_match('/(framerusercontent|dribbble)\./', $h); };

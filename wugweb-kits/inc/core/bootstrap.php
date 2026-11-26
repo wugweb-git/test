@@ -68,3 +68,4 @@ require_once __DIR__ . '/includes/master-menu.php';
 require_once __DIR__ . '/includes/admin-icons.php';
 require_once __DIR__ . '/includes/page-schema.php';
 require_once __DIR__ . '/includes/r2-media.php';
+require_once __DIR__ . '/blocks/case-study-post/layout-v2-helpers.php';
