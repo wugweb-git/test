@@ -379,6 +379,11 @@
     border-color: var(--color-border-subtle);
   }
 
+  .missing-inner .btn-ghost {
+    color: var(--neutral-10);
+    border-color: var(--neutral-10);
+  }
+
   .missing-actions {
     display: flex;
     justify-content: center;
