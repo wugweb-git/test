@@ -53,7 +53,7 @@
 .stat-num.is-blank{color:var(--fg-subtle)}
 .stats .stat-label{margin-top:var(--gap-4);padding-top:var(--gap-4);border-top:var(--stroke-thin) solid color-mix(in srgb,var(--line) 80%,transparent);color:var(--fg);font-size:var(--fluid-body-md);font-weight:var(--font-weight-semibold)}
 .stats .stat-copy{margin-top:var(--gap-2);font-size:var(--fluid-body-sm);color:var(--fg-muted);line-height:var(--core-line-height-relaxed)}
-.values-lede{margin-top:var(--gap-5);max-width:65ch;color:var(--fg-muted)}
+.values-lede{margin-top:var(--gap-5);max-width:60ch;font-size:var(--fluid-body-lg);line-height:var(--lh-xl,1.6);color:var(--fg-muted)}
 .value-n{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--fg-muted);display:block;margin-bottom:var(--gap-4);letter-spacing:.06em}
 .value-card h3{font-size:var(--fluid-h4);font-weight:var(--font-weight-semibold);color:var(--fg)}
 .value-card p{margin-top:var(--gap-3);font-size:var(--fluid-body-sm);color:var(--fg-muted);line-height:var(--core-line-height-relaxed)}

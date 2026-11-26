@@ -136,8 +136,8 @@ foreach (get_posts(array('post_type' => 'case_study', 'post_status' => 'publish'
 <?php endforeach;
 if ($closing) : ?><section class="bento" id="b-closing" aria-label="More from the project"><?php
   $first = array_slice($closing, 0, 6); $more = array_slice($closing, 6);
-  echo '<div class="b-gallery">'; foreach ($first as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
-  if ($more) { echo '<details class="b-gallery-more"><summary>Show all ' . (int) count($closing) . ' images</summary><div class="b-gallery">'; foreach ($more as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div></details>'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
+  echo '<div class="b-gallery" tabindex="0" role="group" aria-label="' . esc_attr($brand . ' case study images') . '">'; foreach ($first as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
+  if ($more) { echo '<details class="b-gallery-more"><summary>Show all ' . (int) count($closing) . ' images</summary><div class="b-gallery" tabindex="0" role="group" aria-label="' . esc_attr($brand . ' more case study images') . '">'; foreach ($more as $md) { echo $fig($md, $brand . ' case study image'); } echo '</div></details>'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- closure builds its markup with esc_attr/esc_url/esc_html 
   ?></section><?php endif; ?>
 </div>
 <?php endif; ?>
