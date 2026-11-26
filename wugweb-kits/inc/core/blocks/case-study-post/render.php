@@ -14,7 +14,7 @@ $industry = html_entity_decode($m('industry') ?: $terms('industry'), ENT_QUOTES)
 $disc = array_values(array_filter(array_unique(array_map('trim', array_merge(explode(',', $m('primary_discipline')), explode(',', $m('additional_disciplines')))))));
 $client = $m('client');
 $logo = '';
-if ($client !== '') { $cp = get_page_by_title($client, OBJECT, 'client'); if ($cp) { $l = (string) get_post_meta($cp->ID, 'wugweb_client_logo', true); if ($ok($l)) $logo = $l; } }
+if ($client !== '') { $cp = get_page_by_title($client, OBJECT, 'client'); if ($cp) { $l = wugweb_icon_url('post', $cp->ID); if ($ok($l)) $logo = $l; } }
 $meta = array();
 $meta[] = array('Client', $client !== '' ? $client : '—', $logo);
 if ($m('partner') !== '' && strtolower($m('partner')) !== 'none') $meta[] = array('Partner', $m('partner'), '');

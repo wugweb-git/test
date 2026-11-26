@@ -107,7 +107,7 @@ add_filter('render_block', function ($content, $block) {
     if (!$GLOBALS['wugweb_gsap']) {
         if (in_array($n, array('wugweb/framework-loop', 'wugweb/process-timeline', 'wugweb/stat-card', 'wugweb/chart'), true)
             || strpos($content, 'data-headline') !== false
-            || preg_match('/data-scroll="(bento|banner|cardstack|assemble)"/', $content)) { $GLOBALS['wugweb_gsap'] = true; }
+            || preg_match('/data-scroll="(bento|cardstack|assemble)"/', $content)) { $GLOBALS['wugweb_gsap'] = true; }
     }
     return $content;
 }, 10, 2);

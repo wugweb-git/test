@@ -9,6 +9,6 @@ $disc = array_filter(array_unique(array_map('trim', array_merge(explode(',', $m(
 $disciplines = $disc ? implode(', ', $disc) : $terms('discipline');
 $client = $m('client');
 $logo = '';
-if ($client !== '') { $cp = get_page_by_title($client, OBJECT, 'client'); if ($cp) $logo = (string) get_post_meta($cp->ID, 'wugweb_client_logo', true); }
+if ($client !== '') { $cp = get_page_by_title($client, OBJECT, 'client'); if ($cp) $logo = wugweb_icon_url('post', $cp->ID); }
 $rows = array('Partnered by' => ($m('partner') !== 'None' ? $m('partner') : ''), 'Timeline' => $m('timeline'), 'Disciplines' => $disciplines, 'Industry' => $industry, 'Team' => $m('team'));
  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><div <?php echo get_block_wrapper_attributes(array('class' => 'work-meta')); ?>><div><span class="meta-label">Client / Brand</span><span class="work-meta-client"><?php if ($logo): ?><img src="<?php echo esc_url($logo); ?>" alt="" class="work-client-logo" loading="eager"><?php endif; ?><?php echo esc_html($client !== '' ? $client : '—'); ?></span></div><?php foreach ($rows as $label => $value): if ($value === '') continue; ?><div><span class="meta-label"><?php echo esc_html($label); ?></span><span><?php echo esc_html($value); ?></span></div><?php endforeach; ?></div>

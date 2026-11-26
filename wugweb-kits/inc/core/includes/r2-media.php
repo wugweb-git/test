@@ -90,3 +90,15 @@ add_filter('attachment_fields_to_edit', function ($fields, $post) {
     }
     return $fields;
 }, 10, 2);
+
+/**
+ * Every Media Library image gets a non-empty alt unless it was deliberately marked decorative.
+ * "Deliberate" = the alt meta exists and is empty; when no alt was ever set, fall back to the attachment title.
+ */
+add_filter('wp_get_attachment_image_attributes', function ($attr, $att) {
+    if (isset($attr['alt']) && trim((string) $attr['alt']) !== '') { return $attr; }
+    if (!$att || metadata_exists('post', (int) $att->ID, '_wp_attachment_image_alt')) { return $attr; }
+    $t = trim(preg_replace('/[-_]+/', ' ', pathinfo((string) $att->post_title, PATHINFO_FILENAME)));
+    if ($t !== '') { $attr['alt'] = $t; }
+    return $attr;
+}, 10, 2);

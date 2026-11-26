@@ -73,6 +73,18 @@ function wugweb_core_cs_fields() {
 	);
 }
 
+/**
+ * Icon / logo for a term, client or other post: meta `wugweb_icon_path` (R2 path such as assets/..., or a full URL).
+ * Term meta for taxonomies, post meta for clients. Clients fall back to the older `wugweb_client_logo`. Returns '' when unset.
+ */
+function wugweb_icon_url( $kind, $id ) {
+	$p = trim( (string) ( 'term' === $kind ? get_term_meta( (int) $id, 'wugweb_icon_path', true ) : get_post_meta( (int) $id, 'wugweb_icon_path', true ) ) );
+	if ( '' === $p && 'post' === $kind ) { $p = trim( (string) get_post_meta( (int) $id, 'wugweb_client_logo', true ) ); }
+	if ( '' === $p ) { return ''; }
+	if ( preg_match( '#^https?://#i', $p ) ) { return $p; }
+	return function_exists( 'wugweb_r2_key_url' ) ? wugweb_r2_key_url( $p ) : $p;
+}
+
 add_action( 'init', function () {
 	add_post_type_support( 'case_study', 'custom-fields' );
 	add_post_type_support( 'case_study', 'excerpt' );
@@ -114,6 +126,11 @@ add_action( 'init', function () {
 			register_term_meta( $s, 'wugweb_' . $m, array( 'type' => 'string', 'single' => true, 'show_in_rest' => true ) );
 		}
 	}
+
+	foreach ( array_merge( array_keys( $tax ), array( 'industry', 'discipline' ) ) as $s ) {
+		register_term_meta( $s, 'wugweb_icon_path', array( 'type' => 'string', 'single' => true, 'show_in_rest' => true, 'sanitize_callback' => 'sanitize_text_field' ) );
+	}
+	register_post_meta( 'client', 'wugweb_icon_path', array( 'type' => 'string', 'single' => true, 'show_in_rest' => true, 'sanitize_callback' => 'sanitize_text_field' ) );
 
 	foreach ( wugweb_core_client_fields() as $k => $t ) {
 		register_post_meta( 'client', 'wugweb_client_' . $k, array( 'type' => $t, 'single' => true, 'show_in_rest' => true ) );

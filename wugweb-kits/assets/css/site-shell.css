@@ -834,6 +834,7 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 @keyframes wugweb-rise{ from{ opacity:0; translate:0 16px; } to{ opacity:1; translate:0 0; } }
 @keyframes wugweb-rise-md{ from{ opacity:0; translate:0 30px; } to{ opacity:1; translate:0 0; } }
 @keyframes wugweb-rise-lg{ from{ opacity:0; translate:0 50px; } to{ opacity:1; translate:0 0; } }
+@keyframes wugweb-sheen{ from{ translate:-40% 0; } to{ translate:240% 0; } }
 @keyframes wugweb-drift{ from{ translate:0 6%; } to{ translate:0 -6%; } }
 @supports (animation-timeline: view()){
   @media (prefers-reduced-motion: no-preference){
@@ -841,6 +842,11 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
     [data-scroll]:not([data-scroll="bento"]):not([data-scroll="banner"]):not([data-scroll="cardstack"]):not([data-scroll="assemble"]):not([data-scroll="processmap"]):not([data-scroll="parallax"]){ animation:wugweb-rise-md linear both; animation-timeline:view(); animation-range:entry 0% entry 40%; }
     [data-scroll="rise"]{ animation-name:wugweb-rise-lg; }
     [data-scroll="parallax"]{ animation:wugweb-drift linear both; animation-timeline:view(); animation-range:cover; }
+    /* CTA band (was GSAP data-scroll="banner"): the panel lifts in, copy and button follow a beat later, the sheen drifts as the page scrolls. */
+    [data-scroll="banner"]{ animation:wugweb-rise-lg linear both; animation-timeline:view(); animation-range:entry 0% entry 55%; }
+    [data-scroll="banner"] h2{ animation:wugweb-rise linear both; animation-timeline:view(); animation-range:entry 10% entry 65%; }
+    [data-scroll="banner"] .final-cta-copy,[data-scroll="banner"] .btn{ animation:wugweb-rise linear both; animation-timeline:view(); animation-range:entry 20% entry 75%; }
+    [data-scroll="banner"] .cta-sheen{ animation:wugweb-sheen linear both; animation-timeline:view(); animation-range:cover; }
   }
 }
 
