@@ -898,3 +898,8 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
   .site-header-inner{position:absolute;top:calc(var(--safe-top) + var(--header-pad-block));left:calc(var(--safe-left) + 16px);right:calc(var(--safe-right) + 16px);margin-inline:0;max-width:none}
   header.wp-block-template-part,.site-header{overflow-anchor:none}
 }
+
+/* Open mobile menu: the cookie banner would sit over the contact card, so it steps aside while the menu is open and returns on close. */
+@media (max-width:767.98px){
+  body:has(.site-header-inner[data-open='true']) .cookie-banner-wrap{display:none}
+}
