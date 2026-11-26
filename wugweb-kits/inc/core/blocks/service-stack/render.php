@@ -31,7 +31,7 @@ $wrap = get_block_wrapper_attributes(array('class' => 'svc-stack'));
 <div <?php echo $wrap; ?>>
 <?php foreach ($panels as $s) :
   $slug = sanitize_key($s['slug']); ?>
-  <section class="svc-panel" id="<?php echo esc_attr($slug); ?>" style="--svc-bg:<?php echo esc_attr($s['bg']); ?>;--svc-fg:<?php echo esc_attr($s['fg']); ?>;--svc-accent:<?php echo esc_attr($s['accent']); ?>" aria-label="Section">
+  <section class="svc-panel" id="<?php echo esc_attr($slug); ?>" style="--svc-bg:<?php echo esc_attr($s['bg']); ?>;--svc-fg:<?php echo esc_attr($s['fg']); ?>;--svc-accent:<?php echo esc_attr($s['accent']); ?>" aria-label="<?php echo esc_attr($s['title']); ?>">
     <div class="wrap svc-inner">
       <div class="svc-copy">
         <span class="svc-num"><?php echo esc_html($s['n']); ?></span>

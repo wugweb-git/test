@@ -15,6 +15,13 @@ add_filter('register_block_type_args', function ($args, $name) {
     return $args;
 }, 11, 2);
 
+/** Register a landmark name for this page: returns '' when it is the first use (keep as is), else a unique variant. */
+function wugweb_a11y_seen($name) {
+    static $seen = array();
+    $k = strtolower(trim($name)); if ($k === '') return '';
+    if (!isset($seen[$k])) { $seen[$k] = 1; return ''; }
+    $seen[$k]++; return trim($name) . ' ' . $seen[$k];
+}
 /** Names already used by defaults on this page, so same-role landmarks stay unique (axe landmark-unique). */
 function wugweb_a11y_unique($label) {
     static $used = array();
@@ -37,17 +44,34 @@ function wugweb_a11y_name_html($html, $block_name, $root_label) {
         $is_root = $root; $root = false;
         $tag = $p->get_tag();
         if (!in_array($tag, $targets, true)) continue;
-        if ($p->get_attribute('aria-label') !== null || $p->get_attribute('aria-labelledby') !== null) continue;
+        $has_l = $p->get_attribute('aria-label'); $has_b = $p->get_attribute('aria-labelledby');
+        if ($has_l !== null || $has_b !== null) {
+            // Already named by its block: only make the name unique on the page (a block rendered twice would repeat it).
+            $nm = is_string($has_l) ? $has_l : '';
+            if ($nm === '' && is_string($has_b) && preg_match('#id=["\']' . preg_quote(trim(explode(' ', $has_b)[0]), '#') . '["\'][^>]*>(.*?)</h[1-6]>#is', $html, $mm)) { $nm = trim(wp_strip_all_tags($mm[1])); }
+            $dup = $nm !== '' ? wugweb_a11y_seen($nm) : '';
+            if ($dup !== '') { $p->remove_attribute('aria-labelledby'); $p->set_attribute('aria-label', $dup); }
+            continue;
+        }
         $cls = (string) $p->get_attribute('class');
         $action = (string) $p->get_attribute('action');
         if ($is_root && $root_label !== '') { $p->set_attribute('aria-label', $root_label); continue; }
-        $p->set_bookmark('wa_t'); $depth = $p->get_current_depth(); $hid = null;
+        $p->set_bookmark('wa_t'); $depth = $p->get_current_depth(); $hid = null; $htxt = '';
         while ($p->next_tag()) {
             if ($p->get_current_depth() <= $depth) break;
-            if (in_array($p->get_tag(), $heads, true)) { $hid = $p->get_attribute('id'); if (!is_string($hid) || $hid === '') { $hid = wp_unique_id('a11y-h-'); $p->set_attribute('id', $hid); } break; }
+            if (in_array($p->get_tag(), $heads, true)) {
+                $hid = $p->get_attribute('id'); if (!is_string($hid) || $hid === '') { $hid = wp_unique_id('a11y-h-'); $p->set_attribute('id', $hid); }
+                $htag = $p->get_tag();
+                while ($p->next_token()) { if ($p->get_token_type() === '#text') { $htxt .= $p->get_modifiable_text(); } elseif ($p->is_tag_closer() && $p->get_tag() === $htag) break; }
+                break;
+            }
         }
         $p->seek('wa_t'); $p->release_bookmark('wa_t');
-        if ($hid) { $p->set_attribute('aria-labelledby', $hid); continue; }
+        if ($hid) {
+            $dup = wugweb_a11y_seen(trim(preg_replace('/\s+/', ' ', $htxt)));
+            if ($dup !== '') { $p->set_attribute('aria-label', $dup); } else { $p->set_attribute('aria-labelledby', $hid); }
+            continue;
+        }
         if ($tag === 'FORM') { $label = (strpos($cls, 'nl-form') !== false || strpos($cls, 'bn-form') !== false || strpos($action, 'subscribe') !== false) ? 'Newsletter signup' : (stripos($block_name . $cls . $action, 'contact') !== false ? 'Contact form' : wugweb_a11y_block_title($block_name)); }
         else { $label = wugweb_a11y_block_title($block_name); }
         $p->set_attribute('aria-label', wugweb_a11y_unique($label));
