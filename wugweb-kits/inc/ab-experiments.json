@@ -1,0 +1,23 @@
+{
+  "_readme": "A/B experiments. All are OFF (enabled:false) until switched on. See docs/ab-testing.md. labels: variant id -> text for `selector` (null = leave the page text alone). weight = relative share. paths = list of regexes matched against location.pathname (empty = every page). goal = CSS selector whose click counts as the conversion (plus any element with data-ab-goal).",
+  "experiments": [
+    {
+      "id": "home-hero-cta",
+      "enabled": false,
+      "paths": ["^/$"],
+      "variants": [{"id": "a", "weight": 50}, {"id": "b", "weight": 50}],
+      "selector": ".hero-ctas .btn-solid",
+      "labels": {"a": "Start a project", "b": "Book a call"},
+      "goal": ".hero-ctas .btn-solid"
+    },
+    {
+      "id": "nav-cta",
+      "enabled": false,
+      "paths": [],
+      "variants": [{"id": "a", "weight": 50}, {"id": "b", "weight": 50}],
+      "selector": ".nav-cta",
+      "labels": {"a": "Let's Talk", "b": "Start a project"},
+      "goal": ".nav-cta"
+    }
+  ]
+}
