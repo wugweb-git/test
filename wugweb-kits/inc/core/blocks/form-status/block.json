@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wugweb/form-status",
+  "version": "1.0.0",
+  "title": "Form Status",
+  "category": "wugweb-pages",
+  "supports": {
+    "html": false,
+    "autoRegister": true,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "letterSpacing": true,
+      "textTransform": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
+  },
+  "render": "file:./render.php",
+  "style": "file:./style.css",
+  "attributes": {
+    "state": {
+      "type": "string",
+      "default": "success"
+    }
+  },
+  "icon": "yes-alt",
+  "description": "Success or failure panel shown after the contact form is sent.",
+  "textdomain": "wugweb-kits",
+  "keywords": [
+    "thank you",
+    "success",
+    "error",
+    "status"
+  ],
+  "viewScript": "file:./view.js"
+}
