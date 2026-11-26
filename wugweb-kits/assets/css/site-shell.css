@@ -828,6 +828,22 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 [data-reveal]{ opacity: 1; }
 .js-reveal [data-reveal]{ opacity: 0; }
 @media (prefers-reduced-motion: reduce){ .js-reveal [data-reveal]{ opacity: 1; } }
+/* Scroll entrances in CSS (scroll-driven animations). GSAP stays only for sequenced, scrubbed and draggable blocks.
+   Unsupported browsers keep the previous behaviour: GSAP on pages that load it, wugweb-reveal.js elsewhere.
+   Uses `translate` (not `transform`) so an element's own transform is never overridden. */
+@keyframes wugweb-rise{ from{ opacity:0; translate:0 16px; } to{ opacity:1; translate:0 0; } }
+@keyframes wugweb-rise-md{ from{ opacity:0; translate:0 30px; } to{ opacity:1; translate:0 0; } }
+@keyframes wugweb-rise-lg{ from{ opacity:0; translate:0 50px; } to{ opacity:1; translate:0 0; } }
+@keyframes wugweb-drift{ from{ translate:0 6%; } to{ translate:0 -6%; } }
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .js-reveal [data-reveal]{ opacity:1; animation:wugweb-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 40%; }
+    [data-scroll]:not([data-scroll="bento"]):not([data-scroll="banner"]):not([data-scroll="cardstack"]):not([data-scroll="assemble"]):not([data-scroll="processmap"]):not([data-scroll="parallax"]){ animation:wugweb-rise-md linear both; animation-timeline:view(); animation-range:entry 0% entry 40%; }
+    [data-scroll="rise"]{ animation-name:wugweb-rise-lg; }
+    [data-scroll="parallax"]{ animation:wugweb-drift linear both; animation-timeline:view(); animation-range:cover; }
+  }
+}
+
 
 /* extra global classes from global.css */
 .t-display, .type-display{font-family: var(--core-font-family-base); font-size: var(--fluid-display); font-weight: var(--font-weight-extrabold); line-height: var(--core-line-height-tight); letter-spacing: 0;}

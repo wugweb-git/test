@@ -98,17 +98,43 @@ add_action('wp_head', function () {
     if (is_admin()) return;
     echo '<script>document.documentElement.classList.add("js-reveal");window.__revealWatchdog=setTimeout(function(){document.documentElement.classList.remove("js-reveal")},5000);</script>' . "\n";
 }, 1);
+/* GSAP is loaded only on pages that still have a GSAP-driven block (sequenced/scrubbed/draggable); everything else is CSS. */
+$GLOBALS['wugweb_gsap'] = false; $GLOBALS['wugweb_gsap_tags'] = false;
+add_filter('render_block', function ($content, $block) {
+    if ($content === '' || ($GLOBALS['wugweb_gsap'] && $GLOBALS['wugweb_gsap_tags'])) { return $content; }
+    $n = isset($block['blockName']) ? (string) $block['blockName'] : '';
+    if ($n === 'wugweb/service-tags' || strpos($content, 'data-tag-field') !== false) { $GLOBALS['wugweb_gsap'] = true; $GLOBALS['wugweb_gsap_tags'] = true; return $content; }
+    if (!$GLOBALS['wugweb_gsap']) {
+        if (in_array($n, array('wugweb/framework-loop', 'wugweb/process-timeline', 'wugweb/stat-card', 'wugweb/chart'), true)
+            || strpos($content, 'data-headline') !== false
+            || preg_match('/data-scroll="(bento|banner|cardstack|assemble)"/', $content)) { $GLOBALS['wugweb_gsap'] = true; }
+    }
+    return $content;
+}, 10, 2);
 add_action('wp_enqueue_scripts', function () {
     $v = wp_get_theme()->get('Version'); $u = get_theme_file_uri('assets/js/');
-    wp_enqueue_script('gsap', $u . 'vendor/gsap.min.js', array(), '3.15.0', true);
-    $deps = array('gsap');
-    foreach (array('ScrollTrigger') as $p) { wp_enqueue_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); $deps[] = 'gsap-' . $p; }
-    // Draggable, Flip and InertiaPlugin are only used by the draggable service tags; the block enqueues 'wugweb-gsap-extras' when it renders.
-    foreach (array('Draggable', 'Flip', 'InertiaPlugin') as $p) { wp_register_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); }
-    wp_register_script('wugweb-gsap-extras', false, array('gsap-Draggable', 'gsap-Flip', 'gsap-InertiaPlugin'), '3.15.0', true);
-    wp_enqueue_script('wugweb-motion', $u . 'wugweb-motion.js', $deps, $v, true);
+    wp_enqueue_script('wugweb-video', $u . 'wugweb-video.js', array(), $v, true);
+    wp_enqueue_script('wugweb-reveal', $u . 'wugweb-reveal.js', array(), $v, true);
     wp_enqueue_script('wugweb-media', $u . 'wugweb-media.js', array(), $v, true);
 });
+add_action('wp_footer', function () {
+    if (empty($GLOBALS['wugweb_gsap'])) { return; }
+    $v = wp_get_theme()->get('Version'); $u = get_theme_file_uri('assets/js/');
+    wp_enqueue_script('gsap', $u . 'vendor/gsap.min.js', array(), '3.15.0', true);
+    wp_enqueue_script('gsap-ScrollTrigger', $u . 'vendor/ScrollTrigger.min.js', array('gsap'), '3.15.0', true);
+    $deps = array('gsap', 'gsap-ScrollTrigger');
+    if (!empty($GLOBALS['wugweb_gsap_tags'])) {
+        foreach (array('Draggable', 'Flip', 'InertiaPlugin') as $p) { wp_enqueue_script('gsap-' . $p, $u . 'vendor/' . $p . '.min.js', array('gsap'), '3.15.0', true); $deps[] = 'gsap-' . $p; }
+    }
+    wp_enqueue_script('wugweb-motion', $u . 'wugweb-motion.js', $deps, $v, true);
+    // Block view scripts and the reveal fallback read window.gsap, so they must print after it.
+    foreach (array('framework-loop', 'process-timeline', 'stat-card', 'chart', 'service-tags') as $b) {
+        $h = wp_scripts()->query('wugweb-' . $b . '-view-script', 'registered');
+        if ($h) { $h->deps = array_values(array_unique(array_merge($h->deps, array('gsap', 'gsap-ScrollTrigger')))); }
+    }
+    $r = wp_scripts()->query('wugweb-reveal', 'registered');
+    if ($r) { $r->deps = array_values(array_unique(array_merge($r->deps, array('gsap')))); }
+}, 1);
 
 add_action('init', function () {
     $v = wp_get_theme()->get('Version');
