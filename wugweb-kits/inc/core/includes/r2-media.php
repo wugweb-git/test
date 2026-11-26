@@ -211,3 +211,21 @@ add_filter('render_block', function ($html) {
         return preg_replace('#<img\b#i', '<img width="' . (int) $d[$key][0] . '" height="' . (int) $d[$key][1] . '"', $tag, 1);
     }, $html);
 }, 19);
+
+/**
+ * A case study whose cover is a video file (3 of them) cannot use it as an image: <img>, og:image, JSON-LD and the cards all need a picture.
+ * On the front end only, the cover meta then reads as that video's generated poster (inc/core/video-posters.json: video key -> poster key),
+ * or as '' (the placeholder) when no poster exists. The stored value is never changed, and wp-admin still sees the real one.
+ */
+add_filter('get_post_metadata', function ($v, $id, $key, $single) {
+    static $busy = false;
+    if ($key !== 'wugweb_cs_cover_image' || $busy || is_admin()) { return $v; }
+    $busy = true; $raw = get_post_meta($id, $key, true); $busy = false;
+    if (!is_string($raw) || !preg_match('#\.(?:mp4|webm|mov)(?:[?\#]|$)#i', $raw)) { return $v; }
+    static $map = null;
+    if (null === $map) { $f = dirname(__DIR__) . '/video-posters.json'; $map = is_readable($f) ? (array) json_decode((string) file_get_contents($f), true) : array(); }
+    $k = wugweb_r2_key_from_url($raw);
+    $out = ($k !== '' && !empty($map[$k])) ? wugweb_r2_key_url($map[$k]) : '';
+    return $single ? $out : array($out);
+}, 10, 4);
+
