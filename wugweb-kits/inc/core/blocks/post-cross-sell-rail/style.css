@@ -1,7 +1,6 @@
 .related-head{ display: flex; justify-content: space-between; align-items: center; gap: var(--gap-4); margin-bottom: var(--gap-6); }
 .related-head h2{ font-size: var(--t-h3); margin: 0; color: var(--fg); }
 .related-grid{ list-style: none; margin: 0; padding: 0; display: grid; gap: var(--grid-gap); grid-template-columns: 1fr; }
-@media (min-width: 768px){.related-grid{ grid-template-columns: repeat(2, 1fr); }}
 @media (min-width: 1200px){.related-grid.is-posts{ grid-template-columns: repeat(3, 1fr); }}
 .related-grid.is-posts > li{ display: flex; min-width: 0; }
 .related-grid.is-posts > li > .post-card{ flex: 1; }
@@ -16,6 +15,5 @@
 .related-card h3{ font-size: var(--t-h5); font-weight: var(--font-weight-semibold); color: var(--fg); margin: 0; line-height: var(--lh-h5); }
 .related-sub{ font-size: var(--fluid-body-sm); color: var(--fg-muted); }
 @media (min-width: 640px){.article-prevnext{ grid-template-columns: 1fr 1fr; }}
-@media (min-width: 768px){.related-grid{ grid-template-columns: repeat(2, 1fr); }}
 @media (min-width: 1200px){.related-grid.is-posts{ grid-template-columns: repeat(3, 1fr); }}
 .related-visual video{background:var(--neutral-5,#7d7d7d)}

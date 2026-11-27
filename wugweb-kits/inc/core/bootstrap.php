@@ -31,7 +31,7 @@ add_action('init', function () {
         'service-page', 'service-hero-metrics', 'capability-showcase', 'service-impact-bento',
         'process-timeline', 'service-mid-cta', 'service-stack', 'subscription-page', 'impact-page', 'legal-hub', 'sitemap-index', 'reviews-page', 'about-section', 'work-index', 'industries-directory', 'article-post', 'case-study-post', 'blog-index', 'service-related-work', 'section-intro', 'framework-loop', 'toolkit-grid',
         // dynamic content
-        'cookie-consent', 'overlay', 'chart', 'contact-form', 'editorial-card', 'case-study-card', 'article-meta-toc',
+        'cookie-consent', 'overlay', 'chart', 'contact-form', 'form-status', 'editorial-card', 'case-study-card', 'article-meta-toc',
         'article-share-newsletter', 'case-study-brief-matrix', 'post-cross-sell-rail', 'faq-list',
         // page sections
         'service-tags', 'intro-statement', 'hero-section', 'industries-served', 'clients-served', 'case-studies-grid', 'recent-thoughts', 'cta-band', 'page-hero', 
