@@ -127,17 +127,20 @@
     color: color-mix(in srgb, var(--neutral-9) 82%, transparent);
   }
 
-  /* Collapsed to a 0-height box; JS animates the height on toggle. */
-  .tag-body { height: 0; overflow: hidden; }
-  .tag-body-inner { padding: 0 var(--gap-6) var(--gap-6); }
+  /* Collapsed to zero rows; opening animates grid-template-rows (no height tween, no layout thrash). */
+  .tag-body,
+  .tag-media { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--duration-slow, .45s) var(--easing-out, cubic-bezier(.22, 1, .36, 1)); }
+  .tag.is-open .tag-body,
+  .tag.is-open .tag-media { grid-template-rows: 1fr; }
+  .tag-body-inner { min-height: 0; overflow: hidden; padding: 0 var(--gap-6); }
+  .tag-body-inner::after { content: ''; display: block; height: var(--gap-6); }
+  .tag-media > * { min-height: 0; overflow: hidden; }
+  @media (prefers-reduced-motion: reduce) { .tag-body, .tag-media { transition: none; } }
 
   /* Collapses to zero height with the panel; JS animates both together.
      Poster-less by necessity (these clips have no stills yet), so it stays at
      preload="none" and only loads when a tag is actually opened. */
   .tag-media {
-    display: block;
-    height: 0;
-    overflow: hidden;
     background: color-mix(in srgb, var(--neutral-10) 10%, transparent);
   }
   .tag-media video {
