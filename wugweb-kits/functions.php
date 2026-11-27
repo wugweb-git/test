@@ -144,3 +144,17 @@ add_action('init', function () {
 }, 5);
 
 add_action('wp_head', function () { echo "<script>(function(){try{var n=performance.getEntriesByType('navigation')[0];if('scrollRestoration' in history){if(n&&n.type==='back_forward'){history.scrollRestoration='auto';}else{history.scrollRestoration='manual';if(!location.hash){window.scrollTo(0,0);}}}}catch(e){}})();</script>\n"; }, 1);
+
+/* Inter Tight (the only typeface) from Google Fonts, 400–800, swap while loading. */
+function wugweb_google_font_url() {
+    return 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap';
+}
+add_action('wp_enqueue_scripts', function () { wp_enqueue_style('wugweb-inter-tight', wugweb_google_font_url(), array(), null); }, 1);
+add_action('enqueue_block_editor_assets', function () { wp_enqueue_style('wugweb-inter-tight', wugweb_google_font_url(), array(), null); });
+add_filter('wp_resource_hints', function ($urls, $relation) {
+    if ($relation === 'preconnect') {
+        $urls[] = 'https://fonts.googleapis.com';
+        $urls[] = array('href' => 'https://fonts.gstatic.com', 'crossorigin' => 'anonymous');
+    }
+    return $urls;
+}, 10, 2);
