@@ -82,6 +82,14 @@
           "profileUrl": "https://twitter.com/the_wugweb"
         },
         {
+          "platform": "Behance",
+          "profileUrl": "https://www.behance.net/wugweb"
+        },
+        {
+          "platform": "Dribbble",
+          "profileUrl": "https://dribbble.com/wugweb"
+        },
+        {
           "platform": "YouTube",
           "profileUrl": "https://www.youtube.com/channel/UC7qGSNvbvZqxZI8cA-Fijlg"
         }
