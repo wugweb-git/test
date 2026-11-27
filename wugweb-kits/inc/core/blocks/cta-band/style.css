@@ -63,11 +63,11 @@
      are the one exception and they run on `scale` only, a separate
      property, so they compose with the solver's translate instead of
      overwriting it. A band along the foot, not the whole panel — the discs
-     are meant to sit in the bottom of the box and be cropped by its edge.
+     rest on the floor of the box, fully visible.
      `z-index: 0` keeps the whole field behind the copy. */
   .cta-balls {
     position: absolute;
-    left: 0; right: 0; bottom: -14%;
+    left: 0; right: 0; bottom: var(--gap-4);
     height: 62%;
     z-index: var(--layer-background);
     touch-action: none;
