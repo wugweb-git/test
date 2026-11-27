@@ -1,0 +1,41 @@
+{
+    "key": "taxonomy_service_group",
+    "title": "Service sub-groups",
+    "taxonomy": "service_group",
+    "menu_order": 0,
+    "active": true,
+    "advanced_configuration": true,
+    "object_type": [
+        "post",
+        "case_study"
+    ],
+    "labels": {
+        "name": "Service sub-groups",
+        "singular_name": "Service sub-group",
+        "menu_name": "Service sub-groups",
+        "all_items": "All Service sub-groups",
+        "edit_item": "Edit Service sub-group",
+        "view_item": "View Service sub-group",
+        "update_item": "Update Service sub-group",
+        "add_new_item": "Add Service sub-group",
+        "new_item_name": "New Service sub-group name",
+        "search_items": "Search Service sub-groups",
+        "not_found": "No service sub-groups found"
+    },
+    "public": true,
+    "publicly_queryable": false,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "show_in_rest": true,
+    "query_var": false,
+    "sort": false,
+    "meta_box": "default",
+    "rewrite": {
+        "permalink_rewrite": "no_permalink"
+    }
+}
