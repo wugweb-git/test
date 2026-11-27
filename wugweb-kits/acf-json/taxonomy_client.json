@@ -1,0 +1,41 @@
+{
+    "key": "taxonomy_client",
+    "title": "Clients",
+    "taxonomy": "client",
+    "menu_order": 0,
+    "active": true,
+    "advanced_configuration": true,
+    "object_type": [
+        "case_study"
+    ],
+    "labels": {
+        "name": "Clients",
+        "singular_name": "Client",
+        "menu_name": "Clients",
+        "all_items": "All Clients",
+        "edit_item": "Edit Client",
+        "view_item": "View Client",
+        "update_item": "Update Client",
+        "add_new_item": "Add Client",
+        "new_item_name": "New Client name",
+        "search_items": "Search Clients",
+        "not_found": "No clients found"
+    },
+    "public": true,
+    "publicly_queryable": false,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "show_in_rest": true,
+    "query_var": false,
+    "sort": false,
+    "meta_box": "default",
+    "rewrite": {
+        "permalink_rewrite": "no_permalink"
+    },
+    "rest_base": "clients"
+}

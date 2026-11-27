@@ -1,0 +1,45 @@
+{
+    "key": "group_wugweb_post",
+    "title": "Post details",
+    "fields": [
+        {
+            "key": "field_wugweb_subtitle",
+            "label": "Subtitle",
+            "name": "wugweb_subtitle",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Short tagline shown under the title.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "allow_in_bindings": 1,
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

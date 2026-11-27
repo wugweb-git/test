@@ -1,0 +1,40 @@
+{
+    "key": "taxonomy_project_type",
+    "title": "Project types",
+    "taxonomy": "project_type",
+    "menu_order": 0,
+    "active": true,
+    "advanced_configuration": true,
+    "object_type": [
+        "case_study"
+    ],
+    "labels": {
+        "name": "Project types",
+        "singular_name": "Project type",
+        "menu_name": "Project types",
+        "all_items": "All Project types",
+        "edit_item": "Edit Project type",
+        "view_item": "View Project type",
+        "update_item": "Update Project type",
+        "add_new_item": "Add Project type",
+        "new_item_name": "New Project type name",
+        "search_items": "Search Project types",
+        "not_found": "No project types found"
+    },
+    "public": true,
+    "publicly_queryable": false,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "show_in_rest": true,
+    "query_var": false,
+    "sort": false,
+    "meta_box": "default",
+    "rewrite": {
+        "permalink_rewrite": "no_permalink"
+    }
+}

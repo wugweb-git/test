@@ -1,0 +1,44 @@
+{
+    "key": "taxonomy_discipline",
+    "title": "Disciplines",
+    "taxonomy": "discipline",
+    "menu_order": 0,
+    "active": true,
+    "advanced_configuration": true,
+    "object_type": [
+        "post",
+        "case_study"
+    ],
+    "labels": {
+        "name": "Disciplines",
+        "singular_name": "Discipline",
+        "menu_name": "Disciplines",
+        "all_items": "All Disciplines",
+        "edit_item": "Edit Discipline",
+        "view_item": "View Discipline",
+        "update_item": "Update Discipline",
+        "add_new_item": "Add Discipline",
+        "new_item_name": "New Discipline name",
+        "search_items": "Search Disciplines",
+        "not_found": "No disciplines found"
+    },
+    "public": true,
+    "publicly_queryable": true,
+    "hierarchical": true,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "show_in_rest": true,
+    "query_var": "taxonomy_key",
+    "sort": false,
+    "meta_box": "default",
+    "rewrite": {
+        "permalink_rewrite": "custom_permalink",
+        "slug": "discipline",
+        "with_front": "1",
+        "rewrite_hierarchical": "0"
+    }
+}

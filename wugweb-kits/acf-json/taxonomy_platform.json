@@ -1,0 +1,40 @@
+{
+    "key": "taxonomy_platform",
+    "title": "Published on",
+    "taxonomy": "platform",
+    "menu_order": 0,
+    "active": true,
+    "advanced_configuration": true,
+    "object_type": [
+        "post"
+    ],
+    "labels": {
+        "name": "Published on",
+        "singular_name": "Published on",
+        "menu_name": "Published on",
+        "all_items": "All Published on",
+        "edit_item": "Edit Published on",
+        "view_item": "View Published on",
+        "update_item": "Update Published on",
+        "add_new_item": "Add Published on",
+        "new_item_name": "New Published on name",
+        "search_items": "Search Published on",
+        "not_found": "No published on found"
+    },
+    "public": true,
+    "publicly_queryable": false,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "show_in_rest": true,
+    "query_var": false,
+    "sort": false,
+    "meta_box": "default",
+    "rewrite": {
+        "permalink_rewrite": "no_permalink"
+    }
+}

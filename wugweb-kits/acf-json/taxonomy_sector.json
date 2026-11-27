@@ -1,0 +1,40 @@
+{
+    "key": "taxonomy_sector",
+    "title": "Sectors",
+    "taxonomy": "sector",
+    "menu_order": 0,
+    "active": true,
+    "advanced_configuration": true,
+    "object_type": [
+        "case_study"
+    ],
+    "labels": {
+        "name": "Sectors",
+        "singular_name": "Sector",
+        "menu_name": "Sectors",
+        "all_items": "All Sectors",
+        "edit_item": "Edit Sector",
+        "view_item": "View Sector",
+        "update_item": "Update Sector",
+        "add_new_item": "Add Sector",
+        "new_item_name": "New Sector name",
+        "search_items": "Search Sectors",
+        "not_found": "No sectors found"
+    },
+    "public": true,
+    "publicly_queryable": false,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "show_in_rest": true,
+    "query_var": false,
+    "sort": false,
+    "meta_box": "default",
+    "rewrite": {
+        "permalink_rewrite": "no_permalink"
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "key": "taxonomy_country",
+    "title": "Countries",
+    "taxonomy": "country",
+    "menu_order": 0,
+    "active": true,
+    "advanced_configuration": true,
+    "object_type": [
+        "case_study"
+    ],
+    "labels": {
+        "name": "Countries",
+        "singular_name": "Country",
+        "menu_name": "Countries",
+        "all_items": "All Countries",
+        "edit_item": "Edit Country",
+        "view_item": "View Country",
+        "update_item": "Update Country",
+        "add_new_item": "Add Country",
+        "new_item_name": "New Country name",
+        "search_items": "Search Countries",
+        "not_found": "No countries found"
+    },
+    "public": true,
+    "publicly_queryable": false,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "show_in_rest": true,
+    "query_var": false,
+    "sort": false,
+    "meta_box": "default",
+    "rewrite": {
+        "permalink_rewrite": "no_permalink"
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "key": "taxonomy_tool",
+    "title": "Tool Stack",
+    "taxonomy": "tool",
+    "menu_order": 0,
+    "active": true,
+    "advanced_configuration": true,
+    "object_type": [
+        "case_study"
+    ],
+    "labels": {
+        "name": "Tool Stack",
+        "singular_name": "Tool",
+        "menu_name": "Tool Stack",
+        "all_items": "All Tool Stack",
+        "edit_item": "Edit Tool",
+        "view_item": "View Tool",
+        "update_item": "Update Tool",
+        "add_new_item": "Add Tool",
+        "new_item_name": "New Tool name",
+        "search_items": "Search Tool Stack",
+        "not_found": "No tool stack found"
+    },
+    "public": true,
+    "publicly_queryable": false,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "show_in_rest": true,
+    "query_var": false,
+    "sort": false,
+    "meta_box": "default",
+    "rewrite": {
+        "permalink_rewrite": "no_permalink"
+    }
+}
