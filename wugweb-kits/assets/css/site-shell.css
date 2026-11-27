@@ -919,3 +919,24 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 .wp-block-post-template.wugweb-card-loop{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gap-8) var(--grid-gap);list-style:none;margin:0;padding:0;max-width:none}
 .wp-block-post-template.wugweb-card-loop>li{margin:0;min-width:0}
 @media (min-width:1200px){.wp-block-post-template.wugweb-card-loop{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Footer: brand and contact on top, three link columns, a quiet bottom bar. Cookie Settings sits with the legal links. */
+.site-footer .site-footer-inner{display:grid;gap:var(--gap-10);align-items:start;justify-content:stretch;padding-block:var(--space-section-md) var(--gap-8)}
+.footer-top{display:flex;flex-wrap:wrap;gap:var(--gap-6);align-items:flex-end;justify-content:space-between}
+.footer-tagline{font-size:var(--fluid-h3,1.75rem);font-weight:var(--font-weight-semibold);color:var(--fg);max-width:18ch;line-height:1.1;margin:0}
+.footer-brand{gap:var(--gap-4)}
+.footer-email{font-size:var(--fluid-body-md);text-decoration:none}
+.footer-cta{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--gap-6);border-radius:var(--r-pill);background:var(--accent);color:var(--neutral-10,#191919);font-weight:var(--font-weight-semibold);font-size:var(--fluid-body-sm);text-decoration:none;transition:transform var(--duration-normal,.3s) var(--easing-out,ease)}
+.footer-cta:hover{transform:translateY(-2px)}
+.footer-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap-8) var(--gap-6);padding-top:var(--gap-8);border-top:var(--stroke-thin) solid var(--line)}
+.footer-col ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--gap-3)}
+.footer-col-h{font-size:var(--t-micro);font-weight:var(--font-weight-semibold);color:var(--fg-subtle);margin:0 0 var(--gap-4);letter-spacing:var(--tracking-label);text-transform:uppercase}
+.footer-col a,.footer-col .footer-action-btn{font-size:var(--fluid-body-sm);color:var(--fg-muted);text-decoration:none;display:inline-block;padding:6px 0;margin:-6px 0;background:none;border:0;cursor:pointer;font-family:var(--font-body);text-align:left}
+.footer-col a::after,.footer-col .footer-action-btn::after{display:none}
+.footer-col a:hover,.footer-col .footer-action-btn:hover{color:var(--fg)}
+.footer-bottom{display:flex;justify-content:space-between;gap:var(--gap-4);flex-wrap:wrap;padding-top:var(--gap-6);border-top:var(--stroke-thin) solid var(--line)}
+.footer-top-link{color:var(--fg-muted);text-decoration:none;font-size:var(--t-micro)}
+.footer-top-link:hover{color:var(--fg)}
+@media (min-width:768px){.footer-cols{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1024px){.footer-cols{grid-template-columns:1.2fr 1fr 1fr;} .footer-cols .footer-col:first-child{grid-column:auto}}
+@media (prefers-reduced-motion:reduce){.footer-cta{transition:none}}
