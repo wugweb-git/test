@@ -8,7 +8,7 @@ if ($title === '' && $pid) { $title = get_the_title($pid); }
 if ($lede === '' && $pid && in_array($v, array('article', 'case'), true)) { $lede = has_excerpt($pid) ? wp_strip_all_tags(get_the_excerpt($pid)) : ''; }
 if (!$tags && $pid && $v === 'article') { $t = get_the_tags($pid); if ($t) $tags = wp_list_pluck($t, 'name'); }
 if (!$tags && $pid && $v === 'case') { $tags = array_merge(wugweb_term_names($pid, 'industry'), wugweb_term_names($pid, 'sector')); }
-if ($eyebrow === '' && $pid && $v === 'case') { $eyebrow = (string) get_post_meta($pid, 'wugweb_cs_client', true); }
+if ($eyebrow === '' && $pid && $v === 'case') { $eyebrow = wugweb_cs_client($pid); }
 $btn = function ($l, $u, $cls) { return $l !== '' ? '<a href="' . esc_url($u) . '" class="btn ' . $cls . '">' . esc_html($l) . '</a>' : ''; };
 $b1 = $btn((string) ($a['primaryLabel'] ?? ''), (string) ($a['primaryUrl'] ?? '#'), 'btn-solid');
 $b2 = $btn((string) ($a['secondaryLabel'] ?? ''), (string) ($a['secondaryUrl'] ?? '#'), 'btn-ghost');

@@ -9,14 +9,14 @@ $m = function ($k) use ($id) { return trim((string) get_post_meta($id, 'wugweb_c
 // Media is linked only where the file exists on our own storage; Framer / Dribbble CDN links stay grey boxes.
 $ok = function ($u) { $u = (string) $u; if (!preg_match('#^https?://#i', $u)) return false; $h = strtolower((string) wp_parse_url($u, PHP_URL_HOST)); return !preg_match('/(framerusercontent|dribbble)\./', $h); };
 $title = get_the_title($id);
-$brand = $m('short_title') ?: $m('client');
+$brand = wugweb_cs_client($id);
 $subtitle = $m('subtitle');
 $terms = function ($tax) use ($id) { $t = get_the_terms($id, $tax); return ($t && !is_wp_error($t)) ? implode(', ', array_map(function ($x) { return html_entity_decode($x->name, ENT_QUOTES); }, $t)) : ''; };
 $industry = html_entity_decode($m('industry') ?: $terms('industry'), ENT_QUOTES);
 $disc = array_values(array_filter(array_unique(array_map('trim', array_merge(explode(',', $m('primary_discipline')), explode(',', $m('additional_disciplines')))))));
-$client = $m('client');
+$client = wugweb_cs_client($id);
 $logo = '';
-if ($client !== '') { $cp = get_page_by_title($client, OBJECT, 'client'); if ($cp) { $l = wugweb_icon_url('post', $cp->ID); if ($ok($l)) $logo = $l; } }
+$l = wugweb_cs_client_logo($id); if ($l !== '' && $ok($l)) $logo = $l;
 $meta = array();
 $meta[] = array('Client', $client !== '' ? $client : '—', $logo);
 if ($m('partner') !== '' && strtolower($m('partner')) !== 'none') $meta[] = array('Partner', $m('partner'), '');

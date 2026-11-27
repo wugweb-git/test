@@ -198,7 +198,7 @@ function wugweb_seo_entities() {
                 'datePublished' => get_the_date('c', $id), 'dateModified' => get_the_modified_date('c', $id), 'inLanguage' => 'en', 'creator' => array('@id' => $org_id), 'publisher' => array('@id' => $org_id));
             if ($m('subtitle') !== '') $cw['alternativeHeadline'] = $m('subtitle');
             if ($desc !== '') $cw['description'] = $desc; elseif ($m('subtitle') !== '') $cw['description'] = $m('subtitle');
-            if ($m('client') !== '') $cw['about'] = array('@type' => 'Organization', 'name' => $m('client'));
+            $client_name = wugweb_cs_client($id); if ($client_name !== '') $cw['about'] = array('@type' => 'Organization', 'name' => $client_name);
             $ind = $m('industry'); if ($ind === '') { $t = get_the_terms($id, 'industry'); if ($t && !is_wp_error($t)) $ind = html_entity_decode($t[0]->name, ENT_QUOTES); }
             if ($ind !== '') $cw['genre'] = $ind;
             $disc = array_values(array_filter(array_unique(array_map('trim', array_merge(explode(',', $m('primary_discipline')), explode(',', $m('additional_disciplines')))))));

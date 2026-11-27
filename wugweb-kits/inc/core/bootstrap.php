@@ -59,6 +59,7 @@ require_once __DIR__ . '/includes/pwa-endpoints.php';
 require_once __DIR__ . '/includes/block-bindings.php';
 require_once __DIR__ . '/includes/blog-display.php';
 require_once __DIR__ . '/includes/tool-chips.php';
+require_once __DIR__ . '/includes/clients.php';
 require_once __DIR__ . '/includes/global-sections.php';
 require_once __DIR__ . '/includes/author-avatar.php';
 require_once __DIR__ . '/includes/contact-submit.php';

@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 $section = in_array(($attributes['section'] ?? 'culture'), array('reviews', 'stats', 'values'), true) ? $attributes['section'] : 'culture';
 if ($section === 'stats') :
-  $cases = (int) wp_count_posts('case_study')->publish; $inds = (int) wp_count_terms(array('taxonomy' => 'industry', 'hide_empty' => false)); $clients = (int) wp_count_posts('client')->publish; $years = max(1, (int) gmdate('Y') - 2020);
+  $cases = (int) wp_count_posts('case_study')->publish; $inds = (int) wp_count_terms(array('taxonomy' => 'industry', 'hide_empty' => false)); $clients = wugweb_client_count(); $years = max(1, (int) gmdate('Y') - 2020);
   $stats = array(array($years . '+', 'Years of experience', 'Expertise that drives meaningful results.'), array(($cases ?: '—') . ($cases ? '+' : ''), 'Projects delivered', 'Creative solutions built with purpose.'), array(($inds ?: '—') . ($inds ? '+' : ''), 'Industries served', 'Sector fluency built case by case.'), array(($clients ?: '—') . ($clients ? '+' : ''), 'Brands transformed', 'From strategy to standout visuals.')); ?>
 <section <?php echo get_block_wrapper_attributes(array('class' => 'wrap stats', 'id' => 'stats', 'data-scroll' => 'rise', 'aria-label' => 'Stats')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?>>
   <ul data-counters><?php foreach ($stats as $s) : preg_match('/^(\d[\d,.]*)(.*)$/', $s[0], $m); ?>

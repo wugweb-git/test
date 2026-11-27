@@ -18,7 +18,7 @@ $resolve = function ($key) use ($cs_all, $norm) {
   $kn = $norm($key);
   foreach ($cs_all as $p) {
     $slug = $norm($p->post_name);
-    $client = $norm(get_post_meta($p->ID, 'wugweb_cs_client', true));
+    $client = $norm(wugweb_cs_client($p->ID));
     if (($slug !== '' && strpos($slug, $kn) !== false) || ($client !== '' && (strpos($client, $kn) !== false || strpos($kn, substr($client, 0, 8)) !== false))) {
       $f = wugweb_fields_case_study($p->ID);
       return array('media' => $f['image'], 'label' => $f['client'] ?: $key, 'url' => $f['url'], 'id' => $p->ID);

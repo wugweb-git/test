@@ -15,7 +15,7 @@ function wugweb_card_dynamic($type, array $a) {
         $a['url'] = get_permalink($id);
         $a['imageUrl'] = (string) get_the_post_thumbnail_url($id, 'large');
     } elseif ($type === 'portfolio' && $pt === 'case_study') {
-        $client = (string) get_post_meta($id, 'wugweb_cs_client', true);
+        $client = wugweb_cs_client($id);
         $disc = (string) get_post_meta($id, 'wugweb_cs_additional_disciplines', true);
         if ($disc === '') $disc = (string) get_post_meta($id, 'wugweb_cs_primary_discipline', true);
         $a['eyebrow'] = trim($client . ($disc !== '' ? ' — ' . $disc : ''));
@@ -25,10 +25,6 @@ function wugweb_card_dynamic($type, array $a) {
         $a['url'] = get_permalink($id);
         $cover = (string) get_post_meta($id, 'wugweb_cs_cover_image', true);
         $a['imageUrl'] = get_the_post_thumbnail_url($id, 'large') ?: $cover;
-    } elseif ($type === 'client' && $pt === 'client') {
-        $a['title'] = get_the_title($id);
-        $a['url'] = get_permalink($id);
-        $a['imageUrl'] = (string) get_the_post_thumbnail_url($id, 'medium');
     }
     return $a;
 }

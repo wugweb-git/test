@@ -40,16 +40,10 @@ function wugweb_fields_post($id) {
 function wugweb_fields_case_study($id) {
     $m = function ($k) use ($id) { return (string) get_post_meta($id, 'wugweb_cs_' . $k, true); };
     $disc = $m('additional_disciplines') ?: $m('primary_discipline');
-    return array('title' => get_the_title($id), 'short_title' => $m('short_title'), 'url' => get_permalink($id),
+    return array('title' => get_the_title($id), 'short_title' => wugweb_cs_client($id), 'url' => get_permalink($id),
         'image' => wugweb_img_first(array(get_the_post_thumbnail_url($id, 'large'), $m('cover_image'))),
-        'client' => $m('client'), 'discipline' => $disc, 'industry' => wugweb_term_names($id, 'industry'), 'sector' => wugweb_term_names($id, 'sector'),
+        'client' => wugweb_cs_client($id), 'discipline' => $disc, 'industry' => wugweb_term_names($id, 'industry'), 'sector' => wugweb_term_names($id, 'sector'),
         'services' => $m('services'), 'results' => $m('results'), 'year' => $m('year'), 'live_url' => $m('live_url'));
-}
-
-function wugweb_fields_client($id) {
-    $m = function ($k) use ($id) { return (string) get_post_meta($id, 'wugweb_client_' . $k, true); };
-    return array('name' => get_the_title($id), 'logo' => wugweb_img_first(array($m('logo'), get_the_post_thumbnail_url($id, 'medium'))), 'website' => $m('website'),
-        'entity_type' => $m('entity_type'), 'industry' => wugweb_term_names($id, 'industry'), 'sector' => wugweb_term_names($id, 'sector'), 'case_studies' => $m('case_studies'), 'url' => get_permalink($id));
 }
 
 function wugweb_fields_industry($term_id) {
@@ -75,7 +69,7 @@ add_action('init', function () {
     $get = function ($source_args, $block) {
         $key = sanitize_key($source_args['key'] ?? ''); $id = (int) ($block->context['postId'] ?? get_the_ID());
         $pt = get_post_type($id);
-        $f = $pt === 'case_study' ? wugweb_fields_case_study($id) : ($pt === 'client' ? wugweb_fields_client($id) : wugweb_fields_post($id));
+        $f = $pt === 'case_study' ? wugweb_fields_case_study($id) : wugweb_fields_post($id);
         $v = $f[$key] ?? null; return is_array($v) ? implode(', ', $v) : $v;
     };
     register_block_bindings_source('wugweb/record-field', array('label' => 'Wugweb record field', 'get_value_callback' => $get, 'uses_context' => array('postId', 'postType')));

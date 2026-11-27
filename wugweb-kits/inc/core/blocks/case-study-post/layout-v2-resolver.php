@@ -67,8 +67,8 @@ function wugweb_cl2_collect($id) {
     // Media is used only where the file is on our own storage; Framer / Dribbble CDN links are not shown.
     $ok = function ($u) { $u = (string) $u; if (!preg_match('#^https?://#i', $u)) return false; $h = strtolower((string) wp_parse_url($u, PHP_URL_HOST)); return !preg_match('/(framerusercontent|dribbble)\./', $h); };
     $title = get_the_title($id);
-    $client = $m('client');
-    $brand = $m('short_title') ?: $client;
+    $client = wugweb_cs_client($id);
+    $brand = $client;
     $terms = function ($tax) use ($id) { $t = get_the_terms($id, $tax); return ($t && !is_wp_error($t)) ? implode(', ', array_map(function ($x) { return html_entity_decode($x->name, ENT_QUOTES); }, $t)) : ''; };
     $industry = html_entity_decode($m('industry') ?: $terms('industry'), ENT_QUOTES);
     $disc = array_values(array_filter(array_unique(array_map('trim', array_merge(explode(',', $m('primary_discipline')), explode(',', $m('additional_disciplines')))))));

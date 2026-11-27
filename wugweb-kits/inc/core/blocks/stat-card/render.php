@@ -7,7 +7,7 @@ if ($metric !== '') {
   $v = 0;
   if ($metric === 'years') $v = (int) gmdate('Y') - (int) ($attributes['foundedYear'] ?? 2020);
   elseif ($metric === 'projects') $v = $cnt('case_study');
-  elseif ($metric === 'clients') $v = $cnt('client');
+  elseif ($metric === 'clients') $v = wugweb_client_count();
   elseif ($metric === 'industries') { $t = get_terms(array('taxonomy' => 'industry', 'hide_empty' => true, 'fields' => 'ids')); $v = is_wp_error($t) ? 0 : count($t); }
   if ($v > 0) $n = $v . '+';
 }

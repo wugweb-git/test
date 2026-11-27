@@ -19,9 +19,8 @@ foreach ($posts as $p) {
   foreach ($disc as $d) { if (in_array($pillar, $map[strtolower($d)] ?? array(), true)) { $hit = true; break; } }
   if (!$hit) { continue; }
   $key = strtolower(trim(get_the_title($p))); if ($key === '' || isset($seen[$key])) { continue; } $seen[$key] = 1;
-  $rows[] = array('title' => get_the_title($p), 'client' => $m('client'), 'disc' => $disc, 'url' => get_permalink($p), 'featured' => in_array(strtolower($m('featured')), array('1', 'true', 'yes'), true));
+  $rows[] = array('title' => get_the_title($p), 'client' => wugweb_cs_client($p->ID), 'disc' => $disc, 'url' => get_permalink($p));
 }
-usort($rows, function ($a, $b) { return (int) $b['featured'] - (int) $a['featured']; });
 $rows = array_slice($rows, 0, $limit);
 if (!$rows) { return; }
  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is escaped by core ?><section <?php echo get_block_wrapper_attributes(array('class' => 'wrap svc-work', 'id' => 'svc-work', 'aria-labelledby' => 'svc-work-title')); ?>>

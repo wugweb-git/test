@@ -11,10 +11,8 @@ $kw = array(
   'Operations' => array('operations', 'qa', 'automation', 'devops', 'support'),
 );
 $posts = get_posts(array('post_type' => 'case_study', 'post_status' => 'publish', 'numberposts' => max(1, min(300, (int) ($attributes['limit'] ?? 200))), 'orderby' => 'date', 'order' => 'DESC'));
-$feat = array(); $rest = array();
-foreach ($posts as $p) { if (in_array(strtolower((string) get_post_meta($p->ID, 'wugweb_cs_featured', true)), array('1', 'true', 'yes'), true)) { $feat[] = $p; } else { $rest[] = $p; } }
 $items = array();
-foreach (array_merge($feat, $rest) as $p) {
+foreach ($posts as $p) {
   $f = wugweb_fields_case_study($p->ID);
   $disc = array_values(array_filter(array_unique(array_map('trim', array_merge(explode(',', (string) get_post_meta($p->ID, 'wugweb_cs_primary_discipline', true)), explode(',', (string) get_post_meta($p->ID, 'wugweb_cs_additional_disciplines', true)))))));
   $hay = strtolower(implode(' ', array_merge($disc, (array) $f['industry'], array($f['client']))));
