@@ -139,8 +139,8 @@
 .wugweb-blog-index .blog-grid-title,.wugweb-blog-index .picks-rows h2,.wugweb-blog-index .picks-big h2,.wugweb-blog-index .blog-work h2{font-size:var(--fluid-h3);font-weight:var(--font-weight-semibold);line-height:1.2;margin:0 0 var(--gap-4)}
 .wugweb-blog-index .blog-strip .pn-kicker{margin:0 0 var(--gap-3);font-size:var(--fluid-label);text-transform:uppercase;letter-spacing:.04em;color:var(--fg-muted)}
 .wugweb-blog-index .picks-rows ul,.wugweb-blog-index .picks-big ul,.wugweb-blog-index .blog-work-grid{list-style:none;margin:0;padding:0}
-.wugweb-blog-index .picks-rows ul{border-top:var(--stroke-thin) solid var(--line)}
-.wugweb-blog-index .picks-rows li{border-bottom:var(--stroke-thin) solid var(--line);padding-block:var(--gap-3)}
+.wugweb-blog-index .picks-rows ul{border:0}
+.wugweb-blog-index .picks-rows li{border:0;padding:0}
 .wugweb-blog-index .picks-rows .post-card--row{max-width:none;margin-inline:0;padding:0;background:transparent}
 .wugweb-blog-index .picks-big ul{display:grid;grid-template-columns:1fr;gap:var(--gap-8) var(--grid-gap)}
 .wugweb-blog-index .picks-big .pc-thumb-wrap{aspect-ratio:16/10;border-radius:var(--radius-lg)}

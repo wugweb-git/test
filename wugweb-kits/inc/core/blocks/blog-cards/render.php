@@ -29,7 +29,7 @@ case 'strip':
   break;
 case 'picks-rows':
   if (!$picks_rows) { return; }
-  ?><div class="picks-rows"><ul class="is-style-row"><?php foreach ($picks_rows as $pr) : ?><li><?php echo wugweb_post_card_html($pr, true); // phpcs:ignore ?></li><?php endforeach; ?></ul></div><?php
+  ?><div class="picks-rows"><ul class="wugweb-card-loop"><?php foreach ($picks_rows as $pr) : ?><li><?php echo wugweb_post_card_html($pr, false); // phpcs:ignore ?></li><?php endforeach; ?></ul></div><?php
   break;
 case 'picks-big':
   if (!$picks_big) { return; }
