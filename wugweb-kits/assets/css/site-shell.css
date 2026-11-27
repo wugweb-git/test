@@ -946,3 +946,9 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 .footer-links a::after{display:none}
 .footer-links a:hover{color:var(--fg)}
 .footer-wa{display:inline-flex;align-items:center;gap:var(--gap-2)}
+.footer-ext{opacity:.6;flex:none}
+.footer-bottom{align-items:center}
+.footer-copy{margin:0;margin-right:auto}
+.footer-legal{color:var(--fg-muted);text-decoration:none;font-size:var(--t-micro)}
+.footer-legal:hover{color:var(--fg)}
+.footer-legal::after{display:none}
