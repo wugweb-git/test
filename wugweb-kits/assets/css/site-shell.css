@@ -939,3 +939,10 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 .footer-top-link:hover{color:var(--fg)}
 @media (min-width:768px){.footer-cols{grid-template-columns:repeat(2,minmax(0,18rem));gap:var(--gap-8) var(--gap-12,6rem)}}
 @media (prefers-reduced-motion:reduce){.footer-cta{transition:none}}
+
+.footer-brand{display:flex;flex-direction:column;align-items:flex-start;gap:var(--gap-3)}
+.footer-links{display:flex;flex-wrap:wrap;gap:var(--gap-2) var(--gap-6);padding-top:var(--gap-6);border-top:var(--stroke-thin) solid var(--line)}
+.footer-links a{font-size:var(--fluid-body-sm);color:var(--fg-muted);text-decoration:none;padding:6px 0;margin:-6px 0}
+.footer-links a::after{display:none}
+.footer-links a:hover{color:var(--fg)}
+.footer-wa{display:inline-flex;align-items:center;gap:var(--gap-2)}
