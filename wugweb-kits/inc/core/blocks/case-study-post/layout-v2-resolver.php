@@ -170,7 +170,7 @@ function wugweb_cl2_collect($id) {
         $next = array('url' => $f['url'], 'title' => $f['short_title'] ?: $f['title'], 'industry' => $f['industry'] ? implode(', ', $f['industry']) : '', 'img' => $ok($f['image']) ? $f['image'] : '');
     }
 
-    return array('id' => $id, 'title' => $title, 'brand' => $brand, 'subtitle' => $m('subtitle'), 'summary' => $m('ai_summary') ?: $m('seo_description'),
+    return array('id' => $id, 'title' => $title, 'brand' => $brand, 'subtitle' => $m('subtitle'), 'summary' => $m('ai_summary') ?: trim((string) get_post_meta($id, 'rank_math_description', true)),
         'tags' => $tags, 'meta' => $meta, 'cover' => $ok($cover) ? $cover : '', 'secs' => $secs, 'closing' => $closing, 'results' => $results,
         'credits' => $credits, 'links' => $links, 'related' => $related, 'next' => $next);
 }

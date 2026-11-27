@@ -47,7 +47,7 @@ function wugweb_seo_share_image() {
     $ok = function ($u) { $u = trim((string) $u); return preg_match('#^https?://#i', $u) && !preg_match('/(framerusercontent|dribbble)\./i', $u) ? $u : ''; };
     if (is_singular()) {
         $id = get_queried_object_id();
-        foreach (array('rank_math_facebook_image', 'wugweb_og_image', 'wugweb_cover_url', 'wugweb_cs_cover_image') as $k) { $u = $ok(get_post_meta($id, $k, true)); if ($u !== '') return $u; }
+        foreach (array('rank_math_facebook_image', 'wugweb_cover_url', 'wugweb_cs_cover_image') as $k) { $u = $ok(get_post_meta($id, $k, true)); if ($u !== '') return $u; }
         if (has_post_thumbnail($id)) { $u = $ok(get_the_post_thumbnail_url($id, 'large')); if ($u !== '') return $u; }
     }
     $o = get_option('rank-math-options-titles'); $u = is_array($o) ? $ok($o['open_graph_image'] ?? '') : '';
@@ -179,17 +179,17 @@ function wugweb_seo_entities() {
     }
     if (is_singular()) {
         $id = get_the_ID(); $url = get_permalink($id); $pt = get_post_type($id);
-        $desc = trim(wp_strip_all_tags((string) (get_post_meta($id, 'wugweb_seo_description', true) ?: get_post_meta($id, 'wugweb_page_seo_description', true) ?: get_the_excerpt($id))));
+        $desc = trim(wp_strip_all_tags((string) (get_post_meta($id, 'rank_math_description', true) ?: get_the_excerpt($id))));
         if ($pt === 'post') {
-            $cover = get_post_meta($id, 'wugweb_og_image', true) ?: get_post_meta($id, 'wugweb_cover_url', true) ?: (has_post_thumbnail($id) ? get_the_post_thumbnail_url($id, 'full') : '');
+            $cover = get_post_meta($id, 'rank_math_facebook_image', true) ?: get_post_meta($id, 'wugweb_cover_url', true) ?: (has_post_thumbnail($id) ? get_the_post_thumbnail_url($id, 'full') : '');
             $author = get_post_meta($id, 'wugweb_author_name', true) ?: get_the_author_meta('display_name', get_post_field('post_author', $id));
-            $a = array('@type' => get_post_meta($id, 'wugweb_schema_type', true) ?: 'BlogPosting', '@id' => $url . '#article', 'headline' => wp_strip_all_tags(get_the_title($id)), 'url' => $url, 'mainEntityOfPage' => array('@id' => $url . '#webpage'),
+            $a = array('@type' => 'BlogPosting', '@id' => $url . '#article', 'headline' => wp_strip_all_tags(get_the_title($id)), 'url' => $url, 'mainEntityOfPage' => array('@id' => $url . '#webpage'),
                 'datePublished' => get_the_date('c', $id), 'dateModified' => get_the_modified_date('c', $id), 'inLanguage' => 'en', 'publisher' => array('@type' => 'Organization', 'name' => 'Wugweb', 'url' => $home, 'logo' => $logo));
             if ($desc !== '') $a['description'] = $desc;
             if ($author) $a['author'] = array('@type' => 'Person', 'name' => $author, 'url' => home_url('/about/'));
             if ($cover) $a['image'] = array(wugweb_seo_image($cover));
             if (get_post_meta($id, 'wugweb_subtitle', true)) $a['alternativeHeadline'] = get_post_meta($id, 'wugweb_subtitle', true);
-            if (get_post_meta($id, 'wugweb_focus_keyword', true)) $a['keywords'] = get_post_meta($id, 'wugweb_focus_keyword', true);
+            if (get_post_meta($id, 'rank_math_focus_keyword', true)) $a['keywords'] = get_post_meta($id, 'rank_math_focus_keyword', true);
             if ((int) get_post_meta($id, 'wugweb_word_count', true)) $a['wordCount'] = (int) get_post_meta($id, 'wugweb_word_count', true);
             $ent['Article'] = $a;
         } elseif ($pt === 'case_study') {
@@ -257,3 +257,6 @@ add_action('wp_head', function () {
     $g = wugweb_seo_origin() !== '' ? wugweb_seo_deep($g) : $g;
     echo '<script type="application/ld+json">' . wp_json_encode(array('@context' => 'https://schema.org', '@graph' => $g), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n"; // phpcs:ignore
 }, 6);
+
+/** The Notion columns that hold SEO values are copied into Rank Math's fields by RankWeb's import-columns module; this only names the prefixes. */
+add_filter('rankweb_import_prefixes', function ($p) { return array_merge((array) $p, array('wugweb_', 'wugweb_cs_', 'wugweb_page_')); });

@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function wugweb_core_client_fields() {
 	return array(
-  'seo_score'=>'string',
   'client_id'=>'string',
   'entity_type'=>'string',
   'logo'=>'string',
@@ -42,13 +41,7 @@ function wugweb_core_cs_fields() {
   'country'=>'string',
   'live_url'=>'string',
   'prototype_url'=>'string',
-  'schema_type'=>'string',
   'seo_score'=>'string',
-  'seo_title'=>'string',
-  'seo_description'=>'string',
-  'focus_keyword'=>'string',
-  'canonical_url'=>'string',
-  'og_image'=>'string',
   'subtitle'=>'string',
   'short_title'=>'string',
   'ai_summary'=>'string',
