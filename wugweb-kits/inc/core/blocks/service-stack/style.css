@@ -1,6 +1,6 @@
 .svc-stack { position: relative; }
   .svc-panel { position: sticky; top: 0; height: 100svh; height: 100dvh; min-height: var(--svc-panel-min); display: flex; align-items: center; background: var(--svc-bg); color: var(--svc-fg); padding-block: var(--space-section-xl) var(--gap-12); border-radius: var(--radius-2xl) var(--radius-2xl) 0 0; box-shadow: var(--shadow-xl); }
-  .svc-inner { width: 100%; transform-origin: center top; will-change: transform, opacity; }
+  .svc-inner { width: 100%; transform-origin: center top; /* no will-change: it pinned six full-screen layers and made the page stutter */ }
   .svc-num { font-family: var(--font-body); font-size: var(--t-sm); letter-spacing: .08em; opacity: var(--opacity-muted); }
   .svc-title { font-size: var(--t-display); font-weight: var(--font-weight-extrabold); line-height: .92; color: var(--svc-fg); margin-top: var(--gap-1); }
   .svc-sub { margin-top: var(--gap-3); font-size: var(--t-l); line-height: var(--lh-l); color: color-mix(in srgb, var(--svc-fg) 88%, transparent); max-width: 42ch; }
