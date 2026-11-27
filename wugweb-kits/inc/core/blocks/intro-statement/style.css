@@ -24,26 +24,74 @@
     margin-top: var(--gap-4);
   }
 
-  .intro-tags {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap-2);
-    align-content: flex-start;
+  /* Venn: three overlapping circles, the team where they meet. */
+  .venn { margin: 0; display: grid; place-items: center; }
+  .venn-stage {
+    --d: min(100%, 26rem);
+    position: relative;
+    width: var(--d);
+    aspect-ratio: 1;
+    isolation: isolate;
+    --px: 0; --py: 0;
   }
-
-  .intro-tags li {
+  .venn-c {
+    position: absolute;
+    width: 58%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    background: color-mix(in srgb, var(--h) 34%, transparent);
+    border: var(--stroke-thin) solid color-mix(in srgb, var(--h) 80%, transparent);
+    mix-blend-mode: screen;
+    transform: translate(calc(var(--px) * var(--k, 1) * 1px), calc(var(--py) * var(--k, 1) * 1px)) translate(var(--ox, 0), var(--oy, 0)) scale(var(--s, 1));
+    transition: transform var(--duration-slow, .6s) var(--easing-out, cubic-bezier(.22, 1, .36, 1)), background var(--duration-normal, .3s) ease, opacity var(--duration-normal, .3s) ease;
+    cursor: pointer;
+  }
+  .venn-c1 { left: 21%; top: 0; --k: -.5; }
+  .venn-c2 { left: 0; top: 36%; --k: .7; }
+  .venn-c3 { left: 42%; top: 36%; --k: .4; }
+  /* Before the section scrolls in, the circles sit apart; they slide together. */
+  .venn:not(.is-in) .venn-c1 { --oy: -18%; --s: .7; opacity: 0; }
+  .venn:not(.is-in) .venn-c2 { --ox: -18%; --s: .7; opacity: 0; }
+  .venn:not(.is-in) .venn-c3 { --ox: 18%; --s: .7; opacity: 0; }
+  .venn-l {
+    font-family: var(--font-body);
+    font-size: var(--fluid-body-md);
+    font-weight: var(--font-weight-semibold);
+    text-transform: lowercase;
+    color: var(--fg);
+    place-self: start center;
+    margin-top: 14%;
+    pointer-events: none;
+  }
+  .venn-c2 .venn-l { place-self: center start; margin: 0 0 0 14%; }
+  .venn-c3 .venn-l { place-self: center end; margin: 0 14% 0 0; }
+  .venn-core {
+    position: absolute;
+    left: 50%; top: 54%;
+    translate: -50% -50%;
+    padding: .4em .9em;
+    border-radius: var(--r-pill);
+    background: var(--fg);
+    color: var(--bg, #000);
     font-family: var(--font-body);
     font-size: var(--t-micro);
-    text-transform: uppercase;
-    letter-spacing:var(--tracking-label);
-    border: var(--stroke-thin) solid var(--line);
-    border-radius: var(--r-pill);
-    padding: var(--gap-2) var(--gap-4);
-    height: fit-content;
-    color: var(--fg-muted);
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
+    z-index: 2;
+    transition: transform var(--duration-normal, .3s) var(--easing-out, ease), box-shadow var(--duration-normal, .3s) ease;
+    animation: venn-pulse 3.2s ease-in-out infinite;
   }
-
-  
+  @keyframes venn-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--fg) 40%, transparent); }
+    50% { box-shadow: 0 0 0 .9em color-mix(in srgb, var(--fg) 0%, transparent); }
+  }
+  /* Hovering or tapping one circle brings it forward and quiets the others. */
+  .venn[data-active] .venn-c { opacity: .38; }
+  .venn[data-active="1"] .venn-c1, .venn[data-active="2"] .venn-c2, .venn[data-active="3"] .venn-c3 {
+    opacity: 1; --s: 1.08; background: color-mix(in srgb, var(--h) 52%, transparent); mix-blend-mode: normal; z-index: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .venn-c, .venn-core { transition: none; animation: none; }
+    .venn:not(.is-in) .venn-c { --ox: 0; --oy: 0; --s: 1; opacity: 1; }
+  }

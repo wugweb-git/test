@@ -61,6 +61,7 @@
     "shadow": true
   },
   "render": "file:./render.php",
+  "viewScript": "file:./view.js",
   "style": "file:./style.css",
   "textdomain": "wugweb-kits",
   "keywords": [
