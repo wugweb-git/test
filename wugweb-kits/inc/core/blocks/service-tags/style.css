@@ -126,13 +126,6 @@
     letter-spacing: -0.02em;
     /* Slightly held back from full ink so the pastel reads through. */
     color: var(--neutral-9);
-    /* Solid plate in the pillar's own pastel: the clip behind the pill can be
-       black or white, and the label must stay readable on either. */
-    position: relative;
-    z-index: 1;
-    padding: 0.12em 0.45em 0.16em;
-    border-radius: var(--r-pill);
-    background: color-mix(in srgb, var(--tag-hue) 72%, var(--neutral-0));
   }
 
   /* Collapsed to zero rows; opening animates grid-template-rows (no height tween, no layout thrash). */
@@ -142,6 +135,9 @@
   .tag.is-open .tag-media { grid-template-rows: 1fr; }
   .tag-body-inner { min-height: 0; overflow: hidden; padding: 0 var(--gap-6); }
   .tag-body-inner::after { content: ''; display: block; height: var(--gap-6); }
+  /* The clip is taller than its collapsed row; without overflow:hidden on the
+     row it spilled over the whole pill and sank the label into it. */
+  .tag-body, .tag-media { overflow: hidden; }
   .tag-media > * { min-height: 0; overflow: hidden; }
   @media (prefers-reduced-motion: reduce) { .tag-body, .tag-media { transition: none; } }
 
