@@ -26,4 +26,4 @@
       flex-direction: column;
       justify-content: center;
       padding-block: var(--gap-8) var(--gap-12);
-    }.blog-teaser-head{ display: contents; }.btc-head-text{ order: 0; }.blog-teaser-grid{ order: 1; gap: var(--gap-3); margin-block: auto; }.blog-teaser-grid > li{ max-width: 480px; width: 100%; margin-inline: auto; }.blog-teaser-grid > li:first-child{ margin-bottom: var(--gap-3); }.btc-cta{ order: 2; margin-top: var(--gap-6); }}
+    }.blog-teaser-head{ display: contents; }.btc-head-text{ order: 0; margin-bottom: var(--gap-6); }.blog-teaser-grid{ order: 1; gap: var(--gap-3); margin-block: auto; }.blog-teaser-grid > li{ max-width: 480px; width: 100%; margin-inline: auto; }.blog-teaser-grid > li:first-child{ margin-bottom: var(--gap-3); }.btc-cta{ order: 2; margin-top: var(--gap-6); }}
