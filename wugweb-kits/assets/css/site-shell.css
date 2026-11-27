@@ -877,8 +877,8 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 .wugweb-service-page,.wugweb-service-page :is(section,div,details,ul,li){--pillar-accent:var(--fg-muted,#bababa) !important}
 .wugweb-service-page .wugweb-capability-showcase summary span,.wugweb-service-page .wugweb-eyebrow{color:var(--fg-muted,#bababa) !important}
 
-/* Phones (<=767px): every blog post card list is ONE stacked column, image on top and text below. Overrides the compact "row" card and any 2-col grid between 640 and 767. */
-@media (max-width:767.98px){
+/* Phones and tablets (<=1023px): every blog post card list is ONE stacked column, image on top and text below. Overrides the compact "row" card and any 2-col grid between 640 and 767. */
+@media (max-width:1023.98px){
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row{flex-direction:column;align-items:stretch;gap:0;padding:0;background:none;max-width:none;width:100%;margin-inline:0}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-thumb-wrap,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-thumb-wrap{width:100%;aspect-ratio:4/3;flex:0 0 auto;border-radius:var(--radius-lg)}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-content,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-content{padding:var(--gap-5) var(--gap-1) 0;gap:var(--gap-2)}
@@ -906,3 +906,6 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 
 /* Focus ring is the brand yellow. On a yellow surface it would vanish, so those surfaces get the dark ring instead. */
 .has-yellow-background-color :is(a,button,summary,[tabindex]):focus-visible,.service-mid-cta :is(a,button):focus-visible,.wugweb-cta-band.is-yellow :is(a,button):focus-visible{outline-color:var(--neutral-10,#191919)}
+
+/* Tablets: the stacked card photo is 16:9 so a 700px-wide card is not a wall of image. */
+@media (min-width:768px) and (max-width:1023.98px){html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-thumb-wrap,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-thumb-wrap{aspect-ratio:16/9}}
