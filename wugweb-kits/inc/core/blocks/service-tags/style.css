@@ -84,6 +84,7 @@
 
   .tag-face {
     appearance: none;
+    font-family: var(--font-body);
     border: 0;
     margin: 0;
     width: 100%;
