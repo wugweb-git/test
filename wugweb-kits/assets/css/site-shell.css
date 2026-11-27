@@ -877,8 +877,8 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 .wugweb-service-page,.wugweb-service-page :is(section,div,details,ul,li){--pillar-accent:var(--fg-muted,#bababa) !important}
 .wugweb-service-page .wugweb-capability-showcase summary span,.wugweb-service-page .wugweb-eyebrow{color:var(--fg-muted,#bababa) !important}
 
-/* Phones and tablets (<=1023px): every blog post card list is ONE stacked column, image on top and text below. Overrides the compact "row" card and any 2-col grid between 640 and 767. */
-@media (max-width:1023.98px){
+/* Tablets (768-1023px): blog post cards are ONE column, image on top and text below. Phones (<768px) keep the compact stacked row cards from the source design. */
+@media (min-width:768px) and (max-width:1023.98px){
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row{flex-direction:column;align-items:stretch;gap:0;padding:0;background:none;max-width:none;width:100%;margin-inline:0}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-thumb-wrap,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-thumb-wrap{width:100%;aspect-ratio:4/3;flex:0 0 auto;border-radius:var(--radius-lg)}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-content,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-content{padding:var(--gap-5) var(--gap-1) 0;gap:var(--gap-2)}
@@ -888,6 +888,8 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-thumb-wrap:not(:has(.pc-chip)) .pc-dot,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-thumb-wrap:not(:has(.pc-chip)) .pc-dot{display:block}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-category,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-category{font-family:var(--font-body);font-size:var(--t-micro);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--card-accent);background:none;padding:0;border-radius:0}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row h3,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row h3{font-size:var(--t-h5);display:block;-webkit-line-clamp:unset;overflow:visible}
+}
+@media (max-width:1023.98px){
   .blog-grid,.wugweb-blog-index .blog-grid,.blog-teaser-grid,.related-grid,.related-grid.is-posts,.wugweb-blog-index .picks-big ul{grid-template-columns:minmax(0,1fr)}
   .blog-teaser-grid>li{max-width:none}
 }
