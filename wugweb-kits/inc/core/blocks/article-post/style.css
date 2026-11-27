@@ -361,7 +361,7 @@
 .wugweb-article-post .article-body blockquote{margin:var(--gap-6) 0;padding:var(--gap-4) var(--gap-6);border-left:var(--stroke-medium) solid var(--color-accent-primary);background:color-mix(in srgb,var(--color-accent-primary) 3%,transparent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-style:italic;color:var(--color-text-primary);font-size:var(--fluid-body-lg);line-height:1.6}
 .wugweb-article-post .article-body a{color:var(--color-accent-primary);text-decoration:underline;text-underline-offset:3px}
 .wugweb-article-post .article-body a:hover{opacity:.85}
-.wugweb-article-post .article-body code{font-family:var(--core-font-family-mono,monospace);background:rgba(255,255,255,.07);color:var(--color-accent-primary);padding:.15em .45em;border-radius:var(--radius-xs);font-size:.875em;border:var(--stroke-thin) solid rgba(255,255,255,.08)}
+.wugweb-article-post .article-body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:rgba(255,255,255,.07);color:var(--color-accent-primary);padding:.15em .45em;border-radius:var(--radius-xs);font-size:.875em;border:var(--stroke-thin) solid rgba(255,255,255,.08)}
 .wugweb-article-post .article-body :is(figure,.wp-block-image){margin:var(--gap-8) 0}
 .wugweb-article-post .article-body :is(figure,.wp-block-image) img{border-radius:var(--radius-md)}
 /* lede: uat .article-intro = 1rem, 1.15rem from 1200, lh 1.4, secondary colour */

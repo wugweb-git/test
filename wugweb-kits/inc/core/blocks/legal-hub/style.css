@@ -134,4 +134,4 @@
 .legal-body li{line-height:1.6;margin:0}
 .legal-body a{color:var(--color-accent-primary);text-decoration:underline;text-underline-offset:3px;transition:color .15s ease,opacity .15s ease}
 .legal-body a:hover{opacity:.85;text-decoration-thickness:var(--stroke-regular)}
-.legal-body code{font-family:var(--core-font-family-mono,monospace);background:rgba(255,255,255,.07);color:var(--color-accent-primary);padding:.15em .45em;border-radius:var(--radius-xs);font-size:.875em;border:var(--stroke-thin) solid rgba(255,255,255,.08)}
+.legal-body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:rgba(255,255,255,.07);color:var(--color-accent-primary);padding:.15em .45em;border-radius:var(--radius-xs);font-size:.875em;border:var(--stroke-thin) solid rgba(255,255,255,.08)}
