@@ -125,7 +125,14 @@
     line-height: var(--core-line-height-none);
     letter-spacing: -0.02em;
     /* Slightly held back from full ink so the pastel reads through. */
-    color: color-mix(in srgb, var(--neutral-9) 82%, transparent);
+    color: var(--neutral-9);
+    /* Solid plate in the pillar's own pastel: the clip behind the pill can be
+       black or white, and the label must stay readable on either. */
+    position: relative;
+    z-index: 1;
+    padding: 0.12em 0.45em 0.16em;
+    border-radius: var(--r-pill);
+    background: color-mix(in srgb, var(--tag-hue) 72%, var(--neutral-0));
   }
 
   /* Collapsed to zero rows; opening animates grid-template-rows (no height tween, no layout thrash). */
