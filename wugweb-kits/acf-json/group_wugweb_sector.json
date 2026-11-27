@@ -1,0 +1,89 @@
+{
+    "key": "group_wugweb_sector",
+    "title": "Sector display",
+    "fields": [
+        {
+            "key": "field_wugweb_sector_show",
+            "label": "Show on the home page and Industries page",
+            "name": "wugweb_sector_show",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_wugweb_sector_order",
+            "label": "Order",
+            "name": "wugweb_sector_order",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "min": "",
+            "max": "",
+            "step": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 1
+        },
+        {
+            "key": "field_wugweb_sector_icon",
+            "label": "Icon name",
+            "name": "wugweb_sector_icon",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Name of an icon in the theme icon set, for example car or landmark.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "allow_in_bindings": 1,
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "sector"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

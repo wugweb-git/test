@@ -5,15 +5,14 @@ $icons = json_decode((string) file_get_contents(__DIR__ . '/../../includes/lucid
 $sectors = array();
 foreach ((array) get_terms(array('taxonomy' => 'sector', 'hide_empty' => false)) as $t) {
   if (is_wp_error($t)) { continue; }
-  $d = json_decode((string) get_term_meta($t->term_id, 'wugweb_notion_data', true), true) ?: array();
-  $sectors[] = array('name' => html_entity_decode($t->name, ENT_QUOTES), 'slug' => $t->slug, 'desc' => (string) $t->description, 'icon' => $d['icon'] ?? '', 'show' => !empty($d['show']), 'order' => (int) ($d['order'] ?? 99), 'inds' => array());
+  $sectors[] = array('id' => (int) $t->term_id, 'name' => html_entity_decode($t->name, ENT_QUOTES), 'slug' => $t->slug, 'desc' => (string) $t->description, 'icon' => (string) get_term_meta($t->term_id, 'wugweb_sector_icon', true), 'show' => (bool) get_term_meta($t->term_id, 'wugweb_sector_show', true), 'order' => (int) (get_term_meta($t->term_id, 'wugweb_sector_order', true) ?: 99), 'inds' => array());
 }
 usort($sectors, function ($a, $b) { return $a['order'] <=> $b['order']; });
-$by = array(); foreach ($sectors as $i => $s) { $by[$s['slug']] = $i; }
+$by = array(); foreach ($sectors as $i => $s) { $by[$s['id']] = $i; }
 foreach ((array) get_terms(array('taxonomy' => 'industry', 'hide_empty' => false, 'orderby' => 'name')) as $in) {
   if (is_wp_error($in)) { continue; }
-  $d = json_decode((string) get_term_meta($in->term_id, 'wugweb_notion_data', true), true) ?: array();
-  foreach ((array) ($d['sector'] ?? array()) as $sl) { if (isset($by[$sl])) { $sectors[$by[$sl]]['inds'][] = html_entity_decode($in->name, ENT_QUOTES); } }
+  $sid = (int) get_term_meta($in->term_id, 'wugweb_sector', true);
+  if (isset($by[$sid])) { $sectors[$by[$sid]]['inds'][] = html_entity_decode($in->name, ENT_QUOTES); }
 }
 $sectors = array_values(array_filter($sectors, function ($s) { return $s['inds'] || $s['show']; }));
 if (!$sectors) { return; }

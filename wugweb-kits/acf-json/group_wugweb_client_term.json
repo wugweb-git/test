@@ -105,6 +105,47 @@
             "maxlength": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_wugweb_wall_logo",
+            "label": "Logo for the home logo wall",
+            "name": "wugweb_wall_logo",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "The (grey) logo shown in the Trusted by wall.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "allow_in_bindings": 1
+        },
+        {
+            "key": "field_wugweb_wall_order",
+            "label": "Order on the logo wall",
+            "name": "wugweb_wall_order",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Leave empty to keep this client off the wall.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "min": "",
+            "max": "",
+            "step": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 1
         }
     ],
     "location": [

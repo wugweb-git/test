@@ -1,5 +1,10 @@
 <?php
-$logos = json_decode((string) file_get_contents(__DIR__ . '/../../includes/logos.json'), true) ?: array();
+$logos = array();
+foreach ((array) get_terms(array('taxonomy' => 'client', 'hide_empty' => false, 'meta_key' => 'wugweb_wall_order', 'orderby' => 'meta_value_num', 'order' => 'ASC')) as $t) {
+  if (is_wp_error($t)) { continue; }
+  $u = (string) get_term_meta($t->term_id, 'wugweb_wall_logo', true); if ($u === '') { continue; }
+  $logos[] = array('url' => $u, 'name' => html_entity_decode($t->name, ENT_QUOTES));
+}
 if (!$logos) { return; }
 $split = 14; $heading = $attributes['heading'] ?? 'Trusted by'; $accent = $attributes['headingAccent'] ?? 'leading brands';
 $tile = function ($l) { return '<li class="logo-tile">' . (!empty($l['url']) ? '<img src="' . esc_url($l['url']) . '" alt="' . esc_attr($l['name']) . ' logo" loading="lazy" decoding="async" />' : '<span class="wugweb-ph" style="--ph-ar:16/9;border-radius:inherit" aria-hidden="true"></span>') . '</li>'; };

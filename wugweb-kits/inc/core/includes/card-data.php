@@ -48,13 +48,13 @@ function wugweb_fields_case_study($id) {
 
 function wugweb_fields_industry($term_id) {
     $t = get_term((int) $term_id, 'industry'); if (!$t || is_wp_error($t)) return array();
-    $d = json_decode((string) get_term_meta($t->term_id, 'wugweb_notion_data', true), true) ?: array();
     $sector = ''; $icon = '';
-    if (!empty($d['sector'][0])) {
-        $s = get_term_by('slug', $d['sector'][0], 'sector');
-        if ($s) { $sector = html_entity_decode($s->name, ENT_QUOTES); $sd = json_decode((string) get_term_meta($s->term_id, 'wugweb_notion_data', true), true) ?: array(); $icons = json_decode((string) file_get_contents(__DIR__ . '/lucide-sector-icons.json'), true) ?: array(); $icon = $icons[$sd['icon'] ?? ''] ?? ''; }
+    $sid = (int) get_term_meta($t->term_id, 'wugweb_sector', true);
+    if ($sid) {
+        $s = get_term($sid, 'sector');
+        if ($s && !is_wp_error($s)) { $sector = html_entity_decode($s->name, ENT_QUOTES); $icons = json_decode((string) file_get_contents(__DIR__ . '/lucide-sector-icons.json'), true) ?: array(); $icon = $icons[(string) get_term_meta($s->term_id, 'wugweb_sector_icon', true)] ?? ''; }
     }
-    return array('name' => html_entity_decode($t->name, ENT_QUOTES), 'description' => $t->description, 'url' => get_term_link($t), 'sector' => $sector, 'icon_svg' => $icon, 'count' => (int) $t->count, 'show_on_sector_card' => !empty($d['show_on_sector_card']));
+    return array('name' => html_entity_decode($t->name, ENT_QUOTES), 'description' => $t->description, 'url' => get_term_link($t), 'sector' => $sector, 'icon_svg' => $icon, 'count' => (int) $t->count, 'show_on_sector_card' => (bool) get_term_meta($t->term_id, 'wugweb_on_sector_card', true));
 }
 
 function wugweb_fields_user($uid) {

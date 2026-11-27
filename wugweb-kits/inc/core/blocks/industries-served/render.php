@@ -3,17 +3,15 @@ $items = array();
 $icons = json_decode((string) file_get_contents(__DIR__ . '/../../includes/lucide-sector-icons.json'), true) ?: array();
 $sectors = array();
 foreach ((array) get_terms(array('taxonomy' => 'sector', 'hide_empty' => false)) as $t) {
-    $d = json_decode((string) get_term_meta($t->term_id, 'wugweb_notion_data', true), true) ?: array();
-    if (empty($d['show'])) continue;
-    $sectors[] = array('t' => $t, 'order' => (int) ($d['order'] ?? 99), 'icon' => $d['icon'] ?? '');
+    if (!get_term_meta($t->term_id, 'wugweb_sector_show', true)) continue;
+    $sectors[] = array('t' => $t, 'order' => (int) (get_term_meta($t->term_id, 'wugweb_sector_order', true) ?: 99), 'icon' => (string) get_term_meta($t->term_id, 'wugweb_sector_icon', true));
 }
 usort($sectors, function ($a, $b) { return $a['order'] <=> $b['order']; });
 $inds = (array) get_terms(array('taxonomy' => 'industry', 'hide_empty' => false, 'orderby' => 'name'));
 foreach ($sectors as $s) {
     $names = array();
     foreach ($inds as $in) {
-        $d = json_decode((string) get_term_meta($in->term_id, 'wugweb_notion_data', true), true) ?: array();
-        if (!empty($d['show_on_sector_card']) && in_array($s['t']->slug, (array) ($d['sector'] ?? array()), true)) $names[] = html_entity_decode($in->name, ENT_QUOTES);
+        if (get_term_meta($in->term_id, 'wugweb_on_sector_card', true) && (int) get_term_meta($in->term_id, 'wugweb_sector', true) === (int) $s['t']->term_id) $names[] = html_entity_decode($in->name, ENT_QUOTES);
     }
     $items[] = array(html_entity_decode($s['t']->name, ENT_QUOTES), $s['t']->slug, implode(' · ', array_slice($names, 0, 2)), $icons[$s['icon']] ?? '');
 };
