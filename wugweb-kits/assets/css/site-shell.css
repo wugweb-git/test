@@ -909,3 +909,6 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 
 /* Tablets: the stacked card photo is 16:9 so a 700px-wide card is not a wall of image. */
 @media (min-width:768px) and (max-width:1023.98px){html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-thumb-wrap,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-thumb-wrap{aspect-ratio:16/9}}
+
+/* Images carry width/height attributes (so the browser reserves space). Without this the attribute height wins wherever a rule sets only a width, and a 5114x3855 cover renders 3855px tall. Zero specificity: any rule that sets a height still wins. */
+:where(img[height]){height:auto}
