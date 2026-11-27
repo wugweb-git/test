@@ -952,3 +952,5 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 .footer-legal{color:var(--fg-muted);text-decoration:none;font-size:var(--t-micro)}
 .footer-legal:hover{color:var(--fg)}
 .footer-legal::after{display:none}
+.footer-contact{display:flex;flex-direction:column;gap:var(--gap-3)}
+@media (min-width:768px){.footer-contact{flex-direction:row;flex-wrap:wrap;gap:var(--gap-3) var(--gap-8)}}
