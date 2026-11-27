@@ -34,17 +34,27 @@
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const inners = panels.map((p) => p.querySelector('.svc-inner'));
-    const update = () => {
+    // One read pass, then one write pass, once per frame; panels whose progress has not moved are skipped.
+    const last = inners.map(() => -1);
+    let queued = false;
+    const frame = () => {
+      queued = false;
       const vh = window.innerHeight;
+      const ps = [];
       for (let i = 0; i < panels.length - 1; i++) {
+        ps[i] = Math.min(1, Math.max(0, (vh - panels[i + 1].getBoundingClientRect().top) / vh));
+      }
+      for (let i = 0; i < ps.length; i++) {
         const inner = inners[i]; if (!inner) continue;
-        const nextTop = panels[i + 1].getBoundingClientRect().top;
-        const p = Math.min(1, Math.max(0, (vh - nextTop) / vh));
-        inner.style.transform = 'scale(' + (1 - 0.06 * p).toFixed(4) + ')';
-        inner.style.opacity = (1 - 0.7 * p).toFixed(3);
+        const q = Math.round(ps[i] * 400);
+        if (q === last[i]) continue;
+        last[i] = q;
+        inner.style.transform = 'scale(' + (1 - 0.06 * ps[i]).toFixed(4) + ')';
+        inner.style.opacity = (1 - 0.7 * ps[i]).toFixed(3);
       }
     };
-    update();
+    const update = () => { if (!queued) { queued = true; requestAnimationFrame(frame); } };
+    frame();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
   }
