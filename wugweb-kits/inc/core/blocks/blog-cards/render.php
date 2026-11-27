@@ -29,11 +29,11 @@ case 'strip':
   break;
 case 'picks-rows':
   if (!$picks_rows) { return; }
-  ?><div class="picks-rows"><ul class="wugweb-card-loop"><?php foreach ($picks_rows as $pr) : ?><li><?php echo wugweb_post_card_html($pr, false); // phpcs:ignore ?></li><?php endforeach; ?></ul></div><?php
+  ?><div class="picks-rows"><ul class="wugweb-card-loop"><?php foreach ($picks_rows as $pr) : ?><li><?php echo wugweb_post_card_html($pr, true); // phpcs:ignore ?></li><?php endforeach; ?></ul></div><?php
   break;
 case 'picks-big':
   if (!$picks_big) { return; }
-  ?><div class="picks-big"><h2><?php echo esc_html($picks_label); ?></h2><ul><?php foreach ($picks_big as $pb) : ?><li><?php echo wugweb_post_card_html($pb, false); // phpcs:ignore ?></li><?php endforeach; ?></ul></div><?php
+  ?><div class="picks-big"><h2><?php echo esc_html($picks_label); ?></h2><ul><?php foreach ($picks_big as $pb) : ?><li><?php echo wugweb_post_card_html($pb, true); // phpcs:ignore ?></li><?php endforeach; ?></ul></div><?php
   break;
 case 'newsletter':
   ?><div class="bn-card"><div class="bn-copy"><h2>Get insights like this in your inbox</h2><p>Design, product, and digital strategy. No spam, just thoughtful content.</p></div><form class="nl-form bn-form" method="POST" action="/api/subscribe"><input type="email" name="email" aria-label="Email address" placeholder="you@company.com" required autocomplete="email" class="nl-input"><button type="submit" class="btn btn-solid">Subscribe</button></form></div><?php

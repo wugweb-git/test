@@ -17,7 +17,7 @@ extract($D);
   <div class="blog-extra"><?php ob_start(); include get_theme_file_path('patterns/blog-mosaic.php'); echo do_blocks(ob_get_clean()); // phpcs:ignore ?></div>
 
   <ul class="blog-grid">
-    <?php foreach ($cards as $i => $c) : // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- card helper escapes every value it prints ?><li data-reveal data-reveal-delay="<?php echo esc_attr(number_format(min($i % 6, 5) * 0.05, 2)); ?>" data-topic="<?php echo esc_attr($c['slug_topic']); ?>"<?php echo isset($used[$c['pid']]) ? ' data-dup="1"' : ''; ?>><?php echo wugweb_post_card_html($c, false); ?></li><?php endforeach; ?>
+    <?php foreach ($cards as $i => $c) : // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- card helper escapes every value it prints ?><li data-reveal data-reveal-delay="<?php echo esc_attr(number_format(min($i % 6, 5) * 0.05, 2)); ?>" data-topic="<?php echo esc_attr($c['slug_topic']); ?>"<?php echo isset($used[$c['pid']]) ? ' data-dup="1"' : ''; ?>><?php echo wugweb_post_card_html($c, true); ?></li><?php endforeach; ?>
     <?php if ($hero) : // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- card helper escapes every value it prints ?><li data-topic="<?php echo esc_attr($hero['slug_topic']); ?>" data-dup="1"><?php echo wugweb_post_card_html($hero, false); ?></li><?php endif; ?>
   </ul>
   <div class="blog-more" hidden><button type="button" class="btn btn-ghost blog-more-btn">Load more articles</button><p class="blog-count" role="status" aria-live="polite"></p></div>
