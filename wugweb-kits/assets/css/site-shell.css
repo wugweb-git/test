@@ -912,3 +912,8 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 
 /* Images carry width/height attributes (so the browser reserves space). Without this the attribute height wins wherever a rule sets only a width, and a 5114x3855 cover renders 3855px tall. Zero specificity: any rule that sets a height still wins. */
 :where(img[height]){height:auto}
+
+/* Query-loop card lists (archive, author, search, blog home): the same stacked cards as the blog. One column, three across from 1200px, never two. */
+.wp-block-post-template.wugweb-card-loop{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gap-8) var(--grid-gap);list-style:none;margin:0;padding:0;max-width:none}
+.wp-block-post-template.wugweb-card-loop>li{margin:0;min-width:0}
+@media (min-width:1200px){.wp-block-post-template.wugweb-card-loop{grid-template-columns:repeat(3,minmax(0,1fr))}}
