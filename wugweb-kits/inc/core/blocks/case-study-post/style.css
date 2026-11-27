@@ -4,7 +4,7 @@
 .wugweb-case-study .work-meta{display:grid;grid-template-columns:1fr;gap:var(--gap-4) var(--gap-8);margin-top:var(--gap-10);border-top:var(--stroke-thin) solid var(--line);padding-top:var(--gap-6)}
 @media (min-width:768px){.wugweb-case-study .work-meta{grid-template-columns:repeat(4,1fr)}}
 .wugweb-case-study .work-meta>div{display:flex;flex-direction:column;gap:var(--gap-1)}
-.wugweb-case-study .meta-label{font-family:var(--font-mono);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.05em;color:var(--fg-muted);margin:0}
+.wugweb-case-study .meta-label{font-family:var(--font-body);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--fg-muted);margin:0}
 .wugweb-case-study .work-meta dd{margin:0;font-size:var(--fluid-body-md);color:var(--fg);font-weight:var(--font-weight-medium)}
 .wugweb-case-study .work-meta-client{display:flex;align-items:center;gap:var(--gap-2)}
 .wugweb-case-study .work-client-logo{height:20px;width:auto;max-width:88px;object-fit:contain;filter:grayscale(1) brightness(1.9)}
@@ -49,7 +49,7 @@
 .wugweb-case-study .more-card:hover .more-card-visual img{transform:scale(1.04)}
 .wugweb-case-study .more-card-visual .wugweb-ph{height:100%;aspect-ratio:auto;border-radius:0}
 .wugweb-case-study .more-card-content{padding:var(--gap-6) var(--gap-8) var(--gap-8);display:flex;flex-direction:column;gap:var(--gap-2)}
-.wugweb-case-study .more-card-client{font-family:var(--font-mono);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.05em;color:var(--color-accent-primary)}
+.wugweb-case-study .more-card-client{font-family:var(--font-body);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.05em;color:var(--color-accent-primary)}
 .wugweb-case-study .more-card h3{font-size:var(--t-h4);font-weight:var(--font-weight-bold);color:var(--fg);margin:0;line-height:var(--core-line-height-tight)}
 .wugweb-case-study .more-card-discipline{font-size:var(--fluid-body-sm);color:var(--fg-muted);margin-top:var(--gap-1)}
 

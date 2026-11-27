@@ -29,10 +29,10 @@
     padding: var(--gap-4) var(--gap-6) var(--gap-6);
     background: var(--color-surface-elevated);
     transition: background var(--duration-normal) ease;  }
-  .work-client { font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .work-client { font-family: var(--font-body); font-size: var(--t-micro); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.04em; }
   .work-grid h3 { font-size: var(--t-h5); font-weight: var(--font-weight-semibold); margin-top: var(--gap-2); line-height: var(--lh-h5); color: var(--fg); }
   .work-category {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     color: var(--color-accent-primary);
     display: inline-block;
@@ -44,7 +44,7 @@
 
   .work-filters { display: flex; gap: var(--gap-2); flex-wrap: wrap; margin-bottom: var(--gap-8); } /* top space comes from the section now */
   .filter-chip {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     padding: var(--gap-2) var(--gap-5);
     border-radius: var(--r-pill);

@@ -39,7 +39,7 @@
   .platform-cta {
     margin-top: auto;
     color: var(--fg-muted);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-label);
   }
   .platform-card:hover .platform-cta { color: var(--fg); }
@@ -65,4 +65,4 @@
   }
   .testimonial-photo { border-radius: var(--radius-full); object-fit: cover; }
   .testimonial-name { font-weight: var(--font-weight-semibold); color: var(--fg); font-size: var(--fluid-body-sm); }
-  .testimonial-role { color: var(--fg-muted); font-family: var(--font-mono); font-size: var(--fluid-label); }
+  .testimonial-role { color: var(--fg-muted); font-family: var(--font-body); font-size: var(--fluid-label); }

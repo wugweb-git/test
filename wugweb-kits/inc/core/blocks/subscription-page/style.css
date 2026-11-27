@@ -11,7 +11,7 @@
 
   .eyebrow {
     display: inline-block;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     font-weight: var(--font-weight-regular);
     letter-spacing: var(--tracking-label);
@@ -138,7 +138,7 @@
   }
 
   .panel-title {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-text-secondary);
     letter-spacing: var(--tracking-label);
@@ -162,7 +162,7 @@
   }
 
   .item-n {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     /* --color-text-secondary, not --color-text-muted: this sits on a lighter
        composited surface where muted measures below the 4.5 WCAG AA floor
@@ -180,7 +180,7 @@
   }
 
   .item-status {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     letter-spacing: var(--tracking-label);
   }
@@ -209,7 +209,7 @@
   }
 
   .panel-footer-text {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-text-muted);
   }
@@ -260,7 +260,7 @@
   }
 
   .step-num {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-h3);
     font-weight: var(--font-weight-semibold);
     color: var(--color-text-muted);
@@ -362,7 +362,7 @@
   }
 
   .interactive-panel-header span {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-text-muted);
   }
@@ -402,7 +402,7 @@
 
   .iq-status {
     width: 2ch;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-weight: var(--font-weight-bold);
   }
 
@@ -413,7 +413,7 @@
   }
 
   .iq-tag {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     letter-spacing: 0.1em;
     padding: 2px 6px;
@@ -472,7 +472,7 @@
     background: none;
     border: none;
     color: var(--color-text-muted);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-label);
     font-weight: var(--font-weight-medium);
     letter-spacing: var(--tracking-label);
@@ -564,7 +564,7 @@
     border: var(--stroke-thin) solid var(--color-border-subtle);
     color: var(--color-text-secondary);
     padding: var(--p-3) var(--p-5);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     border-radius: var(--radius-2);
     cursor: pointer;
@@ -694,7 +694,7 @@
   }
 
   .drawer-meta-section h4 {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-accent-primary);
     text-transform: uppercase;
@@ -773,7 +773,7 @@
   }
 
   .timeline-node h3 {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     letter-spacing: var(--tracking-label);
     color: var(--color-text-secondary);
@@ -896,7 +896,7 @@
   }
 
   .accordion-icon, .faq-icon {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-h4);
     color: var(--color-text-muted);
     transition: transform var(--duration-normal);  }
@@ -954,7 +954,7 @@
   }
 
   .pricing-eyebrow {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     letter-spacing: var(--tracking-label);
     color: var(--color-accent-primary);
@@ -1062,7 +1062,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-2);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-body-sm);
   }
 
@@ -1217,7 +1217,7 @@
   }
 
   .plan-name {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-accent-primary);
   }
@@ -1290,7 +1290,7 @@
   }
 
   .gateway-badge {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     background-color: rgba(43, 112, 240, 0.1);
     color: #2b70f0;
@@ -1364,7 +1364,7 @@
     padding: var(--p-4);
     border-radius: var(--radius-2);
     margin-bottom: var(--gap-6);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-body-sm);
   }
 
@@ -1379,7 +1379,7 @@
   }
 
   .onboarding-progress {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-accent-primary);
   }
@@ -1458,7 +1458,7 @@
   }
 
   .sub-pill {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     color: var(--color-accent-primary);
     background: color-mix(in srgb, var(--color-accent-primary) 8%, transparent);
@@ -1488,7 +1488,7 @@
   }
 
   .lane-title {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     /* --color-text-secondary, not --color-text-muted: this sits on a lighter
        composited surface where muted measures below the 4.5 WCAG AA floor
@@ -1549,7 +1549,7 @@
   }
 
   .bar-eta {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     color: var(--color-text-muted);
     text-transform: uppercase;
@@ -1599,7 +1599,7 @@
 
   .card-front::after {
     content: '✓ DELIVERED';
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     color: var(--color-accent-primary);
     background: color-mix(in srgb, var(--color-accent-primary) 10%, transparent);

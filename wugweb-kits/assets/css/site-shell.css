@@ -552,7 +552,7 @@ section:not(section section) > .wrap{ padding-block: 0 !important; }
     align-items: center;
     justify-content: space-between;
     padding-block: var(--space-section-md);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
   }
 
@@ -853,7 +853,7 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 
 /* extra global classes from global.css */
 .t-display, .type-display{font-family: var(--core-font-family-base); font-size: var(--fluid-display); font-weight: var(--font-weight-extrabold); line-height: var(--core-line-height-tight); letter-spacing: 0;}
-.u-index{display: inline-flex; align-items: center; height: var(--chip-size); min-width: var(--chip-size); font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: var(--tracking-label); color: var(--fg-muted);}
+.u-index{display: inline-flex; align-items: center; height: var(--chip-size); min-width: var(--chip-size); font-family: var(--font-body); font-size: var(--t-micro); letter-spacing: var(--tracking-label); color: var(--fg-muted);}
 
 /* 44px hit area for footer text controls: padding grown, margin pulled back, so layout and look are unchanged (axe target-size counts the element box). */
 .footer-links a, .footer-action-btn, .footer-email a { display: inline-block; padding: 15px 10px; margin: -15px -10px; }
@@ -886,7 +886,7 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-meta,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-meta{display:flex}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-launch,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-launch{display:none}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-thumb-wrap:not(:has(.pc-chip)) .pc-dot,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-thumb-wrap:not(:has(.pc-chip)) .pc-dot{display:block}
-  html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-category,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-category{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.04em;text-transform:uppercase;color:var(--card-accent);background:none;padding:0;border-radius:0}
+  html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row .pc-category,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row .pc-category{font-family:var(--font-body);font-size:var(--t-micro);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--card-accent);background:none;padding:0;border-radius:0}
   html:not(.ab-mobile-blog-cards-b) .post-card.post-card--row h3,html:not(.ab-mobile-blog-cards-b) .is-style-row .post-card.post-card--row h3{font-size:var(--t-h5);display:block;-webkit-line-clamp:unset;overflow:visible}
   .blog-grid,.wugweb-blog-index .blog-grid,.blog-teaser-grid,.related-grid,.related-grid.is-posts,.wugweb-blog-index .picks-big ul{grid-template-columns:minmax(0,1fr)}
   .blog-teaser-grid>li{max-width:none}

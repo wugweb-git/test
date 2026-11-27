@@ -12,7 +12,7 @@
 .form-status-steps{list-style:none;margin:var(--gap-4) 0 0;padding:0;display:grid;gap:var(--gap-4);text-align:left;width:100%}
 @media (min-width:720px){.form-status-steps{grid-template-columns:repeat(3,1fr)}}
 .form-status-steps li{display:flex;flex-direction:column;gap:var(--gap-2)}
-.form-status-steps .step-num{font-family:var(--font-mono);font-weight:700;color:var(--accent-warm)}
+.form-status-steps .step-num{font-family:var(--font-body);font-weight:700;color:var(--accent-warm)}
 .form-status-steps strong{display:block;color:var(--fg)}
 .form-status-steps p{margin:var(--gap-1) 0 0;font-size:var(--t-sm);color:var(--fg-muted)}
 .form-status-actions{display:flex;flex-wrap:wrap;gap:var(--gap-3);justify-content:center;margin-top:var(--gap-4)}

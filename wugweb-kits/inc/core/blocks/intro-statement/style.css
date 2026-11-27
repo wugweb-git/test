@@ -35,10 +35,10 @@
   }
 
   .intro-tags li {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing:var(--tracking-label);
     border: var(--stroke-thin) solid var(--line);
     border-radius: var(--r-pill);
     padding: var(--gap-2) var(--gap-4);

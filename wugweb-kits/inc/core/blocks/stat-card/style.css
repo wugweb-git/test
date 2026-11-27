@@ -10,7 +10,7 @@
 /* These cards sit on --neutral-1 (#F4F4F4), a LIGHT surface on a dark-theme
    site, so they cannot use --fg / --fg-muted. Same --color-ash pairing
    BentoBlock applies to its light tiles. */
-.stat-n { font-family: var(--font-mono); font-size: var(--fluid-h2); font-weight: var(--font-weight-bold); color: var(--color-ash); display: block; }
+.stat-n { font-family: var(--font-body); font-size: var(--fluid-h2); font-weight: var(--font-weight-bold); color: var(--color-ash); display: block; }
 .stat-label { color: var(--color-ash); font-size: var(--fluid-body-md); font-weight: var(--font-weight-medium); margin-top: var(--gap-3); display: block; }
 .stat-copy { margin-top: var(--gap-2); font-size: var(--fluid-body-sm); color: color-mix(in srgb, var(--color-ash) 72%, transparent); line-height: var(--core-line-height-relaxed); }
 
@@ -19,13 +19,13 @@
 /* Dark (about counters) */
 .stat-card-wrap.is-style-dark{background:color-mix(in srgb,var(--neutral-8) 55%,transparent);border:var(--stroke-thin) solid var(--line);padding:var(--gap-6);display:flex;flex-direction:column}
 .stat-card-wrap.is-style-dark:hover{transform:none;border-color:color-mix(in srgb,var(--neutral-0) 22%,transparent);background:color-mix(in srgb,var(--neutral-8) 80%,transparent);box-shadow:var(--shadow-md)}
-.is-style-dark .stat-n{display:flex;align-items:baseline;gap:.02em;font-family:var(--font-mono);font-size:var(--fluid-h1);line-height:1;letter-spacing:-.03em;color:var(--fg)}
+.is-style-dark .stat-n{display:flex;align-items:baseline;gap:.02em;font-family:var(--font-body);font-size:var(--fluid-h1);line-height:1;letter-spacing:-.03em;color:var(--fg)}
 .is-style-dark .stat-suffix{color:var(--fg-muted);font-size:.55em;font-weight:var(--font-weight-semibold)}
 .is-style-dark .stat-label{margin-top:var(--gap-4);padding-top:var(--gap-4);border-top:var(--stroke-thin) solid color-mix(in srgb,var(--line) 80%,transparent);color:var(--fg);font-weight:var(--font-weight-semibold)}
 .is-style-dark .stat-copy{color:var(--fg-muted)}
 /* Value card */
 .value-card{position:relative;z-index:var(--layer-base);background:color-mix(in srgb,var(--neutral-8) 55%,transparent);border:var(--stroke-thin) solid var(--line);border-radius:var(--radius-lg);padding:var(--gap-6);height:100%;transition:border-color var(--duration-normal) var(--easing-smooth),background-color var(--duration-normal) var(--easing-smooth),box-shadow var(--duration-normal) var(--easing-smooth)}
 .value-card:hover{border-color:color-mix(in srgb,var(--neutral-0) 22%,transparent);background:color-mix(in srgb,var(--neutral-8) 80%,transparent);box-shadow:var(--shadow-md)}
-.value-n{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--fg-muted);display:block;margin-bottom:var(--gap-4);letter-spacing:.06em}
+.value-n{font-family:var(--font-body);font-size:var(--t-micro);color:var(--fg-muted);display:block;margin-bottom:var(--gap-4);letter-spacing:.06em}
 .value-card h3{font-size:var(--fluid-h4);font-weight:var(--font-weight-semibold);color:var(--fg);margin:0}
 .value-card p{margin-top:var(--gap-3);font-size:var(--fluid-body-sm);color:var(--fg-muted);line-height:var(--core-line-height-relaxed)}

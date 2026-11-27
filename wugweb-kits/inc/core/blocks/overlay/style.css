@@ -33,5 +33,5 @@
 .wugweb-overlay.is-banner-bottom .wugweb-overlay__panel{border-radius:var(--radius-4,16px);transform:translateY(120%);box-shadow:var(--shadow-xl);padding:var(--gap-4)}
 @media(min-width:768px){.wugweb-overlay.is-banner-bottom{left:auto;right:var(--space-page-md);bottom:var(--space-page-md);max-width:480px}}
 body.wugweb-overlay-locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
-.wugweb-overlay-editor{border:1px dashed var(--neutral-6);padding:12px;border-radius:8px}.wugweb-overlay-editor__label{font:600 11px/1 monospace;opacity:.6;margin-bottom:8px}
+.wugweb-overlay-editor{border:1px dashed var(--neutral-6);padding:12px;border-radius:8px}.wugweb-overlay-editor__label{font:600 11px/1 var(--font-body);opacity:.6;margin-bottom:8px}
 @media(prefers-reduced-motion:reduce){.wugweb-overlay__panel,.wugweb-overlay::backdrop{transition:none}.wugweb-overlay__panel{transform:none!important}}

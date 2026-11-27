@@ -6,7 +6,7 @@
 .wugweb-section__card,.wugweb-content-card{padding:var(--grid-gap,16px);border:1px solid var(--wugweb-line-strong,rgba(255,255,255,.12));border-radius:16px;background:var(--wp--preset--color--ash);transition:background var(--duration-normal,300ms) cubic-bezier(0,0,.2,1),transform 350ms cubic-bezier(.16,1,.3,1)}
 .wugweb-section__card:hover,.wugweb-content-card:hover{background:var(--wp--preset--color--neutral-7)}
 .wugweb-content-card a{color:inherit}
-.wugweb-section__eyebrow,.wugweb-content-eyebrow{margin:0 0 8px;font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--caption);font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--wp--preset--color--neutral-3)}
+.wugweb-section__eyebrow,.wugweb-content-eyebrow{margin:0 0 8px;font-family:var(--wp--preset--font-family--body);font-size:var(--wp--preset--font-size--caption);font-weight:400;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--wp--preset--color--neutral-3)}
 @media(max-width:1023px){.wugweb-section__grid,.wugweb-content-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:767px){.wugweb-section__grid,.wugweb-content-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.wugweb-section__card,.wugweb-content-card{transition:none}}

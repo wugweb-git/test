@@ -33,7 +33,7 @@
 .cookie-opt-row:last-child{border-bottom:none}
 .opt-desc h3{font-size:var(--fluid-body-md);line-height:var(--core-line-height-normal);font-weight:var(--font-weight-semibold);margin:0 0 var(--gap-1);color:var(--color-text-primary)}
 .opt-desc p{margin:0;font-size:var(--fluid-caption);color:var(--color-text-muted);line-height:var(--lh-caption,1.5);max-width:38ch}
-.active-badge{font-family:var(--font-mono);font-size:var(--fluid-caption);color:var(--color-text-muted);white-space:nowrap}
+.active-badge{font-family:var(--font-body);font-size:var(--fluid-caption);color:var(--color-text-muted);white-space:nowrap}
 .toggle-switch{position:relative;display:inline-block;width:44px;height:24px;flex-shrink:0}
 .toggle-switch input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
 .toggle-slider{position:absolute;inset:0;background-color:var(--neutral-6);transition:var(--duration-normal);border-radius:var(--r-full)}

@@ -3,7 +3,7 @@
 
 /* work/index.astro */
 .work-filters .filter-chip {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: var(--t-micro);
   padding: var(--gap-2) var(--gap-5);
   border-radius: var(--r-pill);
@@ -20,6 +20,6 @@
 }
 
 /* blog/index.astro */
-.blog-filters .filter-chip { font-family: var(--font-mono); font-size: var(--t-sm); padding: var(--gap-2) var(--gap-4); border: 0; border-radius: var(--r-pill); background: transparent; color: var(--fg-muted); cursor: pointer; transition: border-color var(--duration-fast) var(--easing-out), color var(--duration-fast) var(--easing-out), background var(--duration-fast) var(--easing-out); }
+.blog-filters .filter-chip { font-family: var(--font-body); font-size: var(--t-sm); padding: var(--gap-2) var(--gap-4); border: 0; border-radius: var(--r-pill); background: transparent; color: var(--fg-muted); cursor: pointer; transition: border-color var(--duration-fast) var(--easing-out), color var(--duration-fast) var(--easing-out), background var(--duration-fast) var(--easing-out); }
 .blog-filters .filter-chip:hover { color: var(--fg); }
 .blog-filters .filter-chip.active { color: var(--fg); background: color-mix(in srgb, var(--neutral-0) 10%, transparent); }

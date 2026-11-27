@@ -103,17 +103,17 @@
       radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--color-yellow) 22%, transparent), transparent 55%),
       linear-gradient(160deg, var(--color-surface-elevated) 0%, var(--color-surface-page) 100%);
   }
-  .work-placeholder-initials { font-family: var(--font-display); font-size: var(--t-h2); font-weight: var(--font-weight-extrabold); line-height: var(--core-line-height-none); color: var(--fg); opacity: var(--opacity-strong); }
-  .work-placeholder-cat { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-muted); }
+  .work-placeholder-initials { font-family: var(--font-body); font-size: var(--t-h2); font-weight: var(--font-weight-extrabold); line-height: var(--core-line-height-none); color: var(--fg); opacity: var(--opacity-strong); }
+  .work-placeholder-cat { font-family: var(--font-body); font-size: var(--t-micro); letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-muted); }
 
   .work-content {
     padding: var(--gap-4) var(--gap-6) var(--gap-6);
     background: var(--color-surface-elevated);
     transition: background var(--duration-normal) ease;  }
-  .work-client { font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .work-client { font-family: var(--font-body); font-size: var(--t-micro); color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.04em; }
   .work-grid-section .work-grid h3 { font-size: var(--t-h5); font-weight: var(--font-weight-semibold); margin-top: var(--gap-2); line-height: var(--lh-h5); color: var(--fg); }
   .work-category {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--t-micro);
     color: var(--color-accent-primary);
     display: inline-block;

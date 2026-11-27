@@ -83,7 +83,7 @@
   .ind-node-tile svg { width: var(--gap-6); height: var(--gap-6); stroke-width: 1.5; }
 
   .ind-node-name {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-body-sm);
     line-height: var(--lh-snug);
     overflow-wrap: anywhere;
@@ -127,7 +127,7 @@
   .dir-row-meta { display: grid; gap: var(--gap-2); align-content: start; min-width: 0; }
 
   .dir-row-num {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     letter-spacing: var(--tracking-label);
     color: var(--fg-subtle);
@@ -287,7 +287,7 @@
     border: var(--stroke-thin) solid var(--color-border-subtle);
     padding: var(--p-3) var(--p-5);
     border-radius: var(--radius-2);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-text-primary);
     text-align: center;
@@ -307,7 +307,7 @@
   }
 
   .diagram-arrows {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     color: var(--color-text-muted);
     font-size: var(--t-h4);
     line-height: 1;

@@ -10,4 +10,4 @@
 .svc-work-card:hover .card-glow { opacity: 1; }
 .svc-work-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
 .svc-work-card h3 { font-size: var(--t-h5); font-weight: var(--font-weight-semibold); color: var(--fg); line-height: var(--lh-h5); position: relative; z-index: 1; }
-.svc-work-card p { margin-top: var(--gap-2); font-family: var(--font-mono); font-size: var(--t-micro); color: var(--fg-muted); position: relative; z-index: 1; }
+.svc-work-card p { margin-top: var(--gap-2); font-family: var(--font-body); font-size: var(--t-micro); color: var(--fg-muted); position: relative; z-index: 1; }

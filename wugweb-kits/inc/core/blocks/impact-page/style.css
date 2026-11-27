@@ -13,7 +13,7 @@
   /* Shared Typography & Spacing */
   .eyebrow {
     display: inline-block;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     font-weight: var(--font-weight-regular);
     letter-spacing: var(--tracking-label);
@@ -62,7 +62,7 @@
   }
 
   .placeholder-tag {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-secondary);
@@ -210,7 +210,7 @@
   }
 
   .node-n {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-accent-primary);
   }
@@ -340,7 +340,7 @@
   }
 
   .meta-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-caption);
     color: var(--color-text-muted);
     letter-spacing: 0.05em;

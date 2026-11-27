@@ -104,7 +104,7 @@
   /* The pillar's own index, in the same mono numbering the rest of the site
      uses — secondary to the label, so it reads as an index not a heading. */
   .tag-n {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--fluid-label);
     letter-spacing: var(--tracking-label);
     line-height: var(--core-line-height-none);
@@ -113,7 +113,7 @@
     padding-top: var(--gap-1);
   }
   .tag-label {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     /* Was --fluid-h1, whose 32px floor is a reading size the pill cannot
        hold on a phone — that, plus overflow-wrap, is what split "experience"
        across two lines. The graphic tier sizes to the field instead. */
