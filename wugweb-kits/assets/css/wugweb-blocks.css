@@ -194,3 +194,6 @@ body a{color:inherit}
 .wp-site-blocks :is(.wugweb-blog-index,.work-grid-section,.wugweb-article-post,.wugweb-case-study,.wp-block-wugweb-work-index) :is(a,button,summary,[tabindex],.filter-chip):focus-visible{outline:2px solid var(--color-accent-primary);outline-offset:3px;border-radius:var(--radius-sm)}
 .wp-site-blocks :is(.blog-filters,.work-filters) .filter-chip:focus-visible{border-radius:var(--radius-full)}
 .wp-site-blocks :is(.services-hero,.work-hero,.blog-hero){padding-bottom:var(--gap-6)}
+
+/* Form controls never fall back to the browser font: one typeface everywhere. */
+button,input,select,textarea,optgroup{font-family:var(--font-body)}
