@@ -8,6 +8,13 @@ function wugweb_global_sections_for_page() {
     $teaser_only = array('contact-us', 'thank-you', 'offline', 'contact-error', 'page-not-found', 'page-not-found-alt');
     if (is_front_page() || is_home() && false) return array('sectors' => false, 'teaser' => false, 'cta' => true); // home carries its own
     if (in_array($slug, $none, true)) return array('sectors' => false, 'teaser' => false, 'cta' => false);
+    // Reading and browsing surfaces: the blog index and everything that lists or shows posts already is the blog, so the teaser would repeat it; the sectors showcase is off-topic there.
+    $blog_surface = $slug === 'blog' || is_home() || is_singular('post') || is_category() || is_tag() || is_author() || is_date() || is_search();
+    if ($blog_surface) return array('sectors' => false, 'teaser' => false, 'cta' => true);
+    // Utility pages: a map of the site needs neither section.
+    if ($slug === 'sitemap') return array('sectors' => false, 'teaser' => false, 'cta' => true);
+    // Industry-led surfaces: the work listing, a single case study and the industry/sector/discipline archives are already organised by industry, so the sectors showcase would repeat it. The blog teaser stays.
+    if (is_post_type_archive('case_study') || is_singular('case_study') || is_tax(array('industry', 'sector', 'discipline'))) return array('sectors' => false, 'teaser' => true, 'cta' => true);
     if (is_404() || in_array($slug, $teaser_only, true)) return array('sectors' => false, 'teaser' => true, 'cta' => true);
     return array('sectors' => true, 'teaser' => true, 'cta' => true);
 }
