@@ -117,3 +117,17 @@ Old audit items on 1024 breakpoint, flat spacing, nav card values, type scale an
 - `.grid`: 4 columns mobile, 8 at 768, 12 at 1200; gap `--grid-gap` 16 / 24 / 32.
 - Page gutter `--space-page-xs/sm/md/lg/xl` = 16 / 20 / 32 / 40 / 48.
 - Section spacing `--space-section-xs` to `--space-section-xl` all = 48 mobile, 70 at 768, 96 at 1200. The old 32/40/48/64/80 ladder is retired.
+
+## Global sections per page
+
+The footer part holds three global blocks: industries-served, recent-thoughts (blog teaser) and cta-band (the action block, the yellow box before the footer). `wugweb_global_sections_for_page()` decides which render:
+
+| Page | Sectors | Blog teaser | Action block |
+|---|---|---|---|
+| Home, About, Services, FAQ, Impact, Reviews, Sitemap, Subscription, Work | yes | yes | yes |
+| Blog index, single post, category, tag, author, date, search | no | no | yes |
+| Case study archive, single case study, industry/sector/discipline archives | no | yes | yes |
+| Contact, thank-you, 404, other utility pages | no | yes | no unless listed in the function |
+| Legal pages, Industries page | no | no | no |
+
+The function is the source of truth; this table follows it.
