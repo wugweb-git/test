@@ -1,0 +1,60 @@
+<?php
+/**
+ * Master: one top-level admin menu group that holds every content taxonomy once (Clients, Industry, Sectors, Countries,
+ * Discipline, Tool Stack, Service sub-groups, Platforms, Project types). Categories and Tags stay under Posts.
+ * Menu entries only: taxonomies stay attached to their post types, no URLs or data change.
+ * (Restores the grouping the retired Content Web plugin provided; the taxonomies now come from acf-json.)
+ */
+defined( 'ABSPATH' ) || exit;
+
+function wugweb_master_taxonomies() {
+	// taxonomy => menu label. The list screen opens under case_study when the taxonomy is attached to it, else post.
+	return array(
+		'client'        => 'Clients',
+		'industry'      => 'Industry',
+		'sector'        => 'Sectors',
+		'country'       => 'Countries',
+		'discipline'    => 'Discipline',
+		'tool'          => 'Tool Stack',
+		'service_group' => 'Service Sub-Groups',
+		'platform'      => 'Platforms',
+		'project_type'  => 'Project Types',
+	);
+}
+
+// Hide the per-post-type menu entries (each taxonomy keeps its post types).
+add_filter( 'register_taxonomy_args', function ( $args, $taxonomy ) {
+	if ( isset( wugweb_master_taxonomies()[ $taxonomy ] ) ) { $args['show_in_menu'] = false; }
+	return $args;
+}, 10, 2 );
+
+function wugweb_master_post_type( $tax ) {
+	$t = get_taxonomy( $tax );
+	return ( $t && in_array( 'case_study', (array) $t->object_type, true ) ) ? 'case_study' : 'post';
+}
+
+add_action( 'admin_menu', function () {
+	$cap = 'manage_categories';
+	add_menu_page( 'Master', 'Master', $cap, 'wugweb-master', '__return_null', 'dashicons-database', 58 );
+	foreach ( wugweb_master_taxonomies() as $tax => $label ) {
+		if ( taxonomy_exists( $tax ) ) {
+			add_submenu_page( 'wugweb-master', $label, $label, $cap, 'edit-tags.php?taxonomy=' . $tax . '&post_type=' . wugweb_master_post_type( $tax ) );
+		}
+	}
+	remove_submenu_page( 'wugweb-master', 'wugweb-master' ); // the group opens on its first taxonomy, no empty landing page
+}, 99 );
+
+// Keep the Master group open and the right entry highlighted on its taxonomy screens.
+add_filter( 'parent_file', function ( $parent ) {
+	global $current_screen;
+	$tax = isset( $current_screen->taxonomy ) ? $current_screen->taxonomy : '';
+	return ( $tax && isset( wugweb_master_taxonomies()[ $tax ] ) ) ? 'wugweb-master' : $parent;
+} );
+add_filter( 'submenu_file', function ( $submenu_file ) {
+	global $current_screen;
+	$tax = isset( $current_screen->taxonomy ) ? $current_screen->taxonomy : '';
+	if ( $tax && isset( wugweb_master_taxonomies()[ $tax ] ) ) {
+		return 'edit-tags.php?taxonomy=' . $tax . '&post_type=' . wugweb_master_post_type( $tax );
+	}
+	return $submenu_file;
+} );
