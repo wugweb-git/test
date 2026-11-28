@@ -26,7 +26,7 @@ function wugweb_master_taxonomies() {
 // Hide the per-post-type menu entries (each taxonomy keeps its post types).
 add_filter( 'register_taxonomy_args', function ( $args, $taxonomy ) {
 	if ( isset( wugweb_master_taxonomies()[ $taxonomy ] ) ) { $args['show_in_menu'] = false; }
-	// "Published on" read like a date; this taxonomy is the platform an article is published on (Medium, LinkedIn...).
+	// Labelled Platform: the old "Published on" name read like a date. It is where an article appears (Medium, LinkedIn...).
 	if ( 'platform' === $taxonomy ) {
 		$args['labels'] = array_merge( (array) ( $args['labels'] ?? array() ), array(
 			'name' => 'Platforms', 'singular_name' => 'Platform', 'menu_name' => 'Platforms', 'all_items' => 'All Platforms',

@@ -37,5 +37,5 @@
     "rewrite": {
         "permalink_rewrite": "no_permalink"
     },
-    "description": "The platform an article is published on (Medium, LinkedIn, Substack, the Wugweb blog)."
+    "description": "Where the article appears: Medium, LinkedIn, Substack, the Wugweb blog."
 }
