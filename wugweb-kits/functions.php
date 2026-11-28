@@ -93,6 +93,7 @@ require_once __DIR__ . '/inc/a11y-names.php';
 if (is_admin()) { require_once __DIR__ . '/inc/admin-registry.php'; }
 require_once __DIR__ . '/inc/seo-head.php';
 require_once __DIR__ . '/inc/ab-testing.php';
+require_once __DIR__ . '/inc/admin-comments-hidden.php';
 
 /* Motion: GSAP (self-hosted) + the site's scroll-animations / draggable-tags / lazy-video, bundled from wugweb_site. */
 add_action('wp_head', function () {
