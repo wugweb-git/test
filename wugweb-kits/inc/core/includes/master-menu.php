@@ -1,8 +1,7 @@
 <?php
 /**
- * Master: one top-level admin menu group that holds every content taxonomy once (Clients, Industry, Sectors, Countries,
- * Discipline, Tool Stack, Service sub-groups, Platforms, Project types). Categories and Tags stay under Posts.
- * Menu entries only: taxonomies stay attached to their post types, no URLs or data change.
+ * Taxonomy: one top-level admin menu group that holds every taxonomy once, and one shared structure for all content types
+ * (posts and case studies carry the same taxonomies). Menu entries and post-type attachment only: no URLs or data change.
  * (Restores the grouping the retired Content Web plugin provided; the taxonomies now come from acf-json.)
  */
 defined( 'ABSPATH' ) || exit;
@@ -10,6 +9,8 @@ defined( 'ABSPATH' ) || exit;
 function wugweb_master_taxonomies() {
 	// taxonomy => menu label. The list screen opens under case_study when the taxonomy is attached to it, else post.
 	return array(
+		'category'      => 'Categories',
+		'post_tag'      => 'Tags',
 		'client'        => 'Clients',
 		'industry'      => 'Industry',
 		'sector'        => 'Sectors',
@@ -33,22 +34,32 @@ function wugweb_master_post_type( $tax ) {
 	return ( $t && in_array( 'case_study', (array) $t->object_type, true ) ) ? 'case_study' : 'post';
 }
 
-add_action( 'admin_menu', function () {
-	$cap = 'manage_categories';
-	add_menu_page( 'Master', 'Master', $cap, 'wugweb-master', '__return_null', 'dashicons-database', 58 );
-	foreach ( wugweb_master_taxonomies() as $tax => $label ) {
-		if ( taxonomy_exists( $tax ) ) {
-			add_submenu_page( 'wugweb-master', $label, $label, $cap, 'edit-tags.php?taxonomy=' . $tax . '&post_type=' . wugweb_master_post_type( $tax ) );
+// One structure for every content type: each custom taxonomy is available on posts and on case studies alike (categories and tags stay on posts).
+add_action( 'init', function () {
+	foreach ( array_keys( wugweb_master_taxonomies() ) as $tax ) {
+		if ( in_array( $tax, array( 'category', 'post_tag' ), true ) || ! taxonomy_exists( $tax ) ) { continue; }
+		foreach ( array( 'post', 'case_study' ) as $type ) {
+			if ( post_type_exists( $type ) ) { register_taxonomy_for_object_type( $tax, $type ); }
 		}
 	}
-	remove_submenu_page( 'wugweb-master', 'wugweb-master' ); // the group opens on its first taxonomy, no empty landing page
 }, 99 );
 
-// Keep the Master group open and the right entry highlighted on its taxonomy screens.
+add_action( 'admin_menu', function () {
+	$cap = 'manage_categories';
+	add_menu_page( 'Taxonomy', 'Taxonomy', $cap, 'wugweb-taxonomy', '__return_null', 'dashicons-database', 58 );
+	foreach ( wugweb_master_taxonomies() as $tax => $label ) {
+		if ( taxonomy_exists( $tax ) ) {
+			add_submenu_page( 'wugweb-taxonomy', $label, $label, $cap, 'edit-tags.php?taxonomy=' . $tax . '&post_type=' . wugweb_master_post_type( $tax ) );
+		}
+	}
+	remove_submenu_page( 'wugweb-taxonomy', 'wugweb-taxonomy' ); // the group opens on its first taxonomy, no empty landing page
+}, 99 );
+
+// Keep the Taxonomy group open and the right entry highlighted on its taxonomy screens.
 add_filter( 'parent_file', function ( $parent ) {
 	global $current_screen;
 	$tax = isset( $current_screen->taxonomy ) ? $current_screen->taxonomy : '';
-	return ( $tax && isset( wugweb_master_taxonomies()[ $tax ] ) ) ? 'wugweb-master' : $parent;
+	return ( $tax && isset( wugweb_master_taxonomies()[ $tax ] ) ) ? 'wugweb-taxonomy' : $parent;
 } );
 add_filter( 'submenu_file', function ( $submenu_file ) {
 	global $current_screen;
