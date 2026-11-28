@@ -892,9 +892,6 @@ header.wp-block-template-part{position:sticky;top:0;z-index:var(--layer-nav,10)}
 @media (max-width:1023.98px){
   .blog-grid,.wugweb-blog-index .blog-grid,.related-grid,.related-grid.is-posts,.wugweb-blog-index .picks-big ul{grid-template-columns:minmax(0,1fr)}
 }
-/* Home blog teaser follows the source: phones one column (first card + stacked rows), 768-1199 two across (2 x 2), 1200+ three across. */
-@media (max-width:767.98px){.blog-teaser-grid{grid-template-columns:minmax(0,1fr)}}
-@media (min-width:768px) and (max-width:1199.98px){.blog-teaser-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* Phones: the open menu sheet is an out-of-flow overlay, so opening or closing it never changes document height (the in-flow growth made the scroll-lock restore land ~480px short). .site-header is the containing block (will-change:transform), so the sheet sits exactly where the closed bar is. */
 @media (max-width:767.98px){
