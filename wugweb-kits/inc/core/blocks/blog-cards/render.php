@@ -36,7 +36,7 @@ case 'picks-big':
   ?><div class="picks-big"><h2><?php echo esc_html($picks_label); ?></h2><ul><?php foreach ($picks_big as $pb) : ?><li><?php echo wugweb_post_card_html($pb, true); // phpcs:ignore ?></li><?php endforeach; ?></ul></div><?php
   break;
 case 'newsletter':
-  ?><div class="bn-card"><div class="bn-copy"><h2>Get insights like this in your inbox</h2><p>Design, product, and digital strategy. No spam, just thoughtful content.</p></div><form class="nl-form bn-form" method="POST" action="/api/subscribe"><input type="email" name="email" aria-label="Email address" placeholder="you@company.com" required autocomplete="email" class="nl-input"><button type="submit" class="btn btn-solid">Subscribe</button></form></div><?php
+  ?><div class="bn-card"><div class="bn-copy"><h2>Get insights like this in your inbox</h2><p>Design, product, and digital strategy. No spam, just thoughtful content.</p></div><form class="nl-form bn-form" method="POST" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="wugweb_subscribe"><input type="email" name="email" aria-label="Email address" placeholder="you@company.com" required autocomplete="email" class="nl-input"><button type="submit" class="btn btn-solid">Subscribe</button></form><?php echo wugweb_subscribe_status(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static strings built above ?></div><?php
   break;
 case 'cases':
   if (!$cs) { return; }

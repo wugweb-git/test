@@ -57,6 +57,31 @@ function wugweb_contact_read( array $src ) {
 	return array( $f, $problems );
 }
 
+/**
+ * Fluent Forms is where every enquiry and signup lands (entries, notifications, integrations).
+ * The page markup and this handler's checks stay as they are; the validated fields are handed to Fluent Forms'
+ * own submit endpoint, so its full pipeline runs. Form ids: option wugweb_ff_{contact|newsletter}, default 3 and 2.
+ */
+function wugweb_ff_form_id( $which ) {
+	$defaults = array( 'contact' => 3, 'newsletter' => 2 );
+	return (int) get_option( 'wugweb_ff_' . $which, $defaults[ $which ] ?? 0 );
+}
+function wugweb_ff_submit( $form_id, array $data ) {
+	if ( ! $form_id ) { return false; }
+	$ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+	$res = wp_remote_post( admin_url( 'admin-ajax.php' ), array(
+		'timeout' => 20,
+		'headers' => array( 'X-Forwarded-For' => $ip, 'X-Real-IP' => $ip ),
+		'body'    => array( 'action' => 'fluentform_submit', 'form_id' => $form_id, 'data' => http_build_query( $data ) ),
+	) );
+	if ( is_wp_error( $res ) || 200 !== (int) wp_remote_retrieve_response_code( $res ) ) {
+		error_log( 'fluent forms submit failed: ' . ( is_wp_error( $res ) ? $res->get_error_message() : wp_remote_retrieve_response_code( $res ) . ' ' . substr( wp_remote_retrieve_body( $res ), 0, 200 ) ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		return false;
+	}
+	$body = json_decode( wp_remote_retrieve_body( $res ), true );
+	return is_array( $body ) && ! empty( $body['success'] );
+}
+
 function wugweb_contact_handle() {
 	$home = home_url( '/' );
 	$back = home_url( '/contact-us/' );
@@ -79,6 +104,19 @@ function wugweb_contact_handle() {
 		exit;
 	}
 
+	set_transient( $key, $n + 1, DAY_IN_SECONDS );
+	if ( ! apply_filters( 'wugweb_contact_legacy_store', false ) ) {
+		$ok = wugweb_ff_submit( wugweb_ff_form_id( 'contact' ), array(
+			'name' => $f['name'], 'company' => $f['company'], 'email' => $f['email'], 'phone' => $f['phone'], 'topic' => $f['topic'],
+			'budget' => $f['budget'], 'timeline' => $f['timeline'], 'interests' => $f['interests'], 'newsletter' => $f['newsletter'] ? array( 'yes' ) : array(),
+		) );
+		if ( ! $ok ) { wp_safe_redirect( home_url( '/contact-error/' ) ); exit; }
+		do_action( 'wugweb_contact_submitted', $f, 0 );
+		wp_safe_redirect( home_url( '/thank-you/' ) );
+		exit;
+	}
+
+	// Legacy path (off by default): stores a private contact_submission post and emails hello@wugweb.com. Enable with the filter above.
 	$title = $f['name'] . ( $f['company'] ? ' (' . $f['company'] . ')' : '' );
 	$id = wp_insert_post( array( 'post_type' => 'contact_submission', 'post_status' => 'private', 'post_title' => $title, 'post_content' => $f['topic'] ), true );
 	if ( is_wp_error( $id ) || ! $id ) {
@@ -115,6 +153,30 @@ function wugweb_contact_handle() {
 }
 add_action( 'admin_post_nopriv_wugweb_contact', 'wugweb_contact_handle' );
 add_action( 'admin_post_wugweb_contact', 'wugweb_contact_handle' );
+
+/** Newsletter signup (the "nl-form" forms): validate the address, then Fluent Forms stores it. Back to the page with ?nl=ok|fail. */
+function wugweb_subscribe_handle() {
+	$back = wp_get_referer() ?: home_url( '/' );
+	$back = remove_query_arg( 'nl', $back );
+	$ip   = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+	$key  = 'wg_nl_' . md5( $ip );
+	$n    = (int) get_transient( $key );
+	$mail = trim( sanitize_email( wp_unslash( $_POST['email'] ?? '' ) ) ); // phpcs:ignore WordPress.Security.NonceVerification -- public form on a cached page; rate limit instead
+	if ( ! is_email( $mail ) || $n >= 10 ) { wp_safe_redirect( add_query_arg( 'nl', 'fail', $back ) ); exit; }
+	set_transient( $key, $n + 1, DAY_IN_SECONDS );
+	$ok = wugweb_ff_submit( wugweb_ff_form_id( 'newsletter' ), array( 'email' => $mail ) );
+	wp_safe_redirect( add_query_arg( 'nl', $ok ? 'ok' : 'fail', $back ) );
+	exit;
+}
+add_action( 'admin_post_nopriv_wugweb_subscribe', 'wugweb_subscribe_handle' );
+add_action( 'admin_post_wugweb_subscribe', 'wugweb_subscribe_handle' );
+/** Status line for the nl-form forms after the redirect. */
+function wugweb_subscribe_status() {
+	$v = isset( $_GET['nl'] ) ? sanitize_key( wp_unslash( $_GET['nl'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
+	if ( 'ok' === $v ) { return '<p class="nl-status" role="status">Thanks, you are subscribed.</p>'; }
+	if ( 'fail' === $v ) { return '<p class="nl-status" role="alert">That did not go through. Check the address and try again.</p>'; }
+	return '';
+}
 
 // The enquiry screen shows the fields, read-only.
 add_action( 'add_meta_boxes_contact_submission', function () {

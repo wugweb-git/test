@@ -197,3 +197,6 @@ body a{color:inherit}
 
 /* Form controls never fall back to the browser font: one typeface everywhere. */
 button,input,select,textarea,optgroup{font-family:var(--font-body)}
+
+/* Newsletter form status line after signup. */
+.nl-status{margin:var(--gap-3, 12px) 0 0;font-size:var(--t-sm, 14px);color:var(--fg-muted)}
