@@ -1,6 +1,6 @@
 {
     "key": "taxonomy_platform",
-    "title": "Published on",
+    "title": "Platform",
     "taxonomy": "platform",
     "menu_order": 0,
     "active": true,
@@ -9,17 +9,17 @@
         "post"
     ],
     "labels": {
-        "name": "Published on",
-        "singular_name": "Published on",
-        "menu_name": "Published on",
-        "all_items": "All Published on",
-        "edit_item": "Edit Published on",
-        "view_item": "View Published on",
-        "update_item": "Update Published on",
-        "add_new_item": "Add Published on",
-        "new_item_name": "New Published on name",
-        "search_items": "Search Published on",
-        "not_found": "No published on found"
+        "name": "Platforms",
+        "singular_name": "Platform",
+        "menu_name": "Platforms",
+        "all_items": "All Platforms",
+        "edit_item": "Edit Platform",
+        "view_item": "View Platform",
+        "update_item": "Update Platform",
+        "add_new_item": "Add Platform",
+        "new_item_name": "New Platform name",
+        "search_items": "Search Platforms",
+        "not_found": "No platforms found"
     },
     "public": true,
     "publicly_queryable": false,
@@ -36,5 +36,6 @@
     "meta_box": "default",
     "rewrite": {
         "permalink_rewrite": "no_permalink"
-    }
+    },
+    "description": "The platform an article is published on (Medium, LinkedIn, Substack, the Wugweb blog)."
 }

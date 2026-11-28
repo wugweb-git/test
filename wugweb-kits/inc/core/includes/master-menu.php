@@ -26,6 +26,14 @@ function wugweb_master_taxonomies() {
 // Hide the per-post-type menu entries (each taxonomy keeps its post types).
 add_filter( 'register_taxonomy_args', function ( $args, $taxonomy ) {
 	if ( isset( wugweb_master_taxonomies()[ $taxonomy ] ) ) { $args['show_in_menu'] = false; }
+	// "Published on" read like a date; this taxonomy is the platform an article is published on (Medium, LinkedIn...).
+	if ( 'platform' === $taxonomy ) {
+		$args['labels'] = array_merge( (array) ( $args['labels'] ?? array() ), array(
+			'name' => 'Platforms', 'singular_name' => 'Platform', 'menu_name' => 'Platforms', 'all_items' => 'All Platforms',
+			'edit_item' => 'Edit Platform', 'view_item' => 'View Platform', 'update_item' => 'Update Platform',
+			'add_new_item' => 'Add Platform', 'new_item_name' => 'New Platform name', 'search_items' => 'Search Platforms', 'not_found' => 'No platforms found',
+		) );
+	}
 	return $args;
 }, 10, 2 );
 
