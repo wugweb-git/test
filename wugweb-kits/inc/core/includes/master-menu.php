@@ -34,13 +34,12 @@ function wugweb_master_post_type( $tax ) {
 	return ( $t && in_array( 'case_study', (array) $t->object_type, true ) ) ? 'case_study' : 'post';
 }
 
-// One structure for every content type: each custom taxonomy is available on posts and on case studies alike (categories and tags stay on posts).
+// One structure for every content type: every taxonomy in the group (categories and tags included) is available on every public content type (posts, case studies, pages).
 add_action( 'init', function () {
+	$types = array_diff( get_post_types( array( 'public' => true ) ), array( 'attachment' ) );
 	foreach ( array_keys( wugweb_master_taxonomies() ) as $tax ) {
-		if ( in_array( $tax, array( 'category', 'post_tag' ), true ) || ! taxonomy_exists( $tax ) ) { continue; }
-		foreach ( array( 'post', 'case_study' ) as $type ) {
-			if ( post_type_exists( $type ) ) { register_taxonomy_for_object_type( $tax, $type ); }
-		}
+		if ( ! taxonomy_exists( $tax ) ) { continue; }
+		foreach ( $types as $type ) { register_taxonomy_for_object_type( $tax, $type ); }
 	}
 }, 99 );
 
