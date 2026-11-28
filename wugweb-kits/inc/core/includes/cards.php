@@ -76,6 +76,6 @@ function wugweb_work_card_html(array $c) {
     $media = (string) ($c['media'] ?? '');
     $is_video = (bool) preg_match('/\.(mp4|webm)(\?|$)/i', $media);
     ob_start(); ?>
-<li data-reveal><a href="<?php echo esc_url($c['url']); ?>"><?php if ($is_video): ?><video aria-hidden="true" muted loop playsinline preload="none" data-src="<?php echo esc_url($media); ?>"></video><?php elseif ($media): ?><img src="<?php echo esc_url($media); ?>" alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--r-2)"><?php else: ?><span class="wugweb-ph" style="--ph-ar:16/10" aria-hidden="true"></span><?php endif; ?><p class="work-client"><?php echo esc_html($c['client']); ?></p><h3><?php echo esc_html($c['title']); ?></h3></a></li>
+<li data-reveal><a href="<?php echo esc_url($c['url']); ?>"><?php if ($is_video): ?><video aria-hidden="true" muted loop playsinline preload="none" data-src="<?php echo esc_url($media); ?>"></video><?php elseif ($media): ?><img src="<?php echo esc_url($media); ?>" alt="<?php echo esc_attr($c['title']); ?>" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--r-2)"><?php else: ?><span class="wugweb-ph" style="--ph-ar:16/10" aria-hidden="true"></span><?php endif; ?><p class="work-client"><?php echo esc_html($c['client']); ?></p><h3><?php echo esc_html($c['title']); ?></h3></a></li>
 <?php return ob_get_clean();
 }

@@ -30,7 +30,7 @@ if (!$items) { return; }
     <?php foreach ($items as $w) : $video = (bool) preg_match('/\.(mp4|webm)(\?|$)/i', $w['media']); ?>
     <li data-reveal data-categories="<?php echo esc_attr($w['pillar']); ?>"><a href="<?php echo esc_url($w['url']); ?>">
       <?php if ($video) : ?><video aria-hidden="true" muted loop playsinline preload="none" data-src="<?php echo esc_url($w['media']); ?>"></video>
-      <?php elseif ($w['media']) : ?><img src="<?php echo esc_url($w['media']); ?>" alt="" loading="lazy" decoding="async">
+      <?php elseif ($w['media']) : ?><img src="<?php echo esc_url($w['media']); ?>" alt="<?php echo esc_attr($w['title']); ?>" loading="lazy" decoding="async">
       <?php else : ?><span class="wugweb-ph" style="--ph-ar:16/10;border-radius:0" aria-hidden="true"></span><?php endif; ?>
       <div class="work-content"><p class="work-client"><?php echo esc_html($w['client']); ?></p><h3><?php echo esc_html($w['title']); ?></h3><span class="work-category"><?php echo esc_html($w['category']); ?></span></div>
     </a></li>
