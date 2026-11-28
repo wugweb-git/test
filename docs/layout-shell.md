@@ -128,7 +128,7 @@ The footer part holds three global blocks: industries-served, recent-thoughts (b
 | Blog index, single post, category, tag, author, date, search, Sitemap | no | no | yes |
 | Case study archive, single case study, industry/sector/discipline archives | no | yes | yes |
 | Contact | no | yes | yes |
-| Thank-you, 404 and other utility pages | no | yes | no |
+| Thank-you and other utility pages | no | yes | yes |
 | Legal pages, Industries page | no | no | no |
 
 The function is the source of truth; this table follows it.
