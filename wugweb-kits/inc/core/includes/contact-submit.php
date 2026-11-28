@@ -55,7 +55,7 @@ function wugweb_ff_submit( $form_id, array $data ) {
 	$ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 	$res = wp_remote_post( admin_url( 'admin-ajax.php' ), array(
 		'timeout' => 20,
-		'headers' => array( 'X-Forwarded-For' => $ip, 'X-Real-IP' => $ip ),
+		'headers' => array( 'X-Wugweb-Client-IP' => $ip, 'X-Wugweb-Client-Sig' => hash_hmac( 'sha256', $ip, wp_salt( 'auth' ) ) ),
 		'body'    => array( 'action' => 'fluentform_submit', 'form_id' => $form_id, 'data' => http_build_query( $data ) ),
 	) );
 	if ( is_wp_error( $res ) || 200 !== (int) wp_remote_retrieve_response_code( $res ) ) {
@@ -65,6 +65,19 @@ function wugweb_ff_submit( $form_id, array $data ) {
 	$body = json_decode( wp_remote_retrieve_body( $res ), true );
 	return is_array( $body ) && ! empty( $body['success'] );
 }
+
+/**
+ * The loopback to Fluent Forms arrives from the server itself, so Fluent Forms would record the server's address.
+ * Restore the visitor's address for that one request, only when the signature (made with the site's own salt) checks out.
+ */
+add_action( 'init', function () {
+	if ( empty( $_SERVER['HTTP_X_WUGWEB_CLIENT_IP'] ) || empty( $_SERVER['HTTP_X_WUGWEB_CLIENT_SIG'] ) ) { return; }
+	$ip  = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_WUGWEB_CLIENT_IP'] ) );
+	$sig = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_WUGWEB_CLIENT_SIG'] ) );
+	if ( filter_var( $ip, FILTER_VALIDATE_IP ) && hash_equals( hash_hmac( 'sha256', $ip, wp_salt( 'auth' ) ), $sig ) ) {
+		$_SERVER['REMOTE_ADDR'] = $ip;
+	}
+}, 0 );
 
 function wugweb_contact_handle() {
 	$home = home_url( '/' );

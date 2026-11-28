@@ -112,6 +112,20 @@ add_filter('rank_math/frontend/robots', function ($r) {
 }, 99);
 add_action('init', function () { if (wugweb_is_test_host() && !headers_sent()) header('X-Robots-Tag: noindex, nofollow'); }, 0);
 
+/* ── 2b. Utility pages never belong in search (any host) ───────────── */
+function wugweb_is_utility_page() {
+    return is_404() || is_page(array('thank-you', 'offline', 'contact-error', 'page-not-found', 'page-not-found-alt'));
+}
+add_filter('wp_robots', function ($r) {
+    if (!wugweb_is_utility_page()) return $r;
+    unset($r['index'], $r['follow'], $r['max-image-preview']);
+    $r['noindex'] = true; $r['nofollow'] = true; return $r;
+}, 99);
+add_filter('rank_math/frontend/robots', function ($r) {
+    if (!wugweb_is_utility_page()) return $r;
+    $r['index'] = 'noindex'; $r['follow'] = 'nofollow'; unset($r['max-snippet'], $r['max-video-preview'], $r['max-image-preview']); return $r;
+}, 99);
+
 /* ── 3. JSON-LD by template ────────────────────────────────────────── */
 function wugweb_seo_faq_items($post) {
     $o = array();
